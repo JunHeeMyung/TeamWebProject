@@ -30,18 +30,20 @@
 	</resource-ref>
 	-->
 
-	<!-- HTTP => HTTPS로 리다이렉트 -->
+	<!-- HTTP => HTTPS로 리다이렉트 
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SSL Forward</web-resource-name>
 			<url-pattern>/*</url-pattern>
 		</web-resource-collection>
 		<user-data-constraint>
+		
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
+	-->
 	
-	<!-- 이미지 css 리다이렉트 방지 -->
+	<!-- 이미지 css 리다이렉트 방지 
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>HTTPS or HTTP</web-resource-name>
@@ -52,6 +54,6 @@
 			<transport-guarantee>NONE</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-
+	-->
 	
 </web-app>
