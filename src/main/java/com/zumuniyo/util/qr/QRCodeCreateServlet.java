@@ -1,4 +1,4 @@
-package com.zumuniyo.controller;
+package com.zumuniyo.util.qr;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
