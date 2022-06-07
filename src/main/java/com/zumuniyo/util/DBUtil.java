@@ -2,39 +2,30 @@ package com.zumuniyo.util;
 
 import java.sql.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 public class DBUtil {
-
+	
 	public static Connection getConnection() {
 
-		Context initContext = null;
 		Connection conn = null;
-
+		String url = DBProperties.URL;
+		String userid = DBProperties.USERID, password = DBProperties.PASSWROD;
 		try {
-			initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			DataSource ds = (DataSource) envContext.lookup("jdbc/myoracle");
-			conn = ds.getConnection();
+			Class.forName(DBProperties.DRIVER);
+			conn = DriverManager.getConnection(url, userid, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return conn;
 	}
-
+	
 	public static void dbClose(ResultSet rs, Statement st, Connection conn) {
 
 		try {
-			if (rs != null) rs.close();
-			if (st != null) st.close();
-			if (conn != null) conn.close();
+			if(rs != null) rs.close();
+			if(st != null) st.close();
+			if(conn != null) conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
