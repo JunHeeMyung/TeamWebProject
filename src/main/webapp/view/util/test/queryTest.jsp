@@ -1,5 +1,5 @@
 <%@page import="java.sql.*"%>
-<%@page import="com.zumuniyo.util.DBUtil"%>
+<%@page import="com.zumuniyo.util.DBUtilForJNDI"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +10,6 @@
 </head>
 <body>
 <%
-
 Connection conn = null;
 ResultSet rs = null;
 Statement st = null;
@@ -23,7 +22,7 @@ try {
    sql = "select * from tab";
       
    // first,last 사용시 파라메터 추가설정해야함
-   conn = DBUtil.getConnection();
+   conn = DBUtilForJNDI.getConnection();
    st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
    rs = st.executeQuery(sql);
    rsmd = rs.getMetaData();
@@ -56,10 +55,8 @@ try {
 } catch (SQLException e) {
    e.printStackTrace();
 } finally {
-   DBUtil.dbClose(rs, st, conn);
+   DBUtilForJNDI.dbClose(rs, st, conn);
 }
-
-
 %>
 </body>
 </html>
