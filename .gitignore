@@ -3,3 +3,4 @@ classes/
 *.keep
 .classpath
 .project
+*.properties
