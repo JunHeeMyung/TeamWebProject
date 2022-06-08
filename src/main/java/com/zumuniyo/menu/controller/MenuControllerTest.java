@@ -44,6 +44,8 @@ public class MenuControllerTest {
 
 	private static String controlMenu() {
 		
+		System.out.println("----<<< 컨트롤메뉴 >>>----");
+		
 		System.out.println("1. 모든메뉴조회");
 		System.out.println("2. 카테고리별 조회");
 		System.out.println("3. 추천메뉴만 조회");
