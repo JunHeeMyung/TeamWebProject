@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/Review/*")
+
+@WebServlet("/review/*")
 public class ReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +24,9 @@ public class ReviewServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
+		if(uri.equals("/review/reviewAllList")) {		
+			command = new ReviewSelectController();
+		}
 		
 		/*
 		if(uri.equals("/emp/emplist.do")) {
