@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ZUMUNIYO</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-index.jsp
-<ul>
-<li><a href="shop/shopList">모든 매장 조회</a></li>
-</ul>
+shop_Name
 </body>
 </html>
