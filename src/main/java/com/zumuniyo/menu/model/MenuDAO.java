@@ -29,8 +29,8 @@ public class MenuDAO {
 	static final String SQL_SELECT_BYHITMENU = "" ;
 	static final String SQL_SELECT_BYINTEREST = "" ;
 	static final String SQL_SELECT_BYNAME = "" ;
-	static final String SQL_SELECT_INSERT = "" ;
-	static final String SQL_SELECT_DELETE = "" ;
+	static final String SQL_INSERT = "" ;
+	static final String SQL_DELETE = "" ;
 	
 	
 	Connection conn;
@@ -64,17 +64,17 @@ public class MenuDAO {
 	
 	public List<MenuDTO> selectAll() {
 		
-		List<MenuDTO> menulist = new ArrayList<>();
+		List<MenuDTO> mlist = new ArrayList<>();
 		
 		conn = DBUtil.getConnection();
 		
 		try {
-			st = conn.prepareStatement(SQL_SELECT_ALL);
+			pst = conn.prepareStatement(SQL_SELECT_ALL);
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {
 				
-				menulist.add(makeMenu(rs));
+				mlist.add(makeMenu(rs));
 			}
 			
 			
@@ -87,14 +87,187 @@ public class MenuDAO {
 		}
 		
 	
-		return menulist;
+		return mlist;
 		
 	}
 
+	public List<MenuDTO> selectByCategory() {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYCATEGORY);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+	
+		return mlist;
+		
+	}
 	
 	
+	public List<MenuDTO> selectByHitMenu() {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYHITMENU);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
 	
+		return mlist;
+		
+		
+	}
 	
+	public List<MenuDTO> selectByInterest() {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYINTEREST);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+	
+		return mlist;
+		
+		
+	}
+	
+	public List<MenuDTO> selectByName() {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYNAME);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+	
+		return mlist;
+		
+		
+	}
+	
+	public int insert(MenuDTO menu) {
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_INSERT);
+			
+			pst.setString(1, menu.getMenu_category());
+			pst.setInt(2, menu.getShop_seq());
+			pst.setString(3, menu.getMenu_name());
+			pst.setInt(4, menu.getMenu_price());
+			pst.setString(5, menu.getMenu_img());
+			pst.setInt(6, menu.getMenu_top());
+			pst.setString(7, menu.getMenu_info());
+			pst.setString(8, menu.getMenu_status());
+			
+			
+			result = pst.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+		return result;
+		
+		
+	}
+	
+	public int delete(int num) {
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_DELETE);
+			
+			pst.setInt(1, num);
+			
+			result = pst.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+	
+		return result;
+		
+		
+	}
 	
 	
 }
