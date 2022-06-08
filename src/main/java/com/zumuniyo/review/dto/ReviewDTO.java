@@ -6,9 +6,9 @@ public class ReviewDTO {
  	int review_seq;
 	int mem_seq;
 	int menu_seq;
-	int review_taste;
-	int review_amount;
-	int review_service;
+	float review_taste;
+	float review_amount;
+	float review_service;
 	String review_content;
 	String review_img;
 	Date review_date;
@@ -20,7 +20,7 @@ public class ReviewDTO {
 
 	
 	
-	public ReviewDTO(int review_seq, int mem_seq, int menu_seq, int review_taste, int review_amount, int review_service,
+	public ReviewDTO(int review_seq, int mem_seq, int menu_seq, float review_taste, float review_amount, float review_service,
 			String review_content, String review_img, Date review_date, int review_exposure) {
 		super();
 		this.review_seq = review_seq;
@@ -61,7 +61,7 @@ public class ReviewDTO {
 		this.menu_seq = menu_seq;
 	}
 
-	public int getReview_taste() {
+	public float getReview_taste() {
 		return review_taste;
 	}
 
@@ -69,7 +69,7 @@ public class ReviewDTO {
 		this.review_taste = review_taste;
 	}
 
-	public int getReview_amount() {
+	public float getReview_amount() {
 		return review_amount;
 	}
 
@@ -77,7 +77,7 @@ public class ReviewDTO {
 		this.review_amount = review_amount;
 	}
 
-	public int getReview_service() {
+	public float getReview_service() {
 		return review_service;
 	}
 
