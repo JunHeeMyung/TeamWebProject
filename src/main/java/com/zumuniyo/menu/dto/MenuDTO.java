@@ -18,6 +18,13 @@ public class MenuDTO {
 		super();
 	}
 	
+	public MenuDTO(String menu_category) {
+		
+		super();
+		this.menu_category = menu_category;
+	}
+	
+	
 	
 	public MenuDTO(int menu_seq, String menu_category, int shop_seq, String menu_name, int menu_price, String menu_img,
 			int menu_top, String menu_info, String menu_status) {
@@ -33,6 +40,36 @@ public class MenuDTO {
 		this.menu_status = menu_status;
 	}
 
+
+	public MenuDTO(String menu_category, int shop_seq, String menu_name, int menu_price, String menu_img,
+			int menu_top, String menu_info) {
+		super();
+		
+		this.menu_category = menu_category;
+		this.shop_seq = shop_seq;
+		this.menu_name = menu_name;
+		this.menu_price = menu_price;
+		this.menu_img = menu_img;
+		this.menu_top = menu_top;
+		this.menu_info = menu_info;
+		
+		
+	}
+
+	public MenuDTO(String menu_category, String menu_name, int menu_price, String menu_img, int menu_top,
+			String menu_info) {
+		
+		super();
+		
+		this.menu_category = menu_category;
+		
+		this.menu_name = menu_name;
+		this.menu_price = menu_price;
+		this.menu_img = menu_img;
+		this.menu_top = menu_top;
+		this.menu_info = menu_info;
+		
+	}
 
 	public int getMenu_seq() {
 		return menu_seq;

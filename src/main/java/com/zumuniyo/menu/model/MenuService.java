@@ -14,5 +14,49 @@ public class MenuService {
 	}
 	
 	
-
+	public List<String> selectCategoryAll() {
+		
+		return dao.selectCategoryAll();
+	}
+	
+	
+	
+	public List<MenuDTO> selectByCategory(String category) {
+		
+		return dao.selectByCategory(category);
+	}
+	
+	public List<MenuDTO> selectByHitMenu(String hit) {
+		
+		return dao.selectByHitMenu();
+	}
+	
+	public List<MenuDTO> selectByInterest(String Interest) {
+		
+		return dao.selectByInterest();
+	}
+	
+	public List<MenuDTO> selectByName(String name) {
+		
+		return dao.selectByName(name);
+	}
+	
+	public int insert(MenuDTO menu) {
+		
+		return dao.insert(menu);
+	}
+	
+	public int delete(int num) {
+		
+		return dao.delete(num);
+		
+	}
+	
+	public int update(MenuDTO menu) {
+		
+		return dao.update(menu);
+	}
+	
+	
+	
 }

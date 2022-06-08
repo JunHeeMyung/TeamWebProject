@@ -1,7 +1,9 @@
 package com.zumuniyo.menu.controller;
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.menu.model.MenuService;
 import com.zumuniyo.menu.model.MenuView;
 
@@ -26,15 +28,20 @@ public class MenuControllerTest {
 			case "5": f5(); break;
 			case "6": f6(); break;
 			case "7": f7(); break;
+			case "8": f8(); break;
 			case "0": flag=false; break;
 			
 			}
 			
 		}
 		System.out.println("종료...");
+		System.exit(0);
 	}
 	
 	
+	
+
+
 	private static String controlMenu() {
 		
 		System.out.println("1. 모든메뉴조회");
@@ -44,7 +51,7 @@ public class MenuControllerTest {
 		System.out.println("5. 특정메뉴이름 조회");
 		System.out.println("6. insert");
 		System.out.println("7. delete");
-		System.out.println("0. 초기화면");
+		System.out.println("0. 종료");
 		
 		
 		return sc.nextLine();
@@ -54,43 +61,120 @@ public class MenuControllerTest {
 	
 	
 	
-	
+	private static void f8() {
+		
+System.out.println("**** 기존 메뉴 수정 ****");
+		
+		System.out.print("메뉴 카테고리를 입력하세요 >> ");
+		String menu_category = sc.nextLine();
+		
+		System.out.print("메뉴 이름을 입력하세요 >> ");
+		String menu_name = sc.nextLine();
+		System.out.print("가격을 입력하세요 >> ");
+		int menu_price = Integer.parseInt(sc.nextLine());
+		System.out.print("첨부할 이미지주소를 입력하세요 >> ");
+		String menu_img = sc.nextLine();
+		System.out.print("추천메뉴 등록 여부를 입력하세요(등록:1, 미등록:0) >> ");
+		int menu_top = Integer.parseInt(sc.nextLine());
+		System.out.print("메뉴 소개문구를 입력하세요 >> ");
+		String menu_info = sc.nextLine();
+		
+		
+		MenuDTO menu = new MenuDTO(menu_category, menu_name, menu_price, menu_img, menu_top, menu_info);
+		
+		int result = mService.update(menu);
+		
+		MenuView.print(result + " 건이 수정되었습니다...");
+		
+	}
 	
 	
 	
 	private static void f7() {
-		// TODO Auto-generated method stub
+		
+		System.out.print("삭제할 메뉴의 menu_seq >> ");
+		int menu_seq = Integer.parseInt(sc.nextLine());
+		
+		int result = mService.delete(menu_seq);
+		MenuView.print(result + " 건이 삭제되었습니다...");
 		
 	}
 
 	private static void f6() {
-		// TODO Auto-generated method stub
 		
+		System.out.println("==== 신규 메뉴 등록 ====");
+		
+		System.out.print("메뉴 카테고리를 입력하세요 >> ");
+		String menu_category = sc.nextLine();
+		System.out.print("매장번호를 입력하세요 >> ");
+		int shop_seq = Integer.parseInt(sc.nextLine());
+		System.out.print("메뉴 이름을 입력하세요 >> ");
+		String menu_name = sc.nextLine();
+		System.out.print("가격을 입력하세요 >> ");
+		int menu_price = Integer.parseInt(sc.nextLine());
+		System.out.print("첨부할 이미지주소를 입력하세요 >> ");
+		String menu_img = sc.nextLine();
+		System.out.print("추천메뉴 등록 여부를 입력하세요(등록:1, 미등록:0) >> ");
+		int menu_top = Integer.parseInt(sc.nextLine());
+		System.out.print("메뉴 소개문구를 입력하세요 >> ");
+		String menu_info = sc.nextLine();
+		
+		
+		MenuDTO menu = new MenuDTO(menu_category, shop_seq, menu_name, menu_price, menu_img, menu_top, menu_info);
+		
+		int result = mService.insert(menu);
+		
+		MenuView.print(result + " 건이 입력되었습니다...");
+	
+	
 	}
 
 	private static void f5() {
-		// TODO Auto-generated method stub
+		System.out.println("검색할 메뉴이름을 입력하세요 >> ");
+		
+		String menu_name = sc.nextLine();
+		List<MenuDTO> mlist = mService.selectByName(menu_name);
+		MenuView.print(mlist);
 		
 	}
 
 	private static void f4() {
-		// TODO Auto-generated method stub
+		System.out.println("판매순으로 정렬...");
+		
+		MenuView.print(mService.selectByInterest(""));
 		
 	}
 
 	private static void f3() {
-		// TODO Auto-generated method stub
+		System.out.print("추천메뉴로 등록된 메뉴를 표시합니다... ");
+		
+		MenuView.print(mService.selectByHitMenu(""));
 		
 	}
 
 	private static void f2() {
-		// TODO Auto-generated method stub
+		System.out.println("현재 입력된 카테고리를 표시합니다...");
+		System.out.println("--------------------------");
+		
+		List<String> menulist= mService.selectCategoryAll();
+		
+		System.out.println(menulist);
+		
+		System.out.println("--------------------------");
+		
+		
+		System.out.print("조회할 카테고리를 입력하세요 >> ");
+		String menu_category = sc.nextLine();
+		List<MenuDTO> mlist = mService.selectByCategory(menu_category);
+		MenuView.print(mlist);
+		
 		
 	}
 
 	
 	
 	private static void f1() {
+		
 		MenuView.print(mService.selectAll());
 		
 	}
