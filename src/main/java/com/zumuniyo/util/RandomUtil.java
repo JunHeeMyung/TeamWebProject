@@ -1,4 +1,4 @@
-package com.zumuniyo.emailcert.controller;
+package com.zumuniyo.util;
 
 public class RandomUtil {
 	

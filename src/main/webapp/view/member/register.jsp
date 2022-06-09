@@ -37,7 +37,7 @@ width:100%;
 text-align: center;
 }
 
-.step {display:none;}
+/* .step {display:none;} */
 
 .step + span {
 border-collapse: collapse;
@@ -82,10 +82,11 @@ box-shadow: 10px -10px 10px -10px #888,
 }
 
 h2{
-padding-top:5%;
+color:#727272;
+padding-top:2%;
+padding-bottom:2%;
 margin: 0px;
 }
-
 
 .typetd {
 width: 30%;
@@ -129,11 +130,11 @@ box-shadow: 10px -10px 10px -10px #1E82FF,
 }
 
 #type1td {
-background-image: url("img/register01.jpg");
+background-image: url("/view/member/img/register01.jpg");
 }
 
 #type2td {
-background-image: url("img/register02.jpg");
+background-image: url("/view/member/img/register02.jpg");
 }
 
 .red {
@@ -176,6 +177,33 @@ input[type=checkbox]{
 margin-right: 15px;
 }
 
+.centerbox {
+margin: 0px auto;
+margin-top: 5px;
+margin-bottom: 5px;
+padding: 0px auto;
+width: 80%;
+}
+
+.result_box {
+height: 25px;
+width: 100%;
+margin-top: -5px;
+margin-bottom: 13px;
+}
+
+
+#send_btn,#confirm_btn,#id_check,#nick_check {
+margin-left: 10px;
+}
+
+#timer {
+color:red;
+}
+
+
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -217,12 +245,103 @@ $(()=>{
 			$('#myModalContent').html("약관을 동의 여부를 다시 확인하세요");
 			$('#myModal').modal('show');
 		}
-		
-		
 	});
 	
+	$("#send_btn").click(()=>{
+		
+		var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		var email_addr = $("#email_addr").val();
+		if(regEmail.test(email_addr)===true){
+			$("#send_btn").html("<div class='spinner-border text-primary'></div>");
+			$.ajax({
+				    url : "/emailcert/create.do",
+				    type : "get",
+				    data : {"email_addr":email_addr},
+				    dataType : "text",
+				    success : data=>{
+						if(data=="메일발송성공"){
+							$("#send_btn").html("<div id='timer'>3:00</div>");
+							countDown(180);
+							$('#send_btn').attr('disabled', true);
+							$('#email_addr').attr('disabled', true);
+						}else{
+							alert(data);
+						}
+				    },
+				    error:()=>{
+				        alert("요청실패");
+				    }
+				})
+
+		}else{
+			
+			$('#myModalTitle').html("이메일 형식 확인");
+			$('#myModalContent').html("올바른 이메일 형식을 입력해주세요");
+			$('#myModal').modal('show');
+		}
+	});
+	
+	$("#confirm_btn").click(()=>{
+		
+		$('#confirm_btn').attr('disabled', true);
+		
+		var email_addr = $("#email_addr").val();
+		var email_certnum = $("#email_certnum").val();
+		
+		$.ajax({
+			    url : "/emailcert/confirm.do",
+			    type : "get",
+			    data : {"email_addr":email_addr,"email_certnum":email_certnum},
+			    dataType : "text",
+			    success : data=>{
+					if(data=="인증성공"){
+						
+						$("#mem_email").val(email_addr);
+						$("#radio4").prop('checked', true).trigger('change');
+
+					}else{
+						
+						$('#myModalTitle').html("인증 번호 확인");
+						$('#myModalContent').html(data);
+						$('#myModal').modal('show');
+						
+					}
+					$('#confirm_btn').attr('disabled', false);
+			    },
+			    error:()=>{
+			        alert("요청실패");
+					$('#confirm_btn').attr('disabled', false);
+			    }
+			})
+	});
+
 	
 })
+
+const countDown = t =>{
+	
+		var time = t;
+
+		function setTime() {
+			var num = time;
+			var min = Math.floor(num / 60);
+			var sec = num % 60;
+			
+			if (time < 0) {
+				clearInterval(timer);
+				$("#send_btn").html("재전송");
+				$('#send_btn').attr('disabled', false);
+				$('#email_addr').attr('disabled', false);
+				return;
+			}
+			
+			$("#timer").html(min+":"+sec.toString().padStart(2,'0'));
+			time=time-1;
+		}
+
+		timer = setInterval(setTime, 1000);
+	}
+
 </script>
 </head>
 <body>
@@ -270,20 +389,58 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <div id="step3box" class="stepbox">
 <h2> 이메일 인증</h2>
 
-<form id="emailcert">
-</form>
+<div class="centerbox">
+<div class="input-group mb-3">
+  <span class="input-group-text">이메일</span>
+  <input type="text" id="email_addr" name="email_addr" class="form-control" placeholder="예시: member@zumuniyo.com">
+  <button type="button" id="send_btn" class="btn btn-light">발송</button>
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text">인증번호</span>
+  <input type="text" id="email_certnum" name="email_certnum" class="form-control" placeholder="예시: 123456">
+  <button type="button" id="confirm_btn" class="btn btn-light">인증</button>
+</div>
+</div>
 
 </div>
 <div id="step4box" class="stepbox">
+<h2>상세 정보 입력</h2>
 
-<form action="">
-<input type="text" value="" id="mem_type">
+<div class="centerbox">
+<form action="/member/register.do" method="post">
+
+<input type="hidden" value="" id="mem_type" name="mem_type" disabled="disabled">
+<input type="hidden" value="" id="mem_email" name="mem_email" disabled="disabled">
+
+<div class="input-group mb-3">
+  <span class="input-group-text">아이디</span>
+  <input type="text" id="mem_id" name="mem_id" class="form-control" placeholder="영문시작, 영문+숫자 6~20자">
+<button type="button" id="id_check" class="btn btn-light">중복확인</button>
+</div>
+<div class="result_box" id="mem_id_result"></div>
+<div class="input-group mb-3">
+  <span class="input-group-text">닉네임</span>
+  <input type="text" id="mem_nick" name="mem_nick" class="form-control" placeholder="한글 2~8자">
+<button type="button" id="nick_check" class="btn btn-light">중복확인</button>
+</div>
+<div class="result_box" id="nick_check_result"></div>
+<div class="input-group mb-3">
+  <span class="input-group-text">비밀번호</span>
+  <input type="text" id="mem_pw" name="mem_pw" class="form-control" placeholder="영문, 숫자, 특수문자 조합 8~16자">
+</div>
+<div class="result_box" id="mem_pw_result"></div>
+<div class="input-group mb-3">
+  <span class="input-group-text">비밀번호확인</span>
+  <input type="text" id="mem_pwconfirm" name="mem_pwconfirm" class="form-control" placeholder="영문, 숫자, 특수문자 조합 8~16자">
+</div>
+<div class="result_box" id="mem_pwconfirm_result"></div>
 
 </form>
+</div>
 
 </div>
 <div id="step5box" class="stepbox">
-step5box
+<h2>가입을 환영합니다</h2>
 
 </div>
 </div>
@@ -293,17 +450,14 @@ step5box
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 id = "myModalTitle" class="modal-title"></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body" id = "myModalContent">
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
       </div>
