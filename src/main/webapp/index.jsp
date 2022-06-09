@@ -12,5 +12,8 @@ index.jsp
 <ul>
 <li><a href="shop/shopList">모든 매장 조회</a></li>
 </ul>
+<ul>
+<li><a href="review/reviewAllList">모든 리뷰 조회</a></li>
+</ul>
 </body>
 </html>
