@@ -23,7 +23,6 @@
 			<td>양평가</td>
 			<td>서비스평가</td>
 			<td>내용</td>
-<!-- 			<td>이미지경로</td> -->
 			<td>사진</td>
 			<td>날짜</td>
 			<td>사장추천</td>			
@@ -37,7 +36,6 @@
 		<td>${review.review_amount}</td>
 		<td>${review.review_service}</td>
 		<td>${review.review_content}</td>
-<%-- 		<td>${review.review_img}</td> --%>
 		<td><img src="${pageContext.request.contextPath}/images/${review.review_img}"></td>
 		<td>${review.review_date}</td>
 		<td>${review.review_exposure}</td>		
