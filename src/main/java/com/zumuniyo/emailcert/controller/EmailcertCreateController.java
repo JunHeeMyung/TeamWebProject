@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.zumuniyo.common.Command;
 import com.zumuniyo.emailcert.dto.EmailcertDTO;
 import com.zumuniyo.emailcert.model.EmailcertService;
+import com.zumuniyo.member.dto.MemberDTO;
+import com.zumuniyo.member.model.MemberService;
 import com.zumuniyo.util.MailSender;
 import com.zumuniyo.util.RandomUtil;
 
@@ -19,6 +21,12 @@ public class EmailcertCreateController implements Command {
 		
 		if(email_addr==null||email_addr.equals("")) {
 			return "json:서버요청실패";
+		}
+		
+		MemberService memberService = new MemberService();
+		MemberDTO memberDTO = memberService.selectByEmail(email_addr);
+		if(memberDTO!=null) {
+			return "json:이미 가입된 이메일입니다";
 		}
 		
 		EmailcertService emailcertService = new EmailcertService();

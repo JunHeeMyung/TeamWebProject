@@ -21,7 +21,7 @@ public class MemberServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
-		if(uri.equals("/member/register.do")&&method.equals("POST")) {
+		if(uri.equals("/member/register.do")&&method.equals("GET")) {
 			command = new RegisterController();
 		}else if(uri.equals("/member/idcheck.do")&&method.equals("GET")){
 			command = new IdcheckController();
