@@ -30,6 +30,7 @@ public class ReviewServlet extends HttpServlet {
 			command = new ReviewInsertController();
 		}else if(uri.equals("/review/reviewShop")) {		
 			command = new ReviewShopController();
+			
 		}
 		
 		if(command==null) {
