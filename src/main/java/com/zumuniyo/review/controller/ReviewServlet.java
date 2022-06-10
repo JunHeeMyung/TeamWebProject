@@ -18,7 +18,7 @@ public class ReviewServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI().substring(request.getContextPath().length());
-		System.out.println(uri);
+		System.out.println("프론트 서블렛 Uri = "+uri);
 		
 		
 		String page = "";
@@ -26,6 +26,8 @@ public class ReviewServlet extends HttpServlet {
 		
 		if(uri.equals("/review/reviewAllList")) {		
 			command = new ReviewSelectController();
+		}else if(uri.equals("/review/reviewInsert")) {		
+			command = new ReviewInsertController();
 		}
 		
 		/*
@@ -39,7 +41,7 @@ public class ReviewServlet extends HttpServlet {
 			command = new ();			
 		}
 		*/
-		
+		System.out.println("FS_uri : " + uri);
 		page = command.execute(request);
 		
 		RequestDispatcher rd;

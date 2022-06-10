@@ -18,6 +18,7 @@
 		<tr>
 			<td>리뷰 SEQ</td>
 			<td>MEM_SEQ</td>
+			<td>MENU_SEQ</td>
 			<td>맛평가</td>
 			<td>양평가</td>
 			<td>서비스평가</td>
@@ -34,6 +35,7 @@
 		<td>${review.review_taste}</td>
 		<td>${review.review_amount}</td>
 		<td>${review.review_service}</td>
+		<td>${review.review_content}</td>
 		<td>${review.review_img}</td>
 		<td>${review.review_date}</td>
 		<td>${review.review_exposure}</td>		
