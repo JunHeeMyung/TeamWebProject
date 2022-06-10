@@ -7,6 +7,7 @@ public class ReviewService {
 
 	ReviewDAO reviewDAO = new ReviewDAO();
 	
+	
 	public List<ReviewDTO> selectAll(){
 		return reviewDAO.selectAll();
 	}	
@@ -19,7 +20,6 @@ public class ReviewService {
 	public List<ReviewDTO> selectByShopSeq(int shop_seq){
 		return reviewDAO.selectByShopSeq(shop_seq);
 	}
-
 	
 	public int reviewInsert(ReviewDTO reviewDTO) {
 		return reviewDAO.reviewInsert(reviewDTO);

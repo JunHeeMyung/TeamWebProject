@@ -2,14 +2,18 @@ package com.zumuniyo.review.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 //import java.sql.Date;
 
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.model.ReviewService;
 //import com.zumuniyo.util.DateUtil;
+import com.zumuniyo.util.UploadUtil;
 
 public class ReviewInsertController implements Command{
+	private static final String UPLOAD_DIR = "images";
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -32,18 +36,37 @@ public class ReviewInsertController implements Command{
 		}else {
 			System.out.println("post");
 			
+			
 			/*
 			 * try { request.setCharacterEncoding("utf-8"); } catch
 			 * (UnsupportedEncodingException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); }
 			 */
 			
+			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
+			System.out.println("업로드 폴더: "+dir);
+			
+			Map<String,Object> map = UploadUtil.uploadFile(UPLOAD_DIR, request);
+			List<String> photos = (List<String>)map.get("photos");
+			System.out.println("업로드 사진: "+photos);
+			
+			// 이후 파라메터 DB 입력
+			Map<String,String> params = (Map<String,String>)map.get("params");
+			for(String key:params.keySet()) {
+				System.out.println(key+":"+params.get(key));
+			}
+			
+			
+			
+			
+			
 			ReviewDTO reviewDTO = makeReview(request);
+			reviewDTO.setReview_img(photos.get(0));
 			ReviewService service = new ReviewService();
 			int result = service.reviewInsert(reviewDTO);
 			request.setAttribute("message", result>0?"리뷰등록성공":"리뷰등록실패");
 			System.out.println("result: "+result);
-			page ="result.jsp";
+			page ="/view/review/result.jsp";
 		}
 		
 	

@@ -15,7 +15,7 @@ import com.zumuniyo.util.UploadUtil;
 @WebServlet("/uploadtest.do")
 public class UploadTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "image";
+	private static final String UPLOAD_DIR = "images";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dir = request.getServletContext().getRealPath(UPLOAD_DIR);

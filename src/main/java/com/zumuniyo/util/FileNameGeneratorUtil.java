@@ -15,6 +15,6 @@ public class FileNameGeneratorUtil {
 		for(int i=0;i<100;i++) {
 			random.append(((int)(Math.random()*10)));
 		}
-		return date+random+extension;
+		return date+random+(extension.equals("")?"":".")+extension;
 	}	
 }

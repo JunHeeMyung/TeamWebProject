@@ -86,6 +86,7 @@ $(function() {
     });
 });
 
+
 $(function() {
     $('div#star3').raty({
         score: function(evt) {        	
@@ -193,7 +194,8 @@ $(function(){
 <h1>리뷰 등록</h1>
 <br>
 
-<form action="../review/reviewInsert" method="post">
+
+<form action="${path}/review/reviewInsert"   method="post" enctype="multipart/form-data">
  
  
  <div class="form-group" id="star1" >
@@ -232,27 +234,36 @@ $(function(){
 <textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
 </div>
 
-
+<!-- 
 <div class="form-group">
 <label>사진</label>
  <input type="submit" id="submit" value="업로드"/>
 </div>
-
+ -->
+ 
+ 	파일: <input type="file" name="photos"> <br> 
 
 <input class="btn btn-primary" type="submit" value="입력하기">
 <input class="btn btn-secondary" type="reset" value="취소하기">
-<input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList">	<!--구매내역으로 돌릴 id설정  -->
+<input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList"><!--구매내역으로 돌릴 id설정  -->
 </form>
+<%-- 
+<form action="${path}/uploadtest.do" 
+	method="post" enctype="multipart/form-data">
+		파일: <input type="file" name="photos"> <br> 
+		<input type="submit"value="업로드">
+</form>
+ --%>
 <script>
 
 
-/*  //구매내역으로 다시 반환시켜야됨
+ //구매내역으로 다시 반환시켜야됨
 $(function(){
 	$("#reviewAllList").click(function(){
 		location.href="reviewAllList";
 	});
 });
- */
+
 
 
 /* 
