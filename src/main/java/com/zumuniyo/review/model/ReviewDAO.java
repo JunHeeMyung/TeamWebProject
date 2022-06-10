@@ -13,13 +13,15 @@ import com.zumuniyo.util.DBUtil;
 
 public class ReviewDAO {
 	
-	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW";
+	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY 1";
 	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";
-	static final String SQL_INSERT_REVIEW = "INSERT INTO Z_REVIEW VALUES(REVIEW_SEQ.nextval,?,?,?,?,?,?,?,sysdate,0)";
 	static final String SQL_UPDATE_REVIEW_EXPOSURE = "UPDATE Z_REVIEW SET REVIEW_EXPOSURE = ? WHERE REVIEW_SEQ = ?";
 	static final String SQL_DELETE_REVIEW = "DELETE FROM Z_REVIEW WHERE REVIEW_SEQ = ?";
+	
+	static final String SQL_INSERT_REVIEW  = "INSERT INTO Z_REVIEW VALUES(REVIEW_SEQ.nextval,?,?,?,?,?,?,?,sysdate,0)";
+	static final String SQL_INSERT_REVIEW2 = "INSERT INTO Z_REVIEW VALUES(REVIEW_SEQ.nextval,NULL,NULL,?,?,?,?,?,sysdate,0)";
 	
 	Connection conn;
 	Statement st;
@@ -121,7 +123,38 @@ public class ReviewDAO {
 		return reviewDTOs;
 	}
 
+	
 	public int reviewInsert(ReviewDTO reviewDTO)
+	{
+		int result = 0;
+		
+		conn = DBUtil.getConnection();
+		try
+		{
+			pst = conn.prepareStatement(SQL_INSERT_REVIEW2);
+			//pst.setInt(1, reviewDTO.getMem_seq());
+			//pst.setInt(2, reviewDTO.getMenu_seq());
+			pst.setFloat(1, reviewDTO.getReview_taste());
+			pst.setFloat(2, reviewDTO.getReview_amount());
+			pst.setFloat(3, reviewDTO.getReview_service());
+			pst.setString(4, reviewDTO.getReview_content());
+			pst.setString(5, reviewDTO.getReview_img());
+			
+			result = pst.executeUpdate();
+			
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+		return result;
+	}
+	
+	
+	public int reviewInsert2(ReviewDTO reviewDTO)
 	{
 		int result = 0;
 
