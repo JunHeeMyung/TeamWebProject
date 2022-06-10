@@ -12,7 +12,7 @@ public class ReviewShopController implements Command{
 		
 		request.setAttribute("reviewShopList", service.selectByShopSeq(Integer.parseInt(request.getParameter("shop_seq"))));
 		
-        return "/view/shop/shopDetail";
+        return "/view/shop/shopDetail.jsp";
 	}
 
 }
