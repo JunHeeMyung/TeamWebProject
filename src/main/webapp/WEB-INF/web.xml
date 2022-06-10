@@ -14,12 +14,15 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	
-	<!-- 에러페이지 설정 
+	 
 	<error-page>
-		<error-code>에러코드</error-code>
-		<location>에러페이지경로</location>
+		<error-code>404</error-code>
+		<location>/error</location>
 	</error-page>
-	 -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/view/common/error500.jsp</location>
+	</error-page>
 	
 	<!-- JDNI 설정 -->
 	<resource-ref>
