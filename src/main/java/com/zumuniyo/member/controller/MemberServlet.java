@@ -34,7 +34,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		
 		if(command==null) {
-			response.sendRedirect("/error");
+			request.getRequestDispatcher("/error").forward(request, response);
 			return;
 		}
 		
