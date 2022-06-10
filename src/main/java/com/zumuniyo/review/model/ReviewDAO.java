@@ -61,7 +61,7 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_SELECT_MemSeq);
 			pst.setInt(1, mem_seq);
-			
+			rs = pst.executeQuery();
 			while (rs.next())
 			{
 				reviewDTOs.add(makeReview(rs));
@@ -85,7 +85,7 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_SELECT_MenuSeq);
 			pst.setInt(1, menu_seq);
-			
+			rs = pst.executeQuery();
 			while (rs.next())
 			{
 				reviewDTOs.add(makeReview(rs));
@@ -108,6 +108,7 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_SELECT_ShopSeq);
 			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
 			
 			while (rs.next())
 			{
@@ -138,7 +139,8 @@ public class ReviewDAO {
 			pst.setFloat(2, reviewDTO.getReview_amount());
 			pst.setFloat(3, reviewDTO.getReview_service());
 			pst.setString(4, reviewDTO.getReview_content());
-			pst.setString(5, reviewDTO.getReview_img());			
+			pst.setString(5, reviewDTO.getReview_img());	
+			rs = pst.executeQuery();
 			result = pst.executeUpdate();
 			
 		} catch (SQLException e)
@@ -168,7 +170,7 @@ public class ReviewDAO {
 			pst.setFloat(5, reviewDTO.getReview_service());
 			pst.setString(6, reviewDTO.getReview_content());
 			pst.setString(7, reviewDTO.getReview_img());
-			
+			rs = pst.executeQuery();
 			result = pst.executeUpdate();
 			
 		} catch (SQLException e)
@@ -192,7 +194,8 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
 			pst.setInt(1, 1);
-			pst.setInt(2, reviewDTO.getReview_seq());			
+			pst.setInt(2, reviewDTO.getReview_seq());	
+			rs = pst.executeQuery();
 			result = pst.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -214,7 +217,8 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
 			pst.setInt(1, 0);
-			pst.setInt(2, reviewDTO.getReview_seq());			
+			pst.setInt(2, reviewDTO.getReview_seq());		
+			rs = pst.executeQuery();
 			result = pst.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -238,6 +242,7 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_DELETE_REVIEW);			
 			pst.setInt(1, reviewDTO.getReview_seq());			
+			rs = pst.executeQuery();
 			
 			result = pst.executeUpdate();
 		} catch (SQLException e)
