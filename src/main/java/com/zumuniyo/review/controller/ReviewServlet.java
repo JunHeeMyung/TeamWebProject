@@ -29,25 +29,15 @@ public class ReviewServlet extends HttpServlet {
 		}else if(uri.equals("/review/reviewInsert")) {		
 			command = new ReviewInsertController();
 		}else if(uri.equals("/review/reviewShop")) {		
-			command = new ReviewShopController();
-			
+			command = new ReviewShopController();			
 		}
+		
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);;
 			return;
 		}
-		/*
-		if(uri.equals("/emp/emplist.do")) {
-			command = new ();
-		}else if(uri.equals("/emp/empInsert.do")){
-			command = new ();			
-		}else if(uri.equals("/emp/empDetail.do")){
-			command = new ();
-		}else if(uri.equals("/emp/empDelete.do")){
-			command = new ();			
-		}
-		*/
+		
 		System.out.println("FS_uri : " + uri);
 		page = command.execute(request);
 		

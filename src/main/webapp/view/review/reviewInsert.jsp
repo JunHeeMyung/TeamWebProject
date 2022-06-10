@@ -86,6 +86,7 @@ $(function() {
     });
 });
 
+
 $(function() {
     $('div#star3').raty({
         score: function(evt) {        	

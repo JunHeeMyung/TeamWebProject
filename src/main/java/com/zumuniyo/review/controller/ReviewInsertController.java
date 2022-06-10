@@ -32,6 +32,7 @@ public class ReviewInsertController implements Command{
 		}else {
 			System.out.println("post");
 			
+			
 			/*
 			 * try { request.setCharacterEncoding("utf-8"); } catch
 			 * (UnsupportedEncodingException e) { // TODO Auto-generated catch block

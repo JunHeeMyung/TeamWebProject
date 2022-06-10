@@ -138,8 +138,7 @@ public class ReviewDAO {
 			pst.setFloat(2, reviewDTO.getReview_amount());
 			pst.setFloat(3, reviewDTO.getReview_service());
 			pst.setString(4, reviewDTO.getReview_content());
-			pst.setString(5, reviewDTO.getReview_img());
-			
+			pst.setString(5, reviewDTO.getReview_img());			
 			result = pst.executeUpdate();
 			
 		} catch (SQLException e)
