@@ -29,7 +29,7 @@ public class EmailcertServlet extends HttpServlet {
 		}
 		
 		if(command==null) {
-			response.sendRedirect("/");
+			response.sendRedirect("/error");
 			return;
 		}
 		
