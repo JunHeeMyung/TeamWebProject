@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+//import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.util.DBUtil;
 
@@ -17,6 +18,7 @@ public class ReviewDAO {
 	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";
+	static final String SQL_SELECT_ShopSeq2 = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";
 	static final String SQL_UPDATE_REVIEW_EXPOSURE = "UPDATE Z_REVIEW SET REVIEW_EXPOSURE = ? WHERE REVIEW_SEQ = ?";
 	static final String SQL_DELETE_REVIEW = "DELETE FROM Z_REVIEW WHERE REVIEW_SEQ = ?";
 	
@@ -100,10 +102,13 @@ public class ReviewDAO {
 		return reviewDTOs;
 	}
 	
+	
+	//========================수정중====================================================================================
 	public List<ReviewDTO> selectByShopSeq(int shop_seq)
 	{		
-		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
+		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();		
 		conn = DBUtil.getConnection();
+		
 		try
 		{
 			pst = conn.prepareStatement(SQL_SELECT_ShopSeq);
@@ -112,7 +117,8 @@ public class ReviewDAO {
 			
 			while (rs.next())
 			{
-				reviewDTOs.add(makeReview(rs));
+				reviewDTOs.add(makeReview(rs));		
+				
 			}
 		} catch (SQLException e)
 		{
@@ -123,7 +129,7 @@ public class ReviewDAO {
 		}
 		return reviewDTOs;
 	}
-
+	
 	
 	public int reviewInsert(ReviewDTO reviewDTO)
 	{
@@ -140,7 +146,7 @@ public class ReviewDAO {
 			pst.setFloat(3, reviewDTO.getReview_service());
 			pst.setString(4, reviewDTO.getReview_content());
 			pst.setString(5, reviewDTO.getReview_img());	
-			rs = pst.executeQuery();
+			
 			result = pst.executeUpdate();
 			
 		} catch (SQLException e)
@@ -170,7 +176,7 @@ public class ReviewDAO {
 			pst.setFloat(5, reviewDTO.getReview_service());
 			pst.setString(6, reviewDTO.getReview_content());
 			pst.setString(7, reviewDTO.getReview_img());
-			rs = pst.executeQuery();
+			
 			result = pst.executeUpdate();
 			
 		} catch (SQLException e)
@@ -195,7 +201,7 @@ public class ReviewDAO {
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
 			pst.setInt(1, 1);
 			pst.setInt(2, reviewDTO.getReview_seq());	
-			rs = pst.executeQuery();
+			
 			result = pst.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -218,7 +224,7 @@ public class ReviewDAO {
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
 			pst.setInt(1, 0);
 			pst.setInt(2, reviewDTO.getReview_seq());		
-			rs = pst.executeQuery();
+			
 			result = pst.executeUpdate();
 		} catch (SQLException e)
 		{
@@ -242,7 +248,7 @@ public class ReviewDAO {
 		{
 			pst = conn.prepareStatement(SQL_DELETE_REVIEW);			
 			pst.setInt(1, reviewDTO.getReview_seq());			
-			rs = pst.executeQuery();
+			
 			
 			result = pst.executeUpdate();
 		} catch (SQLException e)
@@ -274,8 +280,24 @@ public class ReviewDAO {
 	
 		return reviewDTO;
 	}
-	
-	
+	/*
+	private MenuDTO makeMenu(ResultSet rs) throws SQLException {
+		
+		MenuDTO menu = new MenuDTO();
+		
+		menu.setMenu_seq(rs.getInt("menu_seq"));
+		menu.setMenu_category(rs.getString("menu_category"));
+		menu.setShop_seq(rs.getInt("shop_seq"));
+		menu.setMenu_name(rs.getString("menu_name"));
+		menu.setMenu_price(rs.getInt("menu_price"));
+		menu.setMenu_img(rs.getString("menu_img"));
+		menu.setMenu_top(rs.getInt("menu_top"));
+		menu.setMenu_info(rs.getString("menu_info"));
+		menu.setMenu_status(rs.getString("menu_status"));
+		
+		return menu;
+	}
+	*/
 	/*
 	public ReviewDTO selectByMenuSeq(int menu_seq)
 	{

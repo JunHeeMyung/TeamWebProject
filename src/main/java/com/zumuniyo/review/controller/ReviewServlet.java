@@ -28,6 +28,7 @@ public class ReviewServlet extends HttpServlet {
 			command = new ReviewSelectController();
 		}else if(uri.equals("/review/reviewInsert")) {		
 			command = new ReviewInsertController();
+			System.out.println("왔다ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ");
 		}else if(uri.equals("/review/reviewShop")) {		
 			command = new ReviewShopController();			
 		}
