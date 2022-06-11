@@ -8,8 +8,7 @@ public class LoginPageController implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		return null;
+		return "/view/member/login.jsp";
 	}
 
 }
