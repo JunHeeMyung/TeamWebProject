@@ -29,6 +29,8 @@ public class MenuControllerTest {
 			case "6": f6(); break;
 			case "7": f7(); break;
 			case "8": f8(); break;
+			case "9": f9(); break;
+			case "10": f10(); break;
 			case "0": flag=false; break;
 			
 			}
@@ -42,6 +44,10 @@ public class MenuControllerTest {
 	
 
 
+	
+
+
+
 	private static String controlMenu() {
 		
 		System.out.println("----<<< 컨트롤메뉴 >>>----");
@@ -53,6 +59,9 @@ public class MenuControllerTest {
 		System.out.println("5. 특정메뉴이름 조회");
 		System.out.println("6. insert");
 		System.out.println("7. delete");
+		System.out.println("8. 기존메뉴수정");
+		System.out.println("9. menu_seq로 검색");
+		System.out.println("10. shop_seq로 검색");
 		System.out.println("0. 종료");
 		
 		
@@ -61,11 +70,32 @@ public class MenuControllerTest {
 	
 	
 	
+	private static void f10() {
+		
+		System.out.println("검색할 메뉴의 매장ID를 입력하세요 >> ");
+		int shop_seq = Integer.parseInt(sc.nextLine());
+		
+		MenuView.print(mService.selectShopAll(shop_seq));
+		
+	}
 	
 	
+	private static void f9() {
+		
+		System.out.println("검색할 메뉴의 ID를 입력하세요 >> ");
+		int menu_seq = Integer.parseInt(sc.nextLine());
+		
+		MenuView.print(mService.selectByMenuId(menu_seq));
+		
+	}
+
+
 	private static void f8() {
 		
-System.out.println("**** 기존 메뉴 수정 ****");
+		System.out.println("**** 기존 메뉴 수정 ****");
+		
+		System.out.println("수정할 메뉴의 menu_seq >> ");
+		int menu_seq = Integer.parseInt(sc.nextLine());
 		
 		System.out.print("메뉴 카테고리를 입력하세요 >> ");
 		String menu_category = sc.nextLine();
@@ -82,7 +112,7 @@ System.out.println("**** 기존 메뉴 수정 ****");
 		String menu_info = sc.nextLine();
 		
 		
-		MenuDTO menu = new MenuDTO(menu_category, menu_name, menu_price, menu_img, menu_top, menu_info);
+		MenuDTO menu = new MenuDTO(menu_seq, menu_category, menu_name, menu_price, menu_img, menu_top, menu_info);
 		
 		int result = mService.update(menu);
 		

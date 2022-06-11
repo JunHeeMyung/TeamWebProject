@@ -57,6 +57,15 @@ public class MenuService {
 		return dao.update(menu);
 	}
 	
+	public MenuDTO selectByMenuId(int menuid) {
+		
+		return dao.selectByMenuId(menuid);
+	}
+	
+	public List<MenuDTO> selectShopAll(int shop_seq) {
+		
+		return dao.selectShopAll(shop_seq);
+	}
 	
 	
 }

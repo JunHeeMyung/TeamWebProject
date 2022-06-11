@@ -56,13 +56,14 @@ public class MenuDTO {
 		
 	}
 
-	public MenuDTO(String menu_category, String menu_name, int menu_price, String menu_img, int menu_top,
+	public MenuDTO(int menu_seq, String menu_category, String menu_name, int menu_price, String menu_img, int menu_top,
 			String menu_info) {
 		
 		super();
 		
-		this.menu_category = menu_category;
+		this.menu_seq = menu_seq;
 		
+		this.menu_category = menu_category;
 		this.menu_name = menu_name;
 		this.menu_price = menu_price;
 		this.menu_img = menu_img;
