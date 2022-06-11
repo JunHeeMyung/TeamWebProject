@@ -21,6 +21,7 @@ public class MenuListShopServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		
 		MenuService mService = new MenuService();
 		
 		List<MenuDTO> menulist = mService.selectShopAll(3);
