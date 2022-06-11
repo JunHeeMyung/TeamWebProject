@@ -37,10 +37,8 @@
 			</table>
 
 			<div id="steptop"></div>
-			<div id="step1box" class="stepbox shadow p-4 mb-4"
+			<div id="step1box" class="stepbox shadow "
 				style="display: none">
-
-				<h2>회원 선택</h2>
 
 				<table id="typetable">
 					<tr>
@@ -50,7 +48,7 @@
 				</table>
 
 			</div>
-			<div id="step2box" class="stepbox shadow p-4 mb-4">
+			<div id="step2box" class="stepbox shadow p-4 mb-4" style="display: none">
 				<h2>서비스 이용 약관</h2>
 				<div id="terms">Lorem ipsum dolor sit amet, consectetur
 					adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -112,7 +110,7 @@
 					class="btn btn-outline-secondary">다음</button>
 
 			</div>
-			<div id="step3box" class="stepbox shadow p-4 mb-4">
+			<div id="step3box" class="stepbox shadow p-4 mb-4" style="display: none">
 				<h2>이메일 인증</h2>
 
 				<div class="centerbox">
@@ -131,7 +129,7 @@
 				</div>
 
 			</div>
-			<div id="step4box" class="stepbox shadow p-4 mb-4">
+			<div id="step4box" class="stepbox shadow p-4 mb-4" style="display: none">
 				<h2>상세 정보 입력</h2>
 				<div class="centerbox">
 					<form action="/member/register.do" method="post"
@@ -187,7 +185,7 @@
 				</div>
 
 			</div>
-			<div id="step5box" class="stepbox shadow p-4 mb-4">
+			<div id="step5box" class="stepbox shadow p-4 mb-4" style="display: none">
 				<h2>가입을 환영합니다</h2>
 				<div class="blank"></div>
 				<div class="blank"></div>
