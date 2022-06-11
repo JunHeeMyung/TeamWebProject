@@ -35,8 +35,12 @@ public class MenuDAO {
 			+ " values(MENU_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, '활성')" ;
 	static final String SQL_DELETE = "UPDATE Z_MENU SET MENU_STATUS='비활성' WHERE MENU_SEQ=?" ;
 	
-	static final String SQL_UPDATE = "";
+	static final String SQL_UPDATE = "UPDATE Z_MENU SET MENU_CATEGORY=?, MENU_NAME=?, MENU_PRICE=?, MENU_IMG=?, MENU_TOP=?, MENU_INFO=? "
+			+ " WHERE not(menu_status='비활성') and MENU_SEQ=? ";
 	
+	static final String SQL_SELECT_BYMENUID = "select * from Z_MENU where not(menu_status='비활성') and menu_seq=?";
+	
+	static final String SQL_SELECT_SHOPALL = "select * from Z_MENU where not(menu_status='비활성') and shop_seq=? order by 1 desc";
 	
 	
 	Connection conn;
@@ -327,6 +331,8 @@ public class MenuDAO {
             pst.setString(4, menu.getMenu_img());
             pst.setInt(5, menu.getMenu_top());
             pst.setString(6, menu.getMenu_info());
+            pst.setInt(7, menu.getMenu_seq());
+            
             
 			result = pst.executeUpdate();
 			
@@ -338,7 +344,71 @@ public class MenuDAO {
 		return result;
 	}
 	
-
+	
+	public MenuDTO selectByMenuId(int menuid) {
+		
+		MenuDTO menu = null;
+		conn = DBUtil.getConnection();
+		
+		try {
+			
+			pst = conn.prepareStatement(SQL_SELECT_BYMENUID);
+			pst.setInt(1, menuid);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				menu = makeMenu(rs);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+			
+		}
+		
+		return menu;
+	}
+	
+	
+	
+	public List<MenuDTO> selectShopAll(int shop_seq) {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_SHOPALL);
+			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+	
+		return mlist;
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 }
 	
