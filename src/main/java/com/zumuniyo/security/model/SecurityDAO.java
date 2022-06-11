@@ -28,14 +28,14 @@ public class SecurityDAO {
 		return security;
 	}
 
-	public String selectHashByMemSeq(String mem_seq) {
+	public String selectHashByMemSeq(int mem_seq) {
 
 		String hash = null;
 		conn = DBUtil.getConnection();
 
 		try {
 			pst = conn.prepareStatement(SQL_SELECT_HASH_BY_MEM_SEQ);
-			pst.setString(1, mem_seq);
+			pst.setInt(1, mem_seq);
 			rs = pst.executeQuery();
 			if (rs.next())
 				hash = rs.getString("SEC_HASH");
