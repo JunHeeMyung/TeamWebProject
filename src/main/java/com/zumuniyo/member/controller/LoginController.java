@@ -60,9 +60,7 @@ public class LoginController implements Command {
 			memberMap.put("mem_nick",mem_nick);
 			memberMap.put("mem_type",mem_type);
 			
-			String member = new JSONObject(memberMap).toJSONString();
-			System.out.println(member);
-			
+			JSONObject member = new JSONObject(memberMap);
 			
 			session.setAttribute("member",member); // type 제한없이 자체를 저장가능
 			

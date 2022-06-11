@@ -8,6 +8,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @WebFilter("*.do")
@@ -18,8 +19,10 @@ public class PageFilter implements Filter {
 		
 		// 로그인시 마지막 페이지로 이동하기위해 저장함
 		String uri = ((HttpServletRequest)request).getRequestURI();
-		if(!uri.equals("/member/login.do")) {
-			request.setAttribute("nextpage", uri);
+		HttpSession session = ((HttpServletRequest)request).getSession();
+		
+		if(!uri.equals("/member/login.do")&&!uri.equals("/member/logout.do")) {
+			session.setAttribute("nextpage", uri);
 		}
 		chain.doFilter(request, response);
 	}

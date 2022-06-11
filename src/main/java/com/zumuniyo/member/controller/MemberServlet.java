@@ -33,6 +33,8 @@ public class MemberServlet extends HttpServlet {
 			command = new LoginController();
 		}else if(uri.equals("/member/login.do")&&method.equals("GET")){
 			command = new LoginPageController();
+		}else if(uri.equals("/member/logout.do")&&method.equals("GET")){
+			command = new LogoutController();
 		}
 		
 		if(command==null) {
