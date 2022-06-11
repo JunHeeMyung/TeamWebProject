@@ -27,11 +27,14 @@ public class ReviewServlet extends HttpServlet {
 		if(uri.equals("/review/reviewAllList")) {		
 			command = new ReviewSelectController();
 		}else if(uri.equals("/review/reviewInsert")) {		
-			command = new ReviewInsertController();
-			System.out.println("왔다ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ");
+			command = new ReviewInsertController();			
 		}else if(uri.equals("/review/reviewShop")) {		
 			command = new ReviewShopController();			
+		}else if(uri.equals("/review/test")) {		
+			command = new TestController();
 		}
+		
+		
 		
 		
 		if(command==null) {

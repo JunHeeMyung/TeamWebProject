@@ -45,6 +45,8 @@ public class MemberServlet extends HttpServlet {
 		if(page.indexOf("json:")>=0) {
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().print(page.substring(5));
+		}else if(page.indexOf("redirect:")>=0){
+			response.sendRedirect(page.substring(9));
 		}else {
 			request.getRequestDispatcher(page).forward(request, response);
 		}

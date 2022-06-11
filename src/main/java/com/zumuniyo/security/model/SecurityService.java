@@ -6,7 +6,7 @@ public class SecurityService {
 
 	SecurityDAO securityDAO = new SecurityDAO();
 	
-	public String selectHashByMemSeq(String mem_seq) {
+	public String selectHashByMemSeq(int mem_seq) {
 		return securityDAO.selectHashByMemSeq(mem_seq);
 	}
 	

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.shop.dto.ShopDTO;
 import com.zumuniyo.util.DBUtil;
 
@@ -16,6 +17,11 @@ public class ShopDAO {
 	// static final String SQL_SELECT_ALL = "select * from z-shop join (지명) where 위도-0.05 <= y and y <= 위도 +0.05 and 경도-0.05 <= 경도+0.05";
 	
 	static final String SQL_SELECT_LOCATION = "select * from z_shop join z_location where LOC_LAT-0.05 <= ? and ?<= LOC_LAT+0.05 and LOC_LON-0.05 <= ? and ? <= LOC_LON +0.05 order by 1";
+	
+	static final String SQL_SELECT_SHOP = "select * from Z_SHOP where SHOP_SEQ = ?";
+	
+	static final String SQL_SELECT_MENU = "select * from Z_Menu where not(menu_status='비활성') and SHOP_SEQ = ?";
+	
 	
 	Connection conn;
 	Statement st;
@@ -70,7 +76,87 @@ public class ShopDAO {
 			ShopDTO shopDTO = new ShopDTO();
 			shopDTO.setShop_seq(rs.getInt("shop_seq"));
 			shopDTO.setShop_name(rs.getString("shop_name"));
-			shopDTO.setShop_img(rs.getString("shop_img"));
+			shopDTO.setLoc_addr(rs.getString("loc_addr"));
+			shopDTO.setShop_addr_detail("shop_addr_detail");
+			/* shopDTO.setMem_seq(Integer.parseInt("mem_seq")); */
+			shopDTO.setCategory_code("category_code");
+			shopDTO.setShop_img("shop_img");
+			shopDTO.setShop_notice("shop_notice");
+			shopDTO.setShop_status("setShop_status");
 			return shopDTO;
 		}
+		
+		public List<ShopDTO> selectBySeq(int shop_seq) {
+			List<ShopDTO> shoplist = new ArrayList<>();
+			conn = DBUtil.getConnection();
+			try {
+				pst = conn.prepareStatement(SQL_SELECT_SHOP);
+				pst.setInt(1, shop_seq);
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					shoplist.add(makeShop(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.dbClose(rs, pst, conn);
+			}
+			
+			System.out.println("shoplist = "+shoplist);
+			return shoplist;
+		}
+		
+		// 모든 메뉴 조회
+		public List<MenuDTO> selectByMenu(int shop_seq) {
+			List<MenuDTO> menulist = new ArrayList<>();
+			conn = DBUtil.getConnection();
+			try {
+				pst = conn.prepareStatement(SQL_SELECT_MENU);
+				pst.setInt(1, shop_seq);
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					menulist.add(makeShopMenu(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.dbClose(rs, pst, conn);
+			}
+			
+			System.out.println("menulist = "+menulist);
+			return menulist;
+		}
+		
+		/*
+		private int menu_seq;
+		private String menu_category;
+		private int shop_seq;
+		private String menu_name;
+		private int menu_price;
+		private String menu_img;
+		private int menu_top;
+		private String menu_info;
+		private String menu_status;
+		*/
+		
+		private MenuDTO makeShopMenu(ResultSet rs) throws SQLException {
+			
+			MenuDTO menu = new MenuDTO();
+			
+			menu.setMenu_seq(rs.getInt("menu_seq"));
+			menu.setMenu_category(rs.getString("menu_category"));
+			menu.setShop_seq(rs.getInt("shop_seq"));
+			menu.setMenu_name(rs.getString("menu_name"));
+			menu.setMenu_price(rs.getInt("menu_price"));
+			menu.setMenu_img(rs.getString("menu_img"));
+			menu.setMenu_top(rs.getInt("menu_top"));
+			menu.setMenu_info(rs.getString("menu_info"));
+			menu.setMenu_status(rs.getString("menu_status"));
+			
+			return menu;
+		}
+		
+		
 }

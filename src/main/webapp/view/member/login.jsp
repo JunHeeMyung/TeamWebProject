@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,19 +10,18 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-	<!-- <link rel="stylesheet" href="/view/member/login.css"> -->
-	<script
+<!-- <link rel="stylesheet" href="/view/member/login.css"> -->
+<script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>로그인</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- <script src="/view/member/login.js"></script> -->
 <style>
-
 body, html {
-    height:  100%;
-    margin:  0px auto;
-    padding: 0px auto;
+	height: 100%;
+	margin: 0px auto;
+	padding: 0px auto;
 }
 
 div {
@@ -31,101 +30,160 @@ div {
 }
 
 #wrapper {
-height:100%;
-margin: 0px auto;
-background-color: #F3F3F3;
-text-align: center;
-
+	height: 100%;
+	margin: 0px auto;
+	background-color: #F3F3F3;
+	text-align: center;
 }
 
 #mainframe {
-height:100%;
-width:600px;
-display:inline-block;
-margin: 0px auto;
-background-color: F3F3F3;
+	height: 100%;
+	width: 600px;
+	display: inline-block;
+	margin: 0px auto;
+	background-color: F3F3F3;
 }
 
-#mainbox{
-margin:0px;
-padding:0px;	
-margin-top:110px;
-width:100%;
-height:500px;
-background-color: rgba(255, 255, 255);
-
+#mainbox {
+	margin: 0px;
+	padding: 0px;
+	margin-top: 110px;
+	width: 100%;
+	height: 500px;
+	background-color: rgba(255, 255, 255);
 }
 
-@keyframes moving{
-	from{
-		background-position: 100% 100%;
-	}
-	to{
-		background-position: center center;
-	}
+@
+keyframes moving {from { background-position:100%100%;
+	
 }
 
-#leftbox{
-margin:0px;
-padding:0px;	
-height:100%;
-background-color: rgba(23, 12, 41);
-width:38%;
-float: left;
-background-image: url("/view/member/img/login01.jpg");
-background-position: center center;
-background-size: 128%;
-filter: grayscale(70%);
-animation:moving 10s linear;
+to {
+	background-position: center center;
 }
 
-#loginbox{
-margin:0px;
-padding:50px;	
-height:100%;
-width:62%;
-background-color:rgba(255, 255, 255);
-float: left;
+}
+#leftbox {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	background-color: rgba(23, 12, 41);
+	width: 38%;
+	float: left;
+	background-image: url("/view/member/img/login01.jpg");
+	background-position: center center;
+	background-size: 128%;
+	filter: grayscale(70%);
+	animation: moving 10s linear;
+}
+
+#loginbox {
+	margin: 0px;
+	padding: 50px;
+	height: 100%;
+	width: 62%;
+	background-color: rgba(255, 255, 255);
+	float: left;
 }
 
 .updown {
-	margin:0px;
-	padding:0px;
-   	border-left: 1px solid rgba(23, 12, 41);
-    width: 1px;
-    height: 15px;
-    display: inline-block;
-}
-
-#login{
+	margin: 0px;
+	padding: 0px;
+	border-left: 1px solid rgba(23, 12, 41);
+	width: 1px;
+	height: 15px;
 	display: inline-block;
-	width: 100%	
 }
 
-#loginmenu{
+#loginbtn {
+	display: inline-block;
+	width: 100%
+}
+
+#loginmenu {
 	font-size: 15px;
 }
 
-a,a:link,a:visited {
-
- text-decoration: none;
- color: rgba(23, 12, 41);
-  
+a, a:link, a:visited {
+	text-decoration: none;
+	color: rgba(23, 12, 41);
 }
+
 a:hover {
- text-decoration:underline;
+	text-decoration: underline;
 }
 
-.loginicon{
-	display:inline-block;
+.loginicon {
+	display: inline-block;
 	width: 100px;
 	height: 100px;
 	cursor: pointer;
 }
 
+.blank {
+	height: 20px;
+}
 </style>
+<script>
+
+$(() => {
+	
+	
+	$("#loginbtn").click(() => {
+		
+		var mem_id = $("#mem_id").val();
+		var mem_pw = $("#mem_pw").val();
+		
+		if(mem_id==""){
+			$("#mem_id").focus();
+			$('#myModalTitle').html("로그인 정보 확인");
+			$('#myModalContent').html("아이디를 입력하세요");
+			$('#myModal').modal('show');
+			return;
+		}
+		
+		if(mem_pw==""){
+			$("#mem_id").focus();
+			$('#myModalTitle').html("로그인 정보 확인");
+			$('#myModalContent').html("비밀번호를 입력하세요");
+			$('#myModal').modal('show');
+			return;
+		}
+		
+		$('#loginbtn').attr('disabled', true);
+	
+		$.ajax({
+			url: "/member/login.do",
+			type: "post",
+			data: { 
+					"mem_id": mem_id ,
+					"mem_pw": mem_pw
+					},
+			dataType: "text",
+			success: data => {
+				if(data=="로그인성공"){
+					location.reload();
+				}else{
+	
+					$('#myModalTitle').html("로그인 정보 확인");
+					$('#myModalContent').html(data);
+					$('#myModal').modal('show');
+	
+				}
+				$('#loginbtn').attr('disabled', false);
+			},
+			error: () => {
+				alert("요청실패");
+				$('#loginbtn').attr('disabled', false);
+			}
+		})
+	
+	})
+	
+})
 
 
+</script>
 </head>
 <body>
 
@@ -134,31 +192,54 @@ a:hover {
 			<div id="mainbox" class="stepbox shadow mb-4">
 				<div id="leftbox"></div>
 				<div id="loginbox">
-					<div class="form-floating mb-3 mt-3">
-						<input type="text" class="form-control mt-4" id="mem_id"
-							placeholder="Enter email" name="mem_id"> <label
-							for="mem_id">아이디</label>
-					</div>
+					<form action="/member/login.do" method="post" onSubmit="return false;">
+						<div class="form-floating mb-3 mt-3">
+							<input type="text" class="form-control mt-4" id="mem_id"
+								placeholder="Enter email" name="mem_id"> <label
+								for="mem_id">아이디</label>
+						</div>
 
-					<div class="form-floating mt-3 mb-3">
-						<input type="text" class="form-control" id="mem_pw"
-							placeholder="Enter password" name="mem_pw"> <label
-							for="mem_id">비밀번호</label>
-					</div>
-					<button type="button" id="login" class="btn btn-secondary mt-2">로그인</button>
+						<div class="form-floating mt-3 mb-3">
+							<input type="password" class="form-control" id="mem_pw"
+								placeholder="Enter password" name="mem_pw"> <label
+								for="mem_id">비밀번호</label>
+						</div>
+						<input type="submit" id="loginbtn" class="btn btn-secondary mt-2" value="로그인">
 
-					<div id="loginmenu" class="mt-4"> 
-					아이디 찾기 <div class="updown"></div>
-					비밀번호 찾기 <div class="updown"></div>
-					<a href="/member/register.do">회원 가입</a>
-					</div>
-					
-					<div id="subloginbox">
-					<img src="/view/member/img/naverlogin.png" class="loginicon mt-4">
-					<img src="/view/member/img/kakaologin.png" class="loginicon mt-4">
-					</div>
-					
+						<div id="loginmenu" class="mt-4">
+							아이디 찾기
+							<div class="updown"></div>
+							비밀번호 찾기
+							<div class="updown"></div>
+							<a href="/member/register.do">회원 가입</a>
+						</div>
+
+						<div id="subloginbox">
+							<img src="/view/member/img/naverlogin.png" class="loginicon mt-4">
+							<img src="/view/member/img/kakaologin.png" class="loginicon mt-4">
+						</div>
+					</form>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h4 id="myModalTitle" class="modal-title"></h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<div class="modal-body" id="myModalContent"></div>
+				<div class="blank"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+
 			</div>
 		</div>
 	</div>
