@@ -30,6 +30,12 @@ width:100%;
 text-align: center;
 }
 
+.step {
+	height: 0px;
+	width: 0px;
+	display: none;
+}
+
 .step + span {
 border-collapse: collapse;
 color:#727272;
@@ -84,6 +90,8 @@ background-color: rgba(23, 12, 41,0.7);
 	height: 5px;
 	background-color: rgba(23, 12, 41);
 }
+
+
 
 h2{
 color:rgba(23, 12, 41);

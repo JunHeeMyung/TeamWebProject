@@ -25,9 +25,9 @@ $(() => {
 	});
 
 	$("#step2nextbtn").click(() => {
-		var checker2 = $("#checkbox1").is(":checked");
-		var checker3 = $("#checkbox1").is(":checked");
-		var checker4 = $("#checkbox1").is(":checked");
+		var checker2 = $("#checkbox2").is(":checked");
+		var checker3 = $("#checkbox3").is(":checked");
+		var checker4 = $("#checkbox4").is(":checked");
 
 		if (checker2 && checker3 && checker4) {
 			$("#radio3").prop('checked', true).trigger('change');
@@ -176,8 +176,9 @@ $(() => {
 
 	$("#submitbtn").click(() => {
 
-		$('#submitbtn').attr('disabled', true);
 		$("#submitbtn").html("<div class='spinner-border text-primary'></div>");
+		$('#submitbtn').attr('disabled', true);
+		
 
 		var mem_type = $("#mem_type").val();
 		var mem_email = $("#mem_email").val();
@@ -226,7 +227,6 @@ $(() => {
 					"mem_email": mem_email ,
 					"mem_nick": mem_nick ,
 					"mem_id": mem_id ,
-					"mem_nick": mem_nick ,
 					"mem_pw": mem_pw ,
 					},
 			dataType: "text",

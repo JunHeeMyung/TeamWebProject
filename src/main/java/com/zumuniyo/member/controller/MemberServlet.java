@@ -23,6 +23,8 @@ public class MemberServlet extends HttpServlet {
 		
 		if(uri.equals("/member/register.do")&&method.equals("GET")) {
 			command = new RegisterController();
+		}else if(uri.equals("/member/register.do")&&method.equals("POST")) {
+			command = new RegisterPostController();
 		}else if(uri.equals("/member/idcheck.do")&&method.equals("GET")){
 			command = new IdcheckController();
 		}else if(uri.equals("/member/nickcheck.do")&&method.equals("GET")){
