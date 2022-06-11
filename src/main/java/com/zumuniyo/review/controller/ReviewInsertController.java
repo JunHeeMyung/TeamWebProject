@@ -1,12 +1,12 @@
 package com.zumuniyo.review.controller;
 
-import java.io.UnsupportedEncodingException;
+//import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 //import java.sql.Date;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.model.ReviewService;
@@ -45,7 +45,7 @@ public class ReviewInsertController implements Command{
 			
 			/*
 			 * try { request.setCharacterEncoding("utf-8"); } catch
-			 * (UnsupportedEncodingException e) { // TODO Auto-generated catch block
+			 * (UnsupportedEncodingException e) { 
 			 * e.printStackTrace(); }
 			 */
 			
@@ -61,9 +61,6 @@ public class ReviewInsertController implements Command{
 			for(String key:params.keySet()) {
 				System.out.println(key+":"+params.get(key));
 			}
-			
-			
-			
 			
 			
 			ReviewDTO reviewDTO = makeReview(request);

@@ -24,12 +24,20 @@ public class ReviewServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
-		if(uri.equals("/review/reviewAllList")) {		
+		if(uri.equals("/review/reviewAllList.do")) {		
 			command = new ReviewSelectController();
-		}else if(uri.equals("/review/reviewInsert")) {		
+		}else if(uri.equals("/review/reviewInsert.do")) {		
 			command = new ReviewInsertController();			
-		}else if(uri.equals("/review/reviewShop")) {		
-			command = new ReviewShopController();			
+		}else if(uri.equals("/review/reviewShop.do")) {		
+			command = new ReviewShopController();
+		}else if(uri.equals("/review/reviewMenu.do")) {		
+			command = new ReviewMenuController();
+		}else if(uri.equals("/review/reviewUpdate.do")) {		
+			command = new ReviewUpdateController();
+		}else if(uri.equals("/review/reviewDelete.do")) {		
+			command = new ReviewDeleteController();
+			
+			
 		}else if(uri.equals("/review/test")) {		
 			command = new TestController();
 		}

@@ -14,5 +14,4 @@ public class ReviewShopController implements Command{
 		
         return "/view/shop/shopDetail.jsp";
 	}
-
 }
