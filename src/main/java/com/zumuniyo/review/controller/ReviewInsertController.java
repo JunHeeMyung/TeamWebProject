@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 //import java.sql.Date;
+import javax.servlet.http.HttpSession;
 
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.model.ReviewService;
@@ -21,18 +22,23 @@ public class ReviewInsertController implements Command{
 		String method = request.getMethod();
 		String page = null;
 		
+		
 		if(method.equals("GET")) {
 						
 			ReviewService service = new ReviewService();
 			List<ReviewDTO> reviewDTOs = service.selectAll();
-						
-			request.setAttribute("reviewDTOs", reviewDTOs);
+			
+			request.setAttribute("reviewDTOs", reviewDTOs);			
+			
+			
 			//page = "reviewInsert.jsp";
 			System.out.println("page url="+ page);
 			System.out.println("get");
 			
 			//page = "reviewInsert.jsp";
 			page ="/view/review/reviewInsert.jsp";
+			
+			
 		}else {
 			System.out.println("post");
 			
@@ -72,7 +78,7 @@ public class ReviewInsertController implements Command{
 	
 		ReviewService service = new ReviewService();
 		request.setAttribute("reviewAllList", service.selectAll());
-			
+		
 
 		return page;
 	}

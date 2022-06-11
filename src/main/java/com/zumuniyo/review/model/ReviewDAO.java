@@ -3,10 +3,14 @@ package com.zumuniyo.review.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 //import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.review.dto.ReviewDTO;
@@ -14,7 +18,7 @@ import com.zumuniyo.util.DBUtil;
 
 public class ReviewDAO {
 	
-	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY 1";
+	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY REVIEW_SEQ DESC";
 	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";
@@ -105,29 +109,75 @@ public class ReviewDAO {
 	
 	//========================수정중====================================================================================
 	public List<ReviewDTO> selectByShopSeq(int shop_seq)
-	{		
-		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();		
+	{	
+		ResultSetMetaData rsmd = null;
+		
+		Map<String, String> reviewShopMLists = new HashMap<>();
+		List<ReviewDTO> reviewShopLists = new ArrayList<ReviewDTO>();	
+		
+		List<Map<String, String>>reviewShopListss = new ArrayList<>();
+		
 		conn = DBUtil.getConnection();
 		
 		try
 		{
-			pst = conn.prepareStatement(SQL_SELECT_ShopSeq);
+			pst = conn.prepareStatement(SQL_SELECT_ShopSeq, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pst.setInt(1, shop_seq);
-			rs = pst.executeQuery();
-			
-			while (rs.next())
-			{
-				reviewDTOs.add(makeReview(rs));		
-				
-			}
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-		} finally
-		{
-			DBUtil.dbClose(rs, st, conn);
-		}
-		return reviewDTOs;
+			rs = pst.executeQuery();			
+			rsmd = rs.getMetaData();
+	         
+
+	         // 로우수 구하기
+	         rs.last();
+	         int row = rs.getRow();
+	         rs.beforeFirst();
+	         // 컬럼수 구하기
+	         int col = rsmd.getColumnCount();
+	         System.out.println("결과수: " + row);	    	     
+	       
+	         // 결과 출력
+	         int c = 0;
+	         while (rs.next()) {	       	 
+	        	for (int i = 1; i <= col; i++)
+	            {	        		 
+	            	reviewShopMLists.put(rsmd.getColumnName(i), rs.getString(i)); 
+	            	//System.out.println(rsmd.getColumnName(i)+":"+ rs.getString(i));
+	            	//System.out.printf("%s : %s\n",rsmd.getColumnName(i), rs.getString(i));
+	            }
+	        	
+	        //	System.out.println("맵"+reviewShopMLists);
+	        	
+	        	//reviewShopListss.add(c,reviewShopMLists);
+	        	reviewShopListss.add(c, reviewShopMLists);
+	        	System.out.println("C :"+c);
+	        	c++;	        	
+	         }
+	         
+	         System.out.println("리스트1 REVIEW_SEQ="+reviewShopListss.get(0).get("REVIEW_SEQ"));	        	
+	         System.out.println("리스트2 REVIEW_SEQ="+reviewShopListss.get(1).get("REVIEW_SEQ"));	        	
+//	         System.out.println("리스트2"+reviewShopListss.get(1));	        	
+	         
+	         
+	         /*
+	         for(Entry<String, String> entrySet : reviewShopMLists.entrySet())	        	 
+	         {
+	        	 System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
+	         }
+	         */
+	        // System.out.println(reviewShopListss);
+	         
+	         
+				/*
+				 * reviewShopMLists.forEach((key, value) -> { System.out.println(key + " : " +
+				 * value); });
+				 */
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         DBUtil.dbClose(rs, st, conn);
+	      }
+		return reviewShopLists;
 	}
 	
 	
@@ -280,24 +330,67 @@ public class ReviewDAO {
 	
 		return reviewDTO;
 	}
+	
 	/*
-	private MenuDTO makeMenu(ResultSet rs) throws SQLException {
+	 //수정 백업 
+	public List<ReviewDTO> selectByShopSeq(int shop_seq)
+	{	
+		ResultSetMetaData rsmd = null;
 		
-		MenuDTO menu = new MenuDTO();
+		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();	
+		Map<String, String> reviewShopLists = new HashMap<>();
 		
-		menu.setMenu_seq(rs.getInt("menu_seq"));
-		menu.setMenu_category(rs.getString("menu_category"));
-		menu.setShop_seq(rs.getInt("shop_seq"));
-		menu.setMenu_name(rs.getString("menu_name"));
-		menu.setMenu_price(rs.getInt("menu_price"));
-		menu.setMenu_img(rs.getString("menu_img"));
-		menu.setMenu_top(rs.getInt("menu_top"));
-		menu.setMenu_info(rs.getString("menu_info"));
-		menu.setMenu_status(rs.getString("menu_status"));
 		
-		return menu;
+		conn = DBUtil.getConnection();
+		
+		try
+		{
+			pst = conn.prepareStatement(SQL_SELECT_ShopSeq, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
+
+			
+			 rsmd = rs.getMetaData();
+	         
+
+	         // 로우수 구하기
+	         rs.last();
+	         int row = rs.getRow();
+	         rs.beforeFirst();
+	         // 컬럼수 구하기
+	         int col = rsmd.getColumnCount();
+	         System.out.println("결과수: " + row);
+	    
+	         // 컬럼명 출력
+	         for (int i = 1; i <= col; i++) {
+	         System.out.printf("%-15s", rsmd.getColumnName(i));         
+	         }        	         
+	    
+	      
+	         System.out.println("");
+	         // 타입출력
+	         for (int i = 1; i <= col; i++) {
+	            System.out.printf("%-15s", "("+(rsmd.getColumnTypeName(i))+")");
+	         }
+	      
+	         System.out.println("");
+	       
+	         // 결과 출력
+	         while (rs.next()) {
+	            for (int c = 1; c <= col; c++)
+	               System.out.printf("%-15s", rs.getString(c));
+	            System.out.println("");
+	         }
+
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         DBUtil.dbClose(rs, st, conn);
+	      }
+		return reviewDTOs;
 	}
 	*/
+	
 	/*
 	public ReviewDTO selectByMenuSeq(int menu_seq)
 	{
