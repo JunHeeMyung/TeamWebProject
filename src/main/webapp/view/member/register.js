@@ -227,7 +227,7 @@ $(() => {
 					"mem_email": mem_email ,
 					"mem_nick": mem_nick ,
 					"mem_id": mem_id ,
-					"mem_pw": mem_pw ,
+					"mem_pw": mem_pw
 					},
 			dataType: "text",
 			success: data => {
