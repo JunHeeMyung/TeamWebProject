@@ -15,6 +15,7 @@ public class MenuView {
 		
 	}
 	
+	
 	public static void print(MenuDTO menu) {
 		System.out.println("데이터를 1건 출력...");
 		

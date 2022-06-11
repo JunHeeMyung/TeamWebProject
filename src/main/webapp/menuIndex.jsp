@@ -7,7 +7,9 @@
 <title>ZUMUNIYO</title>
 </head>
 <body>
-
+ 
+ 
+ 
 index.jsp
 <ul>
 <li><a href="view/shop/shopList">모든 매장 조회</a></li>
