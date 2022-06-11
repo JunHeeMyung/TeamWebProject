@@ -15,5 +15,8 @@ index.jsp
 <ul>
 <li><a href="review/reviewAllList">모든 리뷰 조회</a></li>
 </ul>
+<ul>
+<li><a href="/member/login.do">로그인</a></li>
+</ul>
 </body>
 </html>
