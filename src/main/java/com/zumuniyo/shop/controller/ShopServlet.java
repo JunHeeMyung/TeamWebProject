@@ -24,13 +24,17 @@ public class ShopServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
-		if(uri.equals("/shop/shopList")) {
-			
+		if(uri.equals("/shop/shopList")) {			
 			command = new ShopListController();
+		} else if(uri.equals("/shop/shopDetail")) {			
+			command = new ShopDetailController();
 		}
 		
-		
-		
+		if(command==null) {
+			request.getRequestDispatcher("/error").forward(request, response);
+			return;
+		}
+
 		
 		
 		page = command.execute(request);

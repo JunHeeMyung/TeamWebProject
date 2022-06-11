@@ -128,6 +128,18 @@ public class ShopDTO {
 	public void setShop_status(String shop_status) {
 		this.shop_status = shop_status;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ShopDTO [shop_seq=").append(shop_seq).append(", shop_name=").append(shop_name)
+				.append(", loc_addr=").append(loc_addr).append(", shop_addr_detail=").append(shop_addr_detail)
+				.append(", mem_seq=").append(mem_seq).append(", category_code=").append(category_code)
+				.append(", shop_img=").append(shop_img).append(", shop_notice=").append(shop_notice)
+				.append(", shop_status=").append(shop_status).append("]");
+		return builder.toString();
+	}
 	
 	
 	
