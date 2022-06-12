@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zumuniyo.menu.dto.MenuDTO;
+import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.shop.dto.ShopDTO;
 import com.zumuniyo.util.DBUtil;
 
@@ -23,6 +24,18 @@ public class ShopDAO {
 	static final String SQL_SELECT_MENU = "select * from Z_Menu where not(menu_status='비활성') and SHOP_SEQ = ?";
 	
 	
+	static final String SQL_INSERT_SHOP = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, ?, ?, ?, ?, '활성')";
+	static final String SQL_INSERT_SHOP_TEST = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
+	//insert INTO Z_SHOP VALUES(SHOP_SEQ.nextval, '멕시카나치킨', '서울특별시 금천구 가산디지털1로 70', '2층', NULL, NULL, NULL, NULL, '활성');
+	/* static final String SQL_INSERT_SHOPIMG = "INSERT INTO Z_shop "; */
+	/*
+
+
+MEM_SEQ
+CATEGORY_CODE
+
+	  */
+	 
 	Connection conn;
 	Statement st;
 	PreparedStatement pst; // 바인딩변수지원
@@ -158,5 +171,44 @@ public class ShopDAO {
 			return menu;
 		}
 		
+		
+		
+		
+		
+		public int shopInsert(ShopDTO shopDTO)
+		{
+			int result = 0;
+			
+			conn = DBUtil.getConnection();
+			try
+			{
+				pst = conn.prepareStatement(SQL_INSERT_SHOP_TEST);
+				
+				pst.setString(1, shopDTO.getShop_name());
+				pst.setString(2, shopDTO.getLoc_addr());
+				pst.setString(3, shopDTO.getShop_addr_detail());
+				pst.setString(4, shopDTO.getShop_addr_detail());
+				pst.setString(5, shopDTO.getShop_notice());
+				
+				/*SHOP_IMG SHOP_NOTICE
+				  "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
+				
+				insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?', NULL, NULL, NULL, NULL, '활성')"; 
+SHOP_SEQ SHOP_NAME LOC_ADDR SHOP_ADDR_DETAIL MEM_SEQ CATEGORY_CODE SHOP_IMG SHOP_NOTICE SHOP_STATUS 
+				 */
+				
+				
+				result = pst.executeUpdate();
+				
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+			} finally
+			{
+				DBUtil.dbClose(rs, pst, conn);
+			}
+			
+			return result;
+		}
 		
 }

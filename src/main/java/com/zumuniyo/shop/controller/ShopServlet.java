@@ -24,10 +24,12 @@ public class ShopServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
-		if(uri.equals("/shop/shopList")) {			
+		if(uri.equals("/shop/shopList.do")) {			
 			command = new ShopListController();
-		} else if(uri.equals("/shop/shopDetail")) {			
+		} else if(uri.equals("/shop/shopDetail.do")) {			
 			command = new ShopDetailController();
+		}  else if(uri.equals("/shop/shopInsert.do")) {			
+			command = new ShopInsertController();
 		}
 		
 		if(command==null) {
