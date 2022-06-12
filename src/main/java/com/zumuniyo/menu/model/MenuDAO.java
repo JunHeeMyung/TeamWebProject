@@ -27,11 +27,13 @@ public class MenuDAO {
 	
 	static final String SQL_SELECT_ALL = "select * from Z_MENU where not(menu_status='비활성') order by 1 desc" ;
 	
-	static final String SQL_SELECT_CATEGORYALL = "SELECT menu_category FROM Z_MENU GROUP BY MENU_CATEGORY"  ;
-	static final String SQL_SELECT_BYCATEGORY = "select * from Z_MENU where not(menu_status='비활성') and MENU_CATEGORY=? " ;
-	static final String SQL_SELECT_BYHITMENU = "select * from Z_MENU where not(menu_status='비활성') and MENU_TOP=1 " ;
+	static final String SQL_SELECT_CATEGORYALL = "SELECT menu_category FROM Z_MENU where shop_seq=? GROUP BY MENU_CATEGORY " ;
+	//static final String SQL_SELECT_BYCATEGORY = "select * from Z_MENU where not(menu_status='비활성') and MENU_CATEGORY=? and shop_seq=? " ;
+	static final String SQL_SELECT_BYHITMENU = "select * from Z_MENU where not(menu_status='비활성') and MENU_TOP=1 and shop_seq=? " ;
 	static final String SQL_SELECT_BYINTEREST = "" ;
-	static final String SQL_SELECT_BYNAME = "select * from Z_MENU where not(menu_status='비활성') and MENU_NAME like ? " ;
+	static final String SQL_SELECT_BYNAME = "select * from Z_MENU where not(menu_status='비활성')and MENU_NAME like ? and shop_seq=? " ;
+	
+	
 	static final String SQL_INSERT = "INSERT INTO Z_MENU(MENU_SEQ, MENU_CATEGORY, SHOP_SEQ, MENU_NAME, MENU_PRICE, MENU_IMG, MENU_TOP, MENU_INFO, MENU_STATUS ) "
 			+ " values(MENU_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, '활성')" ;
 	static final String SQL_DELETE = "UPDATE Z_MENU SET MENU_STATUS='비활성' WHERE MENU_SEQ=?" ;
@@ -41,7 +43,14 @@ public class MenuDAO {
 	
 	static final String SQL_SELECT_BYMENUID = "select * from Z_MENU where not(menu_status='비활성') and menu_seq=?";
 	
-	static final String SQL_SELECT_SHOPALL = "select * from Z_MENU where not(menu_status='비활성') and shop_seq=? order by 1 desc";
+	static final String SQL_SELECT_SHOPALL = "select * from Z_MENU where not(menu_status='비활성') and shop_seq=? order by MENU_CATEGORY desc";
+	
+	static final String SQL_SELECT_BYCATEGORY = "SELECT * FROM Z_MENU WHERE MENU_CATEGORY = ? AND SHOP_SEQ = ? AND MENU_STATUS = '활성' ";
+	
+	
+	
+	
+	
 	
 	
 	Connection conn;
@@ -72,7 +81,7 @@ public class MenuDAO {
 	
 	
 	
-	
+	// 사실상 안씀... 모든메뉴조회(삭제된건 안뜸)
 	public List<MenuDTO> selectAll() {
 		
 		List<MenuDTO> mlist = new ArrayList<>();
@@ -97,13 +106,12 @@ public class MenuDAO {
 			DBUtil.dbClose(rs, pst, conn);
 		}
 		
-	
 		return mlist;
 		
 	}
 	
 	
-	public List<String> selectCategoryAll() {
+	public List<String> selectCategoryAll(int shop_seq) {
 		
 		List<String> menulist = new ArrayList<>();
 		
@@ -111,6 +119,9 @@ public class MenuDAO {
 		
 		try {
 			pst = conn.prepareStatement(SQL_SELECT_CATEGORYALL);
+			
+			pst.setInt(1, shop_seq);
+			
 			rs = pst.executeQuery();
 		
 			while(rs.next()) {
@@ -133,13 +144,11 @@ public class MenuDAO {
 	
 	
 
-	public List<MenuDTO> selectByCategory(String category) {
+	public List<MenuDTO> selectByCategory(String category, int shop_seq) {
 		
-		List<MenuDTO> mlist = new ArrayList<>();
+		List<MenuDTO> menulist = null;
 		
 		conn = DBUtil.getConnection();
-		
-			
 		
 		
 		try {
@@ -148,13 +157,16 @@ public class MenuDAO {
 			
 			pst.setString(1, category);
 			
+			pst.setInt(2, shop_seq);
+			
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {
-				
-				mlist.add(makeMenu(rs));
+				if(menulist==null) {
+					menulist = new ArrayList<>();
+				}
+				menulist.add(makeMenu(rs));
 			}
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -165,12 +177,12 @@ public class MenuDAO {
 		}
 		
 	
-		return mlist;
+		return menulist;
 		
 	}
 	
 	
-	public List<MenuDTO> selectByHitMenu() {
+	public List<MenuDTO> selectByHitMenu(int shop_seq) {
 		
 		List<MenuDTO> mlist = new ArrayList<>();
 		
@@ -178,6 +190,9 @@ public class MenuDAO {
 		
 		try {
 			pst = conn.prepareStatement(SQL_SELECT_BYHITMENU);
+			
+			pst.setInt(1, shop_seq);
+			
 			rs = pst.executeQuery();
 			
 			while(rs.next()) {
@@ -200,6 +215,55 @@ public class MenuDAO {
 		
 	}
 	
+	
+	public List<MenuDTO> selectByName(String name, int shop_seq) {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BYNAME);
+			
+			pst.setString(1, "%"+name+"%");
+			pst.setInt(2, shop_seq);
+			
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		
+	
+		return mlist;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//------------------------------------------------
 	public List<MenuDTO> selectByInterest() {
 		
 		List<MenuDTO> mlist = new ArrayList<>();
@@ -226,42 +290,14 @@ public class MenuDAO {
 		
 	
 		return mlist;
-		
-		
+
 	}
+	//-------------------------------------------------
 	
-	public List<MenuDTO> selectByName(String name) {
-		
-		List<MenuDTO> mlist = new ArrayList<>();
-		
-		conn = DBUtil.getConnection();
-		
-		try {
-			pst = conn.prepareStatement(SQL_SELECT_BYNAME);
-			
-			pst.setString(1, "%"+name+"%");
-			
-			rs = pst.executeQuery();
-			
-			while(rs.next()) {
-				
-				mlist.add(makeMenu(rs));
-			}
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			
-			DBUtil.dbClose(rs, pst, conn);
-		}
-		
 	
-		return mlist;
-		
-		
-	}
+	
+	
+	
 	
 	public int insert(MenuDTO menu) {
 		
@@ -346,6 +382,8 @@ public class MenuDAO {
 	}
 	
 	
+	
+	//
 	public MenuDTO selectByMenuId(int menuid) {
 		
 		MenuDTO menu = null;

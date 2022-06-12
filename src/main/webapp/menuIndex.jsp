@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +29,15 @@ index.jsp
 <ul>
 <li><a href="view/menu/menuListShop.do">매장별 메뉴 조회</a></li>
 </ul>
+
+<hr>
+
+<ul>
+<li><a href="${ path }/menu/menuListAll.do">QR찍었을때 처음가는 메뉴</a></li>
+</ul>
+
+
+
 
 
 </body>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.menu.model.MenuService;
 
-@WebServlet("/view/menu/menuInsert.do")
+//@WebServlet("/view/menu/menuInsert.do")
 public class MenuInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
