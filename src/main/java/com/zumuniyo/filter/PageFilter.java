@@ -24,8 +24,12 @@ public class PageFilter implements Filter {
 		
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
+		System.out.println(path);
+		System.out.println(uri);
+		
 		if(!uri.equals(path+"/member/login.do")
 		 &&!uri.equals(path+"/member/logout.do")
+		 &&!uri.equals(path+"/member/register.do")
 		 &&!uri.equals(path+"/member/login/sublogin.do")
 		 &&!uri.equals(path+"/member/login/subregister.do")) {
 			session.setAttribute("nextpage", uri);
