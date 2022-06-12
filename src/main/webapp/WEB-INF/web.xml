@@ -13,14 +13,6 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	
-	<jsp-config>
-		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
-			<include-prelude>/view/common/header.jspf</include-prelude>
-		</jsp-property-group>
-		
-	</jsp-config>
 	 
 	<error-page>
 		<error-code>404</error-code>
