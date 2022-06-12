@@ -27,7 +27,7 @@ public class LoginPageController implements Command {
 			return "redirect:"+request.getContextPath()+"/";
 		}else {
 			// 이동할 경로가 있으면 해당경로로
-			return "redirect:"+request.getContextPath()+nextpage;
+			return "redirect:"+nextpage;
 		}
 
 	}
