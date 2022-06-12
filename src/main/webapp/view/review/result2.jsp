@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=${pageContext.request.contextPath}/review/reviewAllList.do">
+<meta http-equiv="refresh" content="3;url=${pageContext.request.contextPath}/review/reviewAllList">
 <title>Insert title here</title>
 </head>
 <body>

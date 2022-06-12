@@ -195,7 +195,7 @@ $(function(){
 <br>
 
 
-<form action="${path}/review/reviewInsert"   method="post" enctype="multipart/form-data">
+<form action="${path}/review/reviewInsert.do"   method="post" enctype="multipart/form-data">
  
  
  <div class="form-group" id="star1" >
