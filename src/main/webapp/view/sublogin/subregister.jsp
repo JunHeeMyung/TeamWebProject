@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="${path}/view/sublogin/subregister.css">
 <script src="${path}/view/sublogin/subregister.js"></script>
+<jsp:include page="${page}/view/common/header.jsp"/>
 
 </head>
 

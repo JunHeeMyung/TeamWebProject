@@ -46,7 +46,7 @@ a, a:link, a:visited,a:hover {
 	text-decoration: none;
 }
 
-#loginoutfont a, a:link, a:visited,a:hover
+#loginoutfont a,#loginoutfont a:link,#loginoutfont a:visited,#loginoutfont a:hover
 {
 color: white;
 font-size: 20px;
@@ -58,9 +58,6 @@ cursor: pointer;
 
 </style>
 
-<script>
-alert("접속");
-</script>
 </head>
 <div id="headerbox">
 
