@@ -22,6 +22,7 @@ public class ReviewDAO {
 	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY REVIEW_SEQ DESC";
 	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
+	static final String SQL_SELECT_MenuSeq2 = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=? AND REVIEW_EXPOSURE = 1";
 	static final String SQL_SELECT_ShopSeq2 = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";	
 	
@@ -84,14 +85,40 @@ public class ReviewDAO {
 		return reviewDTOs;
 	}
 	
-	//========================수정중==================================================================================== SQL_SELECT_MenuSeq
+	
+	/*
+	public List<ReviewDTO> selectByMenuSeq(int menu_seq)
+	{		
+		List<ReviewDTO> reviewDTOs = new ArrayList<>();
+		conn = DBUtil.getConnection();
+		try
+		{
+			pst = conn.prepareStatement(SQL_SELECT_MenuSeq);
+			pst.setInt(1, menu_seq);
+			rs = pst.executeQuery();
+			while (rs.next())
+			{
+				reviewDTOs.add(makeReview(rs));
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return reviewDTOs;
+	}
+	*/
+	
+	//========================수정중==================================================================================== SQL_SELECT_MenuSeq	
 	public List<ReviewShopDTO> selectByMenuSeq(int menu_seq)
 	{		
 		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<>();
 		conn = DBUtil.getConnection();
 		try
 		{
-			pst = conn.prepareStatement(SQL_SELECT_MenuSeq);
+			pst = conn.prepareStatement(SQL_SELECT_MenuSeq2);
 			pst.setInt(1, menu_seq);
 			rs = pst.executeQuery();
 			while (rs.next())
@@ -106,9 +133,7 @@ public class ReviewDAO {
 			DBUtil.dbClose(rs, st, conn);
 		}
 		return reviewShopDTOs;
-	}
-	
-		
+	}	
 
 	
 	public List<ReviewShopDTO> selectByShopSeq(int shop_seq)

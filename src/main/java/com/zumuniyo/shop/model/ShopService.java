@@ -23,5 +23,8 @@ public class ShopService {
 	public List<MenuDTO> selectByMenu(int shop_seq) {
 		return shopDAO.selectByMenu(shop_seq);
 	}
+	public int shopInsert(ShopDTO shopDTO) {
+		return shopDAO.shopInsert(shopDTO);
+	}
 
 }

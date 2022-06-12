@@ -12,7 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
+
+
 
 
 <style>
@@ -54,57 +55,6 @@ body {
 
 </style>
 <script type="text/javascript">
-
-$(function() {	
-    $('div#star1').raty({    	
-        score: function(evt) {        	
-            $("#starRating1").val(3);
-            return 3;
-        }
-        ,path : "${path}/view/review/img"
-        ,width : 200        
-        ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
-        ,click: function(score, evt) {
-            $("#starRating1").val(score);            
-        }
-    });
-});
-
-$(function() {
-    $('div#star2').raty({
-        score: function(evt) {        	
-            $("#starRating2").val(3);
-            return 3;
-        }
-     // ,path : "${path}/images"
-        ,path : "${path}/view/review/img"
-        ,width : 200
-        ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
-        ,click: function(score, evt) {
-            $("#starRating2").val(score);
-        }
-    });
-});
-
-
-$(function() {
-    $('div#star3').raty({
-        score: function(evt) {        	
-            $("#starRating3").val(3);
-            return 3;
-        }     
-      	,path : "${path}/view/review/img"
-        ,width : 200
-        ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
-        ,click: function(score, evt) {        
-            $("#starRating3").val(score);  
-           
-        }
-    });
-});
-
-
-
 
 
 /* 
@@ -165,55 +115,21 @@ $(function(){
  
 </head>
 <body>
-<h1>리뷰 등록</h1>
+<h1>매장 등록</h1>
 <br>
 
 
-<form action="${path}/review/reviewInsert.do"   method="post" enctype="multipart/form-data">
- 
- 
- <div class="form-group" id="star1" >
- 	<label for="starRating">맛  </label><input type="hidden" id="starRating1" name="review_taste"/>
- </div> 
- 
- <!-- 
-        <div style="padding-top:20px;">
-            <label for="starRating">맛 : </label><input type="text" id="starRating" value="3"/>
-        </div> 
-        <div style="padding-top:20px;">
-            <label for="displayStarRating">Value : </label><span id="displayStarRating" style="padding-left:20px;">3</span>
-        </div>
-  -->
-
- <div class="form-group" id="star2">
- 	<label for="starRating">양  </label><input type="hidden" id="starRating2" name="review_amount"/>
- </div> 
-
- <div class="form-group" id="star3">
- 	<label for="starRating">서비스  </label><input type="hidden" id="starRating3" name="review_service"/>
- </div> 
-
-
-<!-- 
-<div class="form-group">
-<label>내용</label>
-<input class="form-control"  type="text" name="content" id="content">
-</div>
- -->
+<form action="${path}/shop/shopInsert.do"   method="post" enctype="multipart/form-data">
 
 <div class="form-group" >
  <br>
  <label>-내용-</label>
  <br>
+ 
 <textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
 </div>
 
-<!-- 
-<div class="form-group">
-<label>사진</label>
- <input type="submit" id="submit" value="업로드"/>
-</div>
- -->
+
  
  	파일: <input type="file" name="photos"> <br> 
 

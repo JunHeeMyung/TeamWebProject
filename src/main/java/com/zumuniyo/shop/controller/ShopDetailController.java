@@ -19,7 +19,7 @@ public class ShopDetailController implements Command{
 		//request.setAttribute("shop_seq", request.getParameter("shop_seq"));
        // return "/view/shop/shopDetail.jsp";
 		//System.out.println("왔느냐?");
-        return "/review/reviewShop";
+        return "/review/reviewShop.do";
         ///review/reviewShop
 	}
 

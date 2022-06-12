@@ -9,7 +9,11 @@
 <body>
 
 Testindex.jsp
+<%
+String test123 = "잘나오나";
+session.setAttribute("testSession",test123);
 
+%>
 <ul>
 <li><a href="../../shop/shopList">모든 매장 조회</a></li>
 <li><a href="../../review/reviewAllList.do">모든 리뷰 조회</a></li>
@@ -17,6 +21,11 @@ Testindex.jsp
 <li><a href="../../review/reviewDelete.do">리뷰 삭제</a></li>
 
 <li><a href="../../review/test">테스트용</a></li>
+<br>
+<br>
+<br>
+
+<li><a href="../../mypage/mypageFist.do">mypage테스트용</a></li>
 
 </ul>
 </body>

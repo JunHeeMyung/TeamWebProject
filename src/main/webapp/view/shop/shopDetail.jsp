@@ -40,6 +40,24 @@ h2 {
 	margin: 0 auto;
 	width: 60%;
 }
+
+.shopcat{
+ 	display: flex;
+	width: 60%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.search{
+	width: 422px;
+	margin: 0 auto;
+}
+
+.hd {
+	background-color: skyblue;
+}
+
+
 </style>
 <script>
 
@@ -61,15 +79,30 @@ $(()=>{
 </script>
 </head>
 <body>
+<div class="hd">
 <h1>ZUMUNIYO</h1>
-<form action="/shopList.do" method="get">
+</div>
+<form action="/shopList.do" method="get" class="search">
 		<input type="text" id="latitude" name="latitude">
 		<input type="text" id="longitude" name="longitude">
 		<input type="submit" value="검색하기">
 </form>
 <h2>매장상세</h2>
 
-	
+	<div class="shopcat">
+		<div class="topmenu">
+			추천메뉴
+		</div>
+		<div class="allmenu">
+			전체메뉴
+		</div>
+		<div class="review">
+			리뷰
+		</div>
+		<div class="info">
+			매장정보
+		</div>
+	</div>
 
 	
 <!-- 메뉴 시퀀스 meun_seq, 메뉴 카테고리, 매장 시퀀스, 메뉴 이름 menu_name, 메뉴가격 menu_price, 메뉴 이미지 menu_img , 추천메뉴, 메뉴 소개 menu_info, 메뉴 활성화 -->
