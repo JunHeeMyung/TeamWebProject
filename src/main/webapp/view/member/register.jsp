@@ -10,13 +10,13 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-<link rel="stylesheet" href="/view/member/register.css">
+<link rel="stylesheet" href="${path}/view/member/register.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>회원가입</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="/view/member/register.js"></script>
+<script src="${path}/view/member/register.js"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -132,7 +132,7 @@
 			<div id="step4box" class="stepbox shadow p-4 mb-4" style="display: none">
 				<h2>상세 정보 입력</h2>
 				<div class="centerbox">
-					<form action="/member/register.do" method="post"
+					<form action="${path}/member/register.do" method="post"
 						onSubmit="return false;">
 
 						<input type="hidden" value="" id="mem_type" name="mem_type"
@@ -194,7 +194,7 @@
 				<div class="blank"></div>
 				<div class="blank"></div>
 				<div class="blank"></div>
-				<button type="button" onclick="location.href='/member/login.do';"
+				<button type="button" onclick="location.href='${path}/member/login.do';"
 					class="btn btn-outline-secondary">로그인</button>
 				<button type="button" onclick="location.href='/';"
 					class="btn btn-outline-secondary">홈으로</button>

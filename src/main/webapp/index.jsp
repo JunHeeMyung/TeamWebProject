@@ -18,10 +18,10 @@ index.jsp
 
 
 <c:if test="${member!=null}">
-${member.mem_nick}님 <a href="/member/logout.do"> 로그아웃</a>
+${member.mem_nick}님 <a href="${path}/member/logout.do"> 로그아웃</a>
 </c:if>
 <c:if test="${member==null}">
-손님 안녕하세요 <a href="/member/login.do"> 로그인</a>
+손님 안녕하세요 <a href="${path}/member/login.do"> 로그인</a>
 </c:if> 
 
 

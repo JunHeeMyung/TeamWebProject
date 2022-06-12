@@ -1,3 +1,8 @@
+function getContextPath() {
+	  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1));
+};
+
 $(() => {
 	$(".stepbox").hide();
 	$("#step1box").show();
@@ -45,7 +50,7 @@ $(() => {
 		if (regEmail.test(email_addr) === true) {
 			$("#send_btn").html("<div class='spinner-border text-primary'></div>");
 			$.ajax({
-				url: "/emailcert/create.do",
+				url: getContextPath()+"/emailcert/create.do",
 				type: "get",
 				data: { "email_addr": email_addr },
 				dataType: "text",
@@ -84,7 +89,7 @@ $(() => {
 		var email_certnum = $("#email_certnum").val();
 
 		$.ajax({
-			url: "/emailcert/confirm.do",
+			url: getContextPath()+"/emailcert/confirm.do",
 			type: "get",
 			data: { "email_addr": email_addr, "email_certnum": email_certnum },
 			dataType: "text",
@@ -118,7 +123,7 @@ $(() => {
 
 		var mem_id = $("#mem_id").val();
 		$.ajax({
-			url: "/member/idcheck.do",
+			url: getContextPath()+"/member/idcheck.do",
 			type: "get",
 			data: { "mem_id": mem_id },
 			dataType: "text",
@@ -149,7 +154,7 @@ $(() => {
 
 		var mem_nick = $("#mem_nick").val();
 		$.ajax({
-			url: "/member/nickcheck.do",
+			url: getContextPath()+"/member/nickcheck.do",
 			type: "get",
 			data: { "mem_nick": mem_nick },
 			dataType: "text",
@@ -221,7 +226,7 @@ $(() => {
 		}
 
 		$.ajax({
-			url: "/member/register.do",
+			url: getContextPath()+"/member/register.do",
 			type: "post",
 			data: { "mem_type": mem_type ,
 					"mem_email": mem_email ,

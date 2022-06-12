@@ -35,6 +35,8 @@ public class MemberServlet extends HttpServlet {
 			command = new LoginPageController();
 		}else if(uri.equals("/member/logout.do")&&method.equals("GET")){
 			command = new LogoutController();
+		}else if(uri.equals("/member/login/naver.do")){
+			command = new NaverController();
 		}
 		
 		if(command==null) {

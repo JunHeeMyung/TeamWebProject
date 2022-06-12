@@ -130,11 +130,11 @@ filter: grayscale(0%);
 }
 
 #type1td {
-background-image: url("/view/member/img/register01.jpg");
+background-image: url("img/register01.jpg");
 }
 
 #type2td {
-background-image: url("/view/member/img/register02.jpg");
+background-image: url("img/register02.jpg");
 
 }
 

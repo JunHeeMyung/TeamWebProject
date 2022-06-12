@@ -21,7 +21,9 @@ public class PageFilter implements Filter {
 		String uri = ((HttpServletRequest)request).getRequestURI();
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		
-		if(!uri.equals("/member/login.do")&&!uri.equals("/member/logout.do")) {
+		if(!uri.equals("/member/login.do")
+		 &&!uri.equals("/member/logout.do")
+		 &&!uri.equals("/member/login/naver.do")) {
 			session.setAttribute("nextpage", uri);
 		}
 		chain.doFilter(request, response);
