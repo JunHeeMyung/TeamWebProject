@@ -19,20 +19,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 <style>
 body, html {
+	height:100%;
+	width:100%;
 	padding: 0px auto;
 	margin: 0px auto;
 }
 
-body::-webkit-scrollbar {
-width: 10px;
-}
-body::-webkit-scrollbar-thumb{
-background: rgba(255, 138, 0);
-border-radius: 10px;
-}
-body::-webkit-scrollbar-track {
-background: transparent;
-}
+
 
 div {
 	padding: 0px;
@@ -46,6 +39,9 @@ div {
 	text-align: center;
 }
 
+@media (min-width: 800px){
+
+
 #mainframe {
 	width: 800px;
 	height: 100vh; 
@@ -54,6 +50,57 @@ div {
 	background-color: white;
 	padding-top: 250px;
 }
+
+#searchwrapper{
+z-index:100;
+position:absolute;
+display:inline-block;
+height: 250px;
+width: 800px;
+background-color: black;
+left:50%;
+transform: translate(-50%, 0);
+opacity : 0.5;
+pointer-events: none;
+}
+
+
+}
+
+@media (max-width: 800px){
+
+#mainframe {
+	width: 100%;
+	height: 100vh; 
+	display : inline-block;
+	margin: 0px auto;
+	background-color: white;
+	padding-top: 250px;
+}
+
+#searchwrapper{
+z-index:100;
+position:absolute;
+display:inline-block;
+height: 250px;
+width: 100%;
+background-color: black;
+left:50%;
+transform: translate(-50%, 0);
+opacity : 0.5;
+pointer-events: none;
+}
+
+}
+
+
+
+
+
+
+
+
+
 
 #topframe {
 	position: absolute;
@@ -81,18 +128,6 @@ object-fit: cover;
 filter:grayscale(50%);
 }
 
-#searchwrapper{
-z-index:100;
-position:absolute;
-display:inline-block;
-height: 250px;
-width: 800px;
-background-color: black;
-left:50%;
-transform: translate(-50%, 0);
-opacity : 0.5;
-pointer-events: none;
-}
 
 #searchdiv{
 z-index:200;

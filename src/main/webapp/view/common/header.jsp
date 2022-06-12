@@ -13,6 +13,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 <style>
 
+body::-webkit-scrollbar {
+width: 10px;
+}
+body::-webkit-scrollbar-thumb{
+background: rgba(255, 138, 0);
+border-radius: 10px;
+}
+body::-webkit-scrollbar-track {
+background: transparent;
+}
+
 #headerbox{
 position: absolute;
 left: 0px;
