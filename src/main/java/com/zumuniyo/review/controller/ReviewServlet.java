@@ -42,8 +42,7 @@ public class ReviewServlet extends HttpServlet {
 			command = new TestController();
 		}
 		
-		
-		
+				
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);;

@@ -13,8 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
-<!-- <script type="text/javascript" src="/test/2979/js/jquery.raty.js"></script> -->
-<c:set var = "path" value="${pageContext.request.contextPath}"/>
+
 
 <style>
 html,
@@ -62,7 +61,7 @@ $(function() {
             $("#starRating1").val(3);
             return 3;
         }
-        ,path : "${path}/images"
+        ,path : "${path}/view/review/img"
         ,width : 200        
         ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
         ,click: function(score, evt) {
@@ -77,7 +76,8 @@ $(function() {
             $("#starRating2").val(3);
             return 3;
         }
-        ,path : "${path}/images"
+     // ,path : "${path}/images"
+        ,path : "${path}/view/review/img"
         ,width : 200
         ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
         ,click: function(score, evt) {
@@ -92,8 +92,8 @@ $(function() {
         score: function(evt) {        	
             $("#starRating3").val(3);
             return 3;
-        }        
-        ,path : "${path}/images"
+        }     
+      	,path : "${path}/view/review/img"
         ,width : 200
         ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
         ,click: function(score, evt) {        
@@ -103,32 +103,6 @@ $(function() {
     });
 });
 
-/*
-$(function() {
-    $('div#star').raty({
-        score: 3
-        ,path : "../images"
-        ,width : 200
-        ,click: function(score, evt) {
-            $("#starRating").val(score);
-            $("#displayStarRating").html(score);
-        }
-    });
-});
-
-
-$(function() {
-    $('div#star').raty({
-        score: 3
-        ,path : "/test/2979/img"
-        ,width : 200
-        ,click: function(score, evt) {
-            $("#starRating").val(score);
-            $("#displayStarRating").html(score);
-        }
-    });
-});
- */
 
 
 
