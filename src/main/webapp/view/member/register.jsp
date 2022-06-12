@@ -191,7 +191,7 @@
 				<div class="blank"></div>
 				<button type="button" onclick="location.href='${path}/member/login.do';"
 					class="btn btn-outline-secondary">로그인</button>
-				<button type="button" onclick="location.href='/';"
+				<button type="button" onclick="location.href='${path}/';"
 					class="btn btn-outline-secondary">홈으로</button>
 			</div>
 		</div>
