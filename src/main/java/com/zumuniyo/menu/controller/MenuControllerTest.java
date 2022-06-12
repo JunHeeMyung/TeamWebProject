@@ -166,7 +166,12 @@ public class MenuControllerTest {
 		System.out.println("검색할 메뉴이름을 입력하세요 >> ");
 		
 		String menu_name = sc.nextLine();
-		List<MenuDTO> mlist = mService.selectByName(menu_name);
+		
+		System.out.println("매장번호를 입력하세요 >> ");
+		
+		int shop_seq = Integer.parseInt(sc.nextLine());
+		
+		List<MenuDTO> mlist = mService.selectByName(menu_name, shop_seq);
 		MenuView.print(mlist);
 		
 	}
@@ -181,15 +186,25 @@ public class MenuControllerTest {
 	private static void f3() {
 		System.out.print("추천메뉴로 등록된 메뉴를 표시합니다... ");
 		
-		MenuView.print(mService.selectByHitMenu(""));
+		System.out.println("매장번호를 입력하세요 >> ");
+		
+		int shop_seq = Integer.parseInt(sc.nextLine());
+		
+		
+		MenuView.print(mService.selectByHitMenu(shop_seq));
 		
 	}
 
 	private static void f2() {
-		System.out.println("현재 입력된 카테고리를 표시합니다...");
+		
+		System.out.println("매장번호를 입력하세요 >> ");
+		
+		int shop_seq = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("현재 입력된 매장번호의 카테고리를 표시합니다...");
 		System.out.println("--------------------------");
 		
-		List<String> menulist= mService.selectCategoryAll();
+		List<String> menulist= mService.selectCategoryAll(shop_seq);
 		
 		System.out.println(menulist);
 		
@@ -198,7 +213,12 @@ public class MenuControllerTest {
 		
 		System.out.print("조회할 카테고리를 입력하세요 >> ");
 		String menu_category = sc.nextLine();
-		List<MenuDTO> mlist = mService.selectByCategory(menu_category);
+		
+		System.out.println("매장번호를 다시 한번 입력하세요 >> ");
+		
+		int shop_seq2 = Integer.parseInt(sc.nextLine());
+		
+		List<MenuDTO> mlist = mService.selectByCategory(menu_category, shop_seq2);
 		MenuView.print(mlist);
 		
 		

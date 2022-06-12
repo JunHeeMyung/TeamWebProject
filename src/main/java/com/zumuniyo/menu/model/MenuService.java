@@ -15,31 +15,34 @@ public class MenuService {
 	
 	
 	
-	public List<String> selectCategoryAll() {
+	public List<String> selectCategoryAll(int shop_seq) {
 		
-		return dao.selectCategoryAll();
+		return dao.selectCategoryAll(shop_seq);
 	}
 	
 	
 	
-	public List<MenuDTO> selectByCategory(String category) {
+	public List<MenuDTO> selectByCategory(String category, int shop_seq) {
 		
-		return dao.selectByCategory(category);
+		return dao.selectByCategory(category, shop_seq);
 	}
 	
-	public List<MenuDTO> selectByHitMenu(String hit) {
+	public List<MenuDTO> selectByHitMenu(int shop_seq) {
 		
-		return dao.selectByHitMenu();
+		return dao.selectByHitMenu(shop_seq);
 	}
 	
+	//----------------------------------------------------
 	public List<MenuDTO> selectByInterest(String Interest) {
 		
 		return dao.selectByInterest();
 	}
+	//----------------------------------------------------
 	
-	public List<MenuDTO> selectByName(String name) {
+	
+	public List<MenuDTO> selectByName(String name, int shop_seq) {
 		
-		return dao.selectByName(name);
+		return dao.selectByName(name, shop_seq);
 	}
 	
 	public int insert(MenuDTO menu) {

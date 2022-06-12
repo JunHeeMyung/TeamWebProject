@@ -15,7 +15,7 @@ import com.zumuniyo.menu.model.MenuService;
 /**
  * Servlet implementation class MenuDetailServlet2
  */
-@WebServlet("/view/menu/menuDetail.do")
+//@WebServlet("/view/menu/menuDetail.do")
 public class MenuDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

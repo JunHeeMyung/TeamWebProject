@@ -16,7 +16,7 @@ import com.zumuniyo.menu.model.MenuService;
 /**
  * Servlet implementation class EmpDeleteServlet
  */
-@WebServlet("/view/menu/menuDelete.do")
+//@WebServlet("/view/menu/menuDelete.do")
 public class MenuDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
