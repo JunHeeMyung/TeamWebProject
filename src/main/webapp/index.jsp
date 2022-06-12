@@ -25,8 +25,6 @@ body, html {
 	margin: 0px auto;
 }
 
-
-
 div {
 	padding: 0px;
 	margin: 0px;
@@ -135,7 +133,7 @@ position:absolute;
 left:50%;
 top:50%;
 transform: translate(-50%, 0px);
-width: 400px;
+width: 380px;
 height: 50px;
 border: 6px solid rgba(255, 138, 0);
 background-color: #F3F3F3;
@@ -147,7 +145,7 @@ padding-right:10px;
 #searchbox ,#searchbox:hover{
 background-color:#F3F3F3;
 border: none;
-width: 300px;
+width: 280px;
 height: 30px;
 text-align: center;
 font-weight: bold;

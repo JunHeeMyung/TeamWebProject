@@ -15,7 +15,40 @@ div {
 	background-color: #F3F3F3;
 	text-align: center;
 }
+@media (max-width: 600px){
+#mainframe {
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+	margin: 0px auto;
+	background-color: F3F3F3;
+}
+#leftbox {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	background-color: rgba(23, 12, 41);
+	width: 0px;
+	float: left;
+	background-image: url("img/login01.jpg");
+	background-position: center center;
+	background-size: 128%;
+	filter: grayscale(70%);
+	animation: moving 10s linear;
+}
 
+#loginbox {
+	margin: 0px;
+	padding: 50px;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(255, 255, 255);
+	float: left;
+}
+
+}
+
+@media (min-width: 600px){
 #mainframe {
 	height: 100%;
 	width: 600px;
@@ -23,6 +56,34 @@ div {
 	margin: 0px auto;
 	background-color: F3F3F3;
 }
+#leftbox {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	background-color: rgba(23, 12, 41);
+	width: 38%;
+	float: left;
+	background-image: url("img/login01.jpg");
+	background-position: center center;
+	background-size: 128%;
+	filter: grayscale(70%);
+	animation: moving 10s linear;
+}
+
+#loginbox {
+	margin: 0px;
+	padding: 50px;
+	height: 100%;
+	width: 62%;
+	background-color: rgba(255, 255, 255);
+	float: left;
+}
+}
+
+
+
+
+
 
 #mainbox {
 
@@ -46,28 +107,17 @@ div {
 
 }
 
-#leftbox {
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
-	background-color: rgba(23, 12, 41);
-	width: 38%;
-	float: left;
-	background-image: url("img/login01.jpg");
-	background-position: center center;
-	background-size: 128%;
-	filter: grayscale(70%);
-	animation: moving 10s linear;
-}
 
-#loginbox {
-	margin: 0px;
-	padding: 50px;
-	height: 100%;
-	width: 62%;
-	background-color: rgba(255, 255, 255);
-	float: left;
-}
+
+
+
+
+
+
+
+
+
+
 
 .updown {
 	margin: 0px;
