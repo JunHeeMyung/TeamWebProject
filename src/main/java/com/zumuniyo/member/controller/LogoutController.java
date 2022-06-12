@@ -17,10 +17,10 @@ public class LogoutController implements Command {
 		
 		if(nextpage==null||nextpage.equals("")) {
 			// 이동할 경로가 없으면 메인으로
-			return "redirect:"+"/";
+			return "redirect:"+request.getContextPath()+"/";
 		}else {
 			// 이동할 경로가 있으면 해당경로로
-			return "redirect:"+nextpage;
+			return "redirect:"+request.getContextPath()+nextpage;
 		}
 	}
 }

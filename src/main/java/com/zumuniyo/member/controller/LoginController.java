@@ -62,7 +62,7 @@ public class LoginController implements Command {
 			
 			JSONObject member = new JSONObject(memberMap);
 			
-			session.setAttribute("member",member); // type 제한없이 자체를 저장가능
+			session.setAttribute("member",member);
 			
 			return "json:로그인성공";
 		}else {

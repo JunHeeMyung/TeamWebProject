@@ -95,7 +95,7 @@ $(() => {
 			dataType: "text",
 			success: data => {
 				if (data == "인증성공") {
-
+					clearInterval(timer);
 					$("#mem_email").val(email_addr);
 					$("#radio4").prop('checked', true).trigger('change');
 

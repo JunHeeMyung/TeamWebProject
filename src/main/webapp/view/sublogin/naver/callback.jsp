@@ -8,19 +8,20 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-  var naver_id_login = new naver_id_login("f6x1Hhd4EgEtk7ExFsBe", "http://localhost/member/naver.do");
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+<script>
   
   function getContextPath() {
 	  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 	  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	};
+
+	var naver_id_login = new naver_id_login("f6x1Hhd4EgEtk7ExFsBe", getContextPath()+"/member/login/sublogin.do");
+	  naver_id_login.get_naver_userprofile("naverSignInCallback()");
   
   function naverSignInCallback() {
 	  
 	var form = document.createElement('form');
-	var url = getContextPath()+"/view/login/naver/test.jsp"; 
+	var url = getContextPath()+"/member/login/sublogin.do";
 	
 	window.opener.name= 'target';
 	

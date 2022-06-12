@@ -4,10 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.zumuniyo.common.Command;
 
-public class NaverController implements Command {
+public class SubregisterController implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		return "/view/login/naver/callback.jsp";
+		return "/view/sublogin/subregister.jsp";
 	}
+
 }

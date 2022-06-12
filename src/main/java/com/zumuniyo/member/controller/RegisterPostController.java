@@ -35,9 +35,14 @@ public class RegisterPostController implements Command {
 		if(!RegexValidator.patternCheck(mem_nick, PatternsType.NICK_PATTERN)) {
 			return "json:닉네임을 재확인해주세요";
 		}
-		if(!RegexValidator.patternCheck(mem_id, PatternsType.ID_PATTERN)) {
-			return "json:아이디를 재확인해주세요";
-		}
+		if(mem_id.indexOf("naver:")<0 && 
+				mem_id.indexOf("kakao:")<0 && 
+				mem_id.indexOf("google:")<0 &&
+				mem_id.indexOf("facebook:")<0) {
+			if(!RegexValidator.patternCheck(mem_id, PatternsType.ID_PATTERN)) {
+				return "json:아이디를 재확인해주세요";
+			}
+		}		
 		if(!RegexValidator.patternCheck(mem_pw, PatternsType.PW_PATTERN)) {
 			return "json:비밀번호를 재확인해주세요";
 		}

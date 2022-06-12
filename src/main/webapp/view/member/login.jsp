@@ -80,7 +80,7 @@
 
 <script>
 
-var naver_id_login = new naver_id_login("f6x1Hhd4EgEtk7ExFsBe", "<%=request.getRequestURL().substring(0,request.getRequestURL().lastIndexOf(request.getServletPath()))+"/member/login/naver.do"%>");
+var naver_id_login = new naver_id_login("f6x1Hhd4EgEtk7ExFsBe", "<%=request.getRequestURL().substring(0,request.getRequestURL().lastIndexOf(request.getServletPath()))+"/member/login/sublogin.do"%>");
 var state = naver_id_login.getUniqState();
 naver_id_login.setDomain("<%=request.getRequestURL().substring(0,request.getRequestURL().lastIndexOf(request.getServletPath()))%>");
 naver_id_login.setState(state);
