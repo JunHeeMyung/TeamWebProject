@@ -33,14 +33,20 @@ public class MypageServlet extends HttpServlet {
 		
 		String page = "";
 		Command command = null;
-		
-				
+						
 		HttpSession session = request.getSession();
-		System.out.println("세션 생성 여부"+session.isNew());	
-	
+		System.out.println("세션 생성 여부"+session.isNew());
+			
 		
 		if(session.getAttribute("member")==null) {
+			System.out.println("세션 맴버변수 못 받음");
 			command = new MypageEmty();
+			
+			page = command.execute(request);
+			
+			RequestDispatcher rd;
+			rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
 			return;
 		}
 		
@@ -62,13 +68,14 @@ public class MypageServlet extends HttpServlet {
 				command = new MYpageNOMAL();
 			}			
 		}else {
+			System.out.println("mem_type 못 받음");
 			command = new MypageEmty();
 		}
 		
 				
 		
 		if(command==null) {
-			request.getRequestDispatcher("/error").forward(request, response);;
+			request.getRequestDispatcher("/error").forward(request, response);
 			return;
 		}
 		

@@ -21,13 +21,19 @@
 <p>회원분류 :${member.mem_type} </p>
 
 
-<ul>
-<li>개인정보</li>
-<li>비번변경</li>
-<li>즐겨찾기 목록</li>
-<li>나의 리뷰</li>
 
-<li>${member} </li>
-</ul>
+
+
+<br>
+<form action="${path}/admin/adminMember.do" method="post">
+<button type="submit">회원관리</button>
+</form>
+
+<br>
+<form action="${path}/admin/adminShop.do" method="post">
+<button type="submit">매장관리</button>
+</form>
+
+
 </body>
 </html>

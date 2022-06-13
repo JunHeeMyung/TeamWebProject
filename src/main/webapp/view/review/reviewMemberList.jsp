@@ -42,7 +42,7 @@
 			</td>	
 		</tr>
 		</c:forEach>
-		<input type="button" id="btn1" value="뒤로가기" onclick="location.href = '${path}/index.jsp'">
+		<input type="button" id="btn1" value="뒤로가기" onclick="location.href='${path}/';">
 	</table>
 
 

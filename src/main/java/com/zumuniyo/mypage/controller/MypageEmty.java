@@ -9,5 +9,4 @@ public class MypageEmty implements Command {
 		System.out.println("로그인 안함");
 		return "/view/mypage/mypageEmty.jsp";
 	}
-
 }
