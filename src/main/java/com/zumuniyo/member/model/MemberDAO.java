@@ -167,11 +167,12 @@ public class MemberDAO {
 		try {
 			pst = conn.prepareStatement(SQL_SELECT_ALL);
 			rs = pst.executeQuery();
-			if (rs.next())
+			while(rs.next()) {
 				if(memberDTOs==null) {
 					memberDTOs = new ArrayList<MemberDTO>();
 				}
 				memberDTOs.add(makeMember(rs));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
