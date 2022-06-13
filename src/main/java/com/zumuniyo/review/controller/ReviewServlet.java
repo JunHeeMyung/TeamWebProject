@@ -26,14 +26,21 @@ public class ReviewServlet extends HttpServlet {
 		
 		if(uri.equals("/review/reviewAllList.do")) {		
 			command = new ReviewSelectController();
+		}else if(uri.equals("/review/revieMemList.do")) {		
+				command = new ReviewSelectByMemController();
+		}else if(uri.equals("/review/reviewShopList.do")) {
+				command = new ReviewSelectByShopController();			
+				
 		}else if(uri.equals("/review/reviewInsert.do")) {		
 			command = new ReviewInsertController();			
 		}else if(uri.equals("/review/reviewShop.do")) {		
 			command = new ReviewShopController();
 		}else if(uri.equals("/review/reviewMenu.do")) {		
 			command = new ReviewMenuController();
+			
 		}else if(uri.equals("/review/reviewUpdate.do")) {		
 			command = new ReviewUpdateController();
+			
 		}else if(uri.equals("/review/reviewDelete.do")) {		
 			command = new ReviewDeleteController();
 			
