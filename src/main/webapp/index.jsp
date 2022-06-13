@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=878435cb63e52c1306f3d3ab856fc153&libraries=services"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script
@@ -91,15 +92,6 @@ pointer-events: none;
 
 }
 
-
-
-
-
-
-
-
-
-
 #topframe {
 	position: absolute;
 	left: 0px;
@@ -166,17 +158,31 @@ font-size: 30px;
 cursor: pointer;
 }
 
+#getMyLocation{
 
+z-index:200;
+position:absolute;
+left:50%;
+top:50%;
+transform: translate(-500%, 0px);
+width: 50px;
+height: 50px;
+border: 6px solid rgba(255, 138, 0);
+background-color: rgba(255, 138, 0);;
+border-radius: 25px;
+padding-left:-400px;
 
+}
 
+#getMyLocation{
+color: white;
+font-weight: bold;
+font-size: 25px;
 
+}
 
 
 </style>
-
-<script>
-	
-</script>
 
 
 </head>
@@ -189,6 +195,7 @@ cursor: pointer;
 		<div id="mainframe" class="shadow">
 			<div id="topframe" class="shadow">
 				<div id="searchwrapper"></div>
+				<button id="getMyLocation"><i id="getMyLocationFont" class="fas fa-map-marker-alt"></i></button>
 				<div id="searchdiv">
 					<form>
 						<input id="searchbox" type="text" value="" placeholder="검색어를 입력하세요">
@@ -234,24 +241,61 @@ cursor: pointer;
 
 			</div>
 
+	
 			
-			여기에 메뉴 목록 대충 들어감
-			
-			
-			
-			
+			<div id="map" style="width:100%;height:100%;"></div>
 			
 			
 			
 		</div>
 	</div>
 
+<script>
+
+function getLocation(){
+	
+	/* 지도 세팅 */
+	var container = document.getElementById('map');
+	var options = {
+		center: new kakao.maps.LatLng(35.23103408483914,129.0822385815375), level: 3
+	};
+	var map = new kakao.maps.Map(container, options);
+	
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(pos => {
+
+			/* 위도 경도 받기 */
+			var latitude = pos.coords.latitude, longitude = pos.coords.longitude;
+			var geocoder = new kakao.maps.services.Geocoder();
+			
+			/* 지도 위치 변경 */
+			var location = new kakao.maps.LatLng(latitude, longitude);
+			map.setCenter(location);
+		   	
+		   	/*위도 경도에 대한 위치명 받기*/
+		   	var coord = new kakao.maps.LatLng(latitude, longitude);
+		   	var callback = function(result, status) {
+		   	    if (status === kakao.maps.services.Status.OK) {
+		   	    	$("#searchbox").val(result[0].address.address_name);
+		   	    }
+		   	};
+		   	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+
+		})
+	} else {
+		alert("지원하지않는 브라우져입니다");
+	}
+}
+
+getLocation();
+
+$("#getMyLocation").click(()=>{
+	$("#searchbox").val("");
+	getLocation();
+})
 
 
-
-
-
-
+</script>	
 
 </body>
 </html>
