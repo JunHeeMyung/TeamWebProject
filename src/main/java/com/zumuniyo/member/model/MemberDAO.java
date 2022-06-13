@@ -114,7 +114,6 @@ public class MemberDAO {
 			DBUtil.dbClose(rs, pst, conn);
 		}
 		return result;
-
 	}
 	
 	public int updateNickBySeq(String nick,int mem_seq) {

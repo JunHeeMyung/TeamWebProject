@@ -34,7 +34,7 @@ public class AdminSevelet extends HttpServlet {
 			request.getRequestDispatcher("/error").forward(request, response);
 			return;
 		}
-
+		
 		JSONObject jObject = new JSONObject();
 		jObject = (JSONObject) session.getAttribute("member");
 		String mem_type = (String) jObject.get("mem_type");
@@ -46,10 +46,12 @@ public class AdminSevelet extends HttpServlet {
 					command = new AdminMemberController();
 				} else if (uri.equals("/admin/adminShop.do")) {
 					command = new AdminShopController();
-				}
+				} else if (uri.equals("/admin/adminMemStatusUpdate.do")) {
+				command = new AdminMemStatusUpdate();
 			}
-
+			}
 		}
+		
 		if (command == null) {
 			request.getRequestDispatcher("/error").forward(request, response);
 			return;

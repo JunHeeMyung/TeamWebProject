@@ -37,7 +37,7 @@
 			<td><img src="${path}/images/${review.review_img}"></td>
 			<td>${review.review_date}</td>
 			<td><form action="${path}/review/reviewDelete.do" method="post">
-					<input type="hidden" name="review_seq" value="${review.review_seq}"> <input type="submit" class="btn btn-primary" value="삭제">
+					<input type="hidden" name="review_seq" value="${review.review_seq}"><input type="submit" class="btn btn-primary" value="삭제">
 				</form>				
 			</td>	
 		</tr>
