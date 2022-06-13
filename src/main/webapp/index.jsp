@@ -240,9 +240,7 @@ font-size: 25px;
 				</div>
 
 			</div>
-
-	
-			
+			<div id="resultdiv"></div>
 			<div id="map" style="width:100%;height:100%;"></div>
 			
 			
@@ -251,6 +249,9 @@ font-size: 25px;
 	</div>
 
 <script>
+
+
+
 
 function getLocation(){
 	
@@ -272,15 +273,84 @@ function getLocation(){
 			var location = new kakao.maps.LatLng(latitude, longitude);
 			map.setCenter(location);
 		   	
-		   	/*위도 경도에 대한 위치명 받기*/
-		   	var coord = new kakao.maps.LatLng(latitude, longitude);
-		   	var callback = function(result, status) {
-		   	    if (status === kakao.maps.services.Status.OK) {
-		   	    	$("#searchbox").val(result[0].address.address_name);
-		   	    }
-		   	};
-		   	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+			function setlocationName(inputlat,inputlon){
+				
+				var coord = new kakao.maps.LatLng(inputlat, inputlon);
+			   	var callback = function(result, status) {
+			   	    if (status === kakao.maps.services.Status.OK) {
+			   	    	$("#searchbox").val(result[0].address.address_name);
+			   	    }
+			   	};
+			   	geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+				
+			}
+			
+	   		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+		   	var ps = new kakao.maps.services.Places(map); 
+		   	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
 
+		   	function placesSearchCB (data, status, pagination) {
+		   	    if (status === kakao.maps.services.Status.OK) {
+		   	        for (var i=0; i<data.length; i++) {
+		   	            displayMarker(data[i]);    
+		   	        }       
+		   	    }
+		   	}
+
+		   	function displayMarker(place) {
+		   	    // 마커를 생성하고 지도에 표시합니다
+		   	    var marker = new kakao.maps.Marker({
+		   	        map: map,
+		   	        position: new kakao.maps.LatLng(place.y, place.x) 
+		   	    });
+
+		   	    // 마커에 클릭이벤트를 등록합니다
+		   	    kakao.maps.event.addListener(marker, 'click', function() {
+		   	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+		   	        infowindow.setContent('<div style="padding:5px;font-size:20px;">' + place.place_name + '</div>');
+		   	        infowindow.open(map, marker);
+		   	    });
+		   	}		
+			
+		   	/*위도 경도에 대한 위치명 받기*/
+		   setlocationName(latitude,longitude);
+		   	
+		   	/* 지도 변경시 동작 */
+		   	
+		   	kakao.maps.event.addListener(map, 'dragend', function() {  
+		   		
+		   		var latlng = map.getCenter(); 
+
+			   	setlocationName(latlng.getLat(),latlng.getLng());
+		   	    
+		   		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+			   	var ps = new kakao.maps.services.Places(map); 
+			   	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+		   	    
+		   	});
+
+			kakao.maps.event.addListener(map, 'zoom_changed', function() {  
+		   		
+		   		var latlng = map.getCenter(); 
+
+			   	setlocationName(latlng.getLat(),latlng.getLng());
+		   	    
+		   		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+			   	var ps = new kakao.maps.services.Places(map); 
+			   	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+		   	    
+		   	});
+		   
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		})
 	} else {
 		alert("지원하지않는 브라우져입니다");
@@ -292,8 +362,9 @@ getLocation();
 $("#getMyLocation").click(()=>{
 	$("#searchbox").val("");
 	getLocation();
+	
+	
 })
-
 
 </script>	
 
