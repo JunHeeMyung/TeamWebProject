@@ -67,8 +67,38 @@ font-size: 20px;
 cursor: pointer;
 }
 
+#slidemenu{
+
+width: 100%;
+height: 100%;
+margin: 0px;
+padding: 0px;
+
+}
+
+
+
 </style>
 
+<script>
+
+$(()=>{
+	
+	$.ajax({
+		url: getContextPath()+"/mypage/mypage",
+		type: "get",
+		dataType: "html",
+		success: data => {
+			$("slidemenu").html(data);
+		},
+		error: () => {
+			alert("개인메뉴로드실패");
+		}
+	})
+	
+})
+
+</script>
 </head>
 <div id="headerbox">
 
@@ -94,7 +124,18 @@ ${member.mem_nick} 님, <a href="${path}/member/logout.do">LOGOUT</a>
 
 <div class="offcanvas offcanvas-end" id="rightmenu">
   <div class="offcanvas-header">
-    <h1 class="offcanvas-title">개인화 메뉴</h1>
+  <div id="slidemenu">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
