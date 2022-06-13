@@ -122,7 +122,7 @@ public class MemberDAO {
 		int result = 0;
 		conn = DBUtil.getConnection();
 		try {
-			pst = conn.prepareStatement(SQL_INSERT);
+			pst = conn.prepareStatement(SQL_UPDATE_NICK_BY_SEQ);
 			
 			pst.setString(1, nick);
 			pst.setInt(2, mem_seq);
@@ -143,7 +143,7 @@ public class MemberDAO {
 		int result = 0;
 		conn = DBUtil.getConnection();
 		try {
-			pst = conn.prepareStatement(SQL_INSERT);
+			pst = conn.prepareStatement(SQL_UPDATE_STATUS_BY_SEQ);
 			
 			pst.setString(1, status);
 			pst.setInt(2, mem_seq);
