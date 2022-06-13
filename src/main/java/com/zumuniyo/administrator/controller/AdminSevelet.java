@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -26,6 +27,13 @@ public class AdminSevelet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
+		HttpSession session = request.getSession(); 				
+		
+		if(session.getAttribute("member")==null) {
+			request.getRequestDispatcher("/error").forward(request, response);
+			return;
+		}
+		
 		
 	
 		if(uri.equals("/admin/adminMember.do")) {			
@@ -37,7 +45,7 @@ public class AdminSevelet extends HttpServlet {
 	
 		
 		if(command==null) {
-			request.getRequestDispatcher("/error").forward(request, response);;
+			request.getRequestDispatcher("/error").forward(request, response);
 			return;
 		}
 		

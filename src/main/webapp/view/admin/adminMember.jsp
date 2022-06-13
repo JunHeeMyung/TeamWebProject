@@ -27,13 +27,13 @@
 		
 		<c:forEach items="${memberDTOs}" var="member">
 		<tr>
-			<td>"${member.mem_seq}"</td>
-			<td>"${member.mem_id}"</td>
-			<td>"${member.mem_nick}"</td>
-			<td>"${member.mem_email}"</td>
-			<td>"${member.mem_salt}"</td>
-			<td>"${member.mem_type}"</td>
-			<td>"${member.mem_status}"</td>			
+			<td>${member.mem_seq}</td>
+			<td>${member.mem_id}</td>
+			<td>${member.mem_nick}</td>
+			<td>${member.mem_email}</td>
+			<td>${member.mem_salt}</td>
+			<td>${member.mem_type}</td>
+			<td>${member.mem_status}</td>			
 			<!-- <td><input class="form-control"  type="text" name="phone_number"></td> -->
 
 		</tr>

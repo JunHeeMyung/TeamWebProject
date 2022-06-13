@@ -33,11 +33,10 @@ public class MypageServlet extends HttpServlet {
 		
 		String page = "";
 		Command command = null;
-		
-				
+						
 		HttpSession session = request.getSession();
-		System.out.println("세션 생성 여부"+session.isNew());	
-	
+		System.out.println("세션 생성 여부"+session.isNew());
+			
 		
 		if(session.getAttribute("member")==null) {
 			System.out.println("세션 맴버변수 못 받음");
