@@ -287,7 +287,12 @@ function getLocation(){
 			
 	   		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 		   	var ps = new kakao.maps.services.Places(map); 
-		   	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+		   	ps.categorySearch('FD6', placesSearchCB, {
+		   		//검색조건
+		   		useMapCenter:true,
+		   		useMapBounds:true,
+		   		page:45
+		   	}); 
 
 		   	function placesSearchCB (data, status, pagination) {
 		   	    if (status === kakao.maps.services.Status.OK) {
@@ -325,7 +330,12 @@ function getLocation(){
 		   	    
 		   		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 			   	var ps = new kakao.maps.services.Places(map); 
-			   	ps.categorySearch('FD6', placesSearchCB, {useMapBounds:true}); 
+			   	ps.categorySearch('FD6', placesSearchCB, {
+			   		//검색조건
+			   		useMapCenter:true,
+			   		useMapBounds:true,
+			   		page:45
+			   	}); 
 		   	    
 		   	});
 
