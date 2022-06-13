@@ -36,7 +36,7 @@
 		<td>${review.review_amount}</td>
 		<td>${review.review_service}</td>
 		<td>${review.review_content}</td>
-		<td><img src="${pageContext.request.contextPath}/images/${review.review_img}"></td>
+		<td><img src="${path}/images/${review.review_img}"></td>
 		<td>${review.review_date}</td>
 		<td>${review.review_exposure}</td>		
 		</tr>

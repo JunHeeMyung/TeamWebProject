@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=${path}/review/reviewAllList.do">
-<title>Insert title here</title>
+<title>관리자 마이페이지</title>
 </head>
 <body>
-<h1>${message}</h1>
+<h1> 관리자 마이페이지</h1>
+<p> 관리자 접속 성공 </p>
+
+
 </body>
 </html>

@@ -25,6 +25,7 @@ public class ReviewDAO {
 	static final String SQL_SELECT_MenuSeq2 = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=? AND REVIEW_EXPOSURE = 1";
 	static final String SQL_SELECT_ShopSeq2 = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";	
+	static final String SQL_SELECT_ShopSeq_MANAGER = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=?";
 	
 	static final String SQL_UPDATE_REVIEW_EXPOSURE = "UPDATE Z_REVIEW SET REVIEW_EXPOSURE = ? WHERE REVIEW_SEQ = ?";
 	static final String SQL_DELETE_REVIEW = "DELETE FROM Z_REVIEW WHERE REVIEW_SEQ = ?";
@@ -158,6 +159,31 @@ public class ReviewDAO {
 		}
 		return reviewShopDTOs;
 	}
+	
+	public List<ReviewShopDTO> selectByShopSeq_Manager(int shop_seq)
+	{		
+		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<>();
+		conn = DBUtil.getConnection();
+		try
+		{
+			pst = conn.prepareStatement(SQL_SELECT_ShopSeq_MANAGER);
+			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
+			while (rs.next())
+			{
+				reviewShopDTOs.add(makeReviewShop(rs));
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return reviewShopDTOs;
+	}
+	
+	
 	
 	
 	public int reviewInsert(ReviewDTO reviewDTO)

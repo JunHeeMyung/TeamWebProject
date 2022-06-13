@@ -20,6 +20,9 @@ public class ReviewService {
 	}	
 	public List<ReviewShopDTO> selectByShopSeq(int shop_seq){
 		return reviewDAO.selectByShopSeq(shop_seq);
+	}	
+	public List<ReviewShopDTO> selectByShopSeq_Manager(int shop_seq){
+		return reviewDAO.selectByShopSeq_Manager(shop_seq);
 	}
 	
 	public int reviewInsert(ReviewDTO reviewDTO) {

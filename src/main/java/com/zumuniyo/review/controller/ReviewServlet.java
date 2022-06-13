@@ -38,7 +38,11 @@ public class ReviewServlet extends HttpServlet {
 			command = new ReviewDeleteController();
 			
 			
-		}else if(uri.equals("/review/test")) {		
+		}else if(uri.equals("/review/reviewShopManager.do")) {		
+			command = new ReviewShopManagerController();
+			
+			
+		}else if(uri.equals("/review/test.do")) {		
 			command = new TestController();
 		}
 		

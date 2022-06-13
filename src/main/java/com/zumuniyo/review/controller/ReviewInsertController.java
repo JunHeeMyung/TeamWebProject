@@ -24,18 +24,18 @@ public class ReviewInsertController implements Command{
 		
 		
 		if(method.equals("GET")) {
-						
+			
+			/*
 			ReviewService service = new ReviewService();
-			List<ReviewDTO> reviewDTOs = service.selectAll();
-			
-			request.setAttribute("reviewDTOs", reviewDTOs);			
-			
+			List<ReviewDTO> reviewDTOs = service.selectAll();			
+			request.setAttribute("reviewDTOs", reviewDTOs);						
 			
 			//page = "reviewInsert.jsp";
 			System.out.println("page url="+ page);
 			System.out.println("get");
 			
-			//page = "reviewInsert.jsp";
+			 
+		*/
 			page ="/view/review/reviewInsert.jsp";
 			
 			

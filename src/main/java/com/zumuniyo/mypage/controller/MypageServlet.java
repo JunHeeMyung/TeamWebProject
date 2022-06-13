@@ -1,6 +1,8 @@
 package com.zumuniyo.mypage.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.zumuniyo.review.controller.Command;
+import org.json.simple.JSONObject;
+
+
+
 
 
 /**
@@ -25,17 +31,41 @@ public class MypageServlet extends HttpServlet {
 		String uri = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("mypage 프론트 서블렛 Uri = "+uri);
 		
-		
 		String page = "";
 		Command command = null;
 		
+				
+		HttpSession session = request.getSession();
+		System.out.println("세션 생성 여부"+session.isNew());	
+	
 		
-		if(uri.equals("/mypage/mypageFist.do")) {		
-			command = new MypageFirstController();				
-		}	
+		if(session.getAttribute("member")==null) {
+			command = new MypageEmty();
+			return;
+		}
 		
+	    JSONObject jObject = new JSONObject();
+	    jObject =   (JSONObject) session.getAttribute("member");
+	    String mem_type = (String) jObject.get("mem_type");
 		
+		System.out.println("mem_type :"+mem_type);
 		
+	
+		
+		if(mem_type!=null) {
+			
+			if(mem_type.equals("관리자")) {
+				command = new MypageADMIN();
+			}else if(mem_type.equals("사업자회원")) {
+				command = new MypageBUSINESS();
+			}else if(mem_type.equals("일반회원")) {
+				command = new MYpageNOMAL();
+			}			
+		}else {
+			command = new MypageEmty();
+		}
+		
+				
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);;
