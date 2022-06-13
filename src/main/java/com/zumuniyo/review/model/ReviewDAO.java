@@ -20,7 +20,7 @@ import com.zumuniyo.util.DBUtil;
 public class ReviewDAO {
 	
 	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY REVIEW_SEQ DESC";
-	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ?";
+	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ? ORDER BY REVIEW_SEQ DESC";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq2 = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=? AND REVIEW_EXPOSURE = 1";
@@ -111,8 +111,8 @@ public class ReviewDAO {
 		return reviewDTOs;
 	}
 	*/
-	
-	//========================수정중==================================================================================== SQL_SELECT_MenuSeq	
+
+
 	public List<ReviewShopDTO> selectByMenuSeq(int menu_seq)
 	{		
 		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<>();

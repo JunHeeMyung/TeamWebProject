@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=${path}/review/revieMemList.do">
-<title>Insert title here</title>
+<title>마이페이지</title>
 </head>
 <body>
-<h1>${message}</h1>
+<h1> 로그인을 해주시기 바랍니다.</h1>
+<p>>로그인이 필요합니다.</p>
+
+
 </body>
 </html>

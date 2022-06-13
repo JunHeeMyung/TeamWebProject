@@ -7,7 +7,7 @@ public class MypageEmty implements Command {
 	@Override
 	public String execute(HttpServletRequest request) {
 		System.out.println("로그인 안함");
-		return "/view/index.jsp";
+		return "/view/mypage/mypageEmty.jsp";
 	}
 
 }
