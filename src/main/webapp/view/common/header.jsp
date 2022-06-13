@@ -94,7 +94,7 @@ $(()=>{
 		type: "get",
 		dataType: "html",
 		success: data => {
-			$("slidemenu").html(data);
+			$("#slidemenu").html(data);
 		},
 		error: () => {
 			alert("개인메뉴로드실패");
@@ -130,7 +130,6 @@ ${member.mem_nick} 님, <a href="${path}/member/logout.do">LOGOUT</a>
 <div class="offcanvas offcanvas-end" id="rightmenu">
   <div class="offcanvas-header">
   <div id="slidemenu">
-  
   
   
   
