@@ -57,7 +57,7 @@ public class MenuListAllController implements Command {
 				
 				request.setAttribute("menuDTOs", jsonArray);
 			
-			return "/view/menu/test2.jsp";
+			return "/view/menu/menuListFrontDesign.jsp";
 	
 
 		}else {
