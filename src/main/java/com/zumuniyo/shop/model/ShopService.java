@@ -29,4 +29,7 @@ public class ShopService {
 	public int shopUpdate(ShopDTO shopDTO) {
 		return shopDAO.update(shopDTO);
 	}
+	public List<ShopDTO> selectByMem(int mem_seq) {
+		return shopDAO.selectByMem(mem_seq);
+	}
 }

@@ -32,7 +32,11 @@ public class ShopServlet extends HttpServlet {
 			command = new ShopInsertController();
 		} else if(uri.equals("/shop/shopUpdate.do")) {			
 			command = new ShopUpdateController();
+		} else if(uri.equals("/shop/shopselectByMem.do")) {			
+			command = new ShopSelectByMem();
 		}
+		
+		
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);
