@@ -8,7 +8,7 @@ public class ReviewMenuController implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request) {
-ReviewService service = new ReviewService();
+		ReviewService service = new ReviewService();
 		
 		request.setAttribute("reviewMenuList", service.selectByShopSeq(Integer.parseInt(request.getParameter("menu_seq"))));		
         return "/view/menu/menuDetail.jsp";

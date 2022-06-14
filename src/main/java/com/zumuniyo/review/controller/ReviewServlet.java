@@ -53,7 +53,9 @@ public class ReviewServlet extends HttpServlet {
 			command = new TestController();
 		}
 		
-				
+			
+		
+		
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);;
@@ -63,9 +65,20 @@ public class ReviewServlet extends HttpServlet {
 		System.out.println("FS_uri : " + uri);
 		page = command.execute(request);
 		
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher(page);
-		rd.forward(request, response);
+		System.out.println("page :"+page);
+		if(page.indexOf("json:")>=0) {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print(page.substring(5));
+		}else if(page.indexOf("redirect:")>=0){
+			response.sendRedirect(page.substring(9));
+		}else {
+			request.getRequestDispatcher(page).forward(request, response);
+		}
+		
+		/*
+		 * RequestDispatcher rd; rd = request.getRequestDispatcher(page);
+		 * rd.forward(request, response);
+		 */
 	}
     
 	

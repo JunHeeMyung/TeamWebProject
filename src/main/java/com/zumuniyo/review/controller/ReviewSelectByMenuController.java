@@ -1,5 +1,6 @@
 package com.zumuniyo.review.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,53 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 import com.zumuniyo.review.model.ReviewService;
 
-public class ReviewShopManagerController implements Command {
+public class ReviewSelectByMenuController implements Command{
 
 	@Override
 	public String execute(HttpServletRequest request) {
-
-		//매장관리자(사장님)의 추천리뷰 관리를 위한 list를 위한 컨트롤러
-		
-		//System.out.println("ReviewShopManagerController메소드"+request.getMethod());
-		//int shop_seq =0;
-		
-		/*
-		if(request.getParameter("shop_seq")==null) {
-			request.setAttribute("message", "shop_seq을 입력이 하시오");
-			return "/view/review/miss.jsp";
+			
+		if(request.getParameter("menu_seq")==null) {
+			return "json:매뉴 번호가 없습니다";
 		}
-		else
-		{
-			shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
-			ReviewService service = new ReviewService();
-			request.setAttribute("reviewShopManager", service.selectByShopSeq_Manager(shop_seq));
-			return "/view/review/reviewShopManager.jsp";		
-		}	
-		 */
-		System.out.println("ReviewShopManagerController");
+				
 		
-		ReviewService service = new ReviewService();
+		ReviewService service = new ReviewService();	
 		
-		if(request.getParameter("shop_seq")==null) {
-			return "json:매장 번호가 없습니다";
-		}
+		String menu_seq = request.getParameter("menu_seq");
+		service.selectByMenuSeq(Integer.parseInt(menu_seq));
+		
+		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();
 		
 		
-		int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
-		
-		List<ReviewShopDTO> reviewShopDTOs = service.selectByShopSeq_Manager(shop_seq);
-		
-		System.out.println("shop_seq :"+shop_seq);
 		JSONArray jsonArray = new JSONArray();
 		
-	
 		for(ReviewShopDTO reviewShopDTO:reviewShopDTOs) {
 			
 			JSONObject jsonObject = new JSONObject();			
+			
 			jsonObject.put("mem_seq", reviewShopDTO.getMem_seq());
 			jsonObject.put("menu_seq", reviewShopDTO.getMenu_seq());
 			jsonObject.put("review_taste", reviewShopDTO.getReview_taste());
@@ -74,12 +55,8 @@ public class ReviewShopManagerController implements Command {
 			jsonObject.put("menu_info", reviewShopDTO.getMenu_info());
 			jsonObject.put("menu_status", reviewShopDTO.getMenu_status());			
 			jsonArray.add(jsonObject);
-		}
-		
+			}
 		return "json:"+jsonArray;
-		
-		
-		
-		
 	}
+
 }
