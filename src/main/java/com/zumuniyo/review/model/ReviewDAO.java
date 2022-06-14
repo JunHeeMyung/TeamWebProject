@@ -272,6 +272,7 @@ public class ReviewDAO {
 		int result = 0;
 		
 		conn = DBUtil.getConnection();
+		
 		try
 		{
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
