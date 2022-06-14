@@ -122,7 +122,7 @@ $(()=>{
 		<td>${shop.shop_seq}</td>
 		<td>${shop.shop_img}</td>
 		<td>${shop.shop_name}</td>
-		<td><input type="button" id="btn1" value="상세보기" onclick="location.href = '${pageContext.request.contextPath}/shop/shopDetail?shop_seq=${shop.shop_seq}'"></td>
+		<td><input type="button" id="btn1" value="상세보기" onclick="location.href = '${path}/shop/shopDetail.do?shop_seq=${shop.shop_seq}'"></td>
 		</tr>
 		</c:forEach>
 	</table>

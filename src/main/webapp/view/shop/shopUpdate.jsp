@@ -12,8 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=878435cb63e52c1306f3d3ab856fc153&libraries=services"></script>
+
 
 
 
@@ -55,9 +54,10 @@ body {
 
 
 </style>
+<script type="text/javascript">
 
 
-<!-- 
+/* 
 
 
 $(function(){
@@ -108,16 +108,12 @@ $(function(){
 				
 	});
 });
+ */
 
 
--->
-
-
-
-
-
-
-<script>
+</script>
+  <script>
+/* 참고 : https://postcode.map.daum.net/guide */
 $(()=>{
 	$("#findaddr").click(()=>{
 		new daum.Postcode({
@@ -136,35 +132,27 @@ $(()=>{
 });
 
 </script>
-
 </head>
 <body>
-<h1>매장 등록</h1>
+<h1>매장 수정</h1>
 <br>
 
 
-<form action="${path}/shop/shopInsert.do"   method="post" enctype="multipart/form-data">
+
+
+
+<form action="${path}/shop/shopUpdate.do"   method="post" enctype="multipart/form-data">
 
 <div class="form-group">
 <label>매장이름</label>
 <input class="form-control"  type="text" name="shop_name"> 
 </div>
 
-<select name="category_code">
-<c:forEach var="categoryDTO" items="${categoryDTOs}" varStatus="status">
-<option value="${categoryDTO.category_code}">${categoryDTO.category_name}</option>
-</c:forEach>
-
-</select>
-
-
-
-
-<label>주소</label><input id="addr" name="loc_addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
-	<br>상세주소: <input id="detailaddr" name="shop_addr_detail" type="text">
-<!-- 위도(hidden): -->	<br> <input id="latitude" name="loc_lat" type="text" readonly="readonly">
-<!-- 경도(hidden): --> 	<br><input id="longitude" name="loc_lon" type="text" readonly="readonly">
-
+<label>주소</label><input id="addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
+	<br>상세주소: <input id="detailaddr" type="text">
+<!-- 위도(hidden): -->	<br> <input id="latitude" type="hidden" readonly="readonly">
+<!-- 경도(hidden): --> 	<br><input id="longitude" type="hidden" readonly="readonly">
+</form>
 
 
 
@@ -195,7 +183,7 @@ $(()=>{
  <label>매장정보</label>
  <br>
  
-<textarea class="form-control" id="content" name="shop_notice" cols="50" rows="8"><c:out value="${content}" /></textarea>
+<textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
 </div>
 
 

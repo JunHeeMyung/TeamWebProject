@@ -17,7 +17,7 @@ public class ReviewSelectByShopController implements Command{
 		
 		
 	    JSONObject jObject = new JSONObject();
-	    jObject =   (JSONObject) session.getAttribute("member");
+	    jObject = (JSONObject) session.getAttribute("member");
 	    String mem_seq = (String) jObject.get("mem_seq");
 		
 	
@@ -26,12 +26,11 @@ public class ReviewSelectByShopController implements Command{
 		ShopService sService = new ShopService();
 		
 		
+		System.out.println(mem_seq);
 		
-		
-		System.out.println(mem_seq);		
 				
 //		request.setAttribute("reviewShopList", service.selectByShopSeq(Integer.parseInt(request.getParameter("shop_seq"))));
-		request.setAttribute("reviewShopManager", service.selectByShopSeq(Integer.parseInt(mem_seq)));
+		//request.setAttribute("reviewShopManager", service.selectByShopSeq(Integer.parseInt(mem_seq)));
 	
 		
 		return "/view/review/reviewShopManager.jsp";

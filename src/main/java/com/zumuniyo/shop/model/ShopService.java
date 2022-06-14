@@ -26,5 +26,7 @@ public class ShopService {
 	public int shopInsert(ShopDTO shopDTO) {
 		return shopDAO.shopInsert(shopDTO);
 	}
-
+	public int shopUpdate(ShopDTO shopDTO) {
+		return shopDAO.update(shopDTO);
+	}
 }

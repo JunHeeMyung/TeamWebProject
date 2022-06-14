@@ -30,6 +30,8 @@ public class ShopServlet extends HttpServlet {
 			command = new ShopDetailController();
 		}  else if(uri.equals("/shop/shopInsert.do")) {			
 			command = new ShopInsertController();
+		} else if(uri.equals("/shop/shopUpdate.do")) {			
+			command = new ShopUpdateController();
 		}
 		
 		if(command==null) {
@@ -41,9 +43,14 @@ public class ShopServlet extends HttpServlet {
 		
 		page = command.execute(request);
 		
-		RequestDispatcher rd;
-		rd=request.getRequestDispatcher(page);
-		rd.forward(request, response);
+		if(page.indexOf("json:")>=0) {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print(page.substring(5));
+		}else if(page.indexOf("redirect:")>=0){
+			response.sendRedirect(page.substring(9));
+		}else {
+			request.getRequestDispatcher(page).forward(request, response);
+		}
 		
 	}
 

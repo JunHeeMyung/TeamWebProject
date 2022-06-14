@@ -2,11 +2,21 @@ package com.zumuniyo.shop.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.zumuniyo.category.dto.CategoryDTO;
+import com.zumuniyo.category.model.CategoryService;
+import com.zumuniyo.location.dto.LocationDTO;
+import com.zumuniyo.location.model.LocationService;
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.model.ReviewService;
 import com.zumuniyo.shop.dto.ShopDTO;
@@ -33,9 +43,60 @@ public class ShopInsertController implements Command{
 			System.out.println("get");
 			
 			//page = "reviewInsert.jsp";
+			
+			CategoryService categoryService = new CategoryService();
+			List<CategoryDTO> categoryDTOs = categoryService.selectAll();
+			
+			System.out.println(categoryDTOs);
+			
+			
+			JSONArray jsonarray = new JSONArray();
+			
+			for(CategoryDTO categoryDTO: categoryDTOs) {
+				JSONObject jsonobject = new JSONObject();
+				jsonobject.put("category_code", categoryDTO.getCategory_code());
+				jsonobject.put("category_name", categoryDTO.getCategory_name());
+				jsonarray.add(jsonobject);
+			}
+			
+			request.setAttribute("categoryDTOs", jsonarray);
+			
 			page ="/view/shop/shopInsert.jsp";
 		}else {
 			System.out.println("post");
+			
+			/*
+			String shop_name = request.getParameter("shop_name");
+			String loc_addr = request.getParameter("loc_addr");		
+			String shop_addr_detail = request.getParameter("shop_addr_detail");
+			String category_code = request.getParameter("category_code");
+			String shop_img = request.getParameter("shop_img");
+			String shop_notice = request.getParameter("shop_notice");
+			String loc_lat = request.getParameter("loc_lat");
+			String loc_lon = request.getParameter("loc_lon");
+			
+			if(shop_name==null||loc_addr==null||shop_addr_detail==null||category_code==null||shop_img==null||shop_notice==null
+					||loc_lat==null||loc_lon==null) {
+				return "json:입력값을 재확인해주세요";
+			}
+			
+			if(shop_name.equals("")||loc_addr.equals("")||shop_addr_detail.equals("")||
+					loc_lat.equals("")||loc_lon.equals("")) {
+				return "json:입력값을 재확인해주세요";
+			}
+			*/
+			Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");
+			
+			  if(loginInfo==null) { return "json:로그인정보가 없습니다"; }
+			
+			
+		    int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
+			
+		    
+			
+			
+			
+			
 			
 			
 			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
@@ -54,9 +115,11 @@ public class ShopInsertController implements Command{
 			
 				ShopDTO shopDTO = makeShop(request);
 				shopDTO.setShop_img(photos.get(0));
+				
+				
 				ShopService service = new ShopService();
 				int result = service.shopInsert(shopDTO);
-				request.setAttribute("message", result>0?"리뷰등록성공":"리뷰등록실패");
+				request.setAttribute("message", result>0?"매장등록성공":"매장등록실패");
 				System.out.println("result: "+result);
 				page ="/view/shop/result.jsp";		
 			
@@ -76,11 +139,33 @@ public class ShopInsertController implements Command{
 		ShopDTO shopDTO = new ShopDTO();
 		
 		String shop_name = request.getParameter("shop_name");
+		
 		String loc_addr = request.getParameter("loc_addr");
+		Double loc_lat = Double.parseDouble(request.getParameter("loc_lat"));
+		Double loc_lon = Double.parseDouble(request.getParameter("loc_lon"));
+
 		String shop_addr_detail = request.getParameter("shop_addr_detail");
+		
+		LocationService locationServicenew = new LocationService();
+		if(locationServicenew.selectByAddr(loc_addr)==null) {
+			LocationDTO locationDTO = new LocationDTO(); 
+			locationDTO.setLoc_addr(loc_addr);
+			locationDTO.setLoc_lat(loc_lat);
+			locationDTO.setLoc_lon(loc_lon);
+			
+			int result = locationServicenew.insertLocation(locationDTO);
+
+			
+		}
+		
+		Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");		
+	    int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
+
+		String category_code = request.getParameter("category_code");
 		String shop_img = request.getParameter("shop_img");
 		String shop_notice = request.getParameter("shop_notice");
-		
+		shopDTO.setMem_seq(mem_seq);
+		shopDTO.setCategory_code(category_code);
 		shopDTO.setShop_name(shop_name);
 		shopDTO.setLoc_addr(loc_addr);
 		shopDTO.setShop_addr_detail(shop_addr_detail);

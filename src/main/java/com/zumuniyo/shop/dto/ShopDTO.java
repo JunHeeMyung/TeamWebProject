@@ -2,23 +2,20 @@ package com.zumuniyo.shop.dto;
 
 public class ShopDTO {
 
-	int shop_seq;
-	String shop_name;
-	String loc_addr;
-	String shop_addr_detail;
-	int mem_seq;
-	String category_code;
-	String shop_img;
-	String shop_notice;
-	String shop_status;
-	
-	public ShopDTO() {
-		super();
-	}
+	private int shop_seq;
+	private String shop_name;
+	private String loc_addr;
+	private String shop_addr_detail;
+	private int mem_seq;
+	private String category_code;
+	private String shop_img;
+	private String shop_notice;
+	private String shop_status;
 
 	
+	public ShopDTO() {}
+	
 	public ShopDTO(int shop_seq, String shop_name, String shop_img) {
-		super();
 		this.shop_seq = shop_seq;
 		this.shop_name = shop_name;
 		this.shop_img = shop_img;
@@ -27,7 +24,7 @@ public class ShopDTO {
 
 	public ShopDTO(int shop_seq, String shop_name, String loc_addr, String shop_addr_detail, int mem_seq,
 			String category_code, String shop_img, String shop_notice, String shop_status) {
-		super();
+
 		this.shop_seq = shop_seq;
 		this.shop_name = shop_name;
 		this.loc_addr = loc_addr;
