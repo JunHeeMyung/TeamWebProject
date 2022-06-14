@@ -91,12 +91,22 @@ $(()=> {
 <br>
 
 <br>
-<form action="${path}/shop/shopInsert.do" method="get" name="mem_seq">
+<form action="${path}/shop/shopInsert.do" method="get" name="mem_seq2">
 <button type="submit">매장 등록</button>
 </form>
 <br>
 
+<br>
+<form action="${path}/shop/shopUpdate.do" method="post" name="mem_seq3">
+<button type="submit">매장 수정</button>
+</form>
+<br>
 
+<br>
+<form action="${path}/shop/shopselectByMem.do" method="post" name="mem_seq4">
+<button type="submit">매장관리</button>
+</form>
+<br>
 
 
 
