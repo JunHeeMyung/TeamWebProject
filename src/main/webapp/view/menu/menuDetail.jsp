@@ -31,11 +31,11 @@
 
 <h1>메뉴수정</h1>
 
-<form action="menuDetail.do" method="post">
+<form action="menuUpdate.do" method="post">
 
 <div class="form-group">
 	<label>메뉴ID: ${ z_menu.menu_seq } </label>
-	<input type="text" name="menu_seq" value="${ z_menu.menu_seq }"><br>
+	<input type="text" name="menu_seq" value="${ menu.menu_seq }"><br>
 </div>
 
 
@@ -43,37 +43,37 @@
 
 <div class="form-group">
 	<label>카테고리: </label>
-	<input type="text" name="menu_category" value="${ z_menu.menu_category }"><br>
+	<input type="text" name="menu_category" value="${ menu.menu_category }"><br>
 </div>	
 
 
 <div class="form-group">
 	<label>메뉴이름: </label>
-	<input type="text" name="menu_name" value="${ z_menu.menu_name }"><br>
+	<input type="text" name="menu_name" value="${ menu.menu_name }"><br>
 </div>
 
 
 <div class="form-group">
 	<label>가격: </label>
-	<input type="text" name="menu_price" value="${ z_menu.menu_price }"><br>
+	<input type="text" name="menu_price" value="${ menu.menu_price }"><br>
 </div>
 
 
 <div class="form-group">
 	<label>이미지: </label>
-	<input type="text" name="menu_img" value="${ z_menu.menu_img }"><br>
+	<input type="text" name="menu_img" value="${ menu.menu_img }"><br>
 </div>
 
 
 <div class="form-group">
 	<label>추천메뉴여부: </label>
-	<input type="text" name="menu_top" value="${ z_menu.menu_top }"><br>
+	<input type="text" name="menu_top" value="${ menu.menu_top }"><br>
 </div>
 
 
 <div class="form-group">
 	<label>메뉴소개: </label>
-	<input type="text" name="menu_info" value="${ z_menu.menu_info }"><br>
+	<input type="text" name="menu_info" value="${ menu.menu_info }"><br>
 </div>
 
 
