@@ -1,4 +1,4 @@
-package com.zumuniyo.menu.controller;
+package com.zumuniyo.menu.temp;
 
 import java.util.List;
 import java.util.Scanner;

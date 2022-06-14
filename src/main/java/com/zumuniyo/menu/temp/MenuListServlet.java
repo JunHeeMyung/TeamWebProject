@@ -1,4 +1,4 @@
-package com.zumuniyo.menu.controller;
+package com.zumuniyo.menu.temp;
 
 import java.io.IOException;
 import java.util.List;

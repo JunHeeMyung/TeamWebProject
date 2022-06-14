@@ -37,6 +37,18 @@ index.jsp
 </ul>
 
 
+<ul>
+<li><a href="${ path }/menu/menuManage.do?shop_seq=3">메뉴관리 페이지</a></li>
+</ul>
+
+
+
+
+
+<%-- <ul>
+<li><a href="${ path }/menu/menuInsert.do?shop_seq=3">메뉴추가 페이지</a></li>
+</ul>
+ --%>
 
 
 

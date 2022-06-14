@@ -47,7 +47,7 @@ $(function(){
 			type:"get", 
 			success: function(responseData){
 				// 중복: 1,   중복아님: 0
-				$("#menuMessage").html(responseData==1? "중복된 메뉴가 존재합니다":"사용가능");
+				$("#menuMessage").html(responseData==1? "중복된 이름의 메뉴가 존재합니다":"사용가능");
 				
 			}, 
 			fail: function(){}
@@ -55,6 +55,15 @@ $(function(){
 		});
 	});
 });
+
+
+
+
+
+
+
+
+
 
 
 

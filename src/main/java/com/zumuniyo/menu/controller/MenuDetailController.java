@@ -46,7 +46,8 @@ public class MenuDetailController implements Command{
 			
 			
 			request.setAttribute("menuDTO", jsonObject);
-		
+			
+			//return "json:"+jsonObject.toJSONString();
 			return "/view/menu/menuListFrontDesign.jsp";
 	
 		} else {

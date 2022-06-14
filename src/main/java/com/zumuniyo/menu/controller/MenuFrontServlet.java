@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zumuniyo.menu.temp.MenuCategoryController;
+import com.zumuniyo.menu.temp.MenuListTopController;
+import com.zumuniyo.menu.temp.MenuSearchController;
+
 
 
 
@@ -29,6 +33,10 @@ public class MenuFrontServlet extends HttpServlet {
 		if(uri.equals("/menu/menuListAll.do")) {
 			command = new MenuListAllController();
 		
+		} else if(uri.equals("/menu/menuManage.do")) {
+			command = new MenuManageController();	
+			
+			
 		} else if(uri.equals("/menu/menuListTop.do")) {
 			command = new MenuListTopController();
 		
@@ -50,18 +58,23 @@ public class MenuFrontServlet extends HttpServlet {
 			
 		} else if(uri.equals("/menu/menuFavorites.do")) {
 			command = new MenuFavoritesController();
+		
+		*/	
 			
 			
 			
 		// ---나중에 메뉴관리에 추가할거---	
 		} else if(uri.equals("/menu/menuInsert.do")) {
 			command = new MenuInsertController();
+		
+			
 			
 		} else if(uri.equals("/menu/menuDelete.do")) {
 			command = new MenuDeleteController();
 		//---------------------------	
 		
-		*/
+			
+			
 		}
 
 		if(command==null) {
