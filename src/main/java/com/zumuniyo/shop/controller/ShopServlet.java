@@ -38,6 +38,7 @@ public class ShopServlet extends HttpServlet {
 		
 		
 		
+		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);
 			return;

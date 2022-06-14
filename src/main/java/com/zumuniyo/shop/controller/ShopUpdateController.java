@@ -62,6 +62,7 @@ public class ShopUpdateController implements Command{
 			request.setAttribute("categoryDTOs", jsonarray);
 			
 			page ="/view/shop/shopUpdate.jsp";
+			
 		}else {
 			System.out.println("post");
 			
@@ -72,12 +73,6 @@ public class ShopUpdateController implements Command{
 			
 			
 		    int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
-			
-		    
-			
-			
-			
-			
 			
 			
 			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
@@ -120,7 +115,8 @@ public class ShopUpdateController implements Command{
 		
 		ShopDTO shopDTO = new ShopDTO();
 		
-		String shop_name = request.getParameter("shop_name");
+		String shop_name = request.getParameter("shop_name");		
+		
 		
 		String loc_addr = request.getParameter("loc_addr");
 		Double loc_lat = Double.parseDouble(request.getParameter("loc_lat"));
