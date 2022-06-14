@@ -28,6 +28,8 @@ public class ShopDAO {
 	static final String SQL_INSERT_SHOP_TEST = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
 	
 	static final String SQL_UPDATE = "UPDATE Z_SHOP SET SHOP_NAME = ?, LOC_ADDR=?, SHOP_ADDR_DETAIL=? , SHOP_IMG=? SHOP_NOTICE=? WHERE SHOP_SEQ=? ";
+	
+	static final String SQL_SELECT_MEM_SEQ = "SELECT * FROM Z_SHOP WHERE MEM_SEQ=?";
 	//insert INTO Z_SHOP VALUES(SHOP_SEQ.nextval, '멕시카나치킨', '서울특별시 금천구 가산디지털1로 70', '2층', NULL, NULL, NULL, NULL, '활성');
 	/* static final String SQL_INSERT_SHOPIMG = "INSERT INTO Z_shop "; */
 	/*
@@ -122,6 +124,26 @@ CATEGORY_CODE
 			return shoplist;
 		}
 		
+		public List<ShopDTO> selectByMem(int mem_seq) {
+			List<ShopDTO> shoplist = new ArrayList<>();
+			conn = DBUtil.getConnection();
+			try {
+				pst = conn.prepareStatement(SQL_SELECT_MEM_SEQ);
+				pst.setInt(1, mem_seq);
+				rs = pst.executeQuery();
+
+				while (rs.next()) {
+					shoplist.add(makeShop(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.dbClose(rs, pst, conn);
+			}
+			
+			System.out.println("shoplist = "+shoplist);
+			return shoplist;
+		}
 		// 모든 메뉴 조회
 		public List<MenuDTO> selectByMenu(int shop_seq) {
 			List<MenuDTO> menulist = new ArrayList<>();
