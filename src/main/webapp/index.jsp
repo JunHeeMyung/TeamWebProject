@@ -168,7 +168,7 @@ transform: translate(-500%, 0px);
 width: 50px;
 height: 50px;
 border: 6px solid rgba(255, 138, 0);
-background-color: rgba(255, 138, 0);;
+background-color: rgba(255, 138, 0);
 border-radius: 25px;
 padding-left:-400px;
 
@@ -181,6 +181,27 @@ font-size: 25px;
 
 }
 
+.markerbox{
+transform: translate(0px, 20px);
+color: rgba(255, 138, 0);
+font-weight:bold;
+
+background: rgba(0, 0, 0, 0.3);
+
+}
+
+.markerbox > a{
+
+color: rgba(255, 138, 0);
+font-weight:bold;
+background: rgba(0, 0, 0, 0.3);
+
+}
+
+.markerbox > a:hover {
+color:white;
+background: rgba(0, 0, 0, 1.0);
+}
 
 </style>
 
@@ -250,7 +271,10 @@ font-size: 25px;
 
 <script>
 
-
+function getContextPath() {
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
 
 
 function getLocation(){
@@ -352,14 +376,65 @@ function getLocation(){
 		   	});
 		   
 
+			$.ajax({
+				type:"GET",
+				url:getContextPath()+"/data/mapdata.do", 
+				/* data: {} , */ 
+				dataType:"json",
+				success : data=>{
+			        if ( typeof(data) == "undefined" ) {return;}
+			        
+			        for(var shopdata of data){
+			        	
+			        	    var latval = JSON.stringify(shopdata.LOC_LAT).replaceAll("\"", ""); 
+			        		var lonval = JSON.stringify(shopdata.LOC_LON).replaceAll("\"", "");
+			        		var nameval = JSON.stringify(shopdata.SHOP_NAME).replaceAll("\"", "");
+			        		var shopseqval = JSON.stringify(shopdata.SHOP_SEQ).replaceAll("\"", "");
 			
-			
-			
-			
-			
-			
-			
-			
+				        	var imageSrc = getContextPath()+"/images/icon.png"; // 마커이미지의 주소입니다    
+				            imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+				            imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				              
+					        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+					        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					            markerPosition = new kakao.maps.LatLng(latval, lonval); // 마커가 표시될 위치입니다
+	
+					        // 마커를 생성합니다
+					        var marker = new kakao.maps.Marker({
+					            position: markerPosition, 
+					            image: markerImage, // 마커이미지 설정
+					            zIndex:500
+					        });
+					            
+					        var path = getContextPath();
+					            
+					        var content = '<div class="markerbox">' +
+					        '  <a href="'+path+'/shop/shopDetail.do?shop_seq='+shopseqval+'">' +
+					        '    '+nameval +
+					        '  </a>' +
+					        '</div>';
+
+						    // 커스텀 오버레이가 표시될 위치입니다 
+						    var position = new kakao.maps.LatLng(latval, lonval);  
+	
+						    // 커스텀 오버레이를 생성합니다
+						    var customOverlay = new kakao.maps.CustomOverlay({
+						        map: map,
+						        position: position,
+						        content: content,
+						        yAnchor: 1 ,
+						        zIndex:999
+						    });
+						    
+						    marker.setMap(map);
+			        	
+			        } 
+				    
+				},
+				error : ()=> {
+					alert("에러발생");
+				}
+			});
 			
 		})
 	} else {
