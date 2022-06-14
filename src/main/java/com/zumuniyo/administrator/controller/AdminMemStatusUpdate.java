@@ -17,9 +17,12 @@ public class AdminMemStatusUpdate implements Command {
 		
 		int mem_seq = Integer.parseInt(request.getParameter("mem_seq"));
 		
-		mService.updateStatusBySeq(request.getParameter("mem_status"), mem_seq);
-		mService.updateNickBySeq(request.getParameter("mem_nick"), mem_seq);
-	
+		
+		mService.updateStatusBySeq(request.getParameter("mem_status"),mem_seq); 
+		mService.updateNickBySeq(request.getParameter("mem_nick"),mem_seq);
+		
+		 
+		//mService.updateNickBySeqByStatus(request.getParameterValues("mem_nick"), request.getParameterValues("mem_status"), mem_seq);
 		
 		return "/admin/adminMember.do";
 	}

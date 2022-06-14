@@ -15,6 +15,7 @@
 <p>회원넘버 :${member.mem_seq} </p>
 <p>회원닉네임 :${member.mem_nick} </p>
 <p>회원분류 :${member.mem_type} </p>
+<p>회원상태 :${member.mem_status} </p>
 
 
 <ul>
