@@ -6,24 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-function getContextPath() {
-    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-};
 
-
-/*
-
-$(()=> {	
-	$(".btn-detail").click(function(){
-		return "/shop/shopList.do";
-		
-	});	
-});
-*/
-
-</script>
 
 <title>관리자 마이페이지</title>
 </head>
@@ -59,6 +42,6 @@ $(()=> {
 <button class="btn-detail" onClick="location.href='${path}/shop/shopList.do'">등록된 매장 정보</button>
 
 
-</form>
+
 </body>
 </html>

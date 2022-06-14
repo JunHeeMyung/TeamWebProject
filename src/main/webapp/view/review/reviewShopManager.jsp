@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="${page}/view/common/header.jsp"/>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,9 @@
 <title>매장 주인</title>
 </head>
 <body>
+<br>
+<br>
+<br>
 <table>
 	<tr>	
 		<td>리뷰 번호</td>
@@ -54,6 +58,7 @@
 	</c:forEach>
 
 </table>
+<br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
 
 </body>
 </html>

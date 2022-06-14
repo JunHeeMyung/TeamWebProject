@@ -80,16 +80,33 @@ $(()=> {
 
 <br>
 
- <form action="${path}" method="post">
+<form action="${path}/view/mypage/mypageFirst.jsp" method="post">
 <button type="submit">회원정보</button>
 </form> 
 
+<br>
+<form action="${path}/review/reviewShopList.do" method="post" name="mem_seq">
+<button type="submit">매장 리뷰 조회</button>
+</form>
+<br>
+
+<br>
+<form action="${path}/shop/shopInsert.do" method="post" name="mem_seq">
+<button type="submit">매장 등록</button>
+</form>
+<br>
+
+
+
+
+
+<%-- 
 <br>
 <form action="${path}/review/reviewShopList.do" method="post" name="mem_seq" val="${member.mem_seq}">
 <button type="submit">매장 리뷰 조회</button>
 </form>
 <br>
-
+ --%>
 <%-- 
 <button class="btn-detail" onClick="location.href='${path}/shop/shopList.do'">등록된 매장 정보</button>
 

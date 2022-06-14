@@ -23,7 +23,7 @@
 </ul>
 
 <br>
- <form action="${path}/" method="post">
+<form action="${path}/view/mypage/mypageFirst.jsp" method="post">
 <button type="submit">회원정보</button>
 </form> 
 
