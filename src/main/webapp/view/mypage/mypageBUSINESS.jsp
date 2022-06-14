@@ -97,7 +97,7 @@ $(()=> {
 <br>
 
 <br>
-<form action="${path}/shop/shopUpdate.do" method="post" name="mem_seq3">
+<form action="${path}/shop/shopUpdate.do" method="get" name="mem_seq3">
 <button type="submit">매장 수정</button>
 </form>
 <br>
