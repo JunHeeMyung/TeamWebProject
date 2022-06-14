@@ -76,6 +76,10 @@ padding: 0px;
 
 }
 
+#slideheader{
+display: inline-block;
+text-align: right;
+}
 
 
 </style>
@@ -128,20 +132,14 @@ ${member.mem_nick} 님, <a href="${path}/member/logout.do">LOGOUT</a>
 
 
 <div class="offcanvas offcanvas-end" id="rightmenu">
-  <div class="offcanvas-header">
+  <div id="slideheader" class="offcanvas-header">
+   <button type="button" id ="slideclosebtn" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  
   <div id="slidemenu">
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   </div>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-  </div>
+   
   <div class="offcanvas-body">
 
   </div>
