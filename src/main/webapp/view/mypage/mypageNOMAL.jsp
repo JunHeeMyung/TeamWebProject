@@ -22,10 +22,8 @@
 <li>${member} </li>
 </ul>
 
-
 <br>
-
- <form action="${path}" method="post">
+ <form action="${path}/" method="post">
 <button type="submit">회원정보</button>
 </form> 
 

@@ -48,7 +48,7 @@ public class AdminSevelet extends HttpServlet {
 					command = new AdminShopController();
 				} else if (uri.equals("/admin/adminMemStatusUpdate.do")) {
 				command = new AdminMemStatusUpdate();
-			}
+				}
 			}
 		}
 		
@@ -63,6 +63,5 @@ public class AdminSevelet extends HttpServlet {
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
-
 	}
 }
