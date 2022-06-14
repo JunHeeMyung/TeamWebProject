@@ -26,6 +26,8 @@ public class ShopDAO {
 	
 	static final String SQL_INSERT_SHOP = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, ?, ?, ?, ?, '활성')";
 	static final String SQL_INSERT_SHOP_TEST = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
+	
+	static final String SQL_UPDATE = "update Z_shop set shop_name = ?, loc_addr=?, shop_addr_detail=?  shop_notice=? where shop_seq=? ";
 	//insert INTO Z_SHOP VALUES(SHOP_SEQ.nextval, '멕시카나치킨', '서울특별시 금천구 가산디지털1로 70', '2층', NULL, NULL, NULL, NULL, '활성');
 	/* static final String SQL_INSERT_SHOPIMG = "INSERT INTO Z_shop "; */
 	/*
@@ -172,9 +174,6 @@ CATEGORY_CODE
 		}
 		
 		
-		
-		
-		
 		public int shopInsert(ShopDTO shopDTO)
 		{
 			int result = 0;
@@ -182,13 +181,15 @@ CATEGORY_CODE
 			conn = DBUtil.getConnection();
 			try
 			{
-				pst = conn.prepareStatement(SQL_INSERT_SHOP_TEST);
+				pst = conn.prepareStatement(SQL_INSERT_SHOP);
 				
 				pst.setString(1, shopDTO.getShop_name());
 				pst.setString(2, shopDTO.getLoc_addr());
 				pst.setString(3, shopDTO.getShop_addr_detail());
-				pst.setString(4, shopDTO.getShop_addr_detail());
-				pst.setString(5, shopDTO.getShop_notice());
+				pst.setInt(4, shopDTO.getMem_seq());
+				pst.setString(5, shopDTO.getCategory_code());
+				pst.setString(6, shopDTO.getShop_img());
+				pst.setString(7, shopDTO.getShop_notice());
 				
 				/*SHOP_IMG SHOP_NOTICE
 				  "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
@@ -208,6 +209,27 @@ SHOP_SEQ SHOP_NAME LOC_ADDR SHOP_ADDR_DETAIL MEM_SEQ CATEGORY_CODE SHOP_IMG SHOP
 				DBUtil.dbClose(rs, pst, conn);
 			}
 			
+			return result;
+		}
+		
+		public int update(ShopDTO shopDTO) {
+			conn = DBUtil.getConnection();
+			try {
+				
+				pst = conn.prepareStatement(SQL_UPDATE);
+				
+	            pst.setString(1, shopDTO.getShop_name());
+	            pst.setString(2, shopDTO.getLoc_addr());
+	            pst.setString(3, shopDTO.getShop_addr_detail());
+	            pst.setString(4, shopDTO.getShop_img());
+	            pst.setString(5, shopDTO.getShop_notice());
+	            
+	            result = pst.executeUpdate();			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.dbClose(rs, st, conn);
+			}		
 			return result;
 		}
 		
