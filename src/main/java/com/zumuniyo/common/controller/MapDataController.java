@@ -15,3 +15,4 @@ public class MapDataController implements Command {
 		return "json:"+commonService.getJSONforQuery("SELECT * FROM Z_SHOP JOIN Z_LOCATION USING(LOC_ADDR) WHERE SHOP_STATUS = '활성'");
 	}
 }
+

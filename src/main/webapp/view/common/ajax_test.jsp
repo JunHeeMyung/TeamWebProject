@@ -29,6 +29,8 @@ $(()=> {
 		success : data=>{
 	        if ( typeof(data) == "undefined" ) {return;}
 	        
+	        jsonhere.innerHTML=JSON.stringify(data);
+	        
 	        var boxvalue = "";
 	        
 	        boxvalue+="<table>";
@@ -58,7 +60,7 @@ $(()=> {
 <title>Insert title here</title>
 </head>
 <body>
-
+<div id="jsonhere"></div>
 <div id="here"></div>
 
 </body>
