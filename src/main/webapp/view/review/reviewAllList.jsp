@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- 성공!
+
 <br>
 	<table>
 		<tr>

@@ -90,12 +90,14 @@ table {
 	text-align: center;
 	border : 1px;
 	padding: 0px;
-	margin: 10px;
+	margin: auto;	
 }
-
 
 </style>
 </head>
+
+
+
 <body>
 
 <div id="wrapper" class="shadow">
@@ -105,6 +107,7 @@ table {
 <div id="contents">
 <h1>${member.mem_nick}님의 리뷰</h1>
 
+	<div id="reviewMember">
 	<table>
 		<tr>
 		<!-- 	<td>리뷰 SEQ</td>
@@ -138,7 +141,7 @@ table {
 	</table>
 	<br>
 	<input type="button" id="btn1" value="뒤로가기" onclick="location.href='${path}/';">
-
+	</div>
 </div>
 </div>
 </div>

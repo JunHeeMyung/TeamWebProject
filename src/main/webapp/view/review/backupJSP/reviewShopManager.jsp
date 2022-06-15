@@ -6,100 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 부트스트랩 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-<!-- JQUERY-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- FONTAWESOME -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-
 <title>매장 주인</title>
-<style>
-
-body, html {
-	height:100%;
-	width:100%;
-	padding: 0px auto;
-	margin: 0px auto;
-	background-color: #F3F3F3;
-}
-
-div {
-	padding: 0px;
-	margin: 0px;
-}
-
-
-@media (min-width: 800px){
-
-#wrapper {
-	height:100%;
-	width: 800px;
-	margin: 0px auto;
-	text-align: center;
-	background-color: rgba(255, 255, 255);
-}
-
-}
-
-@media (max-width: 800px){
-
-#wrapper {
-	height:100%;
-	width: 100%;
-	margin: 0px auto;
-	text-align: center;
-	background-color: rgba(255, 255, 255);
-}
-
-}
-
-#mainframe {
-	width: 100%;
-	display : inline-block;
-	margin: 0px auto;
-	background-color: rgba(255, 255, 255);
-	padding-top: 250px;
-}
-
-#contents {
-
-/* 알아서 */
-
-}
-
-tr {
-	padding: 0px;
-	margin: 0px;
-}
-
-td {
-	padding: 10px;
-	margin: 10px;
-	border: 2px solid graytext;
-}
-
-table {	
-	text-align: center;
-	border : 1px;
-	padding: 0px;
-	margin: auto;	
-}
-
-</style>
-
-
 </head>
 <body>
-
-<div id="wrapper" class="shadow">
-<div id="mainframe">
-
-<!-- 입력 -->
-<div id="contents">
-
+<br>
+<br>
+<br>
 <table>
 	<tr>	
 		<td>리뷰 번호</td>
@@ -148,8 +60,5 @@ table {
 </table>
 <br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
 
-</div>
-</div>
-</div>
 </body>
 </html>
