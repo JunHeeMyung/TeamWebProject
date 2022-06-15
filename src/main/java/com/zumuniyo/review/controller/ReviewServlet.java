@@ -24,6 +24,7 @@ public class ReviewServlet extends HttpServlet {
 		
 		
 		//JSON 리턴하는 컨트롤러
+		//Select
 		if(uri.equals("/review/SelectMem.do")) {		
 			command = new ReviewSelectMemJSON();
 		}else if(uri.equals("/review/SelectShop.do")) {		
@@ -31,6 +32,26 @@ public class ReviewServlet extends HttpServlet {
 		}else if(uri.equals("/review/SelectMenu.do")) {		
 			command = new ReviewSelectMenuJSON();
 		}
+		
+		
+		
+		//성공여부 JSON으로 반환하는 컨트롤러
+		//Insert
+		else if(uri.equals("/review/Insert.do")) {		
+			command = new ReviewInsert();
+		}
+		//Update
+		else if(uri.equals("/review/Update.do")) {		
+			command = new ReviewUpdate();
+		}
+		
+		//Delete
+		else if(uri.equals("/review/Delete.do")) {		
+			command = new ReviewDelete();
+		}
+		
+		
+		
 		
 		
 		
