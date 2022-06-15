@@ -218,11 +218,9 @@ background: rgba(0, 0, 0, 1.0);
 				<div id="searchwrapper"></div>
 				<button id="getMyLocation"><i id="getMyLocationFont" class="fas fa-map-marker-alt"></i></button>
 				<div id="searchdiv">
-					<form>
 						<input id="searchbox" type="text" value="" placeholder="검색어를 입력하세요">
 						<i id="searchbtn" class="fas fa-search"></i>
 
-					</form>
 				</div>
 
 				<!-- Carousel -->
@@ -346,6 +344,10 @@ function getLocation(){
 		   	
 		   	/* 지도 변경시 동작 */
 		   	
+		   	
+		   	
+		   	
+		   	
 		   	kakao.maps.event.addListener(map, 'dragend', function() {  
 		   		
 		   		var latlng = map.getCenter(); 
@@ -375,6 +377,29 @@ function getLocation(){
 		   	    
 		   	});
 		   
+			
+
+			$("#searchbtn").click(()=>{
+				
+				var keyword = $("#searchbox").val();
+				
+				var ps = new kakao.maps.services.Places(); 
+				ps.keywordSearch(keyword, placesSearchCB); 
+
+				function placesSearchCB (data, status, pagination) {
+				    if (status === kakao.maps.services.Status.OK) {
+				    	
+				    	var moveLatLon = new kakao.maps.LatLng(data[0].y, data[0].x);
+				    	
+				    	map.setCenter(moveLatLon);
+				    }else{
+				    	alert("검색결과가 없습니다");
+				    }
+				}	
+				
+			})
+			
+			
 
 			$.ajax({
 				type:"GET",
@@ -450,6 +475,29 @@ $("#getMyLocation").click(()=>{
 	
 	
 })
+
+$("#searchbox").keydown(function(key) {
+		if( key.keyCode == 13 ){
+			$("#searchbtn").trigger("click");
+		}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>	
 
