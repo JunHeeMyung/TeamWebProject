@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="${path}/view/common/header.jsp"/>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="${page}/view/common/header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +82,7 @@ div {
 <div id="contents">
 
 
-
+123
 
 
 </div>
