@@ -1,10 +1,9 @@
 package com.zumuniyo.review.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.json.simple.JSONObject;
-
 import com.zumuniyo.review.model.ReviewService;
 
 public class ReviewSelectByMemController implements Command {
@@ -16,12 +15,17 @@ public class ReviewSelectByMemController implements Command {
 
 		JSONObject jObject = new JSONObject();
 		jObject = (JSONObject) session.getAttribute("member");
-		String mem_type = (String) jObject.get("mem_seq");
+		String mem_seq = (String) jObject.get("mem_seq");
 
-		System.out.println("mem_type " + mem_type);
+		System.out.println("mem_seq " + mem_seq);
 		ReviewService service = new ReviewService();
 
-		request.setAttribute("reviewMemberList", service.selectByMemSeq(Integer.parseInt(mem_type)));
+				
+				
+		request.setAttribute("reviewMemberList", service.selectByMemSeq(Integer.parseInt(mem_seq)));
+		
+		
+		
 		return "/view/review/reviewMemberList.jsp";
 	}
 

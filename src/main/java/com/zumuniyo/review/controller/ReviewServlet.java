@@ -80,7 +80,7 @@ public class ReviewServlet extends HttpServlet {
 		}else if(uri.equals("/review/reviewShopManager.do")) {		
 			command = new ReviewShopManagerController();			
 			
-		}else if(uri.equals("/review/test.do")) {		
+		}else if(uri.equals("/review/reviewTest.do")) {		
 			command = new TestController();		
 		}
 		
