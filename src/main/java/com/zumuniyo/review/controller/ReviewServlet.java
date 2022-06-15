@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 @WebServlet("/review/*")
 public class ReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,12 +22,26 @@ public class ReviewServlet extends HttpServlet {
 		String page = "";
 		Command command = null;
 		
-		if(uri.equals("/review/reviewAllList.do")) {		
+		
+		//JSON 리턴하는 컨트롤러
+		if(uri.equals("/review/SelectMem.do")) {		
+			command = new ReviewSelectMemJSON();
+		}else if(uri.equals("/review/SelectShop.do")) {		
+			command = new ReviewSelectShopJSON();
+		}else if(uri.equals("/review/SelectMenu.do")) {		
+			command = new ReviewSelectMenuJSON();
+		}
+		
+		
+		
+		
+		// JSP 리턴하는 컨트롤러
+		else if(uri.equals("/review/reviewAllList.do")) {		
 			command = new ReviewSelectController();
 		}else if(uri.equals("/review/revieMemList.do")) {		
-				command = new ReviewSelectByMemController();
+			command = new ReviewSelectByMemController();
 		}else if(uri.equals("/review/reviewShopList.do")) {
-				command = new ReviewSelectByShopController();			
+			command = new ReviewSelectByShopController();			
 				
 		}else if(uri.equals("/review/reviewInsert.do")) {		
 			command = new ReviewInsertController();			
@@ -44,14 +56,14 @@ public class ReviewServlet extends HttpServlet {
 		}else if(uri.equals("/review/reviewDelete.do")) {		
 			command = new ReviewDeleteController();
 			
-			
 		}else if(uri.equals("/review/reviewShopManager.do")) {		
-			command = new ReviewShopManagerController();
-			
+			command = new ReviewShopManagerController();			
 			
 		}else if(uri.equals("/review/test.do")) {		
-			command = new TestController();
+			command = new TestController();		
 		}
+		
+		
 		
 			
 		

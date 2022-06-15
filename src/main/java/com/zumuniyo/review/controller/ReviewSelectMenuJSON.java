@@ -11,11 +11,11 @@ import org.json.simple.JSONObject;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 import com.zumuniyo.review.model.ReviewService;
 
-public class ReviewSelectByMenuController implements Command{
+public class ReviewSelectMenuJSON implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
-			
+		
 		if(request.getParameter("menu_seq")==null) {
 			return "json:매뉴 번호가 없습니다";
 		}				

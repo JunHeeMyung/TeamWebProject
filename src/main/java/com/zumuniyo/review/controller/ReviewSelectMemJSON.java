@@ -11,28 +11,25 @@ import org.json.simple.JSONObject;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 import com.zumuniyo.review.model.ReviewService;
 
-public class ReviewSelectByMenuController implements Command{
+public class ReviewSelectMemJSON implements Command {
 
 	@Override
-	public String execute(HttpServletRequest request) {
-			
-		if(request.getParameter("menu_seq")==null) {
+	public String execute(HttpServletRequest request) {		
+		
+		if(request.getParameter("mem_seq")==null) {
 			return "json:매뉴 번호가 없습니다";
 		}				
 		
 		ReviewService service = new ReviewService();	
 		
-		String menu_seq = request.getParameter("menu_seq");
-		service.selectByMenuSeq(Integer.parseInt(menu_seq));
+		String mem_seq = request.getParameter("mem_seq");
+		service.selectByMemSeq(Integer.parseInt(mem_seq));
 		
-		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();
+		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();		
 		
-		
-		JSONArray jsonArray = new JSONArray();
-		
-		for(ReviewShopDTO reviewShopDTO:reviewShopDTOs) {
-			
-			JSONObject jsonObject = new JSONObject();			
+		JSONArray jsonArray = new JSONArray();		
+		for(ReviewShopDTO reviewShopDTO:reviewShopDTOs) {			
+			JSONObject jsonObject = new JSONObject();
 			
 			jsonObject.put("mem_seq", reviewShopDTO.getMem_seq()+"");
 			jsonObject.put("menu_seq", reviewShopDTO.getMenu_seq()+"");
