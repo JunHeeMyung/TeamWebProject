@@ -334,12 +334,47 @@ function getContextPath() {
 
 $(()=>{
 	
+	// 최종주문 버튼 누를시(수정)
+	
+	$("#finalorder").click(()=>{
+      //세션에서 카트꺼냄
+      var cart = sessionStorage.getItem('cart');
+      cart = JSON.parse(cart);
+      //존재여부 확인
+      if(JSON.stringify(cart) == null || JSON.stringify(cart) == ''){
+         alert("주문목록이 비어있습니다.");
+         return;
+      }
+      //주문 전송
+      $.ajax({
+         url:getContextPath()+"/orderlist/order.do",
+         type: "post",
+         dataType: "text",
+         data: {"cart":JSON.stringify(cart)}, 
+         success: data => {
+            //주문 성공시 성공한 주문상세페이지로 이동
+            if(data.indexOf("주문성공:")!=-1){
+               sessionStorage.setItem('cart', null);
+               location.href=data.substring(5);
+            //실패할경우 원인출력
+            }else{
+               alert(data);
+            }
+         },
+         error: () => {
+            alert("요청실패");
+         }
+      });
+      return;
+   })
 	
 	
 	
 	
 	
-	// 최종주문 버튼 누를시
+	
+	/* 
+	// 최종주문 버튼 누를시(처음에 짠거)
 	$("#finalorder").click(()=>{
 		
 		var cart = sessionStorage.getItem('cart');
@@ -367,7 +402,7 @@ $(()=>{
 		
 		
 	});
-	
+	 */
 	
 	
 	
@@ -676,19 +711,19 @@ $(function(){
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				
-				<form action="${ path }/orderlist/order.do" method="post"  >
+				<%-- <form action="${ path }/orderlist/order.do" method="post"  > --%>
 				
-				<div class="modal-body form-group" id="orderlistmodalContent">
+				<div class="modal-body" id="orderlistmodalContent">
 				
-				<input type="hidden" id="carthidden" name="cart" class="form-control"  ><br>
-				
+				<!-- <input type="hidden" id="carthidden" name="cart" class="form-control"  ><br> -->
+				<br>
 				</div>
 				<div class="blank"></div>
 				<div class="modal-footer">
-				<input type="submit" id="finalorder" class="btn btn-danger linebtn" onSubmit="return false;" value="주문확정">
+				<button type="button" id="finalorder" class="btn btn-danger linebtn" >주문확정</button>
 				
 			</div>
-			</form>
+			
 			</div>
 		</div>
 	</div>
