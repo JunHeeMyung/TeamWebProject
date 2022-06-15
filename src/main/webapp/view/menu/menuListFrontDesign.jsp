@@ -324,14 +324,15 @@ $(()=>{
 		}
 		
 		
-		alert(JSON.stringify());
-		
 	})
 	
 	
 	$("#cartinbtn").click(()=>{
 	
-		var order_count = $("#countofmenu").val()||1;
+		var order_count = ($("#countofmenu").val())*1;
+		if(order_count == 0||order_count == null||order_count == ''){
+			order_count = 1;		
+		} 
 		var menu_seq = $("#menu_seq").val();
 		
 		var menu = {
@@ -340,21 +341,32 @@ $(()=>{
 		}
 		
 		var cart = sessionStorage.getItem('cart');
-		
+		console.log(cart);
 		if(cart==null){
 			cart = [];
-			cart.push(menu);
-			sessionStorage.setItem('cart',cart);
-		}else{
 			
+			cart.push(menu);
+			sessionStorage.setItem('cart', JSON.stringify(cart));
+		}else{
+			 
+			cart = JSON.parse(cart);
 			for(var menuitemidx in cart){
+				console.log(cart[menuitemidx]);
 				if(cart[menuitemidx]['menu_seq']==menu_seq){
-					cart[menuitemidx]['order_count']=cart[menuitemidx]['order_count']+1;
-					sessionStorage.setItem('cart',cart);
+					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1) + order_count;
+					sessionStorage.setItem('cart', JSON.stringify(cart));
 					return;
-				}
+				} 
 			}
+			//console.dir(typeof(cart));
+			cart.push(menu);
+			sessionStorage.setItem('cart', JSON.stringify(cart));  
+			
 		}
+		
+		$('#menuModal').modal('hide');
+		
+		alert("선택하신 메뉴를 주문목록에 담았습니다.");
 	})
 	
 	
@@ -522,7 +534,7 @@ $(function(){
 
 
 
-<div id="cartbtn">주문하기</div>
+<div id="cartbtn">주문목록</div>
 
 
 
