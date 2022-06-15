@@ -29,6 +29,10 @@ public class ReviewService {
 		return reviewDAO.reviewInsert(reviewDTO);
 	}
 	
+	public int reviewInsert2(ReviewDTO reviewDTO) {
+		return reviewDAO.reviewInsert2(reviewDTO);
+	}
+	
 	public int reviewUpdate_1(ReviewDTO reviewDTO) {
 		return reviewDAO.reviewUpdate_1(reviewDTO);
 	}

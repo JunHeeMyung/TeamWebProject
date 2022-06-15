@@ -15,11 +15,10 @@ public class ReviewSelectController implements Command {
 		ReviewService service = new ReviewService();
 		//if(method.equals("GET")) {
 		request.setAttribute("reviewAllList", service.selectAll());
+		
 		return "/view/review/reviewAllList.jsp";
 		
-	
-		
-      //  selectByMemSeq 
+		//selectByMemSeq 
         
 		
 		

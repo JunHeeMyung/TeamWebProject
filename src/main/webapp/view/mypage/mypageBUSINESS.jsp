@@ -16,6 +16,9 @@ function getContextPath() {
 
 
 
+
+
+/*
 $(()=> {	
 	$(".btn-detail").click(function(){
 		return "/shop/shopList.do";
@@ -51,9 +54,10 @@ $(()=> {
 			}
 		});	
 		*/
+		/*
 	});	
 });
-
+*/
 
 </script>
 
@@ -108,6 +112,11 @@ $(()=> {
 </form>
 <br>
 
+<br>
+<form action="${path}/menu/menuManage.do" method="get" name="mem_seq5">
+<button type="submit">매뉴관리</button>
+</form>
+<br>
 
 
 <%-- 

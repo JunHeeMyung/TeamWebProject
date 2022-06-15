@@ -319,42 +319,81 @@ $(()=>{
 		$('#orderlistmodal').modal('show');
 		orderlistmodalContent.innerHTML = "";
 		var cart = sessionStorage.getItem('cart');
+		cart = JSON.parse(cart);
+		
+		var line = ""; 
+		
+		
 		for(var menu of cart){
-			orderlistmodalContent.innerHTML += ("<br>"+JSON.stringify(menu['menu_seq'])+":"+JSON.stringify(menu['order_count']));
+			alert(JSON.stringify(menu['menu_name'])+","+JSON.stringify(menu['order_count'])+","+JSON.stringify(menu['menu_price']));
+			line += "<div class='linebox'> ";
+			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name'])+" </div> ";
+			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+" </div> ";			
+			line += "<div class='line_price'> "+JSON.stringify(menu['menu_price'])+" </div> ";
+			line += ("<img src="+JSON.stringify(menu['menu_photo'])+" class='line_photo' >");
+			line += "</div>";
+			
+			
+			//("<br>"+JSON.stringify(menu['menu_seq'])+":"+JSON.stringify(menu['order_count']));
+			
 		}
 		
 		
-		alert(JSON.stringify());
 		
+		
+		orderlistmodalContent.innerHTML = line ;
 	})
 	
 	
 	$("#cartinbtn").click(()=>{
-	
-		var order_count = $("#countofmenu").val()||1;
+		
+		var menu_name = $("#menu_name").html();
+		var menu_price = ($("#menu_price").html())*1;
+		var menu_photo = $("#menu_photo").attr("src");
+		
+		var order_count = ($("#countofmenu").val())*1;
+		if(order_count == 0||order_count == null||order_count == ''){
+			order_count = 1;		
+		} 
 		var menu_seq = $("#menu_seq").val();
 		
 		var menu = {
 			"menu_seq":menu_seq,
-			"order_count":order_count	
+			"order_count":order_count,
+			"menu_name":menu_name, 
+			"menu_price":menu_price, 
+			"menu_photo":menu_photo
 		}
 		
 		var cart = sessionStorage.getItem('cart');
-		
+		console.log(cart);
 		if(cart==null){
 			cart = [];
-			cart.push(menu);
-			sessionStorage.setItem('cart',cart);
-		}else{
 			
+			cart.push(menu);
+			sessionStorage.setItem('cart', JSON.stringify(cart));
+		}else{
+			 
+			cart = JSON.parse(cart);
 			for(var menuitemidx in cart){
+				console.log(cart[menuitemidx]);
 				if(cart[menuitemidx]['menu_seq']==menu_seq){
-					cart[menuitemidx]['order_count']=cart[menuitemidx]['order_count']+1;
-					sessionStorage.setItem('cart',cart);
+					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1) + order_count;
+					
+					alert(JSON.stringify(cart));
+					sessionStorage.setItem('cart', JSON.stringify(cart));
 					return;
-				}
+				} 
 			}
+			//console.dir(typeof(cart));
+			cart.push(menu);
+			sessionStorage.setItem('cart', JSON.stringify(cart));  
+			
 		}
+		
+		$('#menuModal').modal('hide');
+		
+		alert("선택하신 메뉴를 주문목록에 담았습니다.");
 	})
 	
 	
@@ -407,7 +446,7 @@ $(function(){
 				$("#menu_name").html(responseData["menu_name"]);
 				$("#menu_info").html(responseData["menu_info"]);
 				$("#menu_img").html(responseData["menu_img"]);
-				$("#menu_price").html(responseData["menu_price"]+"<font size='4'> 원</font>");
+				$("#menu_price").html(responseData["menu_price"]);
 				var path = "<%=request.getSession().getAttribute("path")%>";
 				var imgpath = path+"/images/"+responseData["menu_img"];
 				$("#menu_photo").attr("src",imgpath);
@@ -468,6 +507,19 @@ $(function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container" >
   
   <!-- The Modal -->
@@ -493,14 +545,13 @@ $(function(){
           
           <input id = "countofmenu" type="number" value=1> <span id="gae">개</span>
           
-          
           </td>
           </tr>
           <tr>
           <td colspan='3'><div id="menu_info"></div></td>
           </tr>
           <tr>
-          <td>가격</td><td></td><td><div id="menu_price"></div></td>
+          <td>가격</td><td></td><td><div id="menu_price"><font size='4'> 원</font></div></td>
           </tr>
           </table>
           
@@ -522,7 +573,7 @@ $(function(){
 
 
 
-<div id="cartbtn">주문하기</div>
+<div id="cartbtn">주문목록</div>
 
 
 
