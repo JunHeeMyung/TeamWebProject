@@ -244,7 +244,7 @@ $(function(){
         <form action="${ path }/menu/menuInsert.do" method="post" enctype="multipart/form-data" >
         
         
-        <input type="text" name="shop_seq" class="form-control" value="<%=request.getParameter("shop_seq")%>"><br>
+        <input type="hidden" name="shop_seq" class="form-control" value="<%=request.getParameter("shop_seq")%>"><br>
         
           <label>메뉴이름</label><input type="text" name="menu_name" class="form-control"><br>
           <label>카테고리</label><input type="text" name="menu_category" class="form-control"><br>

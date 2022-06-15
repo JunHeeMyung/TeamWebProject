@@ -71,7 +71,7 @@ z-index: 99;
 
 
 .btn-menu,.btn-menu:hover {
-text-align: left;
+text-align: left;	
 margin: 0px;
 padding: 0px;
 border: 1px solid #DCDCDC;
@@ -281,20 +281,21 @@ margin-left: 5px;
 }
 
 #cartbtn{
+
+align-items: center;
 text-align:center;
 vertical-align:middle;
 color: white;
 font-size:30px;
 font-weight:bold;
 display: flex;
-align-items: center;
 width: 150px;
 height: 100px;
-position: absolute;
+position: fixed;
 right: 50px;
 bottom: 50px;
 background-color: rgba(255, 138, 0);
-border-radius: 40px;
+border-radius: 30px;
 }
 
 #cartbtn:hover {
@@ -306,7 +307,7 @@ border-radius: 40px;
 
 margin-top:100px;
 
-background-color : red;
+
 width:300px;
 height:300px;
 font-size: 20px;
@@ -332,6 +333,45 @@ function getContextPath() {
 
 
 $(()=>{
+	
+	
+	
+	
+	
+	
+	// 최종주문 버튼 누를시
+	$("#finalorder").click(()=>{
+		
+		var cart = sessionStorage.getItem('cart');
+		cart = JSON.parse(cart);
+		
+		if(JSON.stringify(cart) == null || JSON.stringify(cart) == ''){
+			
+			alert("주문목록이 비어있습니다.");
+			
+			return null;
+		}
+		
+		alert(JSON.stringify(cart));
+		
+		sessionStorage.setItem('cart', JSON.stringify(cart));
+		
+		$("#carthidden").val(JSON.stringify(cart));
+		
+		$("#finalorder").submit();
+		
+		
+		//$('#orderlistmodal').modal('hide');
+		
+		return;
+		
+		
+	});
+	
+	
+	
+	
+	// 화면하단 '주문목록' 버튼 누를시
 	$("#cartbtn").click(()=>{
 		$('#orderlistmodal').modal('show');
 		orderlistmodalContent.innerHTML = "";
@@ -345,7 +385,7 @@ $(()=>{
 		
 		for(var menu of cart){
 			
-			alert(JSON.stringify(menu['menu_name'])+","+JSON.stringify(menu['order_count'])+","+JSON.stringify(menu['menu_price']));
+			//alert(JSON.stringify(menu['menu_name'])+","+JSON.stringify(menu['order_count'])+","+JSON.stringify(menu['menu_price']));
 			
 			
 			line += "<div class='linebox'> ";
@@ -359,12 +399,13 @@ $(()=>{
 			//("<br>"+JSON.stringify(menu['menu_seq'])+":"+JSON.stringify(menu['order_count']));
 			
 		}
-		
+		//alert(JSON.stringify(cart));
 		
 		orderlistmodalContent.innerHTML = line ;
 	})
 	
 	
+	// 메뉴상세보기 안의 '주문목록에 담기' 버튼 누를시
 	$("#cartinbtn").click(()=>{
 		
 		var menu_name = $("#menu_name").html();
@@ -401,7 +442,7 @@ $(()=>{
 				if(cart[menuitemidx]['menu_seq']==menu_seq){
 					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1) + order_count;
 					
-					alert(JSON.stringify(cart));
+					//alert(JSON.stringify(cart));
 					
 					sessionStorage.setItem('cart', JSON.stringify(cart));
 					
@@ -423,12 +464,17 @@ $(()=>{
 		$('#menuModal').modal('hide');
 		
 		alert("선택하신 메뉴를 주문목록에 담았습니다.");
-	})
+	});
 	
-	
-	
-	
-})
+});
+
+
+
+
+
+
+
+
 
 
 $.ajax({
@@ -441,12 +487,18 @@ $.ajax({
 	error: () => {
 		alert("개인메뉴로드실패");
 	}
-})
+});
 
 
+
+
+// 각각의 메뉴 클릭했을때 메뉴상세보기
 $(function(){
 	$(".btn-detail").click(function(){
 		//alert("버튼 눌러짐");
+		
+		$("#countofmenu").val(1);
+		
 		var menuseq = $(this).attr("data-menuseq");
 		
 		$("#menu_seq").val(menuseq);
@@ -539,6 +591,11 @@ $(function(){
 </div>
 
 
+</div>
+</div>
+
+
+<div id="cartbtn">주문목록</div>
 
 
 
@@ -551,8 +608,7 @@ $(function(){
 
 
 
-
-
+<!-- 상세보기모달 -->
 <div class="container" >
   
   <!-- The Modal -->
@@ -576,7 +632,7 @@ $(function(){
           <tr>
           <td><div id="menu_name"></div></td><td></td><td>
           
-          <input id = "countofmenu" type="number" value=1> <span id="gae">개</span>
+          <input id = "countofmenu" type="number" min="1" max="99" value=1> <span id="gae">개</span>
           
           </td>
           </tr>
@@ -603,20 +659,12 @@ $(function(){
 
 
 
-<div id="cartbtn">주문목록</div>
 
 
+<!-- 주문목록모달 -->
+<div class="container" >
 
-
-
-
-
-
-
-
-
-
-
+<!-- The Modal -->
 <div class="modal" id="orderlistmodal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -627,24 +675,24 @@ $(function(){
 					</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
-
-				<div class="modal-body" id="orderlistmodalContent">
 				
-	
+				<form action="${ path }/orderlist/order.do" method="post"  >
 				
+				<div class="modal-body form-group" id="orderlistmodalContent">
 				
-				
-				
+				<input type="hidden" id="carthidden" name="cart" class="form-control"  ><br>
 				
 				</div>
 				<div class="blank"></div>
 				<div class="modal-footer">
-					<button type="button" id="finalorder" class="btn btn-danger linebtn">주문확정</button>
-				</div>
-
+				<input type="submit" id="finalorder" class="btn btn-danger linebtn" onSubmit="return false;" value="주문확정">
+				
+			</div>
+			</form>
 			</div>
 		</div>
 	</div>
+</div>
 
 
 
@@ -654,24 +702,7 @@ $(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 헤더박스 쌩으로 만들어놓은거 -->
 
 <div id="headerbox">
 
