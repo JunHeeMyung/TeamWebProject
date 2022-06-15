@@ -301,6 +301,23 @@ border-radius: 40px;
 	cursor:pointer;
 }
 
+
+.table_numberbox {
+
+margin-top:100px;
+
+background-color : red;
+width:300px;
+height:300px;
+font-size: 20px;
+
+}
+
+
+
+
+
+
 </style>
 
 
@@ -318,6 +335,8 @@ $(()=>{
 	$("#cartbtn").click(()=>{
 		$('#orderlistmodal').modal('show');
 		orderlistmodalContent.innerHTML = "";
+		
+		
 		var cart = sessionStorage.getItem('cart');
 		cart = JSON.parse(cart);
 		
@@ -325,20 +344,21 @@ $(()=>{
 		
 		
 		for(var menu of cart){
+			
 			alert(JSON.stringify(menu['menu_name'])+","+JSON.stringify(menu['order_count'])+","+JSON.stringify(menu['menu_price']));
+			
+			
 			line += "<div class='linebox'> ";
 			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name'])+" </div> ";
 			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+" </div> ";			
 			line += "<div class='line_price'> "+JSON.stringify(menu['menu_price'])+" </div> ";
-			line += ("<img src="+JSON.stringify(menu['menu_photo'])+" class='line_photo' >");
+			line += "<img src="+JSON.stringify(menu['menu_photo'])+" class='line_photo' >";
 			line += "</div>";
 			
 			
 			//("<br>"+JSON.stringify(menu['menu_seq'])+":"+JSON.stringify(menu['order_count']));
 			
 		}
-		
-		
 		
 		
 		orderlistmodalContent.innerHTML = line ;
@@ -362,7 +382,8 @@ $(()=>{
 			"order_count":order_count,
 			"menu_name":menu_name, 
 			"menu_price":menu_price, 
-			"menu_photo":menu_photo
+			"menu_photo":menu_photo, 
+			"order_tablenum":<%=request.getParameter("order_tablenum") %>
 		}
 		
 		var cart = sessionStorage.getItem('cart');
@@ -381,11 +402,19 @@ $(()=>{
 					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1) + order_count;
 					
 					alert(JSON.stringify(cart));
+					
 					sessionStorage.setItem('cart', JSON.stringify(cart));
+					
+					
+					$('#menuModal').modal('hide');
+					
+					alert("선택하신 메뉴를 주문목록에 담았습니다.");
+					
 					return;
 				} 
+				
 			}
-			//console.dir(typeof(cart));
+			console.dir(typeof(cart));
 			cart.push(menu);
 			sessionStorage.setItem('cart', JSON.stringify(cart));  
 			
@@ -469,6 +498,10 @@ $(function(){
 
 </head>
 <body>
+
+
+<div class="table_numberbox">${ param.order_tablenum }</div>
+
 
 <div id="wrapper" class="shadow">
 <div id="mainframe">
@@ -555,9 +588,6 @@ $(function(){
           </tr>
           </table>
           
-         
-		 
-         
         </div>
         
         <!-- Modal footer -->
@@ -609,8 +639,7 @@ $(function(){
 				</div>
 				<div class="blank"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger"
-						data-bs-dismiss="modal">닫기</button>
+					<button type="button" id="finalorder" class="btn btn-danger linebtn">주문확정</button>
 				</div>
 
 			</div>
