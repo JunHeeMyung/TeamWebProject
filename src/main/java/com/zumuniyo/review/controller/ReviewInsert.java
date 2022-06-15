@@ -15,20 +15,16 @@ public class ReviewInsert implements Command {
 	@Override
 	public String execute(HttpServletRequest request) {
 		
-		int mem_seq;			
-		int menu_seq;
-				
+	
 		if((request.getParameter("mem_seq")==null)||(request.getParameter("menu_seq")==null)) {
-			return "json:리뷰등록실패";
-
-			
+			return "json:리뷰등록실패";			
 		}else {
-			
-			mem_seq = Integer.parseInt(request.getParameter("mem_seq"));			
-			menu_seq = Integer.parseInt(request.getParameter("menu_seq"));
-			
-			String method = request.getMethod();
-			String page = null;
+	
+					
+		//	int mem_seq = Integer.parseInt(request.getParameter("mem_seq"));			
+		//	int menu_seq = Integer.parseInt(request.getParameter("menu_seq"));		
+		//	String method = request.getMethod(); String page = null;
+	
 
 			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
 			System.out.println("업로드 폴더: " + dir);
@@ -47,7 +43,7 @@ public class ReviewInsert implements Command {
 			reviewDTO.setReview_img(photos.get(0));
 			ReviewService service = new ReviewService();
 			int result = service.reviewInsert2(reviewDTO);
-			request.setAttribute("message", result > 0 ? "리뷰등록성공" : "리뷰등록실패");						
+			//request.setAttribute("message", result > 0 ? "리뷰등록성공" : "리뷰등록실패");						
 					
 			if(result<=0) {			
 				return "json:리뷰등록실패";
@@ -72,7 +68,7 @@ public class ReviewInsert implements Command {
 		float review_amount = readFloat(request, "review_amount");
 		float review_service = readFloat(request, "review_service");
 		String review_content = request.getParameter("review_content");
-		String review_img = request.getParameter("review_img");
+		//String review_img = request.getParameter("review_img");
 		// Date review_date = readDate(request, "review_date");
 		// int review_exposure = readInt(request, "review_exposure");
 
