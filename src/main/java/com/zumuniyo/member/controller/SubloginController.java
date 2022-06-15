@@ -32,7 +32,7 @@ public class SubloginController implements Command {
 		
 		HttpSession session = request.getSession();
 		MemberDAO memberDAO = new MemberDAO();
-		MemberDTO memberDTO = memberDAO.selectById(mem_id);
+		MemberDTO memberDTO = memberDAO.selectByEmail(mem_email);
 		
 		if(memberDTO!=null) {
 			
@@ -62,7 +62,7 @@ public class SubloginController implements Command {
 			}
 			
 		}else {
-			// 토큰이 일치하지 않는경우 가입으로
+			// 아이디가 일치하지 않는경우 가입으로
 			return "/member/login/subregister.do";
 		}
 	}
