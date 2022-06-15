@@ -393,7 +393,6 @@ function getLocation(){
 				    	
 				    	map.setCenter(moveLatLon);
 				    }else{
-				    	alert("검색결과가 없습니다");
 				    }
 				}	
 				
