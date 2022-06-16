@@ -113,7 +113,7 @@ $(()=> {
 					location.host+getContextPath()+
 					"/menu/menuListAll.do?"+
 					"shop_seq="+shop_seq+
-					"%26order_tablenum="+count+"'></td><tr></table>";		
+					"%26order_tablenum="+i+"'></td><tr></table>";		
 		}
 		
 		$("#qrcodetable").html(str);
