@@ -267,7 +267,7 @@ public class ReviewDAO {
 		return result;
 	}
 	
-	public int reviewUpdate_0(ReviewDTO reviewDTO)
+	public int reviewUpdate(ReviewDTO reviewDTO)
 	{
 		int result = 0;
 		
@@ -276,7 +276,7 @@ public class ReviewDAO {
 		try
 		{
 			pst = conn.prepareStatement(SQL_UPDATE_REVIEW_EXPOSURE);			
-			pst.setInt(1, 0);
+			pst.setInt(1, reviewDTO.getReview_exposure());
 			pst.setInt(2, reviewDTO.getReview_seq());		
 			
 			result = pst.executeUpdate();

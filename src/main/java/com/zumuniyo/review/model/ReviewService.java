@@ -31,13 +31,10 @@ public class ReviewService {
 	
 	public int reviewInsert2(ReviewDTO reviewDTO) {
 		return reviewDAO.reviewInsert2(reviewDTO);
-	}
-	
-	public int reviewUpdate_1(ReviewDTO reviewDTO) {
-		return reviewDAO.reviewUpdate_1(reviewDTO);
-	}
-	public int reviewUpdate_0(ReviewDTO reviewDTO) {
-		return reviewDAO.reviewUpdate_0(reviewDTO);
+	}	
+
+	public int reviewUpdate(ReviewDTO reviewDTO) {
+		return reviewDAO.reviewUpdate(reviewDTO);
 	}
 	
 	

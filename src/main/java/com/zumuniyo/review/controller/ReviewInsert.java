@@ -94,12 +94,5 @@ public class ReviewInsert implements Command {
 		String data = request.getParameter(column);
 		return Integer.parseInt(data);	 
 	 }
-	/*
-	 * private Double readDouble(HttpServletRequest request, String column) { String
-	 * data = request.getParameter(column); return Double.parseDouble(data); }
-	 * 
-	 * private Date readDate(HttpServletRequest request, String column) { String
-	 * data = request.getParameter(column); return DateUtil.convertToDate(data); }
 
-	 */
 }
