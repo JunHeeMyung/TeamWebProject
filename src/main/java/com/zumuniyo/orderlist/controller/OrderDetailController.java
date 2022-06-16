@@ -1,4 +1,4 @@
-package com.zumuniyo.orderlist.model;
+package com.zumuniyo.orderlist.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
