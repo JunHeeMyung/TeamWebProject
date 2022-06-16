@@ -138,6 +138,12 @@ text-align: center;
 
 }
 
+.modal-body {
+display: ;
+}
+
+
+
 .collapse {
 
 display : inline-block;
@@ -168,7 +174,7 @@ background: transparent;
 }
 
 #headerbox{
-position: absolute;
+position: fixed;
 left: 0px;
 top: 0px;
 margin : 0px;
@@ -233,12 +239,13 @@ border: none;
 #menu_photo{
 display:inline-block;
 width: 100%;
-height: 200px;
+height: 250px;
 }
 
 #menutable{
 width: 100%;
 table-layout: fixed;
+border:1px solid black;
 
 margin-bottom: 10px;
 margin-top: 10px;
@@ -248,6 +255,9 @@ margin-top: 10px;
 display:table-cell;
 padding-top: 10px; 
 padding-bottom: 10px;
+
+border:1px solid black;
+
 }
 
 #menu_name{
@@ -255,7 +265,7 @@ font-size: 24px;
 }
 
 #menu_price{
-font-size: 22px;
+font-size: 24px;
 }
 
 .updownbtn{
@@ -276,7 +286,25 @@ font-size: 20px;
 vertical-align: middle;
 }
 
+
+#detail_gae_won {
+align-items: center;
+text-align:center;
+
+}
+
+#centerlow {
+align-items: center;
+text-align:center;
+
+
+}
+
 #gae{
+margin-left: 5px;
+}
+
+#won{
 margin-left: 5px;
 }
 
@@ -313,6 +341,73 @@ height:300px;
 font-size: 20px;
 
 }
+
+
+.modal-title {
+
+margin: auto;
+
+}
+
+
+
+
+
+
+.linebox {
+
+width:95%;
+height: 80px;
+display: table; margin-left: auto; margin-right: auto;
+
+border: 1px solid #DCDCDC;
+
+}
+
+
+.linebox td {
+
+display:table-cell;
+padding-top: 10px; 
+padding-bottom: 10px;
+
+border:1px solid black;
+
+}
+
+
+
+
+
+
+.line_name {
+
+font-size: 22px;
+
+}
+
+
+.line_count {
+
+font-size: 20px;
+
+}
+
+.line_price {
+
+font-size: 20px;
+
+}
+
+.line_photo {
+
+display:inline-block;
+width: 80px;
+height: 70px;
+
+}
+
+
 
 
 
@@ -354,7 +449,7 @@ $(()=>{
          success: data => {
             //주문 성공시 성공한 주문상세페이지로 이동
             if(data.indexOf("주문성공:")!=-1){
-               sessionStorage.setItem('cart', null);
+               sessionStorage.clear();
                location.href=data.substring(5);
             //실패할경우 원인출력
             }else{
@@ -457,6 +552,7 @@ $(()=>{
 			"menu_seq":menu_seq,
 			"order_count":order_count,
 			"menu_name":menu_name, 
+			"shop_seq":<%=request.getParameter("shop_seq") %> ,
 			"menu_price":menu_price, 
 			"menu_photo":menu_photo, 
 			"order_tablenum":<%=request.getParameter("order_tablenum") %>
@@ -665,17 +761,16 @@ $(function(){
           
           <table id = "menutable">
           <tr>
-          <td><div id="menu_name"></div></td><td></td><td>
-          
+          <td colspan='2'><div id="menu_name"></div></td><td></td>
+          <td colspan='2' id="detail_gae_won">
           <input id = "countofmenu" type="number" min="1" max="99" value=1> <span id="gae">개</span>
-          
           </td>
           </tr>
           <tr>
-          <td colspan='3'><div id="menu_info"></div></td>
+          <td colspan='5'><div id="menu_info"></div></td>
           </tr>
-          <tr>
-          <td>가격</td><td></td><td><div id="menu_price"><font size='4'> 원</font></div></td>
+          <tr id="centerlow">
+          <td>가격</td> <td></td> <td></td> <td><div id="menu_price"></div></td> <td><span id="won"> 원</span></td>
           </tr>
           </table>
           
@@ -713,10 +808,13 @@ $(function(){
 				
 				<%-- <form action="${ path }/orderlist/order.do" method="post"  > --%>
 				
-				<div class="modal-body" id="orderlistmodalContent">
+				<div class="modal-body">
+				
+				<div id="orderlistmodalContent">
 				
 				<!-- <input type="hidden" id="carthidden" name="cart" class="form-control"  ><br> -->
 				<br>
+				</div>
 				</div>
 				<div class="blank"></div>
 				<div class="modal-footer">

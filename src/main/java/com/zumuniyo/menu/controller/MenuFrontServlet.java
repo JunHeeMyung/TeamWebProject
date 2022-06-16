@@ -30,7 +30,7 @@ public class MenuFrontServlet extends HttpServlet {
 		
 		Command command = null;
 		
-		if(uri.equals("/menu/menuListAll.do")) {
+		if(uri.equals("/menu/menuListAll.zmny")) {
 			command = new MenuListAllController();
 		
 		} else if(uri.equals("/menu/menuManage.do")) {
