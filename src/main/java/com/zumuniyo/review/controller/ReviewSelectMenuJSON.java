@@ -2,12 +2,10 @@ package com.zumuniyo.review.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+import com.zumuniyo.review.dto.ReviewMenuDTO;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 import com.zumuniyo.review.model.ReviewService;
 
@@ -23,28 +21,23 @@ public class ReviewSelectMenuJSON implements Command {
 		ReviewService service = new ReviewService();	
 		
 		String menu_seq = request.getParameter("menu_seq");
-		service.selectByMenuSeq(Integer.parseInt(menu_seq));
 		
-		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();
+		System.out.println("menu_seq "+ menu_seq);
+		List<ReviewMenuDTO> reviewMemDTOs = new ArrayList<>();
+		reviewMemDTOs = service.selectByMenuSeq(Integer.parseInt(menu_seq));
 		
+		System.out.println("reviewMemDTOs"+ reviewMemDTOs);
 		
 		JSONArray jsonArray = new JSONArray();
 		
-		for(ReviewShopDTO reviewShopDTO:reviewShopDTOs) {
+		for(ReviewMenuDTO reviewShopDTO:reviewMemDTOs) {
 			
 			JSONObject jsonObject = new JSONObject();			
 			
-			jsonObject.put("mem_seq", reviewShopDTO.getMem_seq()+"");
+			
 			jsonObject.put("menu_seq", reviewShopDTO.getMenu_seq()+"");
-			jsonObject.put("shop_seq", reviewShopDTO.getShop_seq()+"");
-			jsonObject.put("review_taste", reviewShopDTO.getReview_taste()+"");
-			jsonObject.put("review_amount", reviewShopDTO.getReview_amount()+"");
-			jsonObject.put("review_service", reviewShopDTO.getReview_service()+"");
+			jsonObject.put("shop_seq", reviewShopDTO.getShop_seq()+"");			
 			jsonObject.put("menu_img", reviewShopDTO.getMenu_img()+"");
-			jsonObject.put("review_img", reviewShopDTO.getReview_img()+"");
-			jsonObject.put("review_date", reviewShopDTO.getReview_date()+"");		
-			jsonObject.put("review_content", reviewShopDTO.getReview_content()+"");				
-			jsonObject.put("review_exposure", reviewShopDTO.getReview_exposure()+"");
 			jsonObject.put("menu_category", reviewShopDTO.getMenu_category()+"");
 			jsonObject.put("menu_name", reviewShopDTO.getMenu_name()+"");
 			jsonObject.put("menu_price", reviewShopDTO.getMenu_price()+"");
