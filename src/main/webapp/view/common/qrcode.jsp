@@ -111,7 +111,7 @@ $(()=> {
 			str+="<table class='qrtable' style='display: inline-block;'><tr><td>"+i+"번 테이블</td></tr><tr><td><img src='"+getContextPath()+"/qrcode/create.do?url="+
 					location.protocol+"//"+
 					location.host+getContextPath()+
-					"/menu/menuListAll.do?"+
+					"/menu/menuListAll.zmny?"+
 					"shop_seq="+shop_seq+
 					"%26order_tablenum="+i+"'></td><tr></table>";		
 		}

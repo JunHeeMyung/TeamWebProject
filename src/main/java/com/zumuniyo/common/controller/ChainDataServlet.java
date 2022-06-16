@@ -25,6 +25,8 @@ public class ChainDataServlet extends HttpServlet {
 			command = new MapDataController();
 		}if(uri.equals("/data/qrcode.do")&&method.equals("GET")) {
 			command = new QRCodeController();
+		}if(uri.equals("/data/member.do")&&method.equals("GET")){
+			command = new MemberController();
 		}
 		
 		
