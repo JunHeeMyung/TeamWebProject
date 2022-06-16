@@ -18,7 +18,7 @@ public class OrderController implements Command {
 	public String execute(HttpServletRequest request) {
 
 		String cart = request.getParameter("cart");
-		System.out.println(cart);
+		System.out.println("주문요청:"+cart);
 
 		if(cart==null||cart.equals("")) {
 			return "json:카트가 비었습니다";
@@ -47,11 +47,10 @@ public class OrderController implements Command {
 		
 		
 		
+		
+		
+		
 		int order_seq = 1;
-		
-		
-		
-		
 		return "json:주문성공:"+request.getContextPath()+"/orderlist/orderdetail.do?order_seq="+order_seq;
 	}
 

@@ -8,15 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zumuniyo.common.Command;
-import com.zumuniyo.member.controller.IdcheckController;
-import com.zumuniyo.member.controller.LoginController;
-import com.zumuniyo.member.controller.LoginPageController;
-import com.zumuniyo.member.controller.LogoutController;
-import com.zumuniyo.member.controller.NickcheckController;
-import com.zumuniyo.member.controller.RegisterController;
-import com.zumuniyo.member.controller.RegisterPostController;
-import com.zumuniyo.member.controller.SubloginController;
-import com.zumuniyo.member.controller.SubregisterController;
 
 @WebServlet("/data/*")
 public class ChainDataServlet extends HttpServlet {
@@ -32,7 +23,16 @@ public class ChainDataServlet extends HttpServlet {
 		
 		if(uri.equals("/data/mapdata.do")&&method.equals("GET")) {
 			command = new MapDataController();
+		}if(uri.equals("/data/qrcode.do")&&method.equals("GET")) {
+			command = new QRCodeController();
 		}
+		
+		
+		
+		
+		
+		
+		
 		
 		if(command==null) {
 			request.getRequestDispatcher("/error").forward(request, response);
