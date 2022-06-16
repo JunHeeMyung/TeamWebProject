@@ -42,12 +42,15 @@ public class AdminSevelet extends HttpServlet {
 		System.out.println("mem_type :" + mem_type);
 		if (mem_type != null) {
 			if (mem_type.equals("관리자")) {
+				
 				if (uri.equals("/admin/adminMember.do")) {
 					command = new AdminMemberController();
 				} else if (uri.equals("/admin/adminShop.do")) {
 					command = new AdminShopController();
 				} else if (uri.equals("/admin/adminMemStatusUpdate.do")) {
 				command = new AdminMemStatusUpdate();
+				} else if (uri.equals("/admin/adminStatistics.do")) {
+				command = new AdminStatistics();
 				}
 			}
 		}

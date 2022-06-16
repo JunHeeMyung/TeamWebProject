@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
+import com.zumuniyo.mypage.controller.nickname.NickNameUpdateController;
+
 
 
 
@@ -67,6 +69,12 @@ public class MypageServlet extends HttpServlet {
 		}else {
 			System.out.println("mem_type 못 받음");
 			command = new MypageEmty();
+			
+			String url = request.getMethod();
+			
+			if(url.equals("/mypage/nickUpdate.do")) {
+				command = new NickNameUpdateController();
+			}
 		}
 		
 				

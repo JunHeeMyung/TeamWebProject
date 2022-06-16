@@ -42,6 +42,16 @@
 <button class="btn-detail" onClick="location.href='${path}/shop/shopList.do'">등록된 매장 정보</button>
 
 
+<br>
+<br>
+<button class="btn-detail" onClick="location.href='${path}/admin/adminStatistics.do'"> 통 계 </button>
 
+
+
+
+
+
+<br>
+<br>
 </body>
 </html>

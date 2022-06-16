@@ -23,7 +23,7 @@ public class ReviewSelectShopJSON implements Command {
 		ReviewService service = new ReviewService();	
 		
 		String shop_seq = request.getParameter("shop_seq");
-		service.selectByMemSeq(Integer.parseInt(shop_seq));
+		service.selectByShopSeq(Integer.parseInt(shop_seq));
 		
 		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();		
 		
