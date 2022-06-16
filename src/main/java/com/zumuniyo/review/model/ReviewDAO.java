@@ -3,17 +3,14 @@ package com.zumuniyo.review.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 //import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.review.dto.ReviewDTO;
+import com.zumuniyo.review.dto.ReviewMenuDTO;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 import com.zumuniyo.util.DBUtil;
 
@@ -113,9 +110,9 @@ public class ReviewDAO {
 	*/
 
 
-	public List<ReviewShopDTO> selectByMenuSeq(int menu_seq)
+	public List<ReviewMenuDTO> selectByMenuSeq(int menu_seq)
 	{		
-		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<>();
+		List<ReviewMenuDTO> reviewMenuDTOs = new ArrayList<>();
 		conn = DBUtil.getConnection();
 		try
 		{
@@ -124,7 +121,7 @@ public class ReviewDAO {
 			rs = pst.executeQuery();
 			while (rs.next())
 			{
-				reviewShopDTOs.add(makeReviewShop(rs));
+				reviewMenuDTOs.add(makeReviewMenu(rs));
 			}
 		} catch (SQLException e)
 		{
@@ -133,7 +130,7 @@ public class ReviewDAO {
 		{
 			DBUtil.dbClose(rs, st, conn);
 		}
-		return reviewShopDTOs;
+		return reviewMenuDTOs;
 	}	
 
 	
@@ -317,6 +314,24 @@ public class ReviewDAO {
 	
 	
 	
+	private ReviewMenuDTO makeReviewMenu(ResultSet rs) throws SQLException	
+	{
+		ReviewMenuDTO reviewMenuDTO = new ReviewMenuDTO();
+		
+		
+		reviewMenuDTO.setMenu_seq(rs.getInt("menu_seq"));		
+		reviewMenuDTO.setShop_seq(rs.getInt("shop_seq"));
+		reviewMenuDTO.setMenu_category(rs.getString("menu_category"));
+		reviewMenuDTO.setMenu_name(rs.getString("menu_name"));
+		reviewMenuDTO.setMenu_price(rs.getInt("menu_price"));
+		reviewMenuDTO.setMenu_img(rs.getString("menu_img"));
+		reviewMenuDTO.setMenu_top(rs.getInt("menu_top"));
+		reviewMenuDTO.setMenu_info(rs.getString("menu_info"));
+		reviewMenuDTO.setMenu_status(rs.getString("menu_status"));		
+		
+		
+		return reviewMenuDTO;
+	}
 	private ReviewShopDTO makeReviewShop(ResultSet rs) throws SQLException	
 	{
 		ReviewShopDTO reviewShopDTO = new ReviewShopDTO();		

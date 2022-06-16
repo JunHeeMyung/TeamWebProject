@@ -2,6 +2,7 @@ package com.zumuniyo.review.model;
 
 import java.util.List;
 import com.zumuniyo.review.dto.ReviewDTO;
+import com.zumuniyo.review.dto.ReviewMenuDTO;
 import com.zumuniyo.review.dto.ReviewShopDTO;
 
 public class ReviewService {
@@ -15,7 +16,7 @@ public class ReviewService {
 	public List<ReviewDTO> selectByMemSeq(int mem_seq){
 		return reviewDAO.selectByMemSeq(mem_seq);
 	}
-	public List<ReviewShopDTO> selectByMenuSeq(int menu_seq){
+	public List<ReviewMenuDTO> selectByMenuSeq(int menu_seq){
 		return reviewDAO.selectByMenuSeq(menu_seq);
 	}	
 	public List<ReviewShopDTO> selectByShopSeq(int shop_seq){

@@ -23,9 +23,11 @@ public class ReviewSelectShopJSON implements Command {
 		ReviewService service = new ReviewService();	
 		
 		String shop_seq = request.getParameter("shop_seq");
-		service.selectByShopSeq(Integer.parseInt(shop_seq));
-		
+				
 		List<ReviewShopDTO> reviewShopDTOs = new ArrayList<ReviewShopDTO>();		
+		reviewShopDTOs = service.selectByShopSeq(Integer.parseInt(shop_seq));
+		
+		System.out.println(reviewShopDTOs);
 		
 		JSONArray jsonArray = new JSONArray();		
 		for(ReviewShopDTO reviewShopDTO:reviewShopDTOs) {			
@@ -50,6 +52,7 @@ public class ReviewSelectShopJSON implements Command {
 			jsonObject.put("menu_status", reviewShopDTO.getMenu_status()+"");			
 			jsonArray.add(jsonObject);		
 			}
+		
 		return "json:"+jsonArray;
 	}
 
