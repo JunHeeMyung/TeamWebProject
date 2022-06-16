@@ -365,47 +365,132 @@ border: 1px solid #DCDCDC;
 }
 
 
-.linebox td {
+.linecontent {
 
-display:table-cell;
-padding-top: 10px; 
-padding-bottom: 10px;
 
-border:1px solid black;
+display: flex;
+flex-direction:row;
 
+background-color: red;
+
+
+}
+
+
+.line_name {
+
+float:left;
+
+margin-left: 5px;
+padding-left: 10px;
+padding-top: 10px;
+
+font-size: 22px;
+
+}
+.line_name:after{
+content: "";
+display:block;
+clear:both;
 }
 
 
 
 
 
+.line_photo {
 
-.line_name {
+float:right;
+margin-right: 5px;
 
-font-size: 22px;
+padding-top:5px;
+padding-bottom:5px;
 
+width: 80px;
+height: 80px;
+
+}
+.line_photo:after{
+content: "";
+display:block;
+clear:both;
 }
 
 
 .line_count {
 
+float:right;
+
+margin-right: 5px;
 font-size: 20px;
 
 }
+.line_count:after{
+content: "";
+display:block;
+clear:both;
+}
+
+
+.gae{
+
+float:right;
+margin-right: 5px;
+
+}
+.gae:after{
+content: "";
+display:block;
+clear:both;
+}
+
+
+
+.gagyuk {
+
+float:left;
+
+margin-left: 10px;
+
+}
+.gagyuk:after{
+content: "";
+display:block;
+clear:both;
+}
+
+
 
 .line_price {
 
+float:right;
+
+margin-right: 10px;
 font-size: 20px;
 
 }
+.line_price:after{
+content: "";
+display:block;
+clear:both;
+}
 
-.line_photo {
 
-display:inline-block;
-width: 80px;
-height: 70px;
+
+
+.won{
+
+float:right;
+
+margin-right: 15px;
 
 }
+.won:after{
+content: "";
+display:block;
+clear:both;
+}
+
 
 
 
@@ -519,10 +604,22 @@ $(()=>{
 			
 			
 			line += "<div class='linebox'> ";
-			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name'])+" </div> ";
-			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+" </div> ";			
-			line += "<div class='line_price'> "+JSON.stringify(menu['menu_price'])+" </div> ";
+			line += "<div class='linecontent'> ";			
+			
+			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name']).replaceAll("\"", "")+" </div> ";
+			
 			line += "<img src="+JSON.stringify(menu['menu_photo'])+" class='line_photo' >";
+			
+			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+" </div> ";
+			line += "<div class='gae'> "+"개"+" </div> " ;
+			
+			line += "<div class='gagyuk'> "+"가격"+" </div> " ;
+			line += "<div class='line_price'> "+JSON.stringify(menu['menu_price'])+" </div> ";
+			
+			line += "<div class='won'> "+"원"+" </div> " ;
+			
+			
+			line += "</div>";
 			line += "</div>";
 			
 			
