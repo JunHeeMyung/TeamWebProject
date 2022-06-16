@@ -344,151 +344,71 @@ font-size: 20px;
 
 
 .modal-title {
-
+display:inline-block;
+width:100%;
 margin: auto;
-
 }
 
+.modal-header{
+text-align: center;
 
+}
 
 
 
 
 .linebox {
 
-width:95%;
-height: 80px;
-display: table; margin-left: auto; margin-right: auto;
-
+width:100%;
 border: 1px solid #DCDCDC;
+display: inline-block;
+background-color: gray;
 
 }
-
-
-.linecontent {
-
-
-display: flex;
-flex-direction:row;
-
-background-color: red;
-
-
-}
-
 
 .line_name {
-
 float:left;
-
-margin-left: 5px;
-padding-left: 10px;
-padding-top: 10px;
-
-font-size: 22px;
-
+size: 25px;
+margin-left:20px;
+margin-top:20px;
+font-size:20px;
 }
-.line_name:after{
-content: "";
-display:block;
-clear:both;
-}
-
-
-
-
 
 .line_photo {
-
+width: 120px;
+height: 120px;
+right:20px;
 float:right;
-margin-right: 5px;
-
-padding-top:5px;
-padding-bottom:5px;
-
-width: 80px;
-height: 80px;
-
-}
-.line_photo:after{
-content: "";
-display:block;
-clear:both;
 }
 
 
 .line_count {
+font-size: 25px;
+padding-left: 200px;
 
-float:right;
-
-margin-right: 5px;
-font-size: 20px;
-
-}
-.line_count:after{
-content: "";
-display:block;
-clear:both;
 }
 
 
 .gae{
-
-float:right;
-margin-right: 5px;
-
+font-size: 20px;
+margin-left:20px;
+display: inline-block;
 }
-.gae:after{
-content: "";
-display:block;
-clear:both;
-}
-
 
 
 .gagyuk {
-
-float:left;
-
-margin-left: 10px;
-
+font-size: 25px;
+display: inline-block;
 }
-.gagyuk:after{
-content: "";
-display:block;
-clear:both;
-}
-
-
 
 .line_price {
-
-float:right;
-
-margin-right: 10px;
-font-size: 20px;
+font-size: 25px;
+padding-left: 200px;
 
 }
-.line_price:after{
-content: "";
-display:block;
-clear:both;
-}
-
-
-
 
 .won{
-
-float:right;
-
-margin-right: 15px;
-
-}
-.won:after{
-content: "";
-display:block;
-clear:both;
+display: inline-block;
 }
 
 
@@ -515,8 +435,8 @@ function getContextPath() {
 $(()=>{
 	
 	// 최종주문 버튼 누를시(수정)
-	
-	$("#finalorder").click(()=>{
+	   
+   $("#finalorder").click(()=>{
       //세션에서 카트꺼냄
       var cart = sessionStorage.getItem('cart');
       cart = JSON.parse(cart);
@@ -536,6 +456,7 @@ $(()=>{
             if(data.indexOf("주문성공:")!=-1){
                sessionStorage.clear();
                location.href=data.substring(5);
+               $('#orderlistmodal').modal('hide');
             //실패할경우 원인출력
             }else{
                alert(data);
@@ -547,8 +468,6 @@ $(()=>{
       });
       return;
    })
-	
-	
 	
 	
 	
@@ -604,22 +523,15 @@ $(()=>{
 			
 			
 			line += "<div class='linebox'> ";
-			line += "<div class='linecontent'> ";			
 			
 			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name']).replaceAll("\"", "")+" </div> ";
 			
 			line += "<img src="+JSON.stringify(menu['menu_photo'])+" class='line_photo' >";
 			
-			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+" </div> ";
-			line += "<div class='gae'> "+"개"+" </div> " ;
+			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+"<div class='gae'> "+"개"+" </div></div> ";
 			
-			line += "<div class='gagyuk'> "+"가격"+" </div> " ;
-			line += "<div class='line_price'> "+JSON.stringify(menu['menu_price'])+" </div> ";
+			line += "<div class='line_price'> <div class='gagyuk'> "+"가격"+" </div>"+JSON.stringify(menu['menu_price'])+" <div class='won'> "+"원"+" </div></div> ";
 			
-			line += "<div class='won'> "+"원"+" </div> " ;
-			
-			
-			line += "</div>";
 			line += "</div>";
 			
 			
