@@ -61,7 +61,7 @@ div {
 	display : inline-block;
 	margin: 0px auto;
 	background-color: rgba(255, 255, 255);
-	padding-top: 250px;
+	padding-top: 200px;
 }
 
 #contents {
@@ -254,9 +254,10 @@ $(function(){
  -->
  
  	파일: <input type="file" name="photos"> <br> 
-
-<input class="btn btn-primary" type="submit" value="입력하기">
-<input class="btn btn-secondary" type="reset" value="취소하기">
+<br>
+<br>
+<input class="btn btn-primary" type="submit" value="입력하기">&nbsp;&nbsp;&nbsp;
+<input class="btn btn-secondary" type="reset" value="취소하기">&nbsp;&nbsp;&nbsp;
 <input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList"><!--구매내역으로 돌릴 id설정  -->
 </form>
 <%-- 

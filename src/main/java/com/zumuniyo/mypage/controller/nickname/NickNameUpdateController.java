@@ -14,7 +14,7 @@ public class NickNameUpdateController implements Command {
 		String mem_seq = (String) request.getAttribute("mem_seq");
 		
 		System.out.println("mem_nick "+ mem_nick);
-		System.out.println("mem_nick "+ mem_nick);
+		System.out.println("mem_seq "+ mem_seq);
 		
 		
 		MemberService service = new MemberService();

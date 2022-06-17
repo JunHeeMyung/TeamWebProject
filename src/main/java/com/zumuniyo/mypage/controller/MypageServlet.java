@@ -54,7 +54,7 @@ public class MypageServlet extends HttpServlet {
 	    String mem_type = (String) jObject.get("mem_type");
 		
 		System.out.println("mem_type :"+mem_type);
-		
+		String url = request.getMethod();
 	
 		
 		if(mem_type!=null) {
@@ -65,16 +65,14 @@ public class MypageServlet extends HttpServlet {
 				command = new MypageBUSINESS();
 			}else if(mem_type.equals("일반회원")) {
 				command = new MYpageNOMAL();
+			}else if(url.equals("/mypage/nickUpdate.do")) {
+				command = new NickNameUpdateController();
 			}			
-		}else {
+		} else {
 			System.out.println("mem_type 못 받음");
 			command = new MypageEmty();
+						
 			
-			String url = request.getMethod();
-			
-			if(url.equals("/mypage/nickUpdate.do")) {
-				command = new NickNameUpdateController();
-			}
 		}
 		
 				

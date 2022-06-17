@@ -94,8 +94,8 @@ public class ReviewInsertController implements Command{
 		
 		
 	//	int review_seq = readInt(request, "review_seq");
-	//	int mem_seq = readInt(request, "mem_seq");
-	//	int menu_seq = readInt(request, "menu_seq");		
+		int mem_seq = readInt(request, "mem_seq");
+		int menu_seq = readInt(request, "menu_seq");		
 		float review_taste = readFloat(request, "review_taste");
 		float review_amount = readFloat(request, "review_amount");
 		float review_service = readFloat(request, "review_service");
@@ -117,7 +117,7 @@ public class ReviewInsertController implements Command{
 		return reviewDTO;
 	}
 	
-	/*
+	
 	private int readInt(HttpServletRequest request, String column)
 	{
 		String data = request.getParameter(column);	
@@ -125,7 +125,7 @@ public class ReviewInsertController implements Command{
 		return Integer.parseInt(data);
 			
 	}
-	*/
+	
 	private float readFloat(HttpServletRequest request, String column)
 	{
 		String data = request.getParameter(column);		

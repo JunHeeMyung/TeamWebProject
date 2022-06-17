@@ -95,7 +95,7 @@ div {
 
 <!-- 입력 -->
 <div id="contents">
-<div id="here"></div>
+
 
 
 <!-- 구글 그래프 

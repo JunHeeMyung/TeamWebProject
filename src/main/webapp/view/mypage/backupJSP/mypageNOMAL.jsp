@@ -33,10 +33,6 @@
 </form>
 <br>
 
-<br>
-<form action="${path}/orderlist/myorderlist.do" method="get">
-<button type="submit">주문 목록 조회</button>
-</form>
 
 </body>
 </html>

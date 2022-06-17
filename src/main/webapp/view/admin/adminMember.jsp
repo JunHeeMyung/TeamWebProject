@@ -32,11 +32,11 @@ div {
 }
 
 
-@media (min-width: 800px){
+@media (min-width: 900px){
 
 #wrapper {
 	height:100%;
-	width: 800px;
+	width: 900px;
 	margin: 0px auto;
 	text-align: center;
 	background-color: rgba(255, 255, 255);
@@ -44,7 +44,7 @@ div {
 
 }
 
-@media (max-width: 800px){
+@media (max-width: 900px){
 
 #wrapper {
 	height:100%;
@@ -70,6 +70,20 @@ div {
 
 }
 
+#status{
+	text-align: center;
+	padding: 0px;
+
+}
+
+table {
+    margin:auto; 
+}
+
+table, td, th {
+    border-collapse : collapse;
+   /*  border : 1px solid black; */
+};
 
 </style>
 <script type="text/javascript">
@@ -90,15 +104,17 @@ $(()=>{
 			dataType: "text",
 			success: data => {
 				if (data == "중복") {
-					$("#nick_check_result").html("<span class='red'>중복된 닉네임입니다</span>");
+					$("#mem_nick").css("color","red");
+					//$("#nick_check_result").html("<span class='red'>중복된 닉네임입니다</span>");
 				} else if (data == "비중복") {
-					$("#nick_check_result").html("<span class='green'>중복된 닉네임이 없습니다</span>");
+					$("#mem_nick").css("color","green");
+					//$("#nick_check_result").html("<span class='green'>중복된 닉네임이 없습니다</span>");
 				} else {
-					$("#nick_check_result").html("<span>" + data + "</span>");
+					//$("#nick_check_result").html("<span>" + data + "</span>");
 				}
 
 				$('#nick_check').attr('disabled', false);
-				$("#nick_check").html('중복확인');
+				$("#nick_check").html('중복확인');				
 
 			},
 			error: () => {
@@ -112,11 +128,6 @@ $(()=>{
 	$("#mem_nick").keyup(() => {
 		$("#nicklabel").html(document.getElementById("mem_nick").checkValidity() ? "" : "<i class='xicon fas fa-times-circle red'></i>");
 	})
-	
-	
-	
-	
-	
 })
 
 
@@ -138,25 +149,34 @@ $(()=>{
 	<%-- <form action="${path}/admin/adminMemStatusUpdate.do" method="post"> --%>
 		<table>
 			<tr>
-				<td>MEM_SEQ</td>
+				<td>회원번호</td>
 				<!-- <td>MEM_ID</td> -->
-				<td>MEM_NICK</td>
-				<td>MEM_EMAIL</td>
+				<td>닉네임</td>
+				<td>EMAIL</td>
 				<!-- <td>MEM_SALT</td> -->
-				<td>MEM_TYPE</td>
-				<td>MEM_STATUS</td>
+				<td>회원타입</td>
+				<td>회원상태</td>
 				<td></td>
 
 				<!-- <td></td> -->
 			</tr>
-
+			<c:set var="nickseq" value="0"/>
 			<c:forEach items="${memberDTOs}" var="member">
 				<tr>
 					<c:if test="${member.mem_type!= '관리자'}">
 						<form action="${path}/admin/adminMemStatusUpdate.do" method="post">
 						<td>${member.mem_seq}<input type="hidden" name="mem_seq" value="${member.mem_seq}"></td>
 						<%-- <td>${member.mem_id}</td> --%>
-						<td><input type="text" name="mem_nick" value="${member.mem_nick}"></td>
+						<td><div class="input-group mb-3">
+						
+						<input type="text"
+							id="mem_nick${nickseq}" name="mem_nick" class="form-control"
+							placeholder="한글 2~8자" pattern="\0|^[가-힣]{2,8}$"
+							data-bs-toggle="tooltip" data-bs-placement="top" title="한글 2~8자"
+							value="${member.mem_nick}">
+						<label class="red" id="nicklabel${nickseq}"></label>
+						<button type="button" id="nick_check${nickseq}" class="btn btn-light">중복확인</button>
+					</div></td>
 						<td>${member.mem_email}</td>
 						<%-- <td>${member.mem_salt}</td> --%>
 						<td>${member.mem_type}</td>
@@ -182,6 +202,7 @@ $(()=>{
 	<!-- </form> -->
 
 
+</div>
 </div>
 </div>
 </div>

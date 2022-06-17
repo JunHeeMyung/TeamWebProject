@@ -28,15 +28,15 @@ body, html {
 
 div {
 	padding: 0px;
-	margin: 0px;		
+	margin: 0px;
 }
 
 
-@media (min-width: 800px){
+@media (min-width: 900px){
 
 #wrapper {
 	height:100%;
-	width: 800px;
+	width: 900px;
 	margin: 0px auto;
 	text-align: center;
 	background-color: rgba(255, 255, 255);
@@ -44,7 +44,7 @@ div {
 
 }
 
-@media (max-width: 800px){
+@media (max-width: 900px){
 
 #wrapper {
 	height:100%;
@@ -64,55 +64,28 @@ div {
 	padding-top: 250px;
 }
 
-
-#send_btn,#confirm_btn,#id_check,#nick_check {
-margin-left: 10px;
-}
-
-
 #contents {
 
 /* 알아서 */
 
 }
 
-
-.red {
-color: red; 
-}
-
-.green {
-color: green; 
-}
-
-#status{ 
-	
-
+#status{
 	text-align: center;
-	/* border: 3px solid graytext; */
-	width: 400px;
-	height: 250px;	
-	margin: auto;
-	padding: 20px;
-	border-radius: 10px;
+	padding: 0px;
+
 }
 
-#id_check_result{
-display:inline-block;
-width: 500px;
-height: 500px;
-background-color: red;
+table {
+    margin:auto; 
 }
 
-.xicon{
-	font-size: 20px;
-	margin-top: 8px;
-	margin-left: 10px;
-}
-
+table, td, th {
+    border-collapse : collapse;
+   /*  border : 1px solid black; */
+};
 
 </style>
-
 <script type="text/javascript">
 
 
@@ -131,15 +104,17 @@ $(()=>{
 			dataType: "text",
 			success: data => {
 				if (data == "중복") {
-					$("#nick_check_result").html("<span class='red'>중복된 닉네임입니다</span>");
+					$("#mem_nick").css("color","red");
+					//$("#nick_check_result").html("<span class='red'>중복된 닉네임입니다</span>");
 				} else if (data == "비중복") {
-					$("#nick_check_result").html("<span class='green'>중복된 닉네임이 없습니다</span>");
+					$("#mem_nick").css("color","green");
+					//$("#nick_check_result").html("<span class='green'>중복된 닉네임이 없습니다</span>");
 				} else {
-					$("#nick_check_result").html("<span>" + data + "</span>");
+					//$("#nick_check_result").html("<span>" + data + "</span>");
 				}
 
 				$('#nick_check').attr('disabled', false);
-				$("#nick_check").html('중복확인');
+				$("#nick_check").html('중복확인');				
 
 			},
 			error: () => {
@@ -153,40 +128,13 @@ $(()=>{
 	$("#mem_nick").keyup(() => {
 		$("#nicklabel").html(document.getElementById("mem_nick").checkValidity() ? "" : "<i class='xicon fas fa-times-circle red'></i>");
 	})
-	
-	
-	
-	$("#nick_update").click(() => {
-
-		$('#nick_check').attr('disabled', true);		
-
-		var mem_nick = $("#mem_nick").val();
-		$.ajax({
-			url: getContextPath()+"/mypage/nickUpdate.do",
-			type: "get",
-			data: { "mem_nick": mem_nick },
-			dataType: "text",
-			success: data => {
-			
-
-			},
-			error: () => {
-				alert("요청실패");
-				
-			}
-		})
-	});
-	
-	
-	
-	
 })
 
 
 
 </script>
 
-<title>${member.mem_nick}회원님의 정보</title>
+
 
 </head>
 <body>
@@ -198,40 +146,64 @@ $(()=>{
 <div id="contents">
 <div id= "status" class="shadow">
 
+	<%-- <form action="${path}/admin/adminMemStatusUpdate.do" method="post"> --%>
+		<table>
+			<tr>
+				<td>회원번호</td>
+				<!-- <td>MEM_ID</td> -->
+				<td>닉네임</td>
+				<td>EMAIL</td>
+				<!-- <td>MEM_SALT</td> -->
+				<td>회원타입</td>
+				<td>회원상태</td>
+				<td></td>
 
-<div class="input-group mb-3">
-						<span class="input-group-text">회원번호</span> <input type="text"
-							class="form-control" value="${member.mem_seq}" readonly="readonly">
-</div>
+				<!-- <td></td> -->
+			</tr>
 
-<div class="input-group mb-3">
-						<span class="input-group-text">회원상태</span> <input type="text"
-							class="form-control" value="${member.mem_type}" readonly="readonly">
-</div>
-
-
-
-<div class="input-group mb-3">
-						<span class="input-group-text">닉네임</span> <input type="text"
+			<c:forEach items="${memberDTOs}" var="member">
+				<tr>
+					<c:if test="${member.mem_type!= '관리자'}">
+						<form action="${path}/admin/adminMemStatusUpdate.do" method="post">
+						<td>${member.mem_seq}<input type="hidden" name="mem_seq" value="${member.mem_seq}"></td>
+						<%-- <td>${member.mem_id}</td> --%>
+						<td><div class="input-group mb-3">
+						<input type="text"
 							id="mem_nick" name="mem_nick" class="form-control"
 							placeholder="한글 2~8자" pattern="\0|^[가-힣]{2,8}$"
 							data-bs-toggle="tooltip" data-bs-placement="top" title="한글 2~8자"
 							value="${member.mem_nick}">
 						<label class="red" id="nicklabel"></label>
 						<button type="button" id="nick_check" class="btn btn-light">중복확인</button>
-					</div>
-<div class="result_box" id="nick_check_result"></div>
+					</div></td>
+						<td>${member.mem_email}</td>
+						<%-- <td>${member.mem_salt}</td> --%>
+						<td>${member.mem_type}</td>
+						<td><select name="mem_status" class="form-control">
+<%-- 								<option value="${member.mem_status}">${member.mem_status}</option> --%>
+								<option value="none">${member.mem_status}</option>
+								<option value="일반">일반</option>
+								<option value="잠금">잠금</option>
+								<option value="탈퇴">탈퇴</option>
+						</select></td>
+						<td><input class="btn btn-primary" type="submit" value="수정"></td>
+						</form>
+						<!-- <td><input class="form-control"  type="text" name="phone_number"></td> -->
+					</c:if>
+				</tr>
+			</c:forEach>
 
-<input id="nick_update" class="btn btn-outline-secondary" type="submit" value="수정">
+		</table>
+		<br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';"> 
+		<!-- <input	class="btn btn-primary" type="submit" value="입력하기"> -->
+
+
+	<!-- </form> -->
+
 
 </div>
-
-<br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
-
-
 </div>
 </div>
 </div>
-
 </body>
 </html>
