@@ -245,9 +245,7 @@ height: 250px;
 #menutable{
 width: 100%;
 table-layout: fixed;
-border:1px solid black;
 
-margin-bottom: 10px;
 margin-top: 10px;
 }
 
@@ -256,7 +254,6 @@ display:table-cell;
 padding-top: 10px; 
 padding-bottom: 10px;
 
-border:1px solid black;
 
 }
 
@@ -333,12 +330,8 @@ border-radius: 30px;
 
 .table_numberbox {
 
-margin-top:100px;
 
 
-width:300px;
-height:300px;
-font-size: 20px;
 
 }
 
@@ -362,7 +355,7 @@ text-align: center;
 width:100%;
 border: 1px solid #DCDCDC;
 display: inline-block;
-background-color: gray;
+background-color: white;
 
 }
 
@@ -379,40 +372,80 @@ width: 120px;
 height: 120px;
 right:20px;
 float:right;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-right: 10px;
+
 }
 
 
 .line_count {
-font-size: 25px;
-padding-left: 200px;
+font-size: 23px;
+padding-left: 250px;
+padding-top: 17px;
 
 }
 
 
 .gae{
-font-size: 20px;
-margin-left:20px;
+font-size: 17px;
+margin-left:15px;
 display: inline-block;
 }
 
 
 .gagyuk {
-font-size: 25px;
+font-size: 15px;
+
 display: inline-block;
+padding-left: 20px;
+
+
 }
 
 .line_price {
-font-size: 25px;
-padding-left: 200px;
+font-size: 24px;
+display: inline-block;
+margin-left:190px;
+padding-bottom:10px;
 
 }
 
 .won{
+font-size: 17px;
+margin-left:15px;
 display: inline-block;
+
+}
+
+#ordermodalfooter{
+width: 100%;
+table-layout: fixed;
+
+
+}
+
+#ordermodalfooter td {
+display:table-cell;
+
+padding-right: 3px;
+padding-left: 3px;
+
+
 }
 
 
 
+
+.clearorder{
+font-size:15px;
+
+}
+
+.finalorder{
+font-size:16px;
+
+}
 
 
 
@@ -433,6 +466,35 @@ function getContextPath() {
 
 
 $(()=>{
+	
+	
+	
+	
+	/*    
+	$("#clearorder").click(()=>{
+		
+		var cart = sessionStorage.getItem('cart');
+	      cart = JSON.parse(cart);
+		
+		if(JSON.stringify(cart) == null || JSON.stringify(cart) == ''){
+	         alert("주문목록이 비어있습니다.");
+	         
+	         
+	         return;
+		}
+		
+		sessionStorage.clear();	
+		
+		return;
+	}) 
+	 */
+	
+	 
+	
+	
+	
+	
+	
 	
 	// 최종주문 버튼 누를시(수정)
 	   
@@ -507,11 +569,21 @@ $(()=>{
 	
 	// 화면하단 '주문목록' 버튼 누를시
 	$("#cartbtn").click(()=>{
-		$('#orderlistmodal').modal('show');
+		
+		//$('#orderlistmodal').modal('show');
+		
+		//$("#orderlistmodal").trigger({ type: "click" });
+		
 		orderlistmodalContent.innerHTML = "";
 		
 		
 		var cart = sessionStorage.getItem('cart');
+		
+		if(cart == null || cart == ''){
+	         alert("주문목록이 비어있습니다.");
+	         return;
+		}
+		
 		cart = JSON.parse(cart);
 		
 		var line = ""; 
@@ -530,7 +602,7 @@ $(()=>{
 			
 			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+"<div class='gae'> "+"개"+" </div></div> ";
 			
-			line += "<div class='line_price'> <div class='gagyuk'> "+"가격"+" </div>"+JSON.stringify(menu['menu_price'])+" <div class='won'> "+"원"+" </div></div> ";
+			line += " <div class='gagyuk'> "+"가격"+" </div><div class='line_price'>"+JSON.stringify(menu['menu_price'])+" <div class='won'> "+"원"+" </div></div> ";
 			
 			line += "</div>";
 			
@@ -542,6 +614,10 @@ $(()=>{
 		
 		orderlistmodalContent.innerHTML = line ;
 	})
+	
+	
+	
+	
 	
 	
 	// 메뉴상세보기 안의 '주문목록에 담기' 버튼 누를시
@@ -580,14 +656,20 @@ $(()=>{
 			for(var menuitemidx in cart){
 				console.log(cart[menuitemidx]);
 				if(cart[menuitemidx]['menu_seq']==menu_seq){
-					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1) + order_count;
 					
-					//alert(JSON.stringify(cart));
+					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1 + order_count);
+					
+					cart[menuitemidx]['menu_price']=(((cart[menuitemidx]['menu_price'])*1) * order_count);
+					
+					
 					
 					sessionStorage.setItem('cart', JSON.stringify(cart));
 					
 					
-					$('#menuModal').modal('hide');
+					//$('#menuModal').modal('hide');
+					//$('#menuModal').trigger('hidden.bs.modal');
+					$('[data-bs-dismiss="modal"]').trigger({ type: "click" });
+
 					
 					alert("선택하신 메뉴를 주문목록에 담았습니다.");
 					
@@ -601,7 +683,10 @@ $(()=>{
 			
 		}
 		
-		$('#menuModal').modal('hide');
+		//$('#menuModal').modal('hide');
+		//$('#menuModal').trigger('hidden.bs.modal');
+		$('[data-bs-dismiss="modal"]').trigger({ type: "click" });
+
 		
 		alert("선택하신 메뉴를 주문목록에 담았습니다.");
 	});
@@ -735,7 +820,7 @@ $(function(){
 </div>
 
 
-<div id="cartbtn">주문목록</div>
+<div id="cartbtn" data-bs-toggle="modal" data-bs-target="#orderlistmodal" >주문목록</div>
 
 
 
@@ -826,9 +911,16 @@ $(function(){
 				</div>
 				</div>
 				<div class="blank"></div>
-				<div class="modal-footer">
-				<button type="button" id="finalorder" class="btn btn-danger linebtn" >주문확정</button>
+				<div class="modal-footer" >
 				
+				
+				<table id="ordermodalfooter">
+				<tr>
+				<td><div><button type="button" id="clearorder" class="btn btn-info linebtn ">비우기 </button></div></td>
+				<td colspan="4"><div><button type="button" id="finalorder" class="btn btn-danger linebtn" >주문확정</button></div></td>
+				</tr>
+				</table>
+			
 			</div>
 			
 			</div>
@@ -863,10 +955,25 @@ ${member.mem_nick} 님, <a href="${path}/member/logout.do">LOGOUT</a>
 
 </div>
 
-
 </div>
 
 
+
+<!-- 상단바 버튼누를시 우측 메뉴뜨게 하는거 -->
+
+<div class="offcanvas offcanvas-end" id="rightmenu">
+  <div id="slideheader" class="offcanvas-header">
+   <button type="button" id ="slideclosebtn" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  
+  <div id="slidemenu">
+
+  </div>
+   
+  <div class="offcanvas-body">
+
+  </div>
+</div>
 
 
 
