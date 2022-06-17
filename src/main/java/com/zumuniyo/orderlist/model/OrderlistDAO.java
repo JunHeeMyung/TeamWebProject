@@ -73,7 +73,7 @@ public class OrderlistDAO {
 		conn = DBUtil.getConnection();
 
 		try {
-			pst = conn.prepareStatement(SQL_SELECT_ALL);
+			pst = conn.prepareStatement(SQL_SELECT_NEXT_GROUP_SEQ);
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				next=rs.getInt(1);

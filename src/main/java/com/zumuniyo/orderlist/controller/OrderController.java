@@ -19,6 +19,7 @@ public class OrderController implements Command {
 	@Override
 	public String execute(HttpServletRequest request) {
 
+		//주문검증
 		String cart = request.getParameter("cart");
 		System.out.println("주문요청:"+cart);
 
@@ -39,33 +40,34 @@ public class OrderController implements Command {
 		OrderlistService orderlistService = new OrderlistService();
 		int nextOrderGroupSeq = orderlistService.selectNextOrderGroupSeq(); 
 		
-		
+		// 로그인확인
+		int mem_seq = -1;
+		Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");
+        if(loginInfo!=null) {
+        	mem_seq=Integer.parseInt(loginInfo.get("mem_seq"));
+        }
+        
+        // 주문등록
 		for(int i=0;i<jsonArray.size();i++) {
 			
-
 			JSONObject jsonObject = (JSONObject)jsonArray.get(i);
 			
 			int menu_seq = Integer.parseInt(jsonObject.get("menu_seq").toString());
 			int order_count = Integer.parseInt(jsonObject.get("order_count").toString());
 			int order_tablenum = Integer.parseInt(jsonObject.get("order_tablenum").toString());
 			int shop_seq = Integer.parseInt(jsonObject.get("shop_seq").toString()); //추가요망
-			int mem_seq = -1;
-			
-			Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");
-	        if(loginInfo!=null) {
-	        	mem_seq=Integer.parseInt(loginInfo.get("mem_seq"));
+			/*
+	        System.out.println("메뉴종류:" +menu_seq);
+	        System.out.println("주문수량:"+order_count);
+	        System.out.println("테이블번호:"+order_tablenum);
+	        System.out.println("매장번호:"+shop_seq);
+	        System.out.println("로그인정보:"+mem_seq);
+	        */
+	        OrderlistDTO order = new OrderlistDTO(-1, nextOrderGroupSeq, shop_seq, menu_seq, order_count, order_tablenum, mem_seq, null, null);
+	        
+	        if(orderlistService.insertOrder(order)<=0) {
+	        	return "json:주문도중 문제가 발생하였습니다";
 	        }
-
-	        System.out.println(menu_seq);
-	        System.out.println(order_count);
-	        System.out.println(order_tablenum);
-	        System.out.println(shop_seq);
-	        System.out.println(mem_seq);
-	        
-	        
-			//OrderlistDTO order = new OrderlistDTO(-1, nextOrderGroupSeq, shop_seq, menu_seq, order_count, order_tablenum, mem_seq, null, null);
-
-			
 		}
 		
 		int order_seq = nextOrderGroupSeq;
