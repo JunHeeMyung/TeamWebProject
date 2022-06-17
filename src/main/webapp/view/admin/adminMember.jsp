@@ -139,10 +139,10 @@ $(()=>{
 		<table>
 			<tr>
 				<td>MEM_SEQ</td>
-				<td>MEM_ID</td>
+				<!-- <td>MEM_ID</td> -->
 				<td>MEM_NICK</td>
 				<td>MEM_EMAIL</td>
-				<td>MEM_SALT</td>
+				<!-- <td>MEM_SALT</td> -->
 				<td>MEM_TYPE</td>
 				<td>MEM_STATUS</td>
 				<td></td>
@@ -155,10 +155,10 @@ $(()=>{
 					<c:if test="${member.mem_type!= '관리자'}">
 						<form action="${path}/admin/adminMemStatusUpdate.do" method="post">
 						<td>${member.mem_seq}<input type="hidden" name="mem_seq" value="${member.mem_seq}"></td>
-						<td>${member.mem_id}</td>
+						<%-- <td>${member.mem_id}</td> --%>
 						<td><input type="text" name="mem_nick" value="${member.mem_nick}"></td>
 						<td>${member.mem_email}</td>
-						<td>${member.mem_salt}</td>
+						<%-- <td>${member.mem_salt}</td> --%>
 						<td>${member.mem_type}</td>
 						<td><select name="mem_status" class="form-control">
 <%-- 								<option value="${member.mem_status}">${member.mem_status}</option> --%>

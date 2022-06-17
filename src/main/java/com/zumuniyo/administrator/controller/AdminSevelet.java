@@ -51,7 +51,9 @@ public class AdminSevelet extends HttpServlet {
 				command = new AdminMemStatusUpdate();
 				} else if (uri.equals("/admin/adminStatistics.do")) {
 				command = new AdminStatistics();
-				}
+				} else if (uri.equals("/admin/adminShopCount.do")) {
+				command = new AdminShopCountController();
+			}
 			}
 		}
 		
@@ -59,12 +61,24 @@ public class AdminSevelet extends HttpServlet {
 			request.getRequestDispatcher("/error").forward(request, response);
 			return;
 		}
-
 		System.out.println("FS_uri : " + uri);
-		page = command.execute(request);
 
+		page = command.execute(request);
+		System.out.println("page :"+page);
+		
 		RequestDispatcher rd;
-		rd = request.getRequestDispatcher(page);
-		rd.forward(request, response);
+		if(page.indexOf("json:")>=0) {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print(page.substring(5));
+		}else if(page.indexOf("redirect:")>=0){
+			response.sendRedirect(page.substring(9));
+		}else {
+			request.getRequestDispatcher(page).forward(request, response);
+		}
+		
+		
+		/*
+		 * rd = request.getRequestDispatcher(page); rd.forward(request, response);
+		 */
 	}
 }

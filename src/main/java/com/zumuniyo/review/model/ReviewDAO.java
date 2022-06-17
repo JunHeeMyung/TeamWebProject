@@ -30,6 +30,24 @@ public class ReviewDAO {
 	static final String SQL_INSERT_REVIEW  = "INSERT INTO Z_REVIEW VALUES(REVIEW_SEQ.nextval,?,?,?,?,?,?,?,sysdate,0)";
 	static final String SQL_INSERT_REVIEW2 = "INSERT INTO Z_REVIEW VALUES(REVIEW_SEQ.nextval,NULL,NULL,?,?,?,?,?,sysdate,0)";
 	
+	static final String SQL_SELECT_DAY_COUNT = "SELECT TO_CHAR(b.dt, 'YYYY-MM-DD') AS REVIEW_DATE\r\n"
+			+ "     , NVL(SUM(a.cnt), 0) cnt\r\n"
+			+ "  FROM ( SELECT TO_CHAR(REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE\r\n"
+			+ "              , COUNT(*) cnt\r\n"
+			+ "           FROM Z_REVIEW\r\n"
+			+ "          WHERE REVIEW_DATE BETWEEN TO_DATE('2022-06-08', 'YYYY-MM-DD')\r\n"
+			+ "                             AND TO_DATE('2022-06-20', 'YYYY-MM-DD')\r\n"
+			+ "          GROUP BY REVIEW_DATE\r\n"
+			+ "        ) a\r\n"
+			+ "      , ( SELECT TO_DATE('2022-06-08', 'YYYY-MM-DD') + LEVEL - 1 AS dt\r\n"
+			+ "            FROM dual \r\n"
+			+ "         CONNECT BY LEVEL <= (TO_DATE('2022-06-20', 'YYYY-MM-DD') \r\n"
+			+ "                            - TO_DATE('2022-06-08', 'YYYY-MM-DD') + 1)\r\n"
+			+ "        ) b\r\n"
+			+ "  WHERE b.dt = a.REVIEW_DATE(+)\r\n"
+			+ "  GROUP BY b.dt\r\n"
+			+ "  ORDER BY b.dt";
+	
 	Connection conn;
 	Statement st;
 	PreparedStatement pst;
@@ -46,6 +64,28 @@ public class ReviewDAO {
 			st = conn.createStatement();
 			rs = st.executeQuery(SQL_SELECT_ALL);
 
+			while (rs.next())
+			{
+				reviewDTOs.add(makeReview(rs));
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return reviewDTOs;
+	}
+	public List<ReviewDTO> selectByDayCount()
+	{
+		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
+		conn = DBUtil.getConnection();
+		try
+		{
+			st = conn.createStatement();
+			rs = st.executeQuery(SQL_SELECT_DAY_COUNT);
+			
 			while (rs.next())
 			{
 				reviewDTOs.add(makeReview(rs));
