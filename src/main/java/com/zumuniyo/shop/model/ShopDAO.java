@@ -98,7 +98,7 @@ CATEGORY_CODE
 			shopDTO.setShop_name(rs.getString("shop_name"));
 			shopDTO.setLoc_addr(rs.getString("loc_addr"));
 			shopDTO.setShop_addr_detail(rs.getString("shop_addr_detail"));
-			/* shopDTO.setMem_seq(Integer.parseInt("mem_seq")); */
+			shopDTO.setMem_seq(rs.getInt("mem_seq"));
 			shopDTO.setCategory_code(rs.getString("category_code"));
 			shopDTO.setShop_img(rs.getString("shop_img"));
 			shopDTO.setShop_notice(rs.getString("shop_notice"));
