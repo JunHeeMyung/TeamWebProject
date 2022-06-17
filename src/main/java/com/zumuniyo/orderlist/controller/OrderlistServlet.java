@@ -25,6 +25,8 @@ public class OrderlistServlet extends HttpServlet {
 			command = new OrderController();
 		}else if(uri.equals("/orderlist/orderdetail.do")&&method.equals("GET")) {
 			command = new OrderDetailController();
+		}else if(uri.equals("/orderlist/myorderlist.do")&&method.equals("GET")) {
+			command = new MyOrderListController();
 		}
 		
 		

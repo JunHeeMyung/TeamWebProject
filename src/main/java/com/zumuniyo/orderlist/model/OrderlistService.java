@@ -39,6 +39,10 @@ public class OrderlistService {
 	public JSONArray selectByOrderGroupSeqWithMenuAndShop(int order_group_seq) {
 		return orderlistDAO.selectByOrderGroupSeqWithMenuAndShop(order_group_seq);
 	}
+	
+	public JSONArray selectByMemSeqWithMenuAndShop(int mem_seq) {
+		return orderlistDAO.selectByMemSeqWithMenuAndShop(mem_seq);
+	}
 
 
 }
