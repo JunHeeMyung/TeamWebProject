@@ -24,10 +24,11 @@ $(()=> {
 	$.ajax({
 		type:"GET",
 		//url:getContextPath()+"/review/SelectMem.do", 
-		url:getContextPath()+"/review/SelectMenu.do", 
+		//url:getContextPath()+"/review/SelectMenu.do", 
+		url:getContextPath()+"/review/SelectDay.do", 
 		//url:getContextPath()+"/review/SelectShop.do", 
 		//data: {"mem_seq":99998} , 
-		data: {"menu_seq":2} , 
+		//data: {"menu_seq":2} , 
 		//data: {"shop_seq":3} , 
 		dataType:"json",
 		success : data=>{
@@ -41,9 +42,9 @@ $(()=> {
 	        for(var shopdata of data){
 	        	
 	        	boxvalue+="<tr><td>";
-	        	boxvalue+= JSON.stringify(shopdata.SHOP_NAME).replaceAll("\"", "");
+	        	boxvalue+= JSON.stringify(shopdata.REVIEW_DATE).replaceAll("\"", "");
 				boxvalue+="</td><td>";
-				boxvalue+= JSON.stringify(shopdata.LOC_ADDR).replaceAll("\"", "");
+				boxvalue+= JSON.stringify(shopdata.CNT).replaceAll("\"", "");
 				boxvalue+="</td></tr>";
 		      	  
 	        }

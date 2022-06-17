@@ -31,6 +31,8 @@ public class ReviewServlet extends HttpServlet {
 			command = new ReviewSelectShopJSON();
 		}else if(uri.equals("/review/SelectMenu.do")) {		
 			command = new ReviewSelectMenuJSON();
+		}else if(uri.equals("/review/SelectDay.do")) {		
+			command = new ReviewDayCount();
 		}
 		
 		
