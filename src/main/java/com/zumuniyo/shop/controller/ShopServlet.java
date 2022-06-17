@@ -34,9 +34,11 @@ public class ShopServlet extends HttpServlet {
 			command = new ShopUpdateController();
 		} else if(uri.equals("/shop/shopselectByMem.do")) {			
 			command = new ShopSelectByMem();
+		} else if(uri.equals("/shop/shopDelete.do")) {			
+			command = new ShopDeleteController();
+		} else if(uri.equals("/shop/shopInfo.do")) {			
+			command = new ShopInfoController();
 		}
-		
-		
 		
 		
 		if(command==null) {

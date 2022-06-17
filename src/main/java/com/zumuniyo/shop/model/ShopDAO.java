@@ -30,6 +30,9 @@ public class ShopDAO {
 	static final String SQL_UPDATE = "UPDATE Z_SHOP SET SHOP_NAME = ?, LOC_ADDR=?, SHOP_ADDR_DETAIL=? , SHOP_IMG=? SHOP_NOTICE=? WHERE SHOP_SEQ=? ";
 	
 	static final String SQL_SELECT_MEM_SEQ = "SELECT * FROM Z_SHOP WHERE MEM_SEQ=?";
+	
+	static final String SQL_DELETE = "UPDATE Z_SHOP SET SHOP_STATUS = '비활성' WHERE SHOP_SEQ = ?";
+	
 	//insert INTO Z_SHOP VALUES(SHOP_SEQ.nextval, '멕시카나치킨', '서울특별시 금천구 가산디지털1로 70', '2층', NULL, NULL, NULL, NULL, '활성');
 	/* static final String SQL_INSERT_SHOPIMG = "INSERT INTO Z_shop "; */
 	/*
@@ -94,12 +97,12 @@ CATEGORY_CODE
 			shopDTO.setShop_seq(rs.getInt("shop_seq"));
 			shopDTO.setShop_name(rs.getString("shop_name"));
 			shopDTO.setLoc_addr(rs.getString("loc_addr"));
-			shopDTO.setShop_addr_detail("shop_addr_detail");
+			shopDTO.setShop_addr_detail(rs.getString("shop_addr_detail"));
 			/* shopDTO.setMem_seq(Integer.parseInt("mem_seq")); */
-			shopDTO.setCategory_code("category_code");
-			shopDTO.setShop_img("shop_img");
-			shopDTO.setShop_notice("shop_notice");
-			shopDTO.setShop_status("setShop_status");
+			shopDTO.setCategory_code(rs.getString("category_code"));
+			shopDTO.setShop_img(rs.getString("shop_img"));
+			shopDTO.setShop_notice(rs.getString("shop_notice"));
+			shopDTO.setShop_status(rs.getString("Shop_status"));
 			return shopDTO;
 		}
 		
@@ -256,7 +259,22 @@ SHOP_SEQ SHOP_NAME LOC_ADDR SHOP_ADDR_DETAIL MEM_SEQ CATEGORY_CODE SHOP_IMG SHOP
 			return result;
 		}
 		
-		/*
+		public int delete(int shop_seq) {
+			conn = DBUtil.getConnection();
+			try {				
+				pst = conn.prepareStatement(SQL_DELETE);			
+	            pst.setInt(1, shop_seq);
+	            
+	            result = pst.executeUpdate();			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.dbClose(rs, st, conn);
+			}		
+			return result;
+		}
+		/*  	
+
 		public int update(ShopDTO shopDTO) {
 			conn = DBUtil.getConnection();
 			try {
