@@ -2,6 +2,7 @@ package com.zumuniyo.orderlist.model;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 
 import com.zumuniyo.orderlist.dto.OrderlistDTO;
 
@@ -35,12 +36,9 @@ public class OrderlistService {
 		return orderlistDAO.selectByOrderGroupSeq(order_group_seq);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	public JSONArray selectByOrderGroupSeqWithMenuAndShop(int order_group_seq) {
+		return orderlistDAO.selectByOrderGroupSeqWithMenuAndShop(order_group_seq);
+	}
+
 
 }

@@ -9,6 +9,14 @@ public class CommonDTO {
 
 	public CommonDTO() {}
 
+	public Map<String, Object> getDataMap() {
+		return dataMap;
+	}
+
+	public void setDataMap(Map<String, Object> dataMap) {
+		this.dataMap = dataMap;
+	}
+
 	public Object getData(String key) {
 		return dataMap.get(key);
 	}

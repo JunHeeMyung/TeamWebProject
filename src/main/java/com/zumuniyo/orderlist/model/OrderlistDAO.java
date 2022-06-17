@@ -8,6 +8,10 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.zumuniyo.common.dto.CommonDTO;
 import com.zumuniyo.orderlist.dto.OrderlistDTO;
 import com.zumuniyo.util.DBUtil;
 
@@ -24,6 +28,7 @@ public class OrderlistDAO {
 	static final String SQL_SELECT_BY_MEM_SEQ = "SELECT * FROM Z_ORDERLIST WHERE MEM_SEQ=? ORDER BY 1 DESC";
 	static final String SQL_SELECT_BY_SHOP_SEQ = "SELECT * FROM Z_ORDERLIST WHERE SHOP_SEQ=? ORDER BY 1 DESC";
 	static final String SQL_SELECT_BY_ORDER_GROUP_SEQ = "SELECT * FROM Z_ORDERLIST WHERE ORDER_GROUP_SEQ=? ORDER BY 1 DESC";
+	static final String SQL_SELECT_BY_ORDER_GROUP_SEQ_WITH_MENU_AND_SHOP = "SELECT ORDER_GROUP,MENU_NAME,MENU_PRICE,ORDER_COUNT,ORDER_TABLENUM,ORDER_DATE,ORDER_STATUS,MENU_CATEGORY,MENU_IMG,SHOP_NAME FROM Z_ORDERLIST JOIN Z_MENU USING(MENU_SEQ,SHOP_SEQ) JOIN Z_SHOP USING(SHOP_SEQ) WHERE ORDER_GROUP=?";
 
 	//static final String SQL_UPDATE_BY_SEQ = "UPDATE Z_MEMBER SET";
 	
@@ -175,6 +180,45 @@ public class OrderlistDAO {
 					orderlist = new ArrayList<OrderlistDTO>();
 				}
 				orderlist.add(makeOrder(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		return orderlist;
+		
+	}
+	
+	public JSONArray selectByOrderGroupSeqWithMenuAndShop(int order_group_seq) {
+		
+		JSONArray orderlist = null;
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_BY_ORDER_GROUP_SEQ_WITH_MENU_AND_SHOP);
+			pst.setInt(1, order_group_seq);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				if(orderlist==null) {
+					orderlist = new JSONArray();
+				}
+				
+				JSONObject order = new JSONObject();
+				
+				order.put("ORDER_GROUP", rs.getInt("ORDER_GROUP"));
+				order.put("MENU_NAME", rs.getString("MENU_NAME"));
+				order.put("MENU_PRICE", rs.getInt("MENU_PRICE"));
+				order.put("ORDER_COUNT", rs.getInt("ORDER_COUNT"));
+				order.put("ORDER_TABLENUM", rs.getInt("ORDER_TABLENUM"));
+				order.put("ORDER_DATE", rs.getDate("ORDER_DATE"));
+				order.put("ORDER_STATUS", rs.getString("ORDER_STATUS"));
+				order.put("MENU_CATEGORY", rs.getString("MENU_CATEGORY"));
+				order.put("MENU_IMG", rs.getString("MENU_IMG"));
+				order.put("SHOP_NAME", rs.getString("SHOP_NAME"));
+				
+				orderlist.add(order);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
