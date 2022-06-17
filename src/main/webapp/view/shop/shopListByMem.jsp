@@ -61,15 +61,12 @@ div {
 	display : inline-block;
 	margin: 0px auto;
 	background-color: rgba(255, 255, 255);
-	padding-top: 250px;
+	padding-top: 100px;
 }
 
 
 
-h1,
-body *  {
-	outline: 1px solid lightblue;
-}
+
 
 h1,body,header {
   margin: 0 auto;
@@ -113,6 +110,21 @@ h2 {
 img {
 	width: 80%;
 }
+
+.tbl{
+	width: 100%;
+}
+
+table {
+     border-collapse: collapse;
+     width: 100%;
+}
+ tr, td {
+     padding: 10px;
+     border-bottom: 1px solid #CD5C5C;
+}
+tr:hover { background-color: #F5F5F5; }
+
 </style>
 </head>
 <body>
@@ -123,7 +135,7 @@ img {
 <!-- 입력 -->
 <div id="contents">
 
-<table>
+<table class="tbl">
 <tr>
 	<!-- <td>shop_seq</td>  -->
 	<td>매장이름</td>
@@ -134,6 +146,7 @@ img {
 	<td class="shopimg">매장사진</td>
 	<td>매장정보</td>
 	<!-- <td>shop_status</td> -->
+	<td>수정하기</td>
 	<td></td>
 </tr>
 <c:forEach items="${shopLists}" var="shoplist">
@@ -147,6 +160,7 @@ img {
 	<td class="shopimg"><img src="${path}/images/${shoplist.shop_img}"></td>
 	<%-- <td>${shoplist.shop_img}</td> --%>
 	<td>${shoplist.shop_notice}</td>
+	<td><input type="button" value="수정하기" onClick="location.href='${path}/shop/shopUpdate.do?shop_seq=${shoplist.shop_seq}'"></td>
 <%--<td>${shoplist.shop_status}</td> --%>
 	<td></td>	
 </tr>
