@@ -32,4 +32,8 @@ public class ShopService {
 	public List<ShopDTO> selectByMem(int mem_seq) {
 		return shopDAO.selectByMem(mem_seq);
 	}
+	public int delete(int shop_seq) {
+		return shopDAO.delete(shop_seq);
+	}
+
 }

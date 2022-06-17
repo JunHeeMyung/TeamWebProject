@@ -1,14 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="${page}/view/common/header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="${page}/view/common/header.jsp"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<!-- JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- FONTAWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+
+<title>기본 디자인</title>
 <style>
+
+body, html {
+	height:100%;
+	width:100%;
+	padding: 0px auto;
+	margin: 0px auto;
+	background-color: #F3F3F3;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+@media (min-width: 800px){
+
+#wrapper {
+	height:100%;
+	width: 800px;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgba(255, 255, 255);
+}
+
+}
+
+@media (max-width: 800px){
+
+#wrapper {
+	height:100%;
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgba(255, 255, 255);
+}
+
+}
+
+#mainframe {
+	width: 100%;
+	display : inline-block;
+	margin: 0px auto;
+	background-color: rgba(255, 255, 255);
+	padding-top: 100px;
+}
+
+
+
 h1,
 body *  {
 	outline: 1px solid lightblue;
@@ -49,174 +106,337 @@ h2 {
     justify-content: space-around;
 }
 
-.search{
-	width: 422px;
-	margin: 0 auto;
-}
-
 .hd {
 	background-color: skyblue;
+}
+.menutable{
+
 }
 
 
 </style>
+
+
 <script>
 
-$(()=>{
+
+function getContextPath() {
+    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+
+
+
+
+/* 추천메뉴 */
+
+function drawtopmenu(){
 	
-   if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
+	$.ajax({
+		type:"POST",
+		url:getContextPath()+"/menu/menuListAll.zmny", 
+		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
+		dataType:"json",
+		success : data=>{
+	        if ( typeof(data) == "undefined" ) {return;}
+	        
+	        var str = "";
+	        
+	        str+="<table class='menutable'>"; 
+	        for(var menudata of data){
+	        	if(JSON.stringify(menudata.menu_top).replaceAll("\"", "")*1==1){
+	        		
+	        	
+	        	 str+="<tr><td>";
+	        	 str+= JSON.stringify(menudata.menu_name).replaceAll("\"", "");
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(menudata.menu_price);
+	        	 str+="</td><td>";
+	        	 str+="<img src="+getContextPath()+"/images/"+JSON.stringify(menudata.menu_img)+">";
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(menudata.menu_info).replaceAll("\"", "");
+	        	 str+="</td></tr>";
+	        	 
+	        	}
+	        }
+	        
+			str+="</table>";
+	        hall.innerHTML=str;
+		    
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});
+	
+}
 
-         /* 위도 경도 받기 */
-         var latitude = pos.coords.latitude, longitude = pos.coords.longitude;
-         var location = new kakao.maps.LatLng(latitude, longitude);
-         
-         $("#latitude").val(latitude);
-         $("#longitude").val(longitude);
-      })
-   } else {
-      alert("지원하지않는 브라우져입니다");
-   }
-   
-   $("allmenu").click(()=>{
-	   
-	   $.ajax({
-			url: getContextPath()+"/보류",
-			type: "get",
-			data: { "shop_seq":"" },
-			dataType: "text",
-			success: data => {
-				if (data == "인증성공") {
-					clearInterval(timer);
-					$("#mem_email").val(email_addr);
-					$("#radio4").prop('checked', true).trigger('change');
 
-				} else {
 
-					$('#myModalTitle').html("인증 번호 확인");
-					$('#myModalContent').html(data);
-					$('#myModal').modal('show');
 
-				}
-				$('#confirm_btn').attr('disabled', false);
-			},
-			error: () => {
-				alert("요청실패");
-				$('#confirm_btn').attr('disabled', false);
-			}
-		})
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-   });
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-})
+
+
+
+
+/* 메뉴정보 */
+function drawMenu(){
+	
+	$.ajax({
+		type:"POST",
+		url:getContextPath()+"/menu/menuListAll.zmny", 
+		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
+		dataType:"json",
+		success : data=>{
+	        if ( typeof(data) == "undefined" ) {return;}
+	        
+	        var str = "";
+	        
+	        str+="<table class='menutable'>"; 
+	        for(var menudata of data){
+	        	
+	        	 str+="<tr><td>";
+	        	 str+= JSON.stringify(menudata.menu_name).replaceAll("\"", "");
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(menudata.menu_price);
+	        	 str+="</td><td>";
+	        	 str+="<img src="+getContextPath()+"/images/"+JSON.stringify(menudata.menu_img)+">";
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(menudata.menu_info).replaceAll("\"", "");
+	        	 str+="</td></tr>";
+		      	  
+	        }
+	        
+			str+="</table>";
+	        hall.innerHTML=str;
+		    
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});
+	
+}
+
+/* 리뷰정보 */
+function drawReview(){
+	$.ajax({
+		type:"GET",
+		url:getContextPath()+"/review/reviewShopList.do", 
+		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
+		dataType:"html",
+		success : data=>{
+			
+			
+	        if ( typeof(data) == "undefined" ) {return;}
+	        
+	        var str = "";
+	        
+	      /*   str+="<table class='menutable'>"; 
+	        for(var menudata of data){
+	        	  
+	        	 str+="<tr><td>";
+	        	 str+= JSON.stringify(review.review_taste);
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(review.review_amount);
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(review.review_service);
+	        	 str+="</td><td>";
+	        	 review.review_content(menudata.menu_name).replaceAll("\"", "");
+	        	 str+="</td><td>";
+	        	 str+= JSON.stringify(review.review_service).replaceAll("\"", "");
+	        	 str+="</td></tr>";
+	        	 
+	        	 
+	        }
+	        
+			str+="</table>"; */
+	        hall.innerHTML=data;
+		    
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});
+	
+}
+
+
+
+/* 매장정보 */
+function drawInfo(){
+	
+	$.ajax({
+		type:"POST",
+		url:getContextPath()+"/shop/shopInfo.do", 
+		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
+		dataType:"text",
+		success : data=>{
+	        if ( typeof(data) == "undefined" ) {return;}
+	        
+	        var str = "";
+	        
+	        str+="<table class='menutable'>"; 
+	        	
+	        	 str+="<tr><td>";
+	        	 str+= data;
+	        	 str+="</td></tr>";	      	  
+	       
+	        
+			str+="</table>";
+	        hall.innerHTML=str;
+		    
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});
+	
+}
+
+
+
+
+
+
+
+
+$(()=> {
+	
+	$("#menu_all_topmenu").click(()=>{		
+		drawtopmenu();
+	});
+	
+	$("#menu_all_btn").click(()=>{		
+		drawMenu();
+	});
+	
+	$("#menu_all_review").click(()=>{		
+		drawReview();
+	});
+	
+	$("#menu_all_info").click(()=>{		
+		drawInfo();
+	});
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </head>
-<body>
-<div class="hd">
-<h1>ZUMUNIYO</h1>
-</div>
-<form action="/shopList.do" method="get" class="search">
-		<input type="text" id="latitude" name="latitude">
-		<input type="text" id="longitude" name="longitude">
-		<input type="submit" value="검색하기">
-</form>
-<h2>매장상세</h2>
 
+<body>
+
+<div id="wrapper" class="shadow">
+<div id="mainframe">
+
+<!-- 입력 -->
+
+<div id="contents">
+
+	<h2>매장상세</h2>
+	
 	<div class="shopcat">
-		<div class="topmenu">
+		<div id="menu_all_topmenu">
 			추천메뉴
 		</div>
-		<div class="allmenu">
+		<div id="menu_all_btn" class="allmenu">
 			전체메뉴
 		</div>
-		<div class="review">
+		<div id="menu_all_review" class="allreview">
 			리뷰
 		</div>
-		<div class="info">
+		<div id="menu_all_info">
 			매장정보
 		</div>
 	</div>
+	
+		
+	
+	<div id="hall">
+		
+	</div>
+	
+	
+	
+</div>
 
 	
+</div>
+</div>
 
-<div id="hall">
+<%-- 
 <div class="shop-menu">
-<table class = "mtbl">
-<tr>
-	<td>순서</td>
-	<td>메뉴이미지</td>
-	<td>메뉴이름</td>
-	<td>메뉴가격</td>
-	<td>메뉴소개</td>
-</tr>
-<c:forEach items="${menulist}" var="menu" varStatus="status">
-		<tr>
-		<td>${menu.menu_seq}</td>
-		<td>${menu.menu_img}</td>
-		<td>${menu.menu_name}</td>
-		<td>${menu.menu_price}</td>
-		<td>${menu.menu_info}</td>	
-		</tr>
-		</c:forEach>
-</table>
-</div>
-<div class= "review-detail">
-<table class = "rtbl">
-<tr>
-	<td>맛</td>
-	<td>양</td>
-	<td>서비스</td>
-	<td>사진</td>
-	<td>내용</td>
-</tr>
-<c:forEach items="${reviewShopList}" var="review" varStatus="status">
-		<tr>
-		<td>${review.review_taste}</td>
-		<td>${review.review_amount}</td>
-		<td>${review.review_service}</td>
-		<td><img src="${path}/images/${review.review_img}"></td>
-		<td>${review.review_content}</td>
-		</tr>
-		</c:forEach>
-</table>
-</div>
-</div>
+			<table class = "mtbl">
+				<tr>
+					<td>순서</td>
+					<td>메뉴이미지</td>
+					<td>메뉴이름</td>
+					<td>메뉴가격</td>
+					<td>메뉴소개</td>
+				</tr>
+				
+				
+				<c:forEach items="${menulist}" var="menu" varStatus="status">
+						<tr>
+						<td>${menu.menu_seq}</td>
+						<td><img src="${path}/images/${menu.menu_img}"></td>
+						<td>${menu.menu_name}</td>
+						<td>${menu.menu_price}</td>
+						<td>${menu.menu_info}</td>	
+						</tr>
+				</c:forEach>
+			
+		
+			</table>	
+		</div>
+		
+		
+		<div class= "review-detail">
+			<table class = "rtbl">
+			<tr>
+				<td>맛</td>
+				<td>양</td>
+				<td>서비스</td>
+				<td>사진</td>
+				<td>내용</td>
+			</tr>
+			<c:forEach items="${reviewShopList}" var="review" varStatus="status">
+					<tr>
+					<td>${review.review_taste}</td>
+					<td>${review.review_amount}</td>
+					<td>${review.review_service}</td>
+					<td><img src="${path}/images/${review.review_img}"></td>
+					<td>${review.review_content}</td>
+					</tr>
+					</c:forEach>
+			</table>
+		</div>
+		 --%>
 
 
 
 
- <%-- <c:forEach items="${shopdetail}" var="detail" varStatus="status">
-		<tr>
-		<td>${detail.shop_seq}</td>
-		<td>${detail.shop_name}</td>
-		<td>${detail.loc_addr}</td>
-		<td>${detail.shop_addr_detail}</td>
-		<td>${detail.category_code}</td>
-		<td>${detail.shop_img}</td>		
-		</tr>
-		</c:forEach>  --%>
+
 </body>
 </html>
