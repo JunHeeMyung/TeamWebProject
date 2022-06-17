@@ -25,11 +25,12 @@ public class PageFilter implements Filter {
 		String uri = ((HttpServletRequest)request).getRequestURI();
 		/* String queryString = request.gets */
 		
-		String params ="?";
+		String params ="";
 		boolean isFirstParam= true;
 		Map<String,String[]> paramMap = request.getParameterMap();
 		for(String key:paramMap.keySet()) {
 			if(isFirstParam) {
+				params +="?";
 				isFirstParam=false;
 			}else {
 				params+="&";
