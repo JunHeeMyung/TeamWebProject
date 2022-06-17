@@ -20,7 +20,7 @@ public class MemberController implements Command {
         }
 	
 		return "json:"+commonService.getJSONforQuery("SELECT "
-				+ " (SELECT count(*) AS 전체회원 FROM Z_MEMBER) 전체회원,\r\n"
+				+ " (SELECT count(*) AS 전체회원 FROM Z_MEMBER) 전체회원,"
 				+ " (SELECT count(*) AS 사업자회원 FROM Z_MEMBER WHERE MEM_TYPE ='사업자회원') 사업자회원,"
 				+ " (SELECT count(*) AS 일반회원 FROM Z_MEMBER WHERE MEM_TYPE ='일반회원') 일반회원,"
 				+ " (SELECT count(*) AS naver FROM Z_MEMBER WHERE MEM_ID LIKE '%naver:%') 네이버회원,"
