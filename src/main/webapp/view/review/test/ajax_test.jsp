@@ -25,7 +25,8 @@ $(()=> {
 		type:"GET",
 		//url:getContextPath()+"/review/SelectMem.do", 
 		//url:getContextPath()+"/review/SelectMenu.do", 
-		url:getContextPath()+"/review/SelectDay.do", 
+		//url:getContextPath()+"/review/SelectDay.do", 
+		url:getContextPath()+"/admin/adminShopCount.do", 
 		//url:getContextPath()+"/review/SelectShop.do", 
 		//data: {"mem_seq":99998} , 
 		//data: {"menu_seq":2} , 
@@ -34,26 +35,34 @@ $(()=> {
 		success : data=>{
 	        if ( typeof(data) == "undefined" ) {return;}
 	        
-	        jsonhere.innerHTML=JSON.stringify(data);
+	       	alert(data);
+
+	       	
+	       	
+	       	
+	       	/*
+	       	jsonhere.innerHTML=JSON.stringify(data);
 	        
 	        var boxvalue = "";
 	        
 	        boxvalue+="<table>";
+	      
+	        
 	        for(var shopdata of data){
 	        	
 	        	boxvalue+="<tr><td>";
-	        	boxvalue+= JSON.stringify(shopdata.REVIEW_DATE).replaceAll("\"", "");
+	        	boxvalue+= JSON.stringify(shopdata.활성).replaceAll("\"", "");
 				boxvalue+="</td><td>";
-				boxvalue+= JSON.stringify(shopdata.CNT).replaceAll("\"", "");
+				boxvalue+= JSON.stringify(shopdata.비활성).replaceAll("\"", "");
 				boxvalue+="</td></tr>";
 		      	  
 	        }
 	        boxvalue+="</table>";
 	        here.innerHTML=boxvalue;
-		    
+		    */
 		},
 		error : ()=> {
-			alert("에러발생");
+			alert("에러발생 ajax_test");
 		}
 	});
 });

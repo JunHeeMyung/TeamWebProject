@@ -117,6 +117,10 @@ div {
 	<canvas id="myChart2"></canvas>
 	</div>
 	
+	<div id="post-box3" class="form-post">
+	<canvas id="myChart3"></canvas>
+	</div>
+	
 	<div id="post-box4" class="form-post">
 	<canvas id="myChart4"></canvas>
 	</div>
@@ -145,6 +149,11 @@ var 카카오회원;
 var reviewDate = [];
 var reviewCnt = [];
 var reviewSumCnt = 0;
+
+var shopA;
+var shopO=[];
+var shopC=[];
+
 function getContextPath() {
     var hostIndex = location.href.indexOf( location.host ) + location.host.length;
     return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
@@ -193,7 +202,7 @@ $(()=> {
 				}				 
 				//console.log(reviewDate);
 				//console.log(reviewCnt);				
-				console.log(reviewSumCnt);
+				//console.log(reviewSumCnt);
 				
 		},
 		error : ()=> {
@@ -202,6 +211,32 @@ $(()=> {
 	});
 });
 
+
+///*
+$(()=> {	
+	$.ajax({
+		type:"GET",
+		url:getContextPath()+"/admin/adminShopCount.do", 
+		dataType:"json",
+		success : function(data) { 
+				if ( typeof(data) == "undefined" ) {return;}								
+				
+				for(var shopdata of data){					
+					shopO.push(Number(JSON.stringify(shopdata.활성).replaceAll("\"", "")));
+					shopC.push(Number(JSON.stringify(shopdata.비활성).replaceAll("\"", "")));					
+					
+				}				 			
+				//console.log(data);
+				//console.log(shopO[0]);
+				//console.log(shopC[0]);
+				shopA = shopO[0]+ shopC[0];
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});
+});
+//*/
 
 $("#chart1").click(()=>{	
 	if ($('#post-box1').css('display') == 'block') {
@@ -219,6 +254,15 @@ $("#chart2").click(()=>{
 		} else {
 		$('#post-box2').show();
 		userChar();
+		}
+});	
+$("#chart3").click(()=>{
+	if ($('#post-box3').css('display') == 'block') {
+		$('#post-box3').hide();
+		myChart3.destroy();
+		} else {
+		$('#post-box3').show();
+		shopChar();
 		}
 });	
 $("#chart4").click(()=>{
@@ -248,7 +292,7 @@ function allChar() {
 						label : 'ZUMUNIYO', //차트 제목            
 						data : [
 						//21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-						전체회원, 30, reviewSumCnt ],
+						전체회원, shopA, reviewSumCnt ],
 						backgroundColor : [
 						//색상
 						//'rgba(255, 99, 132, 0.2)',
@@ -311,10 +355,43 @@ function userChar() {
 	});
 }
 
-
+function shopChar() {	
+	var context = document.getElementById('myChart3').getContext('2d');
+	myChart3 = new Chart(context, {
+		type : 'bar', // 차트의 형태 bar , line, pie, doughnut, polarArea
+		data : { // 차트에 들어갈 데이터
+			labels : [					
+			'전체매장', '영업중', '폐업' ],
+				
+			datasets : [
+					{ //데이터
+						label : '매장현황', //차트 제목            
+						data : [						
+							shopA, shopO[0], shopC[0] ],
+						backgroundColor : [
+						//색상
+						//'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [
+						//경계선 색상
+						//'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)', 
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1, //경계선 굵기
+					}, ],
+		},
+	});
+}
 function reviewChar() {	
 
-	const context = document.getElementById('myChart4').getContext('2d');
+	var context = document.getElementById('myChart4').getContext('2d');
 	myChart4 = new Chart(context, {
 		type : 'bar', // 차트의 형태 bar , line, pie, doughnut, polarArea
 		data : { // 차트에 들어갈 데이터
