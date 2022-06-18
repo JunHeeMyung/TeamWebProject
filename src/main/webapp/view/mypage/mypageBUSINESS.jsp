@@ -63,13 +63,39 @@ $(()=> {
 </script>
 
 
+<style>
+
+#sidebar{
+text-align: center;
+height: 100%;
+width: 100%;
+padding: 0px auto;
+margin: 0px auto;
+background-color: white;
+
+}
+
+
+#sidebar button {
+display: inline-block;
+width: 60%;
+margin-left: 20%;
+margin-right: 20%;
+
+}
+
+
+</style>
+
 
 <meta charset="UTF-8">
 <title>사업자회원 마이페이지</title>
 </head>
 <body>
 
-<h1> 사업자회원</h1>
+<div id = "sidebar">
+
+<h1>사업자회원</h1>
 
 <%-- 
 <p> 사업자회원 접속 성공 </p>
@@ -149,6 +175,6 @@ $(()=> {
 
  --%>
 
-
+</div>
 </body>
 </html>
