@@ -59,8 +59,30 @@ div {
 	display : inline-block;
 	margin: 0px auto;
 	background-color: rgba(255, 255, 255);
-	padding-top: 250px;
+	
 }
+
+
+#shopframe {
+
+	padding-top: 40px;
+	padding-bottom: 0px;
+	width: 100%;
+	height: 250px;
+	display : inline-block;
+	margin: 0px auto;
+	background-color: rgba(235, 235, 235);
+	
+}
+
+
+
+
+
+
+
+
+
 
 .container{
 
@@ -81,6 +103,18 @@ width: 100%;
 height: 50px;
 }
 
+
+.btn_category_text {
+
+margin-left: 20px;
+
+}
+
+
+
+
+
+/*--------펼쳐지는 튜플---------*/
 
 .toptuple {
 
@@ -104,7 +138,7 @@ margin: 0px;
 padding: 0px;
 border: 1px solid #DCDCDC;
 background-color: white;
-color:black;
+color: black;
 width: 100%; 
 height: 110px;
 text-align: left;
@@ -112,6 +146,7 @@ display: flex;
 flex-direction: column;
 }
 
+/*----------------------*/
 
 .menunamebox {
 display: flex;
@@ -119,19 +154,25 @@ flex-direction: column;
 text-align: center;
 }
 
+
+/*--------추천메뉴---------*/
 .btntop {
-width: 90px;
-height: 90px;
+
+display: inline-flex;
+flex-direction: column;
+text-align: center;
+
+width: 199px;
+height: 300px;
 border: 1px solid #DCDCDC;
 background-color: white;
 color:black;
 
-
 }
-.btn-detail {
-height: 100%;
 
-}
+/*-----------------------*/
+
+
 
 .modal-header {
 text-align: center;
@@ -327,11 +368,18 @@ border-radius: 30px;
 	cursor:pointer;
 }
 
+#cartbtn_space {
+padding-left: 14px;
+}
+
+
+
+
+
+
+
 
 .table_numberbox {
-
-
-
 
 }
 
@@ -434,10 +482,8 @@ padding-left: 3px;
 
 }
 
-
-
-
 .clearorder{
+
 font-size:15px;
 
 }
@@ -449,6 +495,122 @@ font-size:16px;
 
 
 
+
+/* -----추천메뉴관련------- */
+.btn_topview{
+display: inline-block;
+}
+
+.menu_top_img{
+width: 174px;
+height: 120px;
+}
+
+.menu_top_name{
+
+margin-top:5px;
+font-size: 15px;
+}
+
+.menu_top_info{
+margin-top:5px;
+font-size: 8px;
+color: gray;
+}
+
+.menu_top_price{
+
+display: inline-block;
+font-size: 15px;
+color: rgba(255, 138, 0);
+}
+.menu_top_won{
+padding-bottom: 10px;
+display: inline-block;
+margin-left: 5px;
+font-size: 11px;
+color: rgba(255, 138, 0);
+}
+/*--------------------------*/
+
+
+.btn-detail {
+height: 100%;
+
+}
+
+
+/* -----디테일메뉴관련------- */
+
+.btndetail{ 
+
+background-color: white;
+
+}
+
+.detail_text{
+text-align: left;
+display: flex;
+flex-direction: column;
+left:60px;
+float:left;
+}
+
+.menu_detail_name{
+
+padding-left: 10px;
+margin-top:5px;
+font-size: 18px;
+display: inline-block;
+}
+
+.menu_detail_info{
+
+padding-left: 160px;
+
+font-size: 12px;
+color: gray;
+display: inline-block;
+}
+
+.menu_detail_gagyuk{
+
+padding-left: 440px;
+font-size: 13px;
+display: inline-block;
+margin-right: 40px;
+}
+
+
+.menu_detail_price{
+margin-left: 20px;
+
+display: inline-block;
+font-size: 20px;
+color: black;
+}
+.menu_detail_won{
+margin-left: 20px;
+display: inline-block;
+
+font-size: 15px;
+color: black;
+}
+
+.menu_detail_img{
+right:60px;
+float:right;
+
+width: 120px;
+height: 90px;
+padding-top: 1px;
+
+}
+
+
+
+
+/*--------------------------*/
 
 
 
@@ -468,31 +630,15 @@ function getContextPath() {
 $(()=>{
 	
 	
-	
-	
-	/*    
+	// 비우기 버튼 누를시
 	$("#clearorder").click(()=>{
 		
-		var cart = sessionStorage.getItem('cart');
-	      cart = JSON.parse(cart);
-		
-		if(JSON.stringify(cart) == null || JSON.stringify(cart) == ''){
-	         alert("주문목록이 비어있습니다.");
-	         
-	         
-	         return;
-		}
-		
+		$('[data-bs-dismiss="modal"]').trigger({ type: "click" });
 		sessionStorage.clear();	
+		$("#cartbtn").trigger({ type: "click" });
 		
 		return;
 	}) 
-	 */
-	
-	 
-	
-	
-	
 	
 	
 	
@@ -505,6 +651,7 @@ $(()=>{
       //존재여부 확인
       if(JSON.stringify(cart) == null || JSON.stringify(cart) == ''){
          alert("주문목록이 비어있습니다.");
+         
          return;
       }
       //주문 전송
@@ -548,14 +695,10 @@ $(()=>{
 			return null;
 		}
 		
-		alert(JSON.stringify(cart));
-		
 		sessionStorage.setItem('cart', JSON.stringify(cart));
 		
-		$("#carthidden").val(JSON.stringify(cart));
-		
+		$("#carthidden").val(JSON.stringify(cart));		
 		$("#finalorder").submit();
-		
 		
 		//$('#orderlistmodal').modal('hide');
 		
@@ -571,16 +714,14 @@ $(()=>{
 	$("#cartbtn").click(()=>{
 		
 		//$('#orderlistmodal').modal('show');
-		
 		//$("#orderlistmodal").trigger({ type: "click" });
 		
 		orderlistmodalContent.innerHTML = "";
 		
-		
 		var cart = sessionStorage.getItem('cart');
 		
 		if(cart == null || cart == ''){
-	         alert("주문목록이 비어있습니다.");
+	         //alert("주문목록이 비어있습니다.");
 	         return;
 		}
 		
@@ -602,7 +743,7 @@ $(()=>{
 			
 			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+"<div class='gae'> "+"개"+" </div></div> ";
 			
-			line += " <div class='gagyuk'> "+"가격"+" </div><div class='line_price'>"+JSON.stringify(menu['menu_price'])+" <div class='won'> "+"원"+" </div></div> ";
+			line += " <div class='gagyuk'> "+"가격"+" </div><div class='line_price'>"+((JSON.stringify(menu['menu_price']))*1)*JSON.stringify(menu['order_count'])+" <div class='won'> "+"원"+" </div></div> ";
 			
 			line += "</div>";
 			
@@ -627,10 +768,13 @@ $(()=>{
 		var menu_price = ($("#menu_price").html())*1;
 		var menu_photo = $("#menu_photo").attr("src");
 		
-		var order_count = ($("#countofmenu").val())*1;
+		var order_count = 1;
 		if(order_count == 0||order_count == null||order_count == ''){
 			order_count = 1;		
-		} 
+		} else {
+			order_count = ($("#countofmenu").val())*1;
+			
+		}
 		var menu_seq = $("#menu_seq").val();
 		
 		var menu = {
@@ -650,6 +794,9 @@ $(()=>{
 			
 			cart.push(menu);
 			sessionStorage.setItem('cart', JSON.stringify(cart));
+			
+			
+			
 		}else{
 			 
 			cart = JSON.parse(cart);
@@ -659,9 +806,7 @@ $(()=>{
 					
 					cart[menuitemidx]['order_count']=((cart[menuitemidx]['order_count'])*1 + order_count);
 					
-					cart[menuitemidx]['menu_price']=(((cart[menuitemidx]['menu_price'])*1) * order_count);
-					
-					
+					//cart[menuitemidx]['menu_price']=(((cart[menuitemidx]['menu_price'])*1) * order_count);
 					
 					sessionStorage.setItem('cart', JSON.stringify(cart));
 					
@@ -781,20 +926,37 @@ $(function(){
 
 
 <div id="wrapper" class="shadow">
+
+<div id="shopframe">
+
+
+
+</div>
+
 <div id="mainframe">
 
 
 <c:set var="top" value=""/>
-<button type="button" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${top}">추천메뉴</button>
+<button type="button" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${top}"><div class="btn_category_text">추천메뉴</div></button>
 <div id="menu${top}" class="collapse show what">
 
 <div class="toptuple">
 <c:forEach var="menu" items="${menuDTOs}" varStatus="status">
 <c:if test = "${menu.menu_top eq 1}">
-<div>
-<span>
-<button type="button" class="btn btn-detail btntop" data-bs-toggle="modal" data-bs-target="#menuModal" data-menuseq="${ menu.menu_seq }" >${menu.menu_name}</button>
-</span> 
+<div class="btn_topview">
+	<span>
+	<button type="button" class="btn btn-detail btntop" data-bs-toggle="modal" data-bs-target="#menuModal" data-menuseq="${ menu.menu_seq }" >
+		<div class="btn_topview">
+		
+		<div class="menu_top_img"><img src="${path}/images/${menu.menu_img}" class="menu_top_img"></div>
+		<div class="menu_top_name">${menu.menu_name}</div>
+		<div class="menu_top_info">${menu.menu_info}</div>
+		<div class="menu_top_price"><b>${menu.menu_price}</b><div class="menu_top_won"> 원</div></div>
+		
+		
+		</div>
+	</button>
+	</span> 
 </div>
 </c:if>
 
@@ -808,10 +970,20 @@ $(function(){
 <c:if test ="${menu.menu_category ne last}">
 </div>
 <c:set var="last" value="${menu.menu_category}"/>
-<button type="button" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}">${menu.menu_category}</button>
+<button type="button" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}"><div class="btn_category_text">${menu.menu_category}</div></button>
 <div id="menu${last}" class="collapse what">
 </c:if>
-<span class="menutuple"><button type="button" class="btn btn-detail " data-bs-toggle="modal" data-bs-target="#menuModal" data-menuseq="${ menu.menu_seq }" >${menu.menu_name}</button></span>
+<div class="menutuple">
+<button type="button" class="btn btn-detail btndetail" data-bs-toggle="modal" data-bs-target="#menuModal" data-menuseq="${ menu.menu_seq }" >
+	<div class="detail_text">
+		<div class="menu_detail_name">${menu.menu_name}</div>
+		<div class="menu_detail_info">${menu.menu_info}</div>
+		<div class="menu_detail_price"><div class="menu_detail_gagyuk"> 가격</div>${menu.menu_price}<div class="menu_detail_won"> 원</div></div>
+	</div>	
+		<div class="menu_detail_img"><img src="${path}/images/${menu.menu_img}" class="menu_detail_img"></div>
+		
+</button>
+</div>
 </c:forEach>
 </div>
 
@@ -820,7 +992,7 @@ $(function(){
 </div>
 
 
-<div id="cartbtn" data-bs-toggle="modal" data-bs-target="#orderlistmodal" >주문목록</div>
+<div align="center" id="cartbtn" data-bs-toggle="modal" data-bs-target="#orderlistmodal" ><span id="cartbtn_space">주문목록</span></div>
 
 
 
@@ -916,7 +1088,7 @@ $(function(){
 				
 				<table id="ordermodalfooter">
 				<tr>
-				<td><div><button type="button" id="clearorder" class="btn btn-info linebtn ">비우기 </button></div></td>
+				<td><div><button type="button" id="clearorder" class="btn btn-outline-danger linebtn ">비우기 </button></div></td>
 				<td colspan="4"><div><button type="button" id="finalorder" class="btn btn-danger linebtn" >주문확정</button></div></td>
 				</tr>
 				</table>
