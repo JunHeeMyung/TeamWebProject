@@ -106,12 +106,15 @@ border-bottom: 1px solid orange;
 
 <!-- 입력 -->
 <div id="contents">
-<h2>매장 주문 관리</h2>
+<h2>주문 관리 및 QR코드 생성</h2>
 <table id="shoplistbox">
 <c:forEach var="shop" items="${shoplist}">
 <tr>
 <td>
 <a href="${path}/orderlist/orderlistmanager.do?shop_seq=${shop.shop_seq}">${shop.shop_name}</a>
+</td>
+<td>
+<a href="${path}/data/qrcode.do?shop_seq=${shop.shop_seq}">QR 코드 관리</a>
 </td>
 </tr>
 </c:forEach>

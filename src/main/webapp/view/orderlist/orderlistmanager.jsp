@@ -43,7 +43,11 @@ function getContextPath() {
 	};
  
  
-$(()=>{
+$(()=>{	
+
+	
+	
+	  
 	  self.moveTo(0,0); //창위치
 	  self.resizeTo(screen.availWidth, screen.availHeight); //창크기
 	  
@@ -82,6 +86,7 @@ $(()=>{
 		  
 		  //웹소켓 메시지 수신
 		  function socketMessage(event){
+			  var promise = document.getElementById('dingdong').play();
 			  console.log("새로운 요청이 들어왔습니다.");
 		  	  var receiveData = event.data; // 수신 data
 		      console.log(receiveData);
@@ -136,44 +141,105 @@ div {
 #mainframe {
 	height:100%;
 	width: 100%;
-	
 	padding: 25px;
 	border-radius: 25px;
 	background-color: rgba(255, 255, 255);
 }
 
 #contents {
-
 width:100%;
 height: 100%;
 
 }
 
+#headerbox{
+background-color: rgba(220,220,220);
+width:100%;
+height:5%;
+}
+
 #orderlistbox{
-border: 1px solid red;
+border: 1px solid rgba(240,240,240);
+width: 100%;
+height:95%;
+overflow-y: scroll;
+display: inline-block;
+lef
+}
+
+
+#orderlistbox::-webkit-scrollbar {
+width: 3px;
+}
+#orderlistbox::-webkit-scrollbar-thumb{
+background: rgba(220,220,220);
+border-radius: 5px;
+}
+#orderlistbox::-webkit-scrollbar-track {
+background: transparent;
+}
+
+#dingdongbox{
+display: hidden;
+}
+
+#contents{
+
+}
+
+
+#leftbox{
+display:inline-block;
+float:left;
+margin:0px;
+padding:0px;
 width: 80%;
-height: 100%
+height: 100%;
+border: 1px solid rgba(220,220,220);
+}
 
-
+#rightbox{
+display:inline-block;
+float:left;
+margin:0px;
+padding:0px;
+width: 17%;
+height: 100%;
+background-color:rgba(240,240,240);
+border-radius: 20px;
+margin-left:3%;
 }
 
 
 </style>
 </head>
 <body>
-
-<div id="wrapper">
-<div id="mainframe">
-
-<!-- 입력 -->
-<div id="contents">
-
-<div id="orderlistbox"></div>
-
-
+<div id="dingdongbox">
+<audio id='dingdong' src='${path}/sound/dingdong.mp3'></audio> 
 </div>
-</div>
-</div>
+
+	<div id="wrapper">
+		<div id="mainframe">
+			<div id="contents">
+				<div id="leftbox">
+					<table id="headerbox">
+						<tr>
+							<td class="order_group">#</td>
+							<td class="table_num">테이블</td>
+							<td class="menu_name">[카테고리] 메뉴명</td>
+							<td class="menu_price">단가</td>
+							<td class="menu_count">수량</td>
+							<td class="total">합계</td>
+							<td class="order_status">주문시간/상태</td>
+						</tr>
+					</table>
+					<div id="orderlistbox"></div>
+				</div>
+				<div id="rightbox">123</div>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
