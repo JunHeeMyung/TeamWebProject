@@ -36,8 +36,6 @@ public class ShopOrderlistController implements Command {
         
         JSONArray jsonArray = orderlistDAO.selectByShopSeqWithMenuAndShop(shop_seq);
         
-        System.out.println("shoplist 불러옴:"+jsonArray);
-        
         request.setAttribute("orderlist", jsonArray);
         
 		return "/view/orderlist/shoporderlist.jsp";

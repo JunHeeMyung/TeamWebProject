@@ -33,15 +33,10 @@ public class OrderlistServlet extends HttpServlet {
 			command = new OrderlistManagerController();
 		}else if(uri.equals("/orderlist/shoporderlist.do")&&method.equals("GET")) {
 			command = new ShopOrderlistController();
+		}else if(uri.equals("/orderlist/updatestatus.do")&&method.equals("POST")) {
+			command = new OrderlistUpdateController();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		
 		if(command==null) {

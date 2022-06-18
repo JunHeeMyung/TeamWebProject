@@ -6,13 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 부트스트랩 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 <!-- JQUERY-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- FONTAWESOME -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
 <title>매장 주문 내역</title>
 <style>
@@ -66,14 +61,14 @@ width: 20%;
 }
 
 .ordertable[orderstatus="주문대기"]{
-background-color: white;
+background-color: #FFCFCC;
 }
 .ordertable[orderstatus="주문대기"] td{
 border: 1px solid lightgray;
 }
 
 .ordertable[orderstatus="주문확인"]{
-background-color: #FFCFCC;
+background-color: white;
 }
 
 #headerbox td{
@@ -107,17 +102,18 @@ var choosedordergroup = -1;
 
 $(()=>{
 	
-	$("table").click(function(){
+	$("#orderbox table").click(function(){
 	
 		$("*").attr("choosed","false");
 		$(this).attr("choosed","true");
 		choosedordergroup = $(this).attr("ordergroup")*1;
-		
-	})
-	
+		$("#ordergroupbox").val(choosedordergroup);
+		$("#tablebox").val($(this).attr("tablenum"));
+		$("#totalbox").val($(this).attr("total")+"원")
+		$("#ordergroupbox").val(choosedordergroup);
 
-	
-	
+	})
+
 })
 
 
@@ -133,7 +129,7 @@ $(()=>{
 
 <c:choose>
 <c:when test="${order.ORDER_GROUP ne lastgroup}">
-<table class ="ordertable" ordergroup="${order.ORDER_GROUP}" choosed="false" orderstatus="${order.ORDER_STATUS}">
+<table class ="ordertable" ordergroup="${order.ORDER_GROUP}" choosed="false" orderstatus="${order.ORDER_STATUS}" tablenum="${order.ORDER_TABLENUM}" total="${order.TOTAL}">
 <c:set var="lastgroup" value="${order.ORDER_GROUP}"/>
 <c:set var="listidx" value="0"/>
 <tr>

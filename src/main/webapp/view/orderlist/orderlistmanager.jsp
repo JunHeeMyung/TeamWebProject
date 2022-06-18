@@ -19,23 +19,13 @@
 <script>
 
 
-var getData = ()=>{
-	
-	$.ajax({
-		url: getContextPath()+"/orderlist/shoporderlist.do",
-		type: "get",
-		data: { "shop_seq": <%=request.getParameter("shop_seq")%> },
-		dataType: "html",
-		success: data => {
-			$("#orderlistbox").html(data);
-			}
-		,
-		error: () => {
-			alert("요청실패");
-		}
-	});
 
-}
+
+
+
+
+
+
 
 function getContextPath() {
 	    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
@@ -44,6 +34,86 @@ function getContextPath() {
  
  
 $(()=>{	
+	
+	
+
+	var getData = ()=>{
+		
+		$.ajax({
+			url: getContextPath()+"/orderlist/shoporderlist.do",
+			type: "get",
+			data: { "shop_seq": <%=request.getParameter("shop_seq")%> },
+			dataType: "html",
+			success: data => {
+				$("#orderlistbox").html(data);
+				}
+			,
+			error: () => {
+				alert("요청실패");
+			}
+		});
+
+	}
+
+
+	var orderConfirm = ()=>{
+		
+		$.ajax({
+			url: getContextPath()+"/orderlist/updatestatus.do",
+			type: "post",
+			data: { "order_group":($("#ordergroupbox").val()),
+					"order_status":"주문확인"
+			},
+			dataType: "text",
+			success: data => {
+				if(data=="성공"){
+					alert("주문확인 처리가 성공했습니다");
+					getData();
+					$("#tablebox").val("");
+					$("#ordergroupbox").val("");
+					$("#totalbox").val("");
+				}else{
+					alert(data);
+				}
+				
+			}
+			,
+			error: () => {
+				alert("요청실패");
+			}
+		});
+
+	}
+
+
+	var completePayment = ()=>{
+
+		$.ajax({
+			url: getContextPath()+"/orderlist/updatestatus.do",
+			type: "post",
+			data: { "order_group":($("#ordergroupbox").val()),
+					"order_status":"결제완료"
+			},
+			dataType: "text",
+			success: data => {
+				if(data=="성공"){
+					alert("결제완료 처리가 성공했습니다");
+					getData();
+					$("#tablebox").val("");
+					$("#ordergroupbox").val("");
+					$("#totalbox").val("");
+				}else{
+					alert(data);
+				}
+				
+			}
+			,
+			error: () => {
+				alert("요청실패");
+			}
+		});
+
+	}
 
 	
 	
@@ -106,7 +176,15 @@ $(()=>{
 		  }
 		  
 		  getData();
-
+		  
+		  
+		  $("#orderConfirmbtn").click(()=>{
+			  orderConfirm();
+		  });
+		  
+		  $("#completePaymentbtn").click(()=>{
+			  completePayment();
+		  })
 	  
 })
 	
@@ -211,6 +289,27 @@ margin-left:3%;
 }
 
 
+input[type="text"]{
+text-align: center;
+width: 80%;
+margin-left:10%;
+margin-right:10%;
+margin-bottom: 40px;
+font-size:30px;
+border: none;
+border-radius: 10px;
+}
+
+.confirmbtn{
+width: 80%;
+margin-left:10%;
+margin-right:10%;
+margin-bottom: 10px;
+height: 80px;
+font-size: 30px;
+border-radius: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -235,7 +334,23 @@ margin-left:3%;
 					</table>
 					<div id="orderlistbox"></div>
 				</div>
-				<div id="rightbox">123</div>
+				<div id="rightbox">
+				<br>
+				<br>
+				테이블번호<br><input type="text" id="tablebox" value=""><br>
+				주문번호<br><input type="text" id="ordergroupbox" value=""><br>
+				총액<br><input type="text" id="totalbox" value=""><br>
+				
+				<br>
+				<button type="button" id = "orderConfirmbtn" class="btn btn-outline-secondary confirmbtn">주문확인</button><br><br>
+				<button type="button" id = "completePaymentbtn" class="btn btn-secondary confirmbtn">결제완료</button>
+				
+				
+				
+				
+				
+				
+				</div>
 			</div>
 		</div>
 	</div>

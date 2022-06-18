@@ -48,5 +48,8 @@ public class OrderlistService {
 		return orderlistDAO.selectByShopSeqWithMenuAndShop(shop_seq);
 	}
 	
+	public int updateStatusBygroup(String order_status,int order_group) {
+		return orderlistDAO.updateStatusBygroup(order_status, order_group);
+	}
 	
 }
