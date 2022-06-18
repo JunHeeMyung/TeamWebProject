@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 
 import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.menu.model.MenuService;
+import com.zumuniyo.shop.dto.ShopDTO;
+import com.zumuniyo.shop.model.ShopService;
 
 public class MenuManageController implements Command {
 	
@@ -58,6 +60,15 @@ public class MenuManageController implements Command {
 				
 				request.setAttribute("menuDTOs", jsonArray);
 			
+				
+				ShopService shopService = new ShopService();
+				
+				
+				List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
+				
+				request.setAttribute("shop", shoplist.get(0));
+				
+				
 			return "/view/menu/menuManageDesign.jsp";
 	
 

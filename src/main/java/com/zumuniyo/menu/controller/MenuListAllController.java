@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 
 import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.menu.model.MenuService;
+import com.zumuniyo.shop.dto.ShopDTO;
+import com.zumuniyo.shop.model.ShopService;
 
 public class MenuListAllController implements Command {
 	
@@ -56,6 +58,14 @@ public class MenuListAllController implements Command {
 				}
 				
 				request.setAttribute("menuDTOs", jsonArray);
+				
+				ShopService shopService = new ShopService();
+				
+				List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
+				
+				request.setAttribute("shop", shoplist.get(0));
+				
+				System.out.println(shoplist.get(0));
 			
 			return "/view/menu/menuListFrontDesign.jsp";
 	
@@ -98,6 +108,15 @@ public class MenuListAllController implements Command {
 				jsonArray.add(jsonObject);
 
 			}
+			
+			ShopService shopService = new ShopService();
+			
+			List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
+			
+			request.setAttribute("shop", shoplist.get(0));
+			
+			
+			
 			
 			return "json:"+jsonArray.toJSONString();
 			

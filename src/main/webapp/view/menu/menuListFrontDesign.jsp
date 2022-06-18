@@ -79,9 +79,18 @@ background-color: rgba(245, 245, 245);
 width: 100%;
 height: 50px;
 
-background-color:red;
+background-color:rgba(235, 235, 235);
 
 }
+
+.btnbar{
+padding-left: 30px; 
+padding-right: 30px;
+
+}
+
+
+
 
 
 
@@ -93,11 +102,9 @@ background-color:red;
 	height: 250px;
 	display : inline-block;
 	margin: 0px auto;
-	background-color: rgba(235, 235, 235);
+	background-color: rgba(255, 255, 255);
 	
 }
-
-
 
 
 .container{
@@ -366,6 +373,9 @@ margin-left: 5px;
 margin-left: 5px;
 }
 
+
+/*--------목록버튼관련---------*/
+
 #cartbtn{
 
 align-items: center;
@@ -393,7 +403,35 @@ padding-left: 14px;
 }
 
 
+#gotothetop {
 
+align-items: center;
+text-align:center;
+vertical-align:middle;
+color: white;
+font-size:30px;
+font-weight:bold;
+display: flex;
+width: 90px;
+height: 90px;
+position: fixed;
+right: 220px;
+bottom: 54px;
+background-color: rgba(255, 178, 60);
+border-radius: 22px;
+
+}
+
+#gotothetop:hover {
+	cursor:pointer;
+}
+#gotothetop_space {
+
+padding-left: 15px;
+}
+
+
+/*-----------------------*/
 
 
 
@@ -627,10 +665,55 @@ padding-top: 1px;
 
 }
 
-
-
-
 /*--------------------------*/
+
+#shopimg{
+
+}
+#shopname{
+
+}
+#shopnotice{
+
+}
+
+
+#shopinfobtn {
+
+margin-right: 10px;
+display: inline-block;
+float:right;
+
+align-items: center;
+text-align:center;
+vertical-align:middle;
+color: white;
+font-size:14px;
+
+display: flex;
+width: 130px;
+height: 35px;
+background-color: rgba(95, 198, 145);
+border-radius: 10px;
+
+
+}
+#shopinfobtn:hover {
+	cursor:pointer;
+}
+#shopinfobtn_space {
+
+padding-left:16px;
+}
+
+#shopfavorite {
+
+width: 100px;
+height: 100px;
+
+}
+
+
 
 
 
@@ -648,12 +731,31 @@ function getContextPath() {
 
 
 
+	
 
 
 
 $(()=>{
 	
-	//카테고리 상단바의 버튼 누를시
+	$("#shopinfobtn").click(function(){
+
+		
+	
+	});
+
+	
+	
+	
+	
+	// 하단 top버튼 누를시 
+	$("#gotothetop").click(function(){
+
+		document.documentElement.scrollTop = 0;
+	
+	});
+
+	
+	// 카테고리 상단바의 버튼 누를시
 	$(".btnbar").click(function(){
 		
 		var btnbarid = $(this).attr("id");
@@ -942,8 +1044,10 @@ $(function(){
 				$("#menu_info").html(responseData["menu_info"]);
 				$("#menu_img").html(responseData["menu_img"]);
 				$("#menu_price").html(responseData["menu_price"]);
+				
 				var path = "<%=request.getSession().getAttribute("path")%>";
 				var imgpath = path+"/images/"+responseData["menu_img"];
+				
 				$("#menu_photo").attr("src",imgpath);
 		
 
@@ -1001,9 +1105,25 @@ $(function(){
 <!-- 매장소개페이지 -->
 <div id="shopframe">
 
+<div id="shopimg">${ shop.shop_img }</div>
+<div id="shopname">${ shop.shop_name }</div>
+<div id="shopnotice">${ shop.shop_notice }</div>
+
+<div id="shopinfobtn"><span id="shopinfobtn_space">매장정보보기>> </span></div>
+
+<div id="shopfavorite"><img src="/image/favorites_mark.png" ></div>
+
+
 
 
 </div>
+
+
+
+
+
+
+
 
 
 <!-- 메뉴출력 -->
@@ -1071,7 +1191,7 @@ $(function(){
 
 <div align="center" id="cartbtn" data-bs-toggle="modal" data-bs-target="#orderlistmodal" ><span id="cartbtn_space">주문목록</span></div>
 
-
+<div id="gotothetop"><span id="gotothetop_space">TOP</span></div>
 
 
 

@@ -15,6 +15,13 @@
 <!-- FONTAWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
+<!-- 헤드라인 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+
+
 <title>메뉴관리페이지</title>
 
 
@@ -75,13 +82,20 @@ table , td {
 		border-collapse: collapse; 
 		padding: 5px; 
 	}
-h1 { text-align: center; padding: 20px; margin: 10px; }
+h1 { text-align: center; padding: 20px; margin: 10px; font-family: 'Noto Sans KR', sans-serif; }
 	
 
 .modal-header {
 text-align: center;
 
 }
+
+.modal-title {
+display:inline-block;
+width:100%;
+margin: auto;
+}
+
 
 .menuphoto{
 
@@ -90,7 +104,7 @@ height: 80px;
 
 }
 
-
+/*-------insert버튼관련----------*/
 
 #menuinsert {
 margin-right: 10px;
@@ -112,6 +126,12 @@ border-radius: 10px;
 
 }
 
+#menuinsert:hover {
+	cursor:pointer;
+
+}
+
+
 #insertbtn_space {
 padding-left: 22px;
 
@@ -120,8 +140,35 @@ padding-left: 22px;
 
 #btninsert {
 
+}
+
+/*---------------------------*/
+
+
+.form-control{
+paddin-left:10px;
+paddin-right:10px;
+width: 240px;
+
 
 }
+.form-wide{
+
+width: 100%;
+height: 200px;
+
+vertical-align: text-top;
+
+}
+
+
+.btn-detail{
+
+}
+
+
+
+
 
 #menucounter {
 display: inline-block;
@@ -223,9 +270,14 @@ vertical-align: middle;
 }
 
 
-
-
 /*---------------------*/
+
+
+
+
+
+
+
 
 
 
@@ -288,7 +340,7 @@ $(function(){
 });
 
 $(function(){
-	$("#btninsert").click(function(){
+	$("#btn-insert").click(function(){
 	
 		var shop_seq = <%=request.getParameter("shop_seq")%>
 
@@ -337,6 +389,11 @@ $(function(){
 	});
 });
 
+
+
+
+
+
 	
 
 
@@ -360,10 +417,12 @@ $(function(){
 <div id="mainframe" class="shadow">
 
 
+<div id="shopname">
+<h1>「${ shop.shop_name }」의 메뉴관리 </h1>
+</div>
 
 
 
-<h1>해당 매장이 보유한 메뉴목록</h1>
 
 
 
@@ -375,7 +434,7 @@ $(function(){
 
 
 
-<div id="menuinsert" align="center" data-bs-toggle="modal" data-bs-target="#insertmodal" >
+<div id="menuinsert" align="center" data-bs-toggle="modal" data-bs-target="#insertModal" >
 <div id="btninsert"><span id="insertbtn_space">신규등록</span></div>
 </div>
 
@@ -392,7 +451,7 @@ $(function(){
 		<td>순서</td>
 		<td>이미지</td>
 		<!-- <td>메뉴ID</td> -->
-		<td>메뉴이름</td>
+		<td>이름</td>
 		<td>카테고리</td>
 		<td>가격</td>
 		
@@ -475,8 +534,8 @@ $(function(){
         
           <label>메뉴이름</label><input type="text" name="menu_name" class="form-control"><br>
           <label>카테고리</label><input type="text" name="menu_category" class="form-control"><br>
-          <label>가격</label><input type="text" name="menu_price" class="form-control"><br>
-          <label>메뉴소개</label><input type="text" name="menu_info" class="form-control"><br>
+          <label>가격</label><input type="number" name="menu_price" class="form-control" min="0" max="99999999" value=0 ><br>
+          <label>메뉴소개</label><textarea name="menu_info" class="form-control form-wide"></textarea><br>
           
           <label>추천메뉴여부</label>
           <input type="radio" name="menu_top" value=1 >예
@@ -538,10 +597,9 @@ $(function(){
           
           <table id = "modaltable">
           <tr>
-          <td colspan='2'><div id="menu_name"></div></td><td></td>
-          <td colspan='2' id="detail_gae_won">
+          <td colspan='5'><div id="menu_name"></div></td>
           
-          </td>
+          
           </tr>
           <tr>
           <td colspan='5'><div id="menu_info"></div></td>
@@ -566,41 +624,7 @@ $(function(){
 
 
 
-<div id="detailContainer" class="container">
-  
-  <!-- The Modal -->
-  <div class="modal" id="menuModal2">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">메뉴 상세보기</h4>
-          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body form-group" >
 
-        <input type="hidden" id="menu_seq" class="form-control"><br>
-         <label>메뉴이름</label><input type="text" id="menu_name" class="form-control"><br>
-          <label>메뉴소개</label><input type="text" id="menu_info" class="form-control"><br>
-          <label>이미지</label><input type="text" id="menu_img" class="form-control"><br>
-          <label>가격</label><input type="text" id="menu_price" class="form-control"><br>
-        
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-</div>
 
 
 
