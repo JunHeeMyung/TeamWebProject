@@ -142,12 +142,12 @@ tr:hover { background-color: #F5F5F5; }
 	<td>매장주소</td>
 	<td>상세주소</td>
 	<!-- <td>mem_seq</td> -->
-	<td>카테고리</td>
+	<td>분류</td>
 	<td class="shopimg">매장사진</td>
 	<td>매장정보</td>
 	<!-- <td>shop_status</td> -->
-	<td>수정하기</td>
-	<td></td>
+	<td>수정</td>
+	<td>삭제</td>
 </tr>
 <c:forEach items="${shopLists}" var="shoplist">
 <tr>
@@ -162,7 +162,7 @@ tr:hover { background-color: #F5F5F5; }
 	<td>${shoplist.shop_notice}</td>
 	<td><input type="button" value="수정하기" onClick="location.href='${path}/shop/shopUpdate.do?shop_seq=${shoplist.shop_seq}'"></td>
 <%--<td>${shoplist.shop_status}</td> --%>
-	<td></td>	
+	<td><input type="button" value="삭제하기" onClick="location.href='${path}/shop/shopDelete.do?shop_seq=${shoplist.shop_seq}'"> </td>	
 </tr>
 </c:forEach>
 </table>
