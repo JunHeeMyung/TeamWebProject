@@ -71,5 +71,8 @@ public class MenuService {
 		return dao.selectShopAll(shop_seq);
 	}
 	
-	
+	public List<MenuDTO> selectShopAll2(int shop_seq) {
+		
+		return dao.selectShopAll2(shop_seq);
+	}
 }

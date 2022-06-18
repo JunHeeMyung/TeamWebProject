@@ -35,7 +35,7 @@ public class MenuManageController implements Command {
 			int ishop_seq = Integer.parseInt(shop_seq);
 			
 			
-			List<MenuDTO> menuDTOs = mService.selectShopAll(ishop_seq);
+			List<MenuDTO> menuDTOs = mService.selectShopAll2(ishop_seq);
 
 			
 			JSONArray jsonArray = new JSONArray();
@@ -79,7 +79,7 @@ public class MenuManageController implements Command {
 			int ishop_seq = Integer.parseInt(shop_seq);
 			
 			
-			List<MenuDTO> menuDTOs = mService.selectShopAll(ishop_seq);
+			List<MenuDTO> menuDTOs = mService.selectShopAll2(ishop_seq);
 			
 
 			JSONArray jsonArray = new JSONArray();

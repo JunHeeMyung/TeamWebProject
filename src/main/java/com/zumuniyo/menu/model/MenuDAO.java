@@ -45,6 +45,8 @@ public class MenuDAO {
 	
 	static final String SQL_SELECT_SHOPALL = "select * from Z_MENU where not(menu_status='비활성') and shop_seq=? order by MENU_CATEGORY desc";
 	
+	static final String SQL_SELECT_SHOPALL2 = "select * from Z_MENU where not(menu_status='비활성') and shop_seq=? order by MENU_SEQ desc";
+	
 	static final String SQL_SELECT_BYCATEGORY = "SELECT * FROM Z_MENU WHERE MENU_CATEGORY = ? AND SHOP_SEQ = ? AND MENU_STATUS = '활성' ";
 	
 	
@@ -444,7 +446,34 @@ public class MenuDAO {
 	}
 	
 	
+	public List<MenuDTO> selectShopAll2(int shop_seq) {
+		
+		List<MenuDTO> mlist = new ArrayList<>();
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_SHOPALL2);
+			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				mlist.add(makeMenu(rs));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			DBUtil.dbClose(rs, pst, conn);
+		}
 	
+		return mlist;
+		
+	}
 	
 	
 	

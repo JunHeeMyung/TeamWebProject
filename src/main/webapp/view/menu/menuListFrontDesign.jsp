@@ -50,7 +50,7 @@ div {
 	margin: 0px auto;
 	text-align: center;
 	background-color: rgba(255, 255, 255);
-}
+	}
 
 }
 
@@ -62,10 +62,32 @@ div {
 	
 }
 
+#categoryframe {
+
+padding-top: 15px;
+padding-bottom: 0px;
+
+width: 100%;
+height: 50px;
+display : inline-block;
+margin: 0px auto;
+background-color: rgba(245, 245, 245);
+
+}
+
+#categorybar {
+width: 100%;
+height: 50px;
+
+background-color:red;
+
+}
+
+
 
 #shopframe {
 
-	padding-top: 40px;
+	padding-top: 0px;
 	padding-bottom: 0px;
 	width: 100%;
 	height: 250px;
@@ -74,12 +96,6 @@ div {
 	background-color: rgba(235, 235, 235);
 	
 }
-
-
-
-
-
-
 
 
 
@@ -110,6 +126,10 @@ margin-left: 20px;
 
 }
 
+.btn_category_header {
+
+
+}
 
 
 
@@ -521,7 +541,7 @@ color: gray;
 .menu_top_price{
 
 display: inline-block;
-font-size: 15px;
+font-size: 16px;
 color: rgba(255, 138, 0);
 }
 .menu_top_won{
@@ -627,7 +647,27 @@ function getContextPath() {
 
 
 
+
+
+
+
 $(()=>{
+	
+	//카테고리 상단바의 버튼 누를시
+	$(".btnbar").click(function(){
+		
+		var btnbarid = $(this).attr("id");
+			
+		$("#btnmenuid" + btnbarid.substring(8)).trigger({ type: "click" });
+		
+		var offset = $("#btnmenuid" + btnbarid.substring(8)).offset();
+		
+		$('html').animate({scrollTop : offset.top}, 100);
+		
+	});
+
+	
+	
 	
 	
 	// 비우기 버튼 누를시
@@ -927,12 +967,42 @@ $(function(){
 
 <div id="wrapper" class="shadow">
 
+
+
+
+<!-- 카테고리 상단박스 -->
+<div id="categoryframe">
+
+
+<div id="categorybar">
+<c:set var="headerlast" value=""/>
+<div class="btn-group" >
+<c:set var="btnbarid" value="0" />
+<c:forEach var="menu" items="${menuDTOs}" varStatus="status">
+<c:if test = "${menu.menu_category ne headerlast}">
+<c:set var="headerlast" value="${menu.menu_category}"/>
+<c:set var="btnbarid" value="${btnbarid + 1}" />
+<button type="button" id="btnbarid${btnbarid}" class="btn btnbar" data-bs-target="#menu${headerlast}"><div class="btn_category_header">${menu.menu_category}</div></button>
+</c:if>
+</c:forEach>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+<!-- 매장소개페이지 -->
 <div id="shopframe">
 
 
 
 </div>
 
+
+<!-- 메뉴출력 -->
 <div id="mainframe">
 
 
@@ -951,7 +1021,7 @@ $(function(){
 		<div class="menu_top_img"><img src="${path}/images/${menu.menu_img}" class="menu_top_img"></div>
 		<div class="menu_top_name">${menu.menu_name}</div>
 		<div class="menu_top_info">${menu.menu_info}</div>
-		<div class="menu_top_price"><b>${menu.menu_price}</b><div class="menu_top_won"> 원</div></div>
+		<div class="menu_top_price">${menu.menu_price}<div class="menu_top_won"> 원</div></div>
 		
 		
 		</div>
@@ -966,11 +1036,14 @@ $(function(){
 
 <div>
 <c:set var="last" value=""/>
+<c:set var="btnmenuid" value="0" />
 <c:forEach var="menu" items="${menuDTOs}" varStatus="status">  
+
 <c:if test ="${menu.menu_category ne last}">
 </div>
 <c:set var="last" value="${menu.menu_category}"/>
-<button type="button" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}"><div class="btn_category_text">${menu.menu_category}</div></button>
+<c:set var="btnmenuid" value="${btnmenuid + 1}" />
+<button type="button" id="btnmenuid${btnmenuid}" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}"><div class="btn_category_text">${menu.menu_category}</div></button>
 <div id="menu${last}" class="collapse what">
 </c:if>
 <div class="menutuple">
