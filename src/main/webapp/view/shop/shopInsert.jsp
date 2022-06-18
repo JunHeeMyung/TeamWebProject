@@ -150,20 +150,16 @@ $(()=>{
 <input class="form-control"  type="text" name="shop_name"> 
 </div>
 
+<label>주소</label><input id="addr" name="loc_addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
+<br>상세주소<input id="detailaddr" name="shop_addr_detail" type="text">
+<!-- 위도(hidden): -->	<br> <input id="latitude" name="loc_lat" type="hidden" readonly="readonly">
+<!-- 경도(hidden): --> 	<br><input id="longitude" name="loc_lon" type="hidden" readonly="readonly">
+
 <select name="category_code">
 <c:forEach var="categoryDTO" items="${categoryDTOs}" varStatus="status">
 <option value="${categoryDTO.category_code}">${categoryDTO.category_name}</option>
 </c:forEach>
-
 </select>
-
-
-
-
-<label>주소</label><input id="addr" name="loc_addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
-	<br>상세주소: <input id="detailaddr" name="shop_addr_detail" type="text">
-<!-- 위도(hidden): -->	<br> <input id="latitude" name="loc_lat" type="text" readonly="readonly">
-<!-- 경도(hidden): --> 	<br><input id="longitude" name="loc_lon" type="text" readonly="readonly">
 
 
 

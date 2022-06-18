@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("utf-8"); %>
+<jsp:include page="${page}/view/common/header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +137,7 @@ $(()=>{
 </script>
 </head>
 <body>
-<h1>매장 수정</h1>
+<h2>매장 수정</h2>
 <br>
 
 
@@ -147,14 +148,24 @@ $(()=>{
 
 <div class="form-group">
 <label>매장이름</label>
-<input class="form-control"  type="text" name="shop_name"> 
+<input class="form-control"  type="text" name="shop_name" value="${shop.shop_name}"> 
 </div>
 
-<label>주소</label><input id="addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
-	<br>상세주소: <input id="detailaddr" type="text">
-<!-- 위도(hidden): -->	<br> <input id="latitude" type="hidden" readonly="readonly">
-<!-- 경도(hidden): --> 	<br><input id="longitude" type="hidden" readonly="readonly">
-</form>
+<label>주소</label><input id="addr" name="loc_addr" type="text" readonly="readonly" value="${shop.loc_addr}"><input id="findaddr" type="button" value="주소검색">
+<br>상세주소<input id="detailaddr" name="shop_addr_detail" type="text" value="${shop.shop_addr_detail}">
+<!-- 위도(hidden): -->	<br> <input id="latitude" name="loc_lat" type="hidden" readonly="readonly" value="${location.loc_lat}">
+<!-- 경도(hidden): --> 	<br><input id="longitude" name="loc_lon" type="hidden" readonly="readonly" value="${location.loc_lon}">
+
+<select name="category_code">
+<c:forEach var="categoryDTO" items="${categoryDTOs}" varStatus="status">
+<c:if test="${shop.category_code eq categoryDTO.category_code}">
+<option value="${categoryDTO.category_code}" selected="selected">${categoryDTO.category_name}</option>
+</c:if>
+<c:if test="${shop.category_code ne categoryDTO.category_code}">
+<option value="${categoryDTO.category_code}">${categoryDTO.category_name}</option>
+</c:if>
+</c:forEach>
+</select>
 
 
 
@@ -185,13 +196,13 @@ $(()=>{
  <label>매장정보</label>
  <br>
  
-<textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
+<textarea class="form-control" id="content" name="shop_notice" cols="50" rows="8"><c:out value="${shop.shop_notice}" /></textarea>
 </div>
 
 
 <!-- 이미지선택  -->
 파일: <input type="file" name="photos"> <br> 
-
+<input type="hidden" name ="shop_seq" value="${param.shop_seq}">
 <!-- 버튼 선택 -->
 <input class="btn btn-primary" type="submit" value="입력하기">
 <input class="btn btn-secondary" type="reset" value="취소하기">

@@ -34,10 +34,11 @@ public class ShopUpdateController implements Command{
 		
 		if(method.equals("GET")) {
 						
-			ShopService service = new ShopService();
-			List<ShopDTO> shopDTOs = service.selectShopAll();
+			ShopService shopService = new ShopService();
+			int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
+			
+			List<ShopDTO> shoplist =  shopService.selectBySeq(shop_seq);
 						
-			request.setAttribute("shopDTOs", shopDTOs);
 			
 			System.out.println("page url="+ page);
 			System.out.println("get");
@@ -46,9 +47,7 @@ public class ShopUpdateController implements Command{
 			
 			CategoryService categoryService = new CategoryService();
 			List<CategoryDTO> categoryDTOs = categoryService.selectAll();
-			
-			System.out.println(categoryDTOs);
-			
+
 			
 			JSONArray jsonarray = new JSONArray();
 			
@@ -60,20 +59,43 @@ public class ShopUpdateController implements Command{
 			}
 			
 			request.setAttribute("categoryDTOs", jsonarray);
+			request.setAttribute("shop",shoplist.get(0));
+			
+			LocationService locationService = new LocationService();
+			LocationDTO location = locationService.selectByAddr(shoplist.get(0).getLoc_addr());
+			
+			request.setAttribute("location", location);
 			
 			page ="/view/shop/shopUpdate.jsp";
 			
 		}else {
 			System.out.println("post");
+			/*
+			Map<String,String[]> params = request.getParameterMap();
 			
+			for(String key:params.keySet()) {
+				System.out.println(params.get(key));
+			}
+			*/
+			if(request.getParameter("shop_seq")==null||request.getParameter("shop_seq").equals("")) {
+				return "json:매장정보가 없습니다";
+			}
+			int shop_seq = Integer.parseInt(request.getParameter("shop_seq")); 
 			
 			Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");
 			
 			  if(loginInfo==null) { return "json:로그인정보가 없습니다"; }
 			
-			
 		    int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
-			
+		    
+		    ShopService shopService = new ShopService();
+		    List<ShopDTO> shoplist = shopService.selectBySeq(shop_seq);
+		    
+		    if( shoplist.get(0).getMem_seq() !=mem_seq) {
+		    	return "json:매장 주인이 아닙니다.";
+		    }
+		    
+		    request.setAttribute("shop_seq", shop_seq);
 			
 			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
 			System.out.println("업로드 폴더: "+dir);
@@ -93,11 +115,12 @@ public class ShopUpdateController implements Command{
 				shopDTO.setShop_img(photos.get(0));
 				
 				
+				
 				ShopService service = new ShopService();
 				int result = service.shopUpdate(shopDTO);
 				request.setAttribute("message", result>0?"매장수정성공":"매장수정실패");
 				System.out.println("result: "+result);
-				page ="/index.jsp";		
+				page ="/shop/shopselectByMem.do";		
 			
 		}
 		
@@ -113,11 +136,14 @@ public class ShopUpdateController implements Command{
 	private ShopDTO makeShop(HttpServletRequest request) {
 	//'멕시카나치킨', '서울특별시 금천구 가산디지털1로 70', '2층', NULL, NULL, img경로, 공지사,
 		
+		
+		
+		
+		
+		
 		ShopDTO shopDTO = new ShopDTO();
 		
 		String shop_name = request.getParameter("shop_name");		
-		
-		
 		String loc_addr = request.getParameter("loc_addr");
 		Double loc_lat = Double.parseDouble(request.getParameter("loc_lat"));
 		Double loc_lon = Double.parseDouble(request.getParameter("loc_lon"));
@@ -132,13 +158,11 @@ public class ShopUpdateController implements Command{
 			locationDTO.setLoc_lon(loc_lon);
 			
 			int result = locationServicenew.insertLocation(locationDTO);
-
-			
 		}
 		
 		Map<String, String> loginInfo = (Map<String, String>)request.getSession().getAttribute("member");		
 	    int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
-
+	    int shop_seq = Integer.parseInt(request.getParameter("shop_seq"));
 		String category_code = request.getParameter("category_code");
 		String shop_img = request.getParameter("shop_img");
 		String shop_notice = request.getParameter("shop_notice");
@@ -149,7 +173,7 @@ public class ShopUpdateController implements Command{
 		shopDTO.setShop_addr_detail(shop_addr_detail);
 		shopDTO.setShop_img(shop_img);
 		shopDTO.setShop_notice(shop_notice);
-		
+		shopDTO.setShop_seq(shop_seq);
 		return shopDTO;
 	}
 	

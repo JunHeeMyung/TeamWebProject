@@ -122,7 +122,7 @@ $(()=>{
 		<c:forEach items="${shoplist}" var="shop" varStatus="status">
 		<tr>
 		<td>${shop.shop_seq}</td>
-		<td>${shop.shop_img}</td>
+		<td><img src='${path}/images/${shop.shop_img}'></td>
 		<td>${shop.shop_name}</td>
 		<td><input type="button" id="btn1" value="상세보기" onclick="location.href = '${path}/shop/shopDetail.do?shop_seq=${shop.shop_seq}'"></td>
 		</tr>

@@ -27,7 +27,7 @@ public class ShopDAO {
 	static final String SQL_INSERT_SHOP = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, ?, ?, ?, ?, '활성')";
 	static final String SQL_INSERT_SHOP_TEST = "insert into Z_SHOP VALUES(SHOP_SEQ.nextval,?,?,?, NULL, NULL, ?, ?, '활성')";
 	
-	static final String SQL_UPDATE = "UPDATE Z_SHOP SET SHOP_NAME = ?, LOC_ADDR=?, SHOP_ADDR_DETAIL=? , SHOP_IMG=? SHOP_NOTICE=? WHERE SHOP_SEQ=? ";
+	static final String SQL_UPDATE = "UPDATE Z_SHOP SET SHOP_NAME = ?, LOC_ADDR=?, SHOP_ADDR_DETAIL=? , SHOP_IMG=?, SHOP_NOTICE=? ,CATEGORY_CODE=? WHERE SHOP_SEQ=? ";
 	
 	static final String SQL_SELECT_MEM_SEQ = "SELECT * FROM Z_SHOP WHERE MEM_SEQ=?";
 	
@@ -248,7 +248,9 @@ SHOP_SEQ SHOP_NAME LOC_ADDR SHOP_ADDR_DETAIL MEM_SEQ CATEGORY_CODE SHOP_IMG SHOP
 	            pst.setString(3, shopDTO.getShop_addr_detail());
 	            pst.setString(4, shopDTO.getShop_img());
 	            pst.setString(5, shopDTO.getShop_notice());
-	            pst.setInt(6, shopDTO.getShop_seq());
+	            pst.setString(6, shopDTO.getCategory_code());
+	            pst.setInt(7, shopDTO.getShop_seq());
+	            
 	            
 	            result = pst.executeUpdate();			
 			} catch (SQLException e) {
