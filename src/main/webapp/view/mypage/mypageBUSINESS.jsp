@@ -119,13 +119,10 @@ $(()=> {
 <br>
 
 <br>
-<form action="${path}/orderlist/manageroperner.do" method="get" name="mem_seq6">
-<button type="submit">주문관리</button>
+<form action="${path}/orderlist/manageropener.do" method="get" name="mem_seq6">
+<button type="submit">주문관리 및 QR생성</button>
 </form>
 <br>
-
-
-
 <%-- 
 <br>
 <form action="${path}/review/reviewShopList.do" method="post" name="mem_seq" val="${member.mem_seq}">
