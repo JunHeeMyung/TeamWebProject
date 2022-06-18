@@ -657,12 +657,16 @@ $(()=>{
 	$(".btnbar").click(function(){
 		
 		var btnbarid = $(this).attr("id");
-			
+		
+		$("div[id^='menu']").removeClass("show");
 		$("#btnmenuid" + btnbarid.substring(8)).trigger({ type: "click" });
 		
 		var offset = $("#btnmenuid" + btnbarid.substring(8)).offset();
 		
 		$('html').animate({scrollTop : offset.top}, 100);
+		
+		 
+		
 		
 	});
 
