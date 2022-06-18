@@ -107,6 +107,7 @@ div {
 <button id="chart3" class="btn btn-primary btn-lg">매장</button>
 <button id="chart4" class="btn btn-primary btn-lg">리뷰</button>
 
+
 <div id="post-box" class="form-post" style="width: 800px; height: 800px;">
 	<!--차트가 그려질 부분-->
 	<div id="post-box1" class="form-post">
@@ -238,6 +239,10 @@ $(()=> {
 });
 //*/
 
+
+
+
+
 $("#chart1").click(()=>{	
 	if ($('#post-box1').css('display') == 'block') {
 		$('#post-box1').hide();
@@ -247,6 +252,8 @@ $("#chart1").click(()=>{
 		allChar();
 		}
 });	
+
+
 $("#chart2").click(()=>{
 	if ($('#post-box2').css('display') == 'block') {
 		$('#post-box2').hide();
@@ -275,8 +282,17 @@ $("#chart4").click(()=>{
 		}
 });
 	
-
-
+/* 
+$(()=> {	
+	//allChar();
+	//$('#post-box1').show();	
+	//$("#chart1").trigger("click");
+	//$("#my-btn").trigger("click");
+	
+	//document.getElementById("my-btn")[0].click();
+	//document.getElementById("chart1")[0].click();
+});
+ */
 
 function allChar() {
 	var context = document.getElementById('myChart').getContext('2d');

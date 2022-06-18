@@ -86,53 +86,7 @@ table, td, th {
 };
 
 </style>
-<script type="text/javascript">
 
-
-$(()=>{
-	
-	$("#nick_check").click(() => {
-
-		$('#nick_check').attr('disabled', true);
-		$("#nick_check").html("<div class='spinner-border text-primary'></div>");
-
-		var mem_nick = $("#mem_nick").val();
-		$.ajax({
-			url: getContextPath()+"/member/nickcheck.do",
-			type: "get",
-			data: { "mem_nick": mem_nick },
-			dataType: "text",
-			success: data => {
-				if (data == "중복") {
-					$("#mem_nick").css("color","red");
-					//$("#nick_check_result").html("<span class='red'>중복된 닉네임입니다</span>");
-				} else if (data == "비중복") {
-					$("#mem_nick").css("color","green");
-					//$("#nick_check_result").html("<span class='green'>중복된 닉네임이 없습니다</span>");
-				} else {
-					//$("#nick_check_result").html("<span>" + data + "</span>");
-				}
-
-				$('#nick_check').attr('disabled', false);
-				$("#nick_check").html('중복확인');				
-
-			},
-			error: () => {
-				alert("요청실패");
-				$('#nick_check').attr('disabled', false);
-				$("#nick_check").html('중복확인');
-			}
-		})
-	});
-
-	$("#mem_nick").keyup(() => {
-		$("#nicklabel").html(document.getElementById("mem_nick").checkValidity() ? "" : "<i class='xicon fas fa-times-circle red'></i>");
-	})
-})
-
-
-
-</script>
 
 
 
@@ -160,7 +114,7 @@ $(()=>{
 
 				<!-- <td></td> -->
 			</tr>
-			<c:set var="nickseq" value="0"/>
+			
 			<c:forEach items="${memberDTOs}" var="member">
 				<tr>
 					<c:if test="${member.mem_type!= '관리자'}">
@@ -170,12 +124,8 @@ $(()=>{
 						<td><div class="input-group mb-3">
 						
 						<input type="text"
-							id="mem_nick${nickseq}" name="mem_nick" class="form-control"
-							placeholder="한글 2~8자" pattern="\0|^[가-힣]{2,8}$"
-							data-bs-toggle="tooltip" data-bs-placement="top" title="한글 2~8자"
-							value="${member.mem_nick}">
-						<label class="red" id="nicklabel${nickseq}"></label>
-						<button type="button" id="nick_check${nickseq}" class="btn btn-light">중복확인</button>
+							id="mem_nick${nickseq}" name="mem_nick" class="form-control"value="${member.mem_nick}">
+						<label class="red" id="nicklabel${nickseq}"></label>						
 					</div></td>
 						<td>${member.mem_email}</td>
 						<%-- <td>${member.mem_salt}</td> --%>

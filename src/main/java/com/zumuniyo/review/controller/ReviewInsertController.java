@@ -66,15 +66,15 @@ public class ReviewInsertController implements Command{
 			ReviewDTO reviewDTO = makeReview(request);
 			reviewDTO.setReview_img(photos.get(0));
 			ReviewService service = new ReviewService();
-			int result = service.reviewInsert(reviewDTO);
+			int result = service.reviewInsert2(reviewDTO);
 			request.setAttribute("message", result>0?"리뷰등록성공":"리뷰등록실패");
 			System.out.println("result: "+result);
-			page ="/view/review/result.jsp";
+			page ="/view/orderlist/myorderlist.do";
 		}
 		
-	
-		ReviewService service = new ReviewService();
-		request.setAttribute("reviewAllList", service.selectAll());
+	    
+		//ReviewService service = new ReviewService();
+		//request.setAttribute("reviewAllList", service.selectAll());
 		
 
 		return page;

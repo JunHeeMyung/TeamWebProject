@@ -25,12 +25,12 @@ public class ReviewSelectByShopController implements Command{
 		 */		
 	    ReviewService service = new ReviewService();
 	    String shop_seq = "";
+	    
+	    shop_seq = request.getParameter("shop_seq");
+	    
 	    if(request.getParameter("shop_seq")==null) {
 	    	shop_seq = "4";
-	    } else {
-	    	shop_seq = request.getParameter("shop_seq");	    	
-	    }
-	    
+	    } 
 	    	
 	    
 

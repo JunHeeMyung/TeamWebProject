@@ -8,15 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <style type="text/css">
-h1 {
-	left: 70px;
-	position: relative;
-}
 
-p {
-	left: 130px;
-	position: relative;
-}
 
 #admenu {
 	left: 130px;
@@ -26,15 +18,19 @@ p {
 
 .navigation{
 	position: fixed;
-	top: 20px;
+	top: 0px;
 	right:0px;
-	width: 450px;
+	width: 400px;
 	height: 1000px;
 	border-radius: 10px;
-	background: #4d5bf9;
+	background: rgba(255, 138, 0);
+	text-align: center;
 }
+.btoon{
+	text-align: left;
 
 
+}
 
 </style>
 
@@ -43,7 +39,7 @@ p {
 <body>
 
 <div class="navigation">
-<h1> 관리자 페이지</h1>
+<h1>관리자 페이지</h1>
 
 <!-- <p> 관리자 접속 성공 </p> -->
 
@@ -58,6 +54,7 @@ p {
 
 
 <br>
+<div class="btoon">
 <form action="${path}/admin/adminMember.do" method="post">
 <button name="admenu" class="btn btn-primary" type="submit">회원관리</button>
 </form>
@@ -78,8 +75,7 @@ p {
 <br>
 <br>
 <button name="admenu" class="btn btn-primary" onClick="location.href='${path}/admin/adminStatistics.do'"> 통 계 </button>
-
-
+</div>
 
 
 </div>

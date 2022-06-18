@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- FONTAWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
 
 <title>매장 주인</title>
 <style>
@@ -72,13 +73,18 @@ div {
 
 tr {
 	padding: 0px;
-	margin: 0px;
+	margin: 10px;
+	
+	
 }
 
 td {
 	padding: 10px;
 	margin: 10px;
 	border: 2px solid graytext;
+	
+	
+	
 }
 
 table {	
@@ -89,58 +95,119 @@ table {
 }
 
 </style>
+<script type="text/javascript">
+
+var reviewStar;
+
+
+$(function() {		
+    $('div#star1').raty({    	
+        score: function(evt) {        	
+            $("#starRating1").val(3);
+            return 3;
+        }
+   		,readOnly: true,
+        ,path : "${path}/view/review/img"
+        ,width : 200        
+        ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
+        ,click: function(score, evt) {
+            $("#starRating1").val(score);            
+        }
+    });
+});
+$(function() {
+    $('div#star3').raty({
+        score: function(evt) {        	
+            $("#starRating3").val(3);
+            return 3;
+        }     
+      	,path : "${path}/view/review/img"
+        ,width : 200
+        ,hints : ['나쁨', '그저그런', '보통', '좋음', '매우좋음']
+        ,click: function(score, evt) {        
+            $("#starRating3").val(score);  
+           
+        }
+    });
+});
+
+$(function() {	
+    $('div#star11').raty({    	
+        score: function(evt) {        	
+            $("#starRating11").val();            
+        }
+        ,path : "${path}/view/review/img"
+        ,width : 200       
+    });
+});
+</script>
 
 
 </head>
 <body>
 
+
+
 <div id="wrapper" class="shadow">
+<div class="form-group" id="star11" ><input type="hidden" id="starRating11" value="5"/></div>
 <div id="mainframe">
 
 <!-- 입력 -->
 <div id="contents">
 
-<table>
+
+
+
+<table id="reviewTable">
 	<tr>	
 		<td>리뷰 번호</td>
-		<td>멤버 번호</td>
-		<td>메뉴 번호</td>
-		<td>맛 평가</td>
+		<!-- <td>멤버 번호</td> -->
+		<!-- <td>메뉴 번호</td> -->
+		<!-- <td>맛 평가</td>
 		<td>양 평가</td>
-		<td>서비스 평가</td>
+		<td>서비스 평가</td> -->
 		<td>리뷰 내용</td>
 		<td>리뷰 사진</td>
 		<td>작성일자</td>
-		<td>추천리뷰여부 (1/0)</td>
-		<td>매장 번호</td>
-		<td>메뉴 카테고리</td>
+		<!-- <td>추천리뷰여부 (1/0)</td> -->
+		<!-- <td>매장 번호</td> -->
+		<!-- <td>메뉴 카테고리</td> -->
 		<td>메뉴 이름</td>
 		<td>메뉴 가격</td>
-		<td>메뉴 사진</td>
-		<td>메뉴 탑</td>
-		<td>메뉴 정보</td>
-		<td>메뉴 상태</td>	
+		<!-- <td>메뉴 사진</td> -->
+		<!-- <td>메뉴 탑</td> -->
+		<!-- <td>메뉴 정보</td> -->
+		<!-- <td>메뉴 상태</td> -->
+		<td>평균별점</td>
+		<!-- <td>별점</td> -->
+		<td>별점</td>
 	</tr>
+	
+	
 	<c:forEach items="${reviewShopManager}" var="reviewShopM">
+	<c:set var="starCnt" value="${starCnt+1}"/>	
 	<tr>
 		<td>${reviewShopM.review_seq}</td>
-		<td>${reviewShopM.mem_seq }</td>
-		<td>${reviewShopM.menu_seq }</td>
-		<td>${reviewShopM.review_taste }</td>
+		<%-- <td>${reviewShopM.mem_seq }</td> --%>
+		<%-- <td>${reviewShopM.menu_seq }</td> --%>
+		<%-- <td>${reviewShopM.review_taste }</td>
 		<td>${reviewShopM.review_amount }</td>
-		<td>${reviewShopM.review_service }</td>
+		<td>${reviewShopM.review_service }</td> --%>
 		<td>${reviewShopM.review_content }</td>		
 		<td><img src="${path}/images/${reviewShopM.review_img}"></td>
 		<td>${reviewShopM.review_date }</td>
-		<td>${reviewShopM.review_exposure }</td>
-		<td>${reviewShopM.shop_seq}</td>
-		<td>${reviewShopM.menu_category}</td>
+		<%-- <td>${reviewShopM.review_exposure }</td> --%>
+		<%-- <td>${reviewShopM.shop_seq}</td> --%>
+		<%-- <td>${reviewShopM.menu_category}</td> --%>
 		<td>${reviewShopM.menu_name}</td>
 		<td>${reviewShopM.menu_price}</td>
-		<td>${reviewShopM.menu_img}</td>
-		<td>${reviewShopM.menu_top}</td>
-		<td>${reviewShopM.menu_info}</td>
-		<td>${reviewShopM.menu_status}</td>		
+		<%-- <td><img src="${path}/images/${reviewShopM.menu_img}"></td> --%>
+		<%-- <td>${reviewShopM.menu_top}</td> --%>
+		<%-- <td>${reviewShopM.menu_info}</td> --%>
+		<%-- <td>${reviewShopM.menu_status}</td> --%>		 
+		<td>${(reviewShopM.review_taste+reviewShopM.review_amount+reviewShopM.review_service)/3 }</td>	
+	 	<%-- <td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(reviewShopM.review_taste+reviewShopM.review_amount+reviewShopM.review_service)/3}"/></div></td> --%>
+		<td><img src="${path}/view/review/img/star-on.png"></td>
 	
 	</tr>
 	</c:forEach>
@@ -151,5 +218,6 @@ table {
 </div>
 </div>
 </div>
+
 </body>
 </html>
