@@ -24,7 +24,7 @@ public class ReviewDeleteController implements Command{
 		int result = service.reviewDelete(review_seq);
 		request.setAttribute("message", result>0?"삭제성공":"삭제실패");
 		
-		return "/view/review/result2.jsp";
+		return "/review/revieMemList.do";
 		}
 	}
 

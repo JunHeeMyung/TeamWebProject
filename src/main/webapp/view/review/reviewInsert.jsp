@@ -247,6 +247,8 @@ $(function(){
 <textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
 </div>
 
+<input type="hidden" name="menu_seq" value="${menu_seq}" />
+
 <!-- 
 <div class="form-group">
 <label>사진</label>
@@ -259,8 +261,13 @@ $(function(){
 <br>
 <input class="btn btn-primary" type="submit" value="입력하기">&nbsp;&nbsp;&nbsp;
 <input class="btn btn-secondary" type="reset" value="취소하기">&nbsp;&nbsp;&nbsp;
-<input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList"><!--구매내역으로 돌릴 id설정  -->
+<input class="btn btn-secondary" type="button" value="뒤로가기" id="myOrderList"> <!-- 구매내역으로 돌릴 id설정 --> 
 </form>
+<%-- 
+<br>
+<br>
+<br>
+<button class="btn btn-secondary" onClick="location.href='${path}/orderlist/myorderlist.do'">뒤로가기</button> --%>
 <%-- 
 <form action="${path}/uploadtest.do" 
 	method="post" enctype="multipart/form-data">
@@ -278,8 +285,9 @@ $(function(){
 
  //구매내역으로 다시 반환시켜야됨
 $(function(){
-	$("#reviewAllList").click(function(){
-		location.href="reviewAllList";
+	$("#myOrderList").click(function(){
+		//alert("눌림");
+		location.href="${path}/orderlist/myorderlist.do";
 	});
 });
 

@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- FONTAWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
 
 <script type="text/javascript">
 
@@ -39,7 +40,7 @@ div {
 }
 
 
-@media (min-width: 800px){
+@media (min-width: 900px){
 
 #wrapper {
 	height:100%;
@@ -51,7 +52,7 @@ div {
 
 }
 
-@media (max-width: 800px){
+@media (max-width: 900px){
 
 #wrapper {
 	height:100%;
@@ -92,10 +93,65 @@ table {
 	padding: 0px;
 	margin: auto;	
 }
+#pic{
+	width: 200px;
+	
 
+
+}
 </style>
 </head>
+<script type="text/javascript">
 
+$(()=>{
+	$('div#star1').raty({
+		score: function(evt) {            
+            return $("#starRating1").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+		,width : 500
+	});
+});
+$(()=>{
+	$('div#star2').raty({
+		score: function(evt) {            
+            return $("#starRating2").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star3').raty({
+		score: function(evt) {            
+            return $("#starRating3").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+
+$(()=>{
+	$('div#star4').raty({
+		score: function(evt) {            
+            return $("#starRating4").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star5').raty({
+		score: function(evt) {            
+            return $("#starRating5").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+
+</script>
 
 
 <body>
@@ -103,34 +159,37 @@ table {
 <div id="wrapper" class="shadow">
 <div id="mainframe">
 
-<!-- 입력 -->
 <div id="contents">
 <h1>${member.mem_nick}님의 리뷰</h1>
 
-	<div id="reviewMember">
-	<table>
+
+	
+	<table id="reviewTable">
 		<tr>
 		<!-- 	<td>리뷰 SEQ</td>
 			<td>MEM_SEQ</td> -->
-			<td>MENU_SEQ</td>
-			<td>맛</td>
+			<td>메뉴번호</td>
+			<!-- <td>맛</td>
 			<td>양</td>
-			<td>서비스</td>
+			<td>서비스</td> -->
+			<td id="pic">사진</td>
 			<td>내용</td>
-			<td>사진</td>
+			<td>평균별점</td>
 			<td>날짜</td>					
 			<td></td>					
 		</tr>
 		<c:forEach items="${reviewMemberList}" var="review" varStatus="status">
+		<c:set var="starCnt" value="${starCnt+1}"/>	
 		<tr>
 		<%-- 	<td>${review.review_seq}</td>
 			<td>${review.mem_seq}</td> --%>
 			<td>${review.menu_seq}</td>
-			<td>${review.review_taste}</td>
+			<%-- <td>${review.review_taste}</td>
 			<td>${review.review_amount}</td>
-			<td>${review.review_service}</td>
-			<td>${review.review_content}</td>
+			<td>${review.review_service}</td> --%>
 			<td><img src="${path}/images/${review.review_img}"></td>
+			<td>${review.review_content}</td>
+			<td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(review.review_taste + review.review_amount + review.review_service)/3}"/></div></td>			
 			<td>${review.review_date}</td>
 			<td><form action="${path}/review/reviewDelete.do" method="post">
 					<input type="hidden" name="review_seq" value="${review.review_seq}"><input type="submit" class="btn btn-primary" value="삭제">
@@ -141,7 +200,6 @@ table {
 	</table>
 	<br>
 	<input type="button" id="btn1" value="뒤로가기" onclick="location.href='${path}/';">
-	</div>
 </div>
 </div>
 </div>

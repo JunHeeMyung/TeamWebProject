@@ -16,20 +16,34 @@
 
 }
 
+
+}
+#slideheader{
+display: inline-block;
+text-align: right;
+
+/* 
 .navigation{
 	position: fixed;
 	top: 0px;
 	right:0px;
-	width: 400px;
+	width: 430px;
 	height: 1000px;
 	border-radius: 10px;
-	background: rgba(255, 138, 0);
+	background: rgba(252, 198, 162);
+	background: #6ec5b8;
 	text-align: center;
 }
+ */
 .btoon{
 	text-align: left;
+	background: rgba(252, 198, 162);
+
+}
 
 
+#slidemenu{	
+	background: #6ec5b8;
 }
 
 </style>
@@ -68,16 +82,19 @@
 <%-- <form action="${path}/admin/adminShop.do" method="post"> --%>
 <!-- <button type="submit">통계</button> -->
 
+<%-- 
 <br>
 <button name="admenu" class="btn btn-primary" onClick="location.href='${path}/shop/shopList.do'">등록된 매장 정보</button>
-
-
 <br>
+ --%> 
 <br>
 <button name="admenu" class="btn btn-primary" onClick="location.href='${path}/admin/adminStatistics.do'"> 통 계 </button>
 </div>
-
-
+<!-- 
+<div id="slideheader" class="offcanvas-header">
+   <button type="button" id ="slideclosebtn" class="btn-close" data-bs-dismiss="offcanvas"></button>
+</div>
+ -->
 </div>
 
 <br>

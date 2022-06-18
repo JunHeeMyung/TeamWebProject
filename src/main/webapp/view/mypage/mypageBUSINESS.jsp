@@ -18,6 +18,7 @@ function getContextPath() {
 
 
 
+
 /*
 $(()=> {	
 	$(".btn-detail").click(function(){
@@ -67,7 +68,10 @@ $(()=> {
 <title>사업자회원 마이페이지</title>
 </head>
 <body>
-<h1> 사업자회원 마이페이지</h1>
+
+<h1> 사업자회원</h1>
+
+<%-- 
 <p> 사업자회원 접속 성공 </p>
 
 
@@ -76,51 +80,61 @@ $(()=> {
 <p>회원닉네임 :${member.mem_nick} </p>
 <p>회원분류 :${member.mem_type} </p>
 
-
 <ul>
 <li>${member} </li>
 </ul>
+ --%>
 
 
 <br>
 
 <form action="${path}/view/mypage/mypageFirst.jsp" method="post">
-<button type="submit">회원정보</button>
+<button class="btn btn-primary" type="submit">회원정보</button>
 </form> 
+<br>
+
 
 <br>
-<form action="${path}/review/reviewShopList.do" method="post" name="mem_seq">
-<button type="submit">매장 리뷰 조회</button>
+<form action="${path}/review/reviewShopList.do?${shop_seq}" method="post" name="mem_seq">
+<button class="btn btn-primary" type="submit">매장 리뷰 조회</button>
 </form>
 <br>
 
-<br>
+
+
+
+ <br>
 <form action="${path}/shop/shopInsert.do" method="get" name="mem_seq2">
-<button type="submit">매장 등록</button>
+<button class="btn btn-primary" type="submit">매장 등록</button>
 </form>
 <br>
+ 
 
+<%-- 
 <br>
 <form action="${path}/shop/shopUpdate.do" method="get" name="mem_seq3">
-<button type="submit">매장 수정</button>
+<button class="btn btn-primary" type="submit">매장 수정</button>
 </form>
 <br>
+ --%>
 
 <br>
 <form action="${path}/shop/shopselectByMem.do" method="post" name="mem_seq4">
-<button type="submit">매장관리</button>
+<button class="btn btn-primary" type="submit">매장관리</button>
 </form>
 <br>
 
+<%-- 
 <br>
 <form action="${path}/menu/menuManage.do" method="get" name="mem_seq5">
-<button type="submit">매뉴관리</button>
+<button class="btn btn-primary" type="submit">매뉴관리</button>
 </form>
 <br>
-
+ --%>
+ 
 <br>
 <form action="${path}/orderlist/manageropener.do" method="get" name="mem_seq6">
-<button type="submit">주문관리 및 QR생성</button>
+<button class="btn btn-primary" type="submit">주문관리 및 QR생성</button>
 </form>
 <br>
 <%-- 

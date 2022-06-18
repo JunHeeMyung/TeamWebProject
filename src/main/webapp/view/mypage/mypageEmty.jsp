@@ -33,7 +33,7 @@ color: white;
 <br>
 <br>
 <br>
-<button class="btn-detail" onClick="location.href='${path}/member/login.do'"> LOGIN </button>
+<button class="btn btn-primary" onClick="location.href='${path}/member/login.do'"> LOGIN </button>
 
 
 </body>

@@ -10,6 +10,8 @@ public class NickNameUpdateController implements Command {
 	@Override
 	public String execute(HttpServletRequest request) {		
 		
+		
+		System.out.println("NickNameUpdateController");
 		String mem_nick = (String) request.getAttribute("mem_nick");
 		String mem_seq = (String) request.getAttribute("mem_seq");
 		
@@ -21,6 +23,7 @@ public class NickNameUpdateController implements Command {
 		int result = service.updateNickBySeq(mem_nick, Integer.parseInt(mem_seq));		
 		
 		return result<=0?"json:닉네임변경 실패":"json:닉네임변경 성공";
+		//return "/index.jsp";
 	}
 
 }

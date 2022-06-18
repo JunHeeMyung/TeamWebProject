@@ -22,18 +22,19 @@
 
 <br>
 <form action="${path}/view/mypage/mypageFirst.jsp" method="post">
-<button type="submit">회원정보</button>
+<button class="btn btn-primary" type="submit">회원정보</button>
 </form> 
 
 <br>
+<br>
 <form action="${path}/review/revieMemList.do" method="post">
-<button type="submit">나의 리뷰 조회</button>
+<button class="btn btn-primary" type="submit">나의 리뷰 조회</button>
 </form>
 <br>
 
 <br>
 <form action="${path}/orderlist/myorderlist.do" method="get">
-<button type="submit">주문 목록 조회</button>
+<button class="btn btn-primary" type="submit">주문 목록 조회</button>
 </form>
 
 </body>

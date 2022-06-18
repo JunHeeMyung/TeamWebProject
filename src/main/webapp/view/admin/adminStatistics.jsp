@@ -246,7 +246,9 @@ $(()=> {
 $("#chart1").click(()=>{	
 	if ($('#post-box1').css('display') == 'block') {
 		$('#post-box1').hide();
-		myChart.destroy();		
+		if(myChart!=null){
+			myChart.destroy();			
+		}
 		} else {
 		$('#post-box1').show();		
 		allChar();
@@ -257,7 +259,9 @@ $("#chart1").click(()=>{
 $("#chart2").click(()=>{
 	if ($('#post-box2').css('display') == 'block') {
 		$('#post-box2').hide();
-		myChart2.destroy();
+		if(myChart2!=null){
+			myChart2.destroy();						
+		}
 		} else {
 		$('#post-box2').show();
 		userChar();
@@ -266,7 +270,9 @@ $("#chart2").click(()=>{
 $("#chart3").click(()=>{
 	if ($('#post-box3').css('display') == 'block') {
 		$('#post-box3').hide();
-		myChart3.destroy();
+		if(myChart3!=null){
+			myChart3.destroy();						
+		}		
 		} else {
 		$('#post-box3').show();
 		shopChar();
@@ -275,7 +281,9 @@ $("#chart3").click(()=>{
 $("#chart4").click(()=>{
 	if ($('#post-box4').css('display') == 'block') {
 		$('#post-box4').hide(); 
-		myChart4.destroy();
+		if(myChart4!=null){
+			myChart4.destroy();						
+		}		
 		} else {
 		$('#post-box4').show();
 		reviewChar();

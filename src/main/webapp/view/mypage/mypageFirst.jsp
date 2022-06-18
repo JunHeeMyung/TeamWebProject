@@ -145,7 +145,7 @@ $(()=>{
 			error: () => {
 				alert("요청실패");
 				$('#nick_check').attr('disabled', false);
-				$("#nick_check").html('중복확인');
+				$("#nick_check").html('중복확인');                                    
 			}
 		})
 	});
@@ -154,7 +154,7 @@ $(()=>{
 		$("#nicklabel").html(document.getElementById("mem_nick").checkValidity() ? "" : "<i class='xicon fas fa-times-circle red'></i>");
 	})
 	
-	
+	                             
 	
 	$("#nick_update").click(() => {
 
@@ -199,6 +199,8 @@ $(()=>{
 <div id= "status" class="shadow">
 
 
+<%-- <form action="${path}/mypage/nickUpdate.do" method="get" > --%>
+
 <div class="input-group mb-3">
 						<span class="input-group-text">회원번호</span> <input type="text"
 							class="form-control" value="${member.mem_seq}" readonly="readonly">
@@ -223,7 +225,7 @@ $(()=>{
 <div class="result_box" id="nick_check_result"></div>
 
 <input id="nick_update" class="btn btn-outline-secondary" type="submit" value="수정">
-
+<!-- </form> -->
 </div>
 
 <br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
