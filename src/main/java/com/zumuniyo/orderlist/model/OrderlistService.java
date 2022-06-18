@@ -44,5 +44,9 @@ public class OrderlistService {
 		return orderlistDAO.selectByMemSeqWithMenuAndShop(mem_seq);
 	}
 
-
+	public JSONArray selectByShopSeqWithMenuAndShop(int shop_seq) {
+		return orderlistDAO.selectByShopSeqWithMenuAndShop(shop_seq);
+	}
+	
+	
 }

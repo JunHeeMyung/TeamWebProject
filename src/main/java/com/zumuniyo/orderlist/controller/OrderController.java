@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.zumuniyo.common.Command;
+import com.zumuniyo.orderlist.WebSocket;
 import com.zumuniyo.orderlist.dto.OrderlistDTO;
 import com.zumuniyo.orderlist.model.OrderlistService;
 
@@ -18,6 +19,8 @@ public class OrderController implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
+		
+		int shop_seq = -1;
 
 		//주문검증
 		String cart = request.getParameter("cart");
@@ -55,7 +58,7 @@ public class OrderController implements Command {
 			int menu_seq = Integer.parseInt(jsonObject.get("menu_seq").toString());
 			int order_count = Integer.parseInt(jsonObject.get("order_count").toString());
 			int order_tablenum = Integer.parseInt(jsonObject.get("order_tablenum").toString());
-			int shop_seq = Integer.parseInt(jsonObject.get("shop_seq").toString()); //추가요망
+			shop_seq = Integer.parseInt(jsonObject.get("shop_seq").toString());
 			/*
 	        System.out.println("메뉴종류:" +menu_seq);
 	        System.out.println("주문수량:"+order_count);
@@ -69,6 +72,9 @@ public class OrderController implements Command {
 	        	return "json:주문도중 문제가 발생하였습니다";
 	        }
 		}
+		
+		// 해당 매장번호에게 새로고침신호 알려줌
+		WebSocket.orderReflesh(shop_seq);
 		
 		int order_seq = nextOrderGroupSeq;
 		return "json:주문성공:"+request.getContextPath()+"/orderlist/orderdetail.do?ordergroup="+order_seq;

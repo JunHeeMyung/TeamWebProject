@@ -1,5 +1,6 @@
 package com.zumuniyo.orderlist.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +9,10 @@ import org.json.simple.JSONArray;
 
 import com.zumuniyo.common.Command;
 import com.zumuniyo.orderlist.model.OrderlistService;
+import com.zumuniyo.shop.dto.ShopDTO;
+import com.zumuniyo.shop.model.ShopService;
 
-public class MyOrderListController implements Command {
+public class ManagerOpenerController implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request) {
@@ -23,12 +26,14 @@ public class MyOrderListController implements Command {
         
         int mem_seq = Integer.parseInt(loginInfo.get("mem_seq"));
         
-        JSONArray orderlist = orderlistService.selectByMemSeqWithMenuAndShop(mem_seq);
-
-        request.setAttribute("orderlist", orderlist);
-        
-		return "/view/orderlist/myorderlist.jsp";
+        ShopService shopService = new ShopService();
+        List<ShopDTO> shoplist = shopService.selectByMem(mem_seq);
 		
+		request.setAttribute("shoplist", shoplist);
+		
+		System.out.println(mem_seq+" 샵조회");
+		
+		return "/view/orderlist/manageropener.jsp";
 	}
 
 }
