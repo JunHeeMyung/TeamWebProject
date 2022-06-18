@@ -118,6 +118,13 @@ $(()=> {
 </form>
 <br>
 
+<br>
+<form action="${path}/orderlist/manageroperner.do" method="get" name="mem_seq6">
+<button type="submit">주문관리</button>
+</form>
+<br>
+
+
 
 <%-- 
 <br>
