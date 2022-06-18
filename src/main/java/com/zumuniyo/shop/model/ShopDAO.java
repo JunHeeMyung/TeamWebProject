@@ -29,7 +29,7 @@ public class ShopDAO {
 	
 	static final String SQL_UPDATE = "UPDATE Z_SHOP SET SHOP_NAME = ?, LOC_ADDR=?, SHOP_ADDR_DETAIL=? , SHOP_IMG=?, SHOP_NOTICE=? ,CATEGORY_CODE=? WHERE SHOP_SEQ=? ";
 	
-	static final String SQL_SELECT_MEM_SEQ = "SELECT * FROM Z_SHOP WHERE MEM_SEQ=?";
+	static final String SQL_SELECT_MEM_SEQ = "SELECT * FROM Z_SHOP WHERE SHOP_STATUS = '활성' AND MEM_SEQ=?";
 	
 	static final String SQL_DELETE = "UPDATE Z_SHOP SET SHOP_STATUS = '비활성' WHERE SHOP_SEQ = ?";
 	
