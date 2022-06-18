@@ -17,102 +17,113 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=878435cb63e52c1306f3d3ab856fc153&libraries=services"></script>
 
 
-
-
 <style>
-html,
-body {
-	magin:0;
-	padding: 0;
+
+body, html {
+	height:100%;
+	width:100%;
+	padding: 0px auto;
+	margin: 0px auto;
+	background-color: #F3F3F3;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+@media (min-width: 800px){
+
+#wrapper {
+	height:100%;
+	width: 800px;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgba(255, 255, 255);
+}
+
+}
+
+@media (max-width: 800px){
+
+#wrapper {
+	height:100%;
 	width: 100%;
-	height: 100%;
+	margin: 0px auto;
 	text-align: center;
-	
+	background-color: rgba(255, 255, 255);
 }
 
-/* span{
-	text-align: center;
-} */
-
-  label { display: inline-block; width:100px;}
-.form-control{display: inline-block; width:auto;}
-
-
-
-/* #content {
- 	width: 335px;
-    height: 300px;
-} */
-
-/* 
-#content {
- 	width: 40%;
-    height: 400px;
-}
- */
- 
-#conten{
- 	text-align: left;
 }
 
+#mainframe {
+	width: 100%;
+	display : inline-block;
+	margin: 0px auto;
+	background-color: rgba(255, 255, 255);
+	padding-top: 100px;
+}
+
+
+
+
+
+h1,body,header {
+  margin: 0 auto;
+}
+table {
+	margin: 0 auto;
+	width: 60%;
+}
+
+h1 {
+	/* background-color: #EF4F4F; */
+  color: black;
+  text-align: center;
+}
+
+h1:hover {
+	color: #EF4F4F;
+}
+
+footer{
+	margin: 0 auto;
+	width: 40%;
+}
+
+h2 {
+	margin: 0 auto;
+	width: 60%;
+}
+
+.shopcat{
+ 	display: flex;
+	width: 60%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.hd {
+	background-color: skyblue;
+}
+
+img {
+	width: 80%;
+}
+.form-group{
+display: flex;
+justify-content: center
+}
+
+.form-control{
+width: 30%;
+margin-left: 0;
+margin-right: 0;
+}
 
 </style>
 <script type="text/javascript">
-
-
-/* 
-
-
-$(function(){
-	$("#duplicateCheckBtn").click(function(){
-		//alrert("버튼누름");
- 		
-		var empid = $("#employee_id").val();
-		if(empid=="" || empid==null){
-			alert("직원번호는 필수입력입니다.");
-			$("#employee_id").focus();
-			return;
-		}
-		
-		$.ajax({
-			url:"duplicateCheckBtn.do",
-			data:{"empid":empid },
-			type:"get",
-			success: function(responseData){
-				//중복: 1, 중복안됨: 0
-				$("#message").html(responseData==1?"사용불가":"사용가능");
-			},
-			fail:function(){}
-		});
-				 
-	});
-
-				 
-				 
-	$("#emailduplicateCheckBtn").click(function(){
-						
-		var empEmail = $("#email").val();
-		if(empEmail=="" || empEmail==null){
-			alert("이메일은 필수입력입니다.");
-			$("#email").focus();
-			return;
-		}		
-		
-		$.ajax({
-			url:"emailduplicateCheckBtn.do",
-			data:{"email":empEmail},
-			type:"get",
-			success: function(responseData){
-				//중복: 1, 중복안됨: 0
-				$("#message2").html(responseData==1?"사용불가":"사용가능");
-			},
-			fail:function(){}
-		});
-				
-	});
-});
- */
-
 
 </script>
   <script>
@@ -137,12 +148,12 @@ $(()=>{
 </script>
 </head>
 <body>
-<h2>매장 수정</h2>
-<br>
 
-
-
-
+<div id="wrapper" class="shadow">
+<div id="mainframe">
+<h2>매장 등록</h2>
+<!-- 입력 -->
+<div id="contents">
 
 <form action="${path}/shop/shopUpdate.do"   method="post" enctype="multipart/form-data">
 
@@ -167,30 +178,6 @@ $(()=>{
 </c:forEach>
 </select>
 
-
-
-
-<%-- 
-<div class="form-group">
-<label>메니져</label>
-<select name="manager_id" class="form-control">
-	<c:forEach items="${mlist}" var = "manager">
-		<option value="${manager.key}">${manager.value}</option>	
-	</c:forEach>
-</select>
-</div>
- --%>
-<!-- String shop_name = request.getParameter("shop_name");
-		String loc_addr = request.getParameter("loc_addr");
-		String shop_addr_detail = request.getParameter("shop_addr_detail");
-		String shop_img = request.getParameter("shop_img");
-		String shop_notice = request.getParameter("shop_notice"); -->
-
-
-
-
-
-
 <div class="form-group" >
  <br>
  <label>매장정보</label>
@@ -202,6 +189,7 @@ $(()=>{
 
 <!-- 이미지선택  -->
 파일: <input type="file" name="photos"> <br> 
+
 <input type="hidden" name ="shop_seq" value="${param.shop_seq}">
 <!-- 버튼 선택 -->
 <input class="btn btn-primary" type="submit" value="입력하기">
@@ -221,16 +209,11 @@ $(function(){
 
 
 
-/* 
-$(function(){
-	$("#empList").click(function(){
-		location.href="emplist.do";
-	});
-});
- */
 </script>
+
+</div>
+</div>
+</div>
+
 </body>
 </html>
-
-
-

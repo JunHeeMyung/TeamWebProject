@@ -65,18 +65,16 @@ div {
 }
 
 
-
-h1,
-body *  {
-	outline: 1px solid lightblue;
-}
-
 h1,body,header {
   margin: 0 auto;
 }
 table {
 	margin: 0 auto;
 	width: 60%;
+}
+
+table, tr, td {
+	border: 1px solid lightgray;
 }
 
 h1 {
@@ -104,7 +102,25 @@ h2 {
 	width: 60%;
     margin: 0 auto;
     justify-content: space-around;
+    border: 1px solid lightgray;
 }
+
+.allmenu:hover{
+	color: orange;
+}
+
+.topmenu:hover{
+	color: orange;
+}
+
+.allreview:hover{
+	color: orange;
+}
+
+.allinfo:hover{
+	color: orange;
+}
+
 
 .hd {
 	background-color: skyblue;
@@ -357,7 +373,7 @@ $(()=> {
 	<h2>매장상세</h2>
 	
 	<div class="shopcat">
-		<div id="menu_all_topmenu">
+		<div id="menu_all_topmenu" class="topmenu">
 			추천메뉴
 		</div>
 		<div id="menu_all_btn" class="allmenu">
@@ -366,7 +382,7 @@ $(()=> {
 		<div id="menu_all_review" class="allreview">
 			리뷰
 		</div>
-		<div id="menu_all_info">
+		<div id="menu_all_info" class="allinfo"> 
 			매장정보
 		</div>
 	</div>
