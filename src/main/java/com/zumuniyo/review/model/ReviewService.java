@@ -57,5 +57,8 @@ public class ReviewService {
 	public JSONArray selectReviewByMemSeqWithMenuName(int mem_seq) {
 		return reviewDAO.selectReviewByMemSeqWithMenuName(mem_seq);
 	}
+	public double selectAvgByShopSeq(int shop_seq) {
+		return reviewDAO.selectAvgByShopSeq(shop_seq);
+	}
 	
 }
