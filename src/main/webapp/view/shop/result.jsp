@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=${path}/shop/shopList.do">
+<meta http-equiv="refresh" content="1;url=${path}/shop/shopselectByMem.do">
 <title>Insert title here</title>
 </head>
 <body>
