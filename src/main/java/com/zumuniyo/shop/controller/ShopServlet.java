@@ -26,7 +26,7 @@ public class ShopServlet extends HttpServlet {
 		
 		if(uri.equals("/shop/shopList.do")) {			
 			command = new ShopListController();
-		} else if(uri.equals("/shop/shopDetail.do")) {			
+		} else if(uri.equals("/shop/shopDetail.zmny")) {			
 			command = new ShopDetailController();
 		}  else if(uri.equals("/shop/shopInsert.do")) {			
 			command = new ShopInsertController();

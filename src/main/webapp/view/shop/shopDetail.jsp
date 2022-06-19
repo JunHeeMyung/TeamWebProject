@@ -148,7 +148,11 @@ h2 {
 
 table td {
     padding: 10px;
-    background-color: #eee;
+    background-color: white;
+}
+
+tr:nth-child(even) td {
+  background: #FFE1BE;
 }
 
 table th {
@@ -196,6 +200,7 @@ function drawtopmenu(){
 	        var str = "";
 	        
 	        str+="<table class='menutable'>"; 
+	        str+="<tr><td>메뉴이름</td><td>가격</td><td>사진</td><td>설명</td></tr>"
 	        for(var menudata of data){
 	        	if(JSON.stringify(menudata.menu_top).replaceAll("\"", "")*1==1){
 	        		
@@ -239,6 +244,7 @@ function drawMenu(){
 	        var str = "";
 	        
 	        str+="<table class='menutable'>"; 
+	        str+="<tr><td>메뉴이름</td><td>가격</td><td>사진</td><td>설명</td></tr>"
 	        for(var menudata of data){
 	        	
 	        	 str+="<tr><td>";
