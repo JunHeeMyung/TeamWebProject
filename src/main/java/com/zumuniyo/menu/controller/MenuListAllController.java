@@ -63,7 +63,7 @@ public class MenuListAllController implements Command {
 				
 				request.setAttribute("shop", shoplist.get(0));
 				
-				System.out.println(shoplist.get(0));
+				//System.out.println(shoplist.get(0));
 				
 				
 				ReviewService reviewService = new ReviewService();
@@ -72,7 +72,7 @@ public class MenuListAllController implements Command {
 				
 				request.setAttribute("review", reviewlist);
 				
-				System.out.println(reviewlist);
+				//System.out.println(reviewlist);
 				
 				
 			return "/view/menu/menuListFrontDesign.jsp";

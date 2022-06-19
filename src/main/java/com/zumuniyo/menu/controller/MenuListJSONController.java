@@ -68,7 +68,7 @@ public class MenuListJSONController implements Command {
 		
 		request.setAttribute("review", reviewlist);
 		
-		System.out.println(reviewlist);
+		//System.out.println(reviewlist);
 		
 		
 		

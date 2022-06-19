@@ -696,8 +696,8 @@ float:left;
 
 .menu_shop_img {
 
-width:210px;
-height:210px;
+width:220px;
+height:220px;
 }
 
 
@@ -716,15 +716,16 @@ display: inline;
 #shopnotice{
 margin-top: 40px;
 margin-left: 25px;
+
 }
 
 
 #shopinfobtn {
 
-bottom:10px;
+
 margin-left: 25px;
-margin-top: 0 auto;
-margin-bottom: -120px;
+margin-top: 50px;
+
 
 
 align-items: center;
@@ -750,7 +751,7 @@ padding-left:16px;
 }
 
 #shopfavorite {
-margin-top: 20px;
+
 display: flex;
 flex-direction: left;
 }
@@ -760,6 +761,9 @@ width: 100px;
 height: 100px;
 
 margin-left:260px;
+float: right;
+
+
 
 }
 #favoriteimg:hover{
@@ -806,7 +810,7 @@ $(()=>{
 	
 	$("#shopreview").click(function(){
 	
-		
+		location.href="${path}/shop/shopDetail.zmny?shop_seq=${shop.shop_seq}&menuclick=3";
 		
 	});
 	
@@ -814,16 +818,17 @@ $(()=>{
 	
 	$("#shopinfobtn").click(function(){
 
-		
+		location.href="${path}/shop/shopDetail.zmny?shop_seq=${shop.shop_seq}&menuclick=4";
 	
 	});
 	
-	
+	/* 
 	$("#shopfavorite").click(function(){
 
 		
 		
-	});
+	}); 
+	*/
 	
 	
 	
@@ -871,6 +876,16 @@ $(()=>{
 	// 최종주문 버튼 누를시(수정)
 	   
    $("#finalorder").click(()=>{
+	   
+	   var loginMember = '${member}';
+	   if(loginMember==""){
+		   if(confirm("로그인?")){
+			   location.href="${path}/member/login.do";
+			   return;
+		   }
+		
+	   }
+	   
       //세션에서 카트꺼냄
       var cart = sessionStorage.getItem('cart');
       cart = JSON.parse(cart);
@@ -905,6 +920,7 @@ $(()=>{
    })
 	
 	
+   
 	
 	
 	/* 
@@ -1106,7 +1122,9 @@ $(function(){
 				//here.innerHTML = responseData.menu_seq;
 				
 				// JSON 받기 
-				//var obj = JSON.parse(responseData);
+				/* var obj = JSON.parse(responseData);
+				console.log(obj); */
+				console.log(responseData);
 				/* 
 				$("#menu_seq").val(responseData.menu_seq);
 				$("#menu_name").val(responseData.menu_name);
@@ -1120,7 +1138,8 @@ $(function(){
 				$("#menu_img").html(responseData["menu_img"]);
 				$("#menu_price").html(responseData["menu_price"]);
 				
-				var path = "<%=request.getSession().getAttribute("path")%>";
+				var path = "<%=request.getSession().getAttribute("path")%>"; 
+				console.log(path);
 				var imgpath = path+"/images/"+responseData["menu_img"];
 				
 				$("#menu_photo").attr("src",imgpath);

@@ -174,6 +174,8 @@ thead{
 
 
 <script>
+ 
+
 
 
 function getContextPath() {
@@ -285,7 +287,6 @@ function drawReview(){
 	        var str = "";
 	        
 	        hall.innerHTML=data;
-	        starPrint();
 		    
 		},
 		error : ()=> {
@@ -331,7 +332,7 @@ function drawInfo(){
 
 $(()=> {
 	
-	drawtopmenu();
+	//drawtopmenu();
 	
 	$("#menu_all_topmenu").click(()=>{		
 		drawtopmenu();
@@ -348,15 +349,13 @@ $(()=> {
 	$("#menu_all_info").click(()=>{		
 		drawInfo();
 	});
+	
 
 });
 
 
 /* 별점 스크립트 */
-
-function starPrint() {
-	
-
+$(()=>{
 	$('div#star1').raty({
 		score: function(evt) {            
             return $("#starRating1").val();
@@ -365,8 +364,8 @@ function starPrint() {
 		,readOnly: true
 		,width : 500
 	});
-
-
+});
+$(()=>{
 	$('div#star2').raty({
 		score: function(evt) {            
             return $("#starRating2").val();
@@ -374,7 +373,8 @@ function starPrint() {
 		,path : "${path}/view/review/img"
 		,readOnly: true
 	});
-
+});
+$(()=>{
 	$('div#star3').raty({
 		score: function(evt) {            
             return $("#starRating3").val();
@@ -382,7 +382,9 @@ function starPrint() {
 		,path : "${path}/view/review/img"
 		,readOnly: true
 	});
+});
 
+$(()=>{
 	$('div#star4').raty({
 		score: function(evt) {            
             return $("#starRating4").val();
@@ -390,7 +392,8 @@ function starPrint() {
 		,path : "${path}/view/review/img"
 		,readOnly: true
 	});
-
+});
+$(()=>{
 	$('div#star5').raty({
 		score: function(evt) {            
             return $("#starRating5").val();
@@ -398,8 +401,28 @@ function starPrint() {
 		,path : "${path}/view/review/img"
 		,readOnly: true
 	});
+});
 
+
+
+
+
+$(()=>{
+var menuclick = "${param.menuclick}";
+console.log(menuclick);
+if(menuclick==3){
+	
+	$("#menu_all_review").trigger("click");
+}else if(menuclick==4){
+	 
+	$("#menu_all_info").trigger("click");
+}else{
+	$("#menu_all_topmenu").trigger("click");
 }
+
+});
+
+
 
 
 
