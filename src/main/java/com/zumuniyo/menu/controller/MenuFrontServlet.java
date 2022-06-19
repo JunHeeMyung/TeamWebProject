@@ -60,6 +60,9 @@ public class MenuFrontServlet extends HttpServlet {
 			command = new MenuFavoritesController();
 		
 		*/	
+		} else if(uri.equals("/menu/menuListJSON.do")) {
+			command = new MenuListJSONController();
+			
 			
 			
 			
