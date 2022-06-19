@@ -196,10 +196,8 @@ $(()=> {
 				
 				for(var reviewdata of data){
 					reviewDate.push(JSON.stringify(reviewdata.REVIEW_DATE).replaceAll("\"", ""));
-					reviewCnt.push(Number(JSON.stringify(reviewdata.CNT).replaceAll("\"", "")));
-					
-					reviewSumCnt += Number(JSON.stringify(reviewdata.CNT).replaceAll("\"", "")); 
-								
+					reviewCnt.push(Number(JSON.stringify(reviewdata.CNT).replaceAll("\"", "")));					
+					reviewSumCnt += Number(JSON.stringify(reviewdata.CNT).replaceAll("\"", "")); 								
 				}				 
 				//console.log(reviewDate);
 				//console.log(reviewCnt);				

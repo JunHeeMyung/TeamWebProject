@@ -19,11 +19,14 @@ public class ReviewDAO {
 	static final String SQL_SELECT_ALL = "SELECT * FROM Z_REVIEW ORDER BY REVIEW_SEQ DESC";
 	static final String SQL_SELECT_MemSeq = "SELECT * FROM Z_REVIEW WHERE MEM_SEQ = ? ORDER BY REVIEW_SEQ DESC";
 	static final String SQL_SELECT_MenuSeq = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ = ?";
+	static final String SQL_SELECT_MenuName = "SELECT MENU_NAME FROM Z_REVIEW WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_MenuSeq2 = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE MENU_SEQ = ?";
 	static final String SQL_SELECT_ShopSeq = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=? AND REVIEW_EXPOSURE = 1";
 	static final String SQL_SELECT_ShopSeq2 = "SELECT * FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ = ?) AND REVIEW_EXPOSURE = 1";	
 	static final String SQL_SELECT_ShopSeq_MANAGER = "SELECT * FROM Z_REVIEW NATURAL JOIN Z_MENU WHERE SHOP_SEQ=?";
 	
+	static final String SQL_SELECT_REVIEW_SHOP_MEM = "SELECT * FROM Z_REVIEW WHERE REVIEW_SEQ IN (SELECT REVIEW_SEQ FROM Z_REVIEW WHERE MENU_SEQ IN (SELECT MENU_SEQ FROM Z_MENU WHERE SHOP_SEQ IN (SELECT SHOP_SEQ FROM Z_SHOP WHERE MEM_SEQ = ?)))";
+		
 	static final String SQL_UPDATE_REVIEW_EXPOSURE = "UPDATE Z_REVIEW SET REVIEW_EXPOSURE = ? WHERE REVIEW_SEQ = ?";
 	static final String SQL_DELETE_REVIEW = "DELETE FROM Z_REVIEW WHERE REVIEW_SEQ = ?";
 	
@@ -53,7 +56,31 @@ public class ReviewDAO {
 	PreparedStatement pst;
 	ResultSet rs;
 	int result;
-
+	
+	
+	public String selectMenu(int menu_seq) {
+		conn = DBUtil.getConnection();
+	
+		String menu_name="";
+		try
+		{
+			pst = conn.prepareStatement(SQL_SELECT_MenuName);
+			pst.setInt(1, menu_seq);
+			rs = pst.executeQuery();
+			
+			 menu_name = rs.getString("menu_name");			
+			
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return menu_name;
+	}
+	
+	
 	
 	public List<ReviewDTO> selectAll()
 	{
@@ -77,6 +104,31 @@ public class ReviewDAO {
 		}
 		return reviewDTOs;
 	}
+	public List<ReviewDTO> selectShopReview(int mem_seq)
+	{
+		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();
+		conn = DBUtil.getConnection();
+		try
+		{			
+			
+			pst = conn.prepareStatement(SQL_SELECT_REVIEW_SHOP_MEM);
+			pst.setInt(1, mem_seq);
+			rs = pst.executeQuery();
+			
+			while (rs.next())
+			{
+				reviewDTOs.add(makeReview(rs));
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return reviewDTOs;
+	}
+	
 	public List<ReviewDTO> selectByDayCount()
 	{
 		List<ReviewDTO> reviewDTOs = new ArrayList<ReviewDTO>();

@@ -166,8 +166,7 @@ function numberFormat(inputNumber) {
 
 <div id="contents">
 
-
-<table id="reviewTable">
+<table id="reviewTable" class="table-striped">
 	<tr>	
 		<td>리뷰 번호</td>
 		<!-- <td>멤버 번호</td> -->
@@ -201,7 +200,7 @@ function numberFormat(inputNumber) {
 		<td>${reviewShopM.review_amount }</td>
 		<td>${reviewShopM.review_service }</td> --%>
 		<td>${reviewShopM.review_content }</td>		
-		<td><img src="${path}/images/${reviewShopM.review_img}"></td>
+		<td><img src="${path}/images/${reviewShopM.review_img}" width="250" height="250"></td>
 		<td>${reviewShopM.review_date }</td>
 		<%-- <td>${reviewShopM.review_exposure }</td> --%>
 		<%-- <td>${reviewShopM.shop_seq}</td> --%>

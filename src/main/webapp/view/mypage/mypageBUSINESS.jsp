@@ -121,10 +121,23 @@ margin-right: 20%;
 
 
 <br>
-<form action="${path}/review/reviewShopList.do?${shop_seq}" method="post" name="mem_seq">
+<form action="${path}/review/SelectShopReviewJSP.do" method="get">
 <button class="btn btn-primary" type="submit">매장 리뷰 조회</button>
 </form>
 <br>
+
+<%-- 
+<br>
+<form action="${path}/review/SelectShopReview.do" method="get">
+<button class="btn btn-primary" type="submit">매장 리뷰 조회</button>
+</form>
+<br>
+ --%>
+<%-- <br>
+<form action="${path}/review/reviewShopList.do?${shop_seq}" method="post" name="mem_seq">
+<button class="btn btn-primary" type="submit">매장 리뷰 조회</button>
+</form>
+<br> --%>
 
 
 

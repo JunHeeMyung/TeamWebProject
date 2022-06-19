@@ -32,9 +32,10 @@ public class ReviewServlet extends HttpServlet {
 		}else if(uri.equals("/review/SelectMenu.do")) {		
 			command = new ReviewSelectMenuJSON();
 		}else if(uri.equals("/review/SelectDay.do")) {		
-			command = new ReviewDayCount();
+			command = new ReviewDayCount(); 
+		}else if(uri.equals("/review/SelectShopReview.do")) {		
+			command = new ReviewSelectShopReview();
 		}
-		
 		
 		
 		//성공여부 JSON으로 반환하는 컨트롤러
@@ -84,7 +85,18 @@ public class ReviewServlet extends HttpServlet {
 			
 		}else if(uri.equals("/review/reviewTest.do")) {		
 			command = new TestController();		
+		}else if(uri.equals("/review/SelectShopReviewJSP.do")) {		
+			command = new ReviewSelectShopReviewJSP();
 		}
+		
+		else if(uri.equals("/review/SelectMenuName.do")) {		
+		command = new ReviewSelectMenuName();
+		}
+	
+		
+		
+		
+		
 		
 		
 		

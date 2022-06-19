@@ -9,42 +9,23 @@
 
 <style type="text/css">
 
-
-#admenu {
-	left: 130px;
-	position: relative;
-
+#sidebar{
+text-align: center;
+height: 100%;
+width: 100%;
+padding: 0px auto;
+margin: 0px auto;
+background-color: white;
 }
 
 
-}
-#slideheader{
+#sidebar button {
 display: inline-block;
-text-align: right;
-
-/* 
-.navigation{
-	position: fixed;
-	top: 0px;
-	right:0px;
-	width: 430px;
-	height: 1000px;
-	border-radius: 10px;
-	background: rgba(252, 198, 162);
-	background: #6ec5b8;
-	text-align: center;
-}
- */
-.btoon{
-	text-align: left;
-	background: rgba(252, 198, 162);
-
+width: 60%;
+margin-left: 20%;
+margin-right: 20%;
 }
 
-
-#slidemenu{	
-	background: #6ec5b8;
-}
 
 </style>
 
@@ -52,7 +33,9 @@ text-align: right;
 </head>
 <body>
 
-<div class="navigation">
+
+
+<div id="sidebar">
 <h1>관리자 페이지</h1>
 
 <!-- <p> 관리자 접속 성공 </p> -->

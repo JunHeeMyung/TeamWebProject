@@ -102,6 +102,7 @@ table {
 </style>
 </head>
 <script type="text/javascript">
+var menu_name;
 
 $(()=>{
 	$('div#star1').raty({
@@ -151,6 +152,32 @@ $(()=>{
 	});
 });
 
+/*
+$(()=>{
+	$.ajax({
+		type:"GET",
+		url:getContextPath()+"/review/SelectMenuName.do", 
+		data:{"menu_seq":${menu_seq}} ,
+		dataType:"text",
+		success : function(data) { 
+				if ( typeof(data) == "undefined" ) {return;}				
+					
+				// 데이터를 확인하고 싶을 때.
+					let str = JSON.stringify(data); // <> parse()
+					alert(str); 
+					
+					
+	//		for(var nameData of data){
+	//			menu_name =  JSON.stringify(nameData.menu_name).replaceAll("\"", "");				
+	//		}	
+		
+		},
+		error : ()=> {
+			alert("에러발생");
+		}
+	});	
+});
+*/
 </script>
 
 
@@ -164,7 +191,7 @@ $(()=>{
 
 
 	
-	<table id="reviewTable">
+	<table id="reviewTable" class="table-striped">
 		<tr>
 		<!-- 	<td>리뷰 SEQ</td>
 			<td>MEM_SEQ</td> -->
@@ -187,7 +214,7 @@ $(()=>{
 			<%-- <td>${review.review_taste}</td>
 			<td>${review.review_amount}</td>
 			<td>${review.review_service}</td> --%>
-			<td><img src="${path}/images/${review.review_img}"></td>
+			<td><img src="${path}/images/${review.review_img}" width="250" height="250"></td>
 			<td>${review.review_content}</td>
 			<td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(review.review_taste + review.review_amount + review.review_service)/3}"/></div></td>			
 			<td>${review.review_date}</td>

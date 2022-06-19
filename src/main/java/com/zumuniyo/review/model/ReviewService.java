@@ -43,9 +43,13 @@ public class ReviewService {
 		return reviewDAO.reviewDelete(rewview_seq);
 	}
 		
+	public List<ReviewDTO> selectShopReview(int mem_seq){
+		return reviewDAO.selectShopReview(mem_seq);		
+	}
 
-
-
+	public String selectMenu(int menu_seq) {
+		return reviewDAO.selectMenu(menu_seq);
+	}
 	
 
 }
