@@ -108,7 +108,7 @@ h2 {
 }
 
 img {
-	width: 80%;
+	width: 100%;
 }
 
 .tbl{
@@ -125,6 +125,10 @@ table {
 }
 tr:hover { background-color: #F5F5F5; }
 
+.tblname{
+	width: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -138,16 +142,16 @@ tr:hover { background-color: #F5F5F5; }
 <table class="tbl">
 <tr>
 	<!-- <td>shop_seq</td>  -->
-	<td>매장이름</td>
-	<td>매장주소</td>
-	<td>상세주소</td>
+	<td class="tblname">매장이름</td>
+	<td class="tblname">매장주소</td>
+	<td class="tblname">상세주소</td>
 	<!-- <td>mem_seq</td> -->
-	<td>분류</td>
-	<td class="shopimg">매장사진</td>
-	<td>매장정보</td>
+	<td class="tblname">분류</td>
+	<td class="tblname">매장사진</td>
+	<td class="tblname">매장정보</td>
 	<!-- <td>shop_status</td> -->
-	<td>수정</td>
-	<td>삭제</td>
+	<td class="tblname">수정</td>
+	<td class="tblname">삭제</td>
 </tr>
 <c:forEach items="${shopLists}" var="shoplist">
 <tr>
