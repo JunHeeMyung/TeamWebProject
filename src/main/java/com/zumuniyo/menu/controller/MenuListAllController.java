@@ -52,32 +52,20 @@ public class MenuListAllController implements Command {
 					jsonObject.put("menu_info", menuDTO.getMenu_info());
 					jsonObject.put("menu_status", menuDTO.getMenu_status());
 					jsonArray.add(jsonObject);
-	
 				}
 				
 				request.setAttribute("menuDTOs", jsonArray);
 				
 				ShopService shopService = new ShopService();
-				
 				List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
-				
 				request.setAttribute("shop", shoplist.get(0));
 				
-				//System.out.println(shoplist.get(0));
-				
-				
 				ReviewService reviewService = new ReviewService();
-				
 				double reviewlist = reviewService.selectAvgByShopSeq(ishop_seq);
-				
 				request.setAttribute("review", reviewlist);
-				
-				//System.out.println(reviewlist);
 				
 				
 			return "/view/menu/menuListFrontDesign.jsp";
-	
-
 		
 	}
 	

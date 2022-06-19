@@ -12,9 +12,6 @@ public class MenuDeleteController implements Command {
 		
 		
 		if(request.getMethod().equals("POST")) {
-		
-		
-			
 			
 		int imenu_seq = Integer.parseInt(request.getParameter("menu_seq"));
 		
@@ -32,8 +29,6 @@ public class MenuDeleteController implements Command {
 			if(!Character.isDigit(c)) return "json:메뉴시퀀스 입력값이 숫자가 아닙니다";
 		}
 		
-		
-		
 		int result = mService.delete(imenu_seq);
 		
 		if(result<=0) {
@@ -41,17 +36,11 @@ public class MenuDeleteController implements Command {
 			return "json:삭제 대상이 존재하지 않습니다.";
 		}
 		
-		//request.setAttribute("menuMessage", result>0?"메뉴를 삭제하였습니다.":"메뉴 삭제에 실패하였습니다.");
-		
-		//return "/view/menu/menuManageDesign.jsp";
 		return "json:메뉴 삭제에 성공했습니다.";
 		
 		}
-		
 		else {
 		
-			
-			
 			return "/view/menu/menuManageDesign.jsp";
 			
 		}

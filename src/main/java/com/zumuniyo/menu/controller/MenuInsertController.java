@@ -18,12 +18,9 @@ public class MenuInsertController implements Command {
 	public String execute(HttpServletRequest request) {
 		
 		if(request.getMethod().equals("GET")) {
-			
-			
 			return "/view/menu/menuManageDesign.jsp";
 			
 		}
-			
 		 else if(request.getMethod().equals("POST")) {
 		
 			MenuDTO menuDTO = makeMenu(request);
@@ -43,10 +40,6 @@ public class MenuInsertController implements Command {
 				if(!Character.isDigit(c)) return "json:매장 시퀀스 입력값이 숫자가 아닙니다";
 			}
 			
-			
-			
-			
-			
 			String dir = request.getServletContext().getRealPath(UPLOAD_DIR);
 			System.out.println("업로드 폴더: "+dir);
 			
@@ -62,9 +55,6 @@ public class MenuInsertController implements Command {
 			menuDTO.setMenu_img(photos.get(0));
 			
 			int result = mService.insert(menuDTO);
-			
-			
-			//request.setAttribute("menuMessage", result>0?"메뉴정보입력성공":"메뉴정보입력실패");
 			
 			return "redirect:"+request.getContextPath()+"/menu/menuManage.do?shop_seq="+shop_seq;
 			
@@ -101,7 +91,6 @@ public class MenuInsertController implements Command {
 			return menu;
 			
 		}
-		
 		
 		private int readInt(HttpServletRequest request, String column) {
 			

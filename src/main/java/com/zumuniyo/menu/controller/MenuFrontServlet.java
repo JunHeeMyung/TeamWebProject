@@ -29,49 +29,38 @@ public class MenuFrontServlet extends HttpServlet {
 		String page = "";
 		
 		Command command = null;
-		
+		// QR메뉴출력화면으로 가기
 		if(uri.equals("/menu/menuListAll.zmny")) {
 			command = new MenuListAllController();
-		
+		// 메뉴관리페이지로 가기
 		} else if(uri.equals("/menu/menuManage.do")) {
 			command = new MenuManageController();	
 			
-			
+		// QR메뉴에서 상위에 표시될 메뉴만 출력하기	
 		} else if(uri.equals("/menu/menuListTop.do")) {
 			command = new MenuListTopController();
 		
+		// 카테고리별로 group by 해서 출력하기
 		} else if(uri.equals("/menu/menuCategory.do")) {
 			command = new MenuCategoryController();
 		
+		// 특정 이름이 들어간 메뉴 검색해서 출력하기
 		} else if(uri.equals("/menu/menuSearch.do")) {
 			command = new MenuSearchController();
-			
-			
+		
+		// 각각의 메뉴 클릭했을 때 메뉴 상세값 출력하기
 		} else if(uri.equals("/menu/menuDetail.do")) {
 			command = new MenuDetailController();
-		/*
-		} else if(uri.equals("/menu/menuCartList.do")) {
-			command = new MenuCartListController();
 		
-		} else if(uri.equals("/menu/menuShopDetail.do")) {
-			command = new MenuShopDetailController();
-			
-		} else if(uri.equals("/menu/menuFavorites.do")) {
-			command = new MenuFavoritesController();
-		
-		*/	
+		// 메뉴리스트를 JSON으로 넘겨주기
 		} else if(uri.equals("/menu/menuListJSON.do")) {
 			command = new MenuListJSONController();
 			
-			
-			
-			
-		// ---나중에 메뉴관리에 추가할거---	
+		// 메뉴관리에서 메뉴 추가하기	
 		} else if(uri.equals("/menu/menuInsert.do")) {
 			command = new MenuInsertController();
 		
-			
-			
+		// 메뉴관리에서 특정메뉴 지우기
 		} else if(uri.equals("/menu/menuDelete.do")) {
 			command = new MenuDeleteController();
 		//---------------------------	

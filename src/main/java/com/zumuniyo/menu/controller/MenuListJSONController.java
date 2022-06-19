@@ -33,10 +33,8 @@ public class MenuListJSONController implements Command {
 		
 		int ishop_seq = Integer.parseInt(shop_seq);
 		
-		
 		List<MenuDTO> menuDTOs = mService.selectShopAll(ishop_seq);
 		
-
 		JSONArray jsonArray = new JSONArray();
 		
 		for(MenuDTO menuDTO:menuDTOs) {
@@ -56,22 +54,12 @@ public class MenuListJSONController implements Command {
 		}
 		
 		ShopService shopService = new ShopService();
-		
 		List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
-		
 		request.setAttribute("shop", shoplist.get(0));
 		
-
 		ReviewService reviewService = new ReviewService();
-		
 		double reviewlist = reviewService.selectAvgByShopSeq(ishop_seq);
-		
 		request.setAttribute("review", reviewlist);
-		
-		//System.out.println(reviewlist);
-		
-		
-		
 		
 		return "json:"+jsonArray.toJSONString();
 		
