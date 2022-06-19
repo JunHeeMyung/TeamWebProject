@@ -33,12 +33,12 @@ index.jsp
 <hr>
 
 <ul>
-<li><a href="${ path }/menu/menuListAll.zmny?shop_seq=4&order_tablenum=1">QR찍었을때 처음가는 메뉴</a></li>
+<li><a href="${ path }/menu/menuListAll.zmny?shop_seq=201&order_tablenum=1">QR찍었을때 처음가는 메뉴</a></li>
 </ul>
 
 
 <ul>
-<li><a href="${ path }/menu/menuManage.do?shop_seq=3">메뉴관리 페이지</a></li>
+<li><a href="${ path }/menu/menuManage.do?shop_seq=201">메뉴관리 페이지</a></li>
 </ul>
 
 

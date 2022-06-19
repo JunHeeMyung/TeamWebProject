@@ -78,6 +78,7 @@ div {
 
 
 table , td {
+		
 		border: 1px solid rgba(225, 225, 225); 
 		border-collapse: collapse; 
 		padding: 5px; 
@@ -205,7 +206,7 @@ padding: 10px;
 }
 
 #menutable {
-
+width:100%;
 
 }
 
@@ -214,7 +215,8 @@ padding: 10px;
 
 text-align: left;
 padding: 10px;
- 
+min-width: 300px;
+
 
 }
 

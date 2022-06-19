@@ -724,7 +724,7 @@ margin-left: 25px;
 
 
 margin-left: 25px;
-margin-top: 50px;
+margin-top: 30px;
 
 
 
@@ -757,10 +757,10 @@ flex-direction: left;
 }
 
 #favoriteimg {
-width: 100px;
-height: 100px;
+width: 80px;
+height: 80px;
 
-margin-left:260px;
+margin-left:280px;
 float: right;
 
 
@@ -852,9 +852,6 @@ $(()=>{
 		
 		$('html').animate({scrollTop : offset.top}, 100);
 		
-		 
-		
-		
 	});
 
 	
@@ -879,7 +876,7 @@ $(()=>{
 	   
 	   var loginMember = '${member}';
 	   if(loginMember==""){
-		   if(confirm("로그인?")){
+		   if(confirm("비회원 상태에서는 리뷰입력이 불가능합니다. 로그인하시겠습니까? (취소시 주문확정)" )){
 			   location.href="${path}/member/login.do";
 			   return;
 		   }
@@ -974,9 +971,6 @@ $(()=>{
 		
 		for(var menu of cart){
 			
-			//alert(JSON.stringify(menu['menu_name'])+","+JSON.stringify(menu['order_count'])+","+JSON.stringify(menu['menu_price']));
-			
-			
 			line += "<div class='linebox'> ";
 			
 			line += "<div class='line_name'> "+JSON.stringify(menu['menu_name']).replaceAll("\"", "")+" </div> ";
@@ -985,7 +979,9 @@ $(()=>{
 			
 			line += "<div class='line_count'> "+JSON.stringify(menu['order_count'])+"<div class='gae'> "+"개"+" </div></div> ";
 			
-			line += " <div class='gagyuk'> "+"가격"+" </div><div class='line_price'>"+((JSON.stringify(menu['menu_price']))*1)*JSON.stringify(menu['order_count'])+" <div class='won'> "+"원"+" </div></div> ";
+			line += " <div class='gagyuk'> "+"가격"+" </div><div class='line_price'>"+
+			((JSON.stringify(menu['menu_price']))*1)*JSON.stringify(menu['order_count'])+
+			" <div class='won'> "+"원"+" </div></div> ";
 			
 			line += "</div>";
 			
@@ -1036,8 +1032,6 @@ $(()=>{
 			
 			cart.push(menu);
 			sessionStorage.setItem('cart', JSON.stringify(cart));
-			
-			
 			
 		}else{
 			 
@@ -1116,22 +1110,11 @@ $(function(){
 			dataType:"json", 
 			type: "post", 
 			success: function(responseData){
-				//alert("ajax 성공");
-				//var test = JSON.stringify(responseData);
-				
-				//here.innerHTML = responseData.menu_seq;
 				
 				// JSON 받기 
 				/* var obj = JSON.parse(responseData);
 				console.log(obj); */
 				console.log(responseData);
-				/* 
-				$("#menu_seq").val(responseData.menu_seq);
-				$("#menu_name").val(responseData.menu_name);
-				$("#menu_info").val(responseData.menu_info);
-				$("#menu_img").val(responseData.menu_img);
-				$("#menu_price").val(responseData.menu_price);
-				 */
 				
 				$("#menu_name").html(responseData["menu_name"]);
 				$("#menu_info").html(responseData["menu_info"]);
@@ -1337,7 +1320,8 @@ $(()=>{
 </div>
 <c:set var="last" value="${menu.menu_category}"/>
 <c:set var="btnmenuid" value="${btnmenuid + 1}" />
-<button type="button" id="btnmenuid${btnmenuid}" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}"><div class="btn_category_text">${menu.menu_category}</div></button>
+<button type="button" id="btnmenuid${btnmenuid}" class="btn btn-menu" data-bs-toggle="collapse" data-bs-target="#menu${last}">
+<div class="btn_category_text">${menu.menu_category}</div></button>
 <div id="menu${last}" class="collapse what">
 </c:if>
 <div class="menutuple">
@@ -1345,7 +1329,8 @@ $(()=>{
 	<div class="detail_text">
 		<div class="menu_detail_name">${menu.menu_name}</div>
 		<div class="menu_detail_info">${menu.menu_info}</div>
-		<div class="menu_detail_price"><div class="menu_detail_gagyuk"> 가격</div>${menu.menu_price}<div class="menu_detail_won"> 원</div></div>
+		<div class="menu_detail_price"><div class="menu_detail_gagyuk"> 가격</div>${menu.menu_price}
+		<div class="menu_detail_won"> 원</div></div>
 	</div>	
 		<div class="menu_detail_img"><img src="${path}/images/${menu.menu_img}" class="menu_detail_img"></div>
 		

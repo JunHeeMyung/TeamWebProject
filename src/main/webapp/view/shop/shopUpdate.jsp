@@ -17,7 +17,7 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=878435cb63e52c1306f3d3ab856fc153&libraries=services"></script>
 
 
-<title>기본 디자인</title>
+<title>매장수정</title>
 <style>
 
 body, html {
@@ -206,7 +206,7 @@ $(()=>{
 
 <!-- 입력 -->
 <div id="contents">
-<form action="${path}/shop/shopInsert.do"   method="post" enctype="multipart/form-data">
+<form action="${path}/shop/shopUpdate.do"   method="post" enctype="multipart/form-data">
 <div id="outerbox">
 <table id="inputtable">
 <tr>
@@ -226,11 +226,20 @@ $(()=>{
 </tr>
 <tr>
 <td class="lefttd">카테고리</td>
-<td class="righttd"><select name="category_code" class="tableitem">
+<td class="righttd">
+
+<select name="category_code" class="tableitem">
 <c:forEach var="categoryDTO" items="${categoryDTOs}" varStatus="status">
+<c:if test="${shop.category_code eq categoryDTO.category_code}">
+<option value="${categoryDTO.category_code}" selected="selected">${categoryDTO.category_name}</option>
+</c:if>
+<c:if test="${shop.category_code ne categoryDTO.category_code}">
 <option value="${categoryDTO.category_code}">${categoryDTO.category_name}</option>
+</c:if>
 </c:forEach>
-</select></td>
+</select>
+
+</td>
 </tr>
 <tr>
 <td colspan="2"><label>매장정보</label></td>
@@ -246,6 +255,7 @@ $(()=>{
 </table>
 
 <div id="bottombtn">
+<input type="hidden" name ="shop_seq" value="${param.shop_seq}">
 <input class="btn btn-primary" type="submit" value="입력하기">
 <input class="btn btn-secondary" type="reset" value="취소하기">
 </div>

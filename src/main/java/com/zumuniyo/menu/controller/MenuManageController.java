@@ -62,16 +62,12 @@ public class MenuManageController implements Command {
 			
 				
 				ShopService shopService = new ShopService();
-				
-				
 				List<ShopDTO> shoplist = shopService.selectBySeq(ishop_seq); 
-				
 				request.setAttribute("shop", shoplist.get(0));
 				
 				
 			return "/view/menu/menuManageDesign.jsp";
 	
-
 		}else {
 			
 			MenuService mService = new MenuService();
@@ -86,13 +82,10 @@ public class MenuManageController implements Command {
 			for(char c : array) {
 				if(!Character.isDigit(c)) return "json:매장번호 입력값이 숫자가 아닙니다";
 			}
-			
 			int ishop_seq = Integer.parseInt(shop_seq);
-			
 			
 			List<MenuDTO> menuDTOs = mService.selectShopAll2(ishop_seq);
 			
-
 			JSONArray jsonArray = new JSONArray();
 			
 			for(MenuDTO menuDTO:menuDTOs) {
@@ -112,7 +105,6 @@ public class MenuManageController implements Command {
 			}
 			
 			return "json:"+jsonArray.toJSONString();
-			
 			
 		}
 	}
