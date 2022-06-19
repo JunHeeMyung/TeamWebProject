@@ -123,6 +123,53 @@ margin-left: 0;
 margin-right: 0;
 }
 
+#inputtable{
+background-color:#EEEEEE;
+width: 100%;
+}
+
+
+.tableitem {
+width: 100%;
+height: 100%;
+} 
+
+.tableleftitem {
+width: 70%;
+height: 100%;
+}
+
+.tablerightitem {
+width: 30%;
+height: 100%;
+}  
+
+#bottombtn {
+padding-top: 30px;
+}
+
+#inserttitle{
+
+margin-bottom: 30px;
+
+}
+
+.lefttd{
+width: 30%;
+}
+
+.righttd{
+width: 70%;
+}
+#outerbox{
+display:inline-block;
+width: 80%;
+border-radius: 50px;
+background-color: #EEEEEE;
+padding: 50px;
+}
+
+
 </style>
 <script type="text/javascript">
 
@@ -152,42 +199,57 @@ $(()=>{
 
 <div id="wrapper" class="shadow">
 <div id="mainframe">
-<h2>매장 등록</h2>
+<h2 id="inserttitle">매장 등록</h2>
+
+
+
+
 <!-- 입력 -->
 <div id="contents">
 <form action="${path}/shop/shopInsert.do"   method="post" enctype="multipart/form-data">
-
-<div class="form-group">
-<label>매장이름</label>
-<input class="form-control"  type="text" name="shop_name"> 
-</div>
-
-<label>주소</label><input id="addr" name="loc_addr" type="text" readonly="readonly"><input id="findaddr" type="button" value="주소검색">
-<br>상세주소<input id="detailaddr" name="shop_addr_detail" type="text">
-<!-- 위도(hidden): -->	<br> <input id="latitude" name="loc_lat" type="hidden" readonly="readonly">
-<!-- 경도(hidden): --> 	<br><input id="longitude" name="loc_lon" type="hidden" readonly="readonly">
-
-<select name="category_code">
+<div id="outerbox">
+<table id="inputtable">
+<tr>
+<td class="lefttd"><label>매장이름</label></td>
+<td class="righttd"><input type="text" name="shop_name" class="tableitem"></td>
+</tr>
+<tr>
+<td class="lefttd"><label>주소</label></td>
+<td class="righttd"><input id="addr" name="loc_addr" type="text" readonly="readonly" class="tableleftitem"><input id="findaddr" type="button" value="주소검색" class="tablerightitem"></td>
+</tr>
+<tr>
+<td class="lefttd">상세주소
+<!-- 위도(hidden): -->	<input id="latitude" name="loc_lat" type="hidden" readonly="readonly">
+<!-- 경도(hidden): --> 	<input id="longitude" name="loc_lon" type="hidden" readonly="readonly">
+</td>
+<td class="righttd"><input id="detailaddr" name="shop_addr_detail" type="text" class="tableitem"></td>
+</tr>
+<tr>
+<td class="lefttd">카테고리</td>
+<td class="righttd"><select name="category_code" class="tableitem">
 <c:forEach var="categoryDTO" items="${categoryDTOs}" varStatus="status">
 <option value="${categoryDTO.category_code}">${categoryDTO.category_name}</option>
 </c:forEach>
-</select>
+</select></td>
+</tr>
+<tr>
+<td colspan="2"><label>매장정보</label></td>
+</tr>
+<tr>
+<td colspan="2"><textarea id="content" name="shop_notice" cols="50" rows="8" class="tableitem"></textarea></td>
+</tr>
+<tr>
+<td colspan="2">
+파일: <input type="file" name="photos">
+</td>
+</tr>
+</table>
 
-<div class="form-group" >
- <br>
- <label>매장정보</label>
- <br>
- 
-<textarea class="form-control" id="content" name="shop_notice" cols="50" rows="8"><c:out value="${content}" /></textarea>
-</div>
-
-
-<!-- 이미지선택  -->
-파일: <input type="file" name="photos"> <br> 
-
-<!-- 버튼 선택 -->
+<div id="bottombtn">
 <input class="btn btn-primary" type="submit" value="입력하기">
 <input class="btn btn-secondary" type="reset" value="취소하기">
+</div>
+</div>
 <!-- <input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList">구매내역으로 돌릴 id설정  -->
 </form>
 
