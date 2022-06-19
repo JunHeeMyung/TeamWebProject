@@ -214,14 +214,14 @@ function numberFormat(inputNumber) {
 		<%-- <td>${reviewShopM.menu_info}</td> --%>
 		<%-- <td>${reviewShopM.menu_status}</td> --%>		 
 		<%-- <td>${(reviewShopM.review_taste+reviewShopM.review_amount+reviewShopM.review_service)/3 }</td> --%>	
-	 	<td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(reviewShopM.review_taste+reviewShopM.review_amount+reviewShopM.review_service)/3}"/></div></td>
+	 	<td><div class="form-group" id="star${starCnt}"><input type="hidden" id="starRating${starCnt}" value="${(reviewShopM.review_taste+reviewShopM.review_amount+reviewShopM.review_service)/3}"/></div></td>
 	 	<%-- <td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="3"/></div></td> --%>		
 	
 	</tr>
 	</c:forEach>
 
 </table>
-<br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
+<%-- <br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';"> --%>
 
 </div>
 </div>

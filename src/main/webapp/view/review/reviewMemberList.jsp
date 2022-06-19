@@ -195,7 +195,7 @@ $(()=>{
 		<tr>
 		<!-- 	<td>리뷰 SEQ</td>
 			<td>MEM_SEQ</td> -->
-			<td>메뉴번호</td>
+			<td>메뉴이름</td>
 			<!-- <td>맛</td>
 			<td>양</td>
 			<td>서비스</td> -->
@@ -206,7 +206,7 @@ $(()=>{
 			<td></td>					
 		</tr>
 		<c:forEach items="${reviewMemberList}" var="review" varStatus="status">
-		<c:set var="starCnt" value="${starCnt+1}"/>	
+		<c:set var="starCnt" value="${starCnt+1}"/>
 		<tr>
 		<%-- 	<td>${review.review_seq}</td>
 			<td>${review.mem_seq}</td> --%>
