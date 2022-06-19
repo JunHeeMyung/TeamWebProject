@@ -667,22 +667,53 @@ padding-top: 1px;
 
 /*--------------------------*/
 
+#shoptotal {
+
+padding: 10px;
+text-align: left;
+
+}
+
 #shopimg{
 
+float:left;
+
+
+
 }
+
+.menu_shop_img {
+
+width:220px;
+height:220px;
+}
+
+
+#shoptext{
+margin-top: 20px;
+margin-left: 240px;
+}
+
 #shopname{
 
+font-size:24px;
+margin-left: 20px;
+display: inline;
 }
-#shopnotice{
 
+#shopnotice{
+margin-top: 40px;
+margin-left: 25px;
 }
 
 
 #shopinfobtn {
 
-margin-right: 10px;
-display: inline-block;
-float:right;
+bottom:10px;
+margin-left: 25px;
+margin-top: 0 auto;
+margin-bottom: -120px;
+
 
 align-items: center;
 text-align:center;
@@ -690,7 +721,7 @@ vertical-align:middle;
 color: white;
 font-size:14px;
 
-display: flex;
+display: inline-flex;
 width: 130px;
 height: 35px;
 background-color: rgba(95, 198, 145);
@@ -704,16 +735,27 @@ border-radius: 10px;
 #shopinfobtn_space {
 
 padding-left:16px;
+
 }
 
 #shopfavorite {
 
 width: 100px;
 height: 100px;
+float: right;
+margin-top: 20px;
 
+top:30px;
+}
+#shopfavorite:hover{
+	cursor:pointer;
 }
 
+#favoriteimg {
+width: 100px;
+height: 100px;
 
+}
 
 
 
@@ -742,8 +784,13 @@ $(()=>{
 		
 	
 	});
-
 	
+	
+	$("#shopfavorite").click(function(){
+
+		
+		
+	});
 	
 	
 	
@@ -1105,16 +1152,20 @@ $(function(){
 <!-- 매장소개페이지 -->
 <div id="shopframe">
 
-<div id="shopimg">${ shop.shop_img }</div>
+<div id="shoptotal">
+
+<div id="shopimg"><img src="${ path }/images/${shop.shop_img}" class="menu_shop_img"></div>
+
+<div id="shoptext">
 <div id="shopname">${ shop.shop_name }</div>
 <div id="shopnotice">${ shop.shop_notice }</div>
 
 <div id="shopinfobtn"><span id="shopinfobtn_space">매장정보보기>> </span></div>
 
-<div id="shopfavorite"><img src="/image/favorites_mark.png" ></div>
+<div id="shopfavorite"><img id="favoriteimg" src="${ path }/view/menu/image/favorites_mark.png" ></div>
+</div>
 
-
-
+</div>
 
 </div>
 
