@@ -270,7 +270,7 @@ function drawMenu(){
 		}
 	});
 	
-}
+} 
 
 /* 리뷰정보 */
 function drawReview(){
