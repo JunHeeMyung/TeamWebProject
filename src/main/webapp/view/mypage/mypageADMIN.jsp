@@ -15,7 +15,7 @@ height: 100%;
 width: 100%;
 padding: 0px auto;
 margin: 0px auto;
-background-color: white;
+
 }
 
 
@@ -26,6 +26,13 @@ margin-left: 20%;
 margin-right: 20%;
 }
 
+#slidemenu{
+
+background-color: rgb(209,239,221);
+border-radius: 15px;
+
+}
+
 
 </style>
 
@@ -34,6 +41,7 @@ margin-right: 20%;
 <body>
 
 
+<div id="sideAll">
 
 <div id="sidebar">
 <h1>관리자 페이지</h1>
@@ -53,7 +61,7 @@ margin-right: 20%;
 <br>
 <div class="btoon">
 <form action="${path}/admin/adminMember.do" method="post">
-<button name="admenu" class="btn btn-primary" type="submit">회원관리</button>
+<button name="admenu" class="btn btn-success" type="submit">회원관리</button>
 </form>
 <%-- 
 <br>
@@ -71,13 +79,14 @@ margin-right: 20%;
 <br>
  --%> 
 <br>
-<button name="admenu" class="btn btn-primary" onClick="location.href='${path}/admin/adminStatistics.do'"> 통 계 </button>
+<button name="admenu" class="btn btn-success" onClick="location.href='${path}/admin/adminStatistics.do'"> 통 계 </button>
 </div>
 <!-- 
 <div id="slideheader" class="offcanvas-header">
    <button type="button" id ="slideclosebtn" class="btn-close" data-bs-dismiss="offcanvas"></button>
 </div>
  -->
+</div>
 </div>
 
 <br>

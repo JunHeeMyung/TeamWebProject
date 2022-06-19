@@ -84,6 +84,12 @@ margin-right: 20%;
 
 }
 
+#slidemenu{
+
+background-color: rgb(209,239,221);
+border-radius: 15px;
+
+}
 
 </style>
 
@@ -115,14 +121,14 @@ margin-right: 20%;
 <br>
 
 <form action="${path}/view/mypage/mypageFirst.jsp" method="post">
-<button class="btn btn-primary" type="submit">회원정보</button>
+<button class="btn btn-success" type="submit">회원정보</button>
 </form> 
 <br>
 
 
 <br>
 <form action="${path}/review/SelectShopReviewJSP.do" method="get">
-<button class="btn btn-primary" type="submit">매장 리뷰 조회</button>
+<button class="btn btn-success" type="submit">매장 리뷰 조회</button>
 </form>
 <br>
 
@@ -144,7 +150,7 @@ margin-right: 20%;
 
  <br>
 <form action="${path}/shop/shopInsert.do" method="get" name="mem_seq2">
-<button class="btn btn-primary" type="submit">매장 등록</button>
+<button class="btn btn-success" type="submit">매장 등록</button>
 </form>
 <br>
  
@@ -159,7 +165,7 @@ margin-right: 20%;
 
 <br>
 <form action="${path}/shop/shopselectByMem.do" method="post" name="mem_seq4">
-<button class="btn btn-primary" type="submit">매장관리</button>
+<button class="btn btn-success" type="submit">매장관리</button>
 </form>
 <br>
 
@@ -173,7 +179,7 @@ margin-right: 20%;
  
 <br>
 <form action="${path}/orderlist/manageropener.do" method="get" name="mem_seq6">
-<button class="btn btn-primary" type="submit">주문관리 및 QR생성</button>
+<button class="btn btn-success" type="submit">주문관리 및 QR생성</button>
 </form>
 <br>
 <%-- 

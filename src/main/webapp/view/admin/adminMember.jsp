@@ -61,30 +61,30 @@ div {
 	display : inline-block;
 	margin: 0px auto;
 	background-color: rgba(255, 255, 255);
-	padding-top: 250px;
+	padding-top: 100px;
 }
 
 #contents {
 
-/* 알아서 */
-
 }
 
-#status{
-	text-align: center;
+tr {
 	padding: 0px;
-
+	margin: 0px;
 }
 
-table {
-    margin:auto; 
+td {
+	padding: 10px;
+	margin: 10px;
+	/* border: 2px solid graytext; */
 }
 
-table, td, th {
-    border-collapse : collapse;
-   /*  border : 1px solid black; */
-};
-
+table {	
+	text-align: center;
+	border : 1px;
+	padding: 0px;
+	margin: auto;	
+}
 </style>
 
 
@@ -94,39 +94,35 @@ table, td, th {
 <body>
 
 <div id="wrapper" class="shadow">
+
 <div id="mainframe">
 
-<!-- 입력 -->
 <div id="contents">
-<div id= "status" class="shadow">
 
-	<%-- <form action="${path}/admin/adminMemStatusUpdate.do" method="post"> --%>
-		<table>
+<table id="reviewTable" class="table table-striped">	
+		<thead class="table-success">
 			<tr>
-				<td>회원번호</td>
+				<th>회원번호</th>
 				<!-- <td>MEM_ID</td> -->
-				<td>닉네임</td>
-				<td>EMAIL</td>
+				<th>닉네임</th>
+				<th>EMAIL</th>
 				<!-- <td>MEM_SALT</td> -->
-				<td>회원타입</td>
-				<td>회원상태</td>
-				<td></td>
+				<th>회원타입</th>
+				<th>회원상태</th>
+				<th></th>
 
-				<!-- <td></td> -->
 			</tr>
-			
+		</thead>
+			<tbody>
 			<c:forEach items="${memberDTOs}" var="member">
 				<tr>
 					<c:if test="${member.mem_type!= '관리자'}">
 						<form action="${path}/admin/adminMemStatusUpdate.do" method="post">
 						<td>${member.mem_seq}<input type="hidden" name="mem_seq" value="${member.mem_seq}"></td>
 						<%-- <td>${member.mem_id}</td> --%>
-						<td><div class="input-group mb-3">
-						
-						<input type="text"
-							id="mem_nick${nickseq}" name="mem_nick" class="form-control"value="${member.mem_nick}">
-						<label class="red" id="nicklabel${nickseq}"></label>						
-					</div></td>
+						<td><div class="input-group mb-3">						
+						<input type="text" id="mem_nick${nickseq}" name="mem_nick" class="form-control"value="${member.mem_nick}">
+						</div></td>
 						<td>${member.mem_email}</td>
 						<%-- <td>${member.mem_salt}</td> --%>
 						<td>${member.mem_type}</td>
@@ -138,23 +134,24 @@ table, td, th {
 								<option value="탈퇴">탈퇴</option>
 						</select></td>
 						<td><input class="btn btn-primary" type="submit" value="수정"></td>
-						</form>
+						</form>						
 						<!-- <td><input class="form-control"  type="text" name="phone_number"></td> -->
 					</c:if>
 				</tr>
 			</c:forEach>
-
+		</tbody>		
 		</table>
 		<br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';"> 
-		<!-- <input	class="btn btn-primary" type="submit" value="입력하기"> -->
-
-
-	<!-- </form> -->
-
+		<br>
+		<br>
+		<br>
 
 </div>
 </div>
 </div>
-</div>
+
+
+
+
 </body>
 </html>
