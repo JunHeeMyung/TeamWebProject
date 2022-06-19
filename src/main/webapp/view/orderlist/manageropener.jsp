@@ -82,20 +82,41 @@ text-align: center;
 
 }
 #shoplistbox{
-
 width: 100%;
 }
 
 
-#shoplistbox {
-margin-top:50px;
-}
-
 #shoplistbox td{
 
-border-top: 1px solid orange;
-border-bottom: 1px solid orange;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+height: 40px;
+color: white;
 }
+
+#shoplistbox a{
+color: black;
+}
+
+#outerbox{
+margin-top:30px;
+display:inline-block;
+width: 80%;
+padding: 30px;
+border-radius: 30px;
+background-color: #EEEEEE;
+
+
+}
+
+.shopboxhead{
+
+color: white;
+background-color: orange;
+
+}
+
+
 
 </style>
 </head>
@@ -107,19 +128,21 @@ border-bottom: 1px solid orange;
 <!-- 입력 -->
 <div id="contents">
 <h2>주문 관리 및 QR코드 생성</h2>
+<div id="outerbox">
 <table id="shoplistbox">
+<tr><td class="shopboxhead">매장이름</td><td class="shopboxhead">QR 코드 관리</td></tr>
 <c:forEach var="shop" items="${shoplist}">
 <tr>
 <td>
-<a href="${path}/orderlist/orderlistmanager.do?shop_seq=${shop.shop_seq}">${shop.shop_name}</a>
+<a href="${path}/orderlist/orderlistmanager.do?shop_seq=${shop.shop_seq}">[${shop.shop_name}]</a>
 </td>
 <td>
-<a href="${path}/data/qrcode.do?shop_seq=${shop.shop_seq}">QR 코드 관리</a>
+<a href="${path}/data/qrcode.do?shop_seq=${shop.shop_seq}">[QR 코드 관리]</a>
 </td>
 </tr>
 </c:forEach>
 </table>
-
+</div>
 </div>
 </div>
 </div>
