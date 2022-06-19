@@ -5,8 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 //import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.review.dto.ReviewDTO;
@@ -50,6 +54,8 @@ public class ReviewDAO {
 			+ "  WHERE b.dt = a.REVIEW_DATE(+)\r\n"
 			+ "  GROUP BY b.dt\r\n"
 			+ "  ORDER BY b.dt";
+	
+	static final String SQL_SELECT_MemSeq_With_MenuName = "SELECT * FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE MEM_SEQ = ?";
 	
 	Connection conn;
 	Statement st;
@@ -469,6 +475,58 @@ public class ReviewDAO {
 	
 		return reviewDTO;
 	}
+	
+	public JSONArray selectReviewByMemSeqWithMenuName(int mem_seq) {
+		
+		JSONArray reviewlist = null;
+		conn = DBUtil.getConnection();
+		
+		try {
+			pst = conn.prepareStatement(SQL_SELECT_MemSeq_With_MenuName);
+			pst.setInt(1, mem_seq);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				if(reviewlist==null) {
+					reviewlist = new JSONArray();
+				}
+				
+				JSONObject review = new JSONObject();
+				
+				review.put("review_seq", rs.getInt("review_seq"));
+				review.put("mem_seq", rs.getInt("mem_seq"));
+				review.put("menu_seq", rs.getInt("menu_seq"));
+				review.put("review_taste", rs.getInt("review_taste"));
+				review.put("review_amount", rs.getInt("review_amount"));
+				review.put("review_service", rs.getInt("review_service"));
+				review.put("review_content", rs.getString("review_content"));
+				review.put("review_img", rs.getString("review_img"));
+				review.put("review_date", rs.getDate("review_date"));
+				review.put("review_exposure", rs.getString("review_exposure"));
+				
+				review.put("menu_name", rs.getString("menu_name"));
+				
+				reviewlist.add(review);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(rs, pst, conn);
+		}
+		return reviewlist;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 //수정 백업 

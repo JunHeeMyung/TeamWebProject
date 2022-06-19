@@ -210,7 +210,7 @@ $(()=>{
 		<tr>
 		<%-- 	<td>${review.review_seq}</td>
 			<td>${review.mem_seq}</td> --%>
-			<td>${review.menu_seq}</td>
+			<td>${review.menu_name}</td>
 			<%-- <td>${review.review_taste}</td>
 			<td>${review.review_amount}</td>
 			<td>${review.review_service}</td> --%>

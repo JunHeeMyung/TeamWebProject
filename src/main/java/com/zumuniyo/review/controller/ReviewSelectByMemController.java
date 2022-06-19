@@ -15,16 +15,16 @@ public class ReviewSelectByMemController implements Command {
 
 		JSONObject jObject = new JSONObject();
 		jObject = (JSONObject) session.getAttribute("member");
+		if(jObject==null) {
+			return "redirect:"+request.getContextPath()+"/member/login.do";
+		}
+				
 		String mem_seq = (String) jObject.get("mem_seq");
 
 		System.out.println("mem_seq " + mem_seq);
 		ReviewService service = new ReviewService();
-
-				
-				
-		request.setAttribute("reviewMemberList", service.selectByMemSeq(Integer.parseInt(mem_seq)));
 		
-		
+		request.setAttribute("reviewMemberList", service.selectReviewByMemSeqWithMenuName(Integer.parseInt(mem_seq)));
 		
 		return "/view/review/reviewMemberList.jsp";
 	}

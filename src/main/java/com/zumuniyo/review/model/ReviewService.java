@@ -1,6 +1,9 @@
 package com.zumuniyo.review.model;
 
 import java.util.List;
+
+import org.json.simple.JSONArray;
+
 import com.zumuniyo.review.dto.ReviewDTO;
 import com.zumuniyo.review.dto.ReviewMenuDTO;
 import com.zumuniyo.review.dto.ReviewShopDTO;
@@ -51,5 +54,8 @@ public class ReviewService {
 		return reviewDAO.selectMenu(menu_seq);
 	}
 	
-
+	public JSONArray selectReviewByMemSeqWithMenuName(int mem_seq) {
+		return reviewDAO.selectReviewByMemSeqWithMenuName(mem_seq);
+	}
+	
 }
