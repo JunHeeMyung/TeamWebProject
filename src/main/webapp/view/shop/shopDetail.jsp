@@ -287,6 +287,7 @@ function drawReview(){
 	        var str = "";
 	        
 	        hall.innerHTML=data;
+	        starPrint();
 		    
 		},
 		error : ()=> {
@@ -354,56 +355,6 @@ $(()=> {
 });
 
 
-/* 별점 스크립트 */
-$(()=>{
-	$('div#star1').raty({
-		score: function(evt) {            
-            return $("#starRating1").val();
-        }
-		,path : "${path}/view/review/img"
-		,readOnly: true
-		,width : 500
-	});
-});
-$(()=>{
-	$('div#star2').raty({
-		score: function(evt) {            
-            return $("#starRating2").val();
-        }
-		,path : "${path}/view/review/img"
-		,readOnly: true
-	});
-});
-$(()=>{
-	$('div#star3').raty({
-		score: function(evt) {            
-            return $("#starRating3").val();
-        }
-		,path : "${path}/view/review/img"
-		,readOnly: true
-	});
-});
-
-$(()=>{
-	$('div#star4').raty({
-		score: function(evt) {            
-            return $("#starRating4").val();
-        }
-		,path : "${path}/view/review/img"
-		,readOnly: true
-	});
-});
-$(()=>{
-	$('div#star5').raty({
-		score: function(evt) {            
-            return $("#starRating5").val();
-        }
-		,path : "${path}/view/review/img"
-		,readOnly: true
-	});
-});
-
-
 
 
 
@@ -424,6 +375,55 @@ if(menuclick==3){
 
 
 
+
+/* 별점 스크립트 */
+
+function starPrint() {
+	
+
+	$('div#star1').raty({
+		score: function(evt) {            
+            return $("#starRating1").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+		,width : 500
+	});
+
+
+	$('div#star2').raty({
+		score: function(evt) {            
+            return $("#starRating2").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+
+	$('div#star3').raty({
+		score: function(evt) {            
+            return $("#starRating3").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+
+	$('div#star4').raty({
+		score: function(evt) {            
+            return $("#starRating4").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+
+	$('div#star5').raty({
+		score: function(evt) {            
+            return $("#starRating5").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+
+}
 
 
 </script>
