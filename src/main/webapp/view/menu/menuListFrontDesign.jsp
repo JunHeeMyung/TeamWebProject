@@ -668,12 +668,23 @@ padding-top: 1px;
 
 /*--------------------------*/
 
-#shoptotal {
+#shoptotal_out {
 
 padding: 10px;
+background-color: rgba(255, 208, 98);
+
+}
+
+#shoptotal_in {
+
+padding: 10px;
+background-color: rgba(255, 255, 255);
+
 text-align: left;
 
 }
+
+
 
 #shopimg{
 
@@ -685,8 +696,8 @@ float:left;
 
 .menu_shop_img {
 
-width:220px;
-height:220px;
+width:210px;
+height:210px;
 }
 
 
@@ -734,42 +745,45 @@ border-radius: 10px;
 	cursor:pointer;
 }
 #shopinfobtn_space {
-
 padding-left:16px;
 
 }
 
 #shopfavorite {
-
-width: 100px;
-height: 100px;
-float: right;
 margin-top: 20px;
-
-top:30px;
-}
-#shopfavorite:hover{
-	cursor:pointer;
+display: flex;
+flex-direction: left;
 }
 
 #favoriteimg {
 width: 100px;
 height: 100px;
 
+margin-left:260px;
+
+}
+#favoriteimg:hover{
+	cursor:pointer;
 }
 
-#shopreview{
-display: inline-block;
-}
 
 
 #shopstar{
+margin-left: 30px;
 
 display: inline-block;
 }
 
 
+#shopreview{
 
+margin-left :8px;
+display: inline-block;
+
+}
+#shopreview:hover {
+	cursor:pointer;
+}
 
 
 
@@ -1225,7 +1239,8 @@ $(()=>{
 <!-- 매장소개페이지 -->
 <div id="shopframe">
 
-<div id="shoptotal">
+<div id="shoptotal_out">
+<div id="shoptotal_in">
 
 <div id="shopimg"><img src="${ path }/images/${shop.shop_img}" class="menu_shop_img"></div>
 
@@ -1235,19 +1250,24 @@ $(()=>{
 <c:set var="starCnt" value="${starCnt+1}"/>	
 
 <div id="shopname" >${ shop.shop_name } 
-<div id="shopreview"> <div id="shopstar"> 
+
+<div id="shopstar"> 
 <div class="form-group" id="star${starCnt}"><input type="hidden" id="starRating${starCnt}" value="${review}"/></div>
- </div> ${review} </div>
+</div>
+<div id="shopreview" data-bs-toggle="tooltip" title="리뷰 보러가기">  ${review} </div>
 </div>
 
 
 <div id="shopnotice">${ shop.shop_notice }</div>
 
+<div id="shopfavorite">
 <div id="shopinfobtn"><span id="shopinfobtn_space">매장정보보기>> </span></div>
 
-<div id="shopfavorite" data-bs-toggle="tooltip" title="즐겨찾기 매장에 추가"><img id="favoriteimg" src="${ path }/view/menu/image/favorites_mark.png" ></div>
+<img id="favoriteimg" data-bs-toggle="tooltip" title="즐겨찾기 매장에 추가" src="${ path }/view/menu/image/favorites_mark.png" >
+</div>
 
 
+</div>
 </div>
 </div>
 </div>

@@ -24,7 +24,12 @@ margin-left: 20%;
 margin-right: 20%;
 
 }
+#slidemenu{
 
+background-color: rgb(209,239,221);
+border-radius: 15px;
+
+}
 
 </style>
 
@@ -42,7 +47,7 @@ margin-right: 20%;
 <br>
 <br>
 <br>
-<button class="btn btn-primary" onClick="location.href='${path}/member/login.do'"> LOGIN </button>
+<button class="btn btn-success" onClick="location.href='${path}/member/login.do'"> LOGIN </button>
 
 </div>
 </body>

@@ -191,7 +191,7 @@ function drawtopmenu(){
 	
 	$.ajax({
 		type:"POST",
-		url:getContextPath()+"/menu/menuListAll.zmny", 
+		url:getContextPath()+"/menu/menuListJSON.do", 
 		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
 		dataType:"json",
 		success : data=>{
@@ -235,7 +235,7 @@ function drawMenu(){
 	
 	$.ajax({
 		type:"POST",
-		url:getContextPath()+"/menu/menuListAll.zmny", 
+		url:getContextPath()+"/menu/menuListJSON.do", 
 		data: {"shop_seq":<%=request.getParameter("shop_seq")%>} ,
 		dataType:"json",
 		success : data=>{
