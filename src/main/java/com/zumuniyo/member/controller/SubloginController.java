@@ -21,12 +21,20 @@ public class SubloginController implements Command {
 		
 		String mem_id = request.getParameter("mem_id");
 		String mem_email = request.getParameter("mem_email");
-		
+		String type = request.getParameter("type");
 		// 컬백 요청
 		
 		if(mem_id==null&&mem_email==null) {
 			return "/view/sublogin/naver/callback.jsp";
 		}
+		
+		if(type!=null&&!type.equals("")&&type.equals("kakao")) {
+			request.setAttribute("mem_id", "kakao:"+mem_id);
+		}else {
+			request.setAttribute("mem_id", mem_id);
+		}
+		request.setAttribute("mem_email", mem_email);
+		request.setAttribute("type", type);
 		
 		// 토큰 확인
 		

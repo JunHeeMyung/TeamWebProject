@@ -31,10 +31,10 @@
 						<input type="hidden" value="일반회원" id="mem_type" name="mem_type"
 							disabled="disabled">
 
-						<input type="hidden" value="${param.mem_email}"
+						<input type="hidden" value="${mem_email}"
 							id="mem_email" name="mem_email" disabled="disabled">
 							
-						<input type="hidden" value="${param.mem_id}"
+						<input type="hidden" value="${mem_id}"
 							id="mem_id" name="mem_id" disabled="disabled">
 
 						<div class="input-group mb-3">

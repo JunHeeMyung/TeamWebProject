@@ -14,7 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>	
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="${path}/view/member/login.js"></script>
 <link rel="stylesheet" href="${path}/view/member/login.css">
 
@@ -51,7 +51,7 @@
 						<div id="subloginbox">
 							<div id="naver_id_login"></div>
 							<img src="${path}/view/member/img/naverlogin.png" id="naverbtn" class="loginicon mt-4">
-							<img src="${path}/view/member/img/kakaologin.png" id="kakaobtn" class="loginicon mt-4">
+							<img src="${path}/view/member/img/kakaologin.png" id="kakaobtn" onclick="kakaoLogin();" class="loginicon mt-4">
 						</div>
 					</form>
 				</div>
@@ -87,6 +87,63 @@ naver_id_login.setDomain("<%=request.getRequestURL().substring(0,request.getRequ
 naver_id_login.setState(state);
 naver_id_login.setPopup();
 naver_id_login.init_naver_id_login();
+
+
+function sendPost(url, params) {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('target', '_blank');
+    form.setAttribute('action', url);
+    document.charset = "UTF-8";
+
+    for (var key in params) {
+      var hiddenField = document.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', key);
+      hiddenField.setAttribute('value', params[key]);
+      form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+Kakao.init('878435cb63e52c1306f3d3ab856fc153');
+function kakaoLogin() {
+	
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  if(response.kakao_account.email==undefined){
+        		  alert("카카오이메일 동의를 해주세요 (카카토톡>설정>개인/보안>카카오계정>연결된서비스관리>외부서비스 제거후 재시도)");
+        	  }else{
+        	  	var mem_email = response.kakao_account.email;
+        	  	var mem_id = response.id;
+        	  	window.close();
+        	  	sendPost(getContextPath()+"/member/login/sublogin.do",{"mem_email":mem_email,"mem_id":mem_id,"type":"kakao"});
+        	  }
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+}
+
+
+
+
+
+
+
+
+
 
 </script>
 

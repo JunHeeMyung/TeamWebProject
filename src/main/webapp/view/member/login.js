@@ -3,7 +3,13 @@ function getContextPath() {
 	  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 };
 
+
 $(() => {
+	
+
+	
+	
+	
 	
 	$("#naverbtn").click(() => {
 		$("#naver_id_login").children().trigger("click");
