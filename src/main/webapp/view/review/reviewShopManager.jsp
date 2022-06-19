@@ -106,6 +106,8 @@ $(()=>{
 		,readOnly: true
 	});
 });
+
+
 $(()=>{
 	$('div#star2').raty({
 		score: function(evt) {            
@@ -158,14 +160,13 @@ function numberFormat(inputNumber) {
  
  
 <div id="wrapper" class="shadow">
-
 <div id="mainframe">
-
-
 <div id="contents">
 
-	<table id="reviewTable" class="table table-striped">
-	<thead class="table-success">
+<!-- 	<table id="reviewTable" class="table table-striped"> -->
+	<table>
+	<thead>
+	<!-- <thead class="table-success"> -->
 	<tr>	
 		<th>리뷰 번호</th>
 		<!-- <td>멤버 번호</td> -->
