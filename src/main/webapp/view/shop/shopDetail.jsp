@@ -160,10 +160,10 @@ table th {
     color: #fff;
     padding: 10px;
 }
-
+ 
 img {
-    width: 90px;
-    height: 90px;
+   max-width: 90px;
+   max-height: 90px;
 }
 
 thead{
@@ -386,8 +386,7 @@ function starPrint() {
             return $("#starRating1").val();
         }
 		,path : "${path}/view/review/img"
-		,readOnly: true
-		,width : 500
+		,readOnly: true		
 	});
 
 
