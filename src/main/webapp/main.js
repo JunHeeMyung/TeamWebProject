@@ -163,7 +163,7 @@ function getLocation(){
 					        var path = getContextPath();
 					            
 					        var content = '<div class="markerbox">' +
-					        '  <a href="'+path+'/shop/shopDetail.do?shop_seq='+shopseqval+'">' +
+					        '  <a href="'+path+'/shop/shopDetail.zmny?shop_seq='+shopseqval+'">' +
 					        '    '+nameval +
 					        '  </a>' +
 					        '</div>';
