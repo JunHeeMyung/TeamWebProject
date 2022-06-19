@@ -56,6 +56,7 @@ public class ReviewDAO {
 			+ "  ORDER BY b.dt";
 	
 	static final String SQL_SELECT_MemSeq_With_MenuName = "SELECT * FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE MEM_SEQ = ? ORDER BY REVIEW_SEQ DESC";
+	static final String SQL_SELECT_AVG_BY_SHOPSEQ = "SELECT ROUND(SUM(REVIEW_TASTE+REVIEW_AMOUNT+REVIEW_SERVICE)/(COUNT(*)*3),1 ) POINT FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE SHOP_SEQ = ?"; 
 	
 	Connection conn;
 	Statement st;
@@ -518,7 +519,29 @@ public class ReviewDAO {
 	}
 	
 	
-	
+
+	public double selectAvgByShopSeq(int shop_seq)
+	{		
+		double avg = 0;
+		conn = DBUtil.getConnection();
+		try
+		{
+			pst = conn.prepareStatement(SQL_SELECT_AVG_BY_SHOPSEQ);
+			pst.setInt(1, shop_seq);
+			rs = pst.executeQuery();
+			while (rs.next())
+			{
+				avg = rs.getDouble("POINT");
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			DBUtil.dbClose(rs, st, conn);
+		}
+		return avg;
+	}	
 	
 	
 	
