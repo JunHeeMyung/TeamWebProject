@@ -79,8 +79,7 @@ tr {
 
 td {	
 	padding: 10px;
-	margin: 10px;
-	border: 2px solid graytext;
+	margin: 10px;	
 }
 
 table {	
@@ -154,20 +153,20 @@ $(()=>{
 
 <div id="contents">
 
-
-<table id="reviewTable" class="table-striped">
+<table id="reviewTable" class="table table-striped">
+<thead class="table-success">
 	<tr>	
-		<td>리뷰 번호</td>
-		<td>리뷰 내용</td>
-		<td>리뷰 사진</td>
-		<td>작성일자</td>	
-		<td>평균별점</td>				
-		<td>매장추천</td>
-		<td></td>
+		<th>리뷰 번호</th>
+		<th>리뷰 내용</th>
+		<th>리뷰 사진</th>
+		<th>작성일자</th>	
+		<th>평균별점</th>				
+		<th>매장추천</th>
+		<th></th>
 						
 	</tr>	
-	
-	
+	</thead>
+	<tbody>
 	<c:forEach items="${reviewDTOs}" var="reviewDTO">
 	<c:set var="starCnt" value="${starCnt+1}"/>	
 	<tr>
@@ -203,6 +202,7 @@ $(()=>{
 		</c:if>
 	</tr>
 	</c:forEach>
+	</tbody>
 </table>
 <br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';">
 

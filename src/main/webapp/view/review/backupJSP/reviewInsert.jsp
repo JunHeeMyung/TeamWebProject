@@ -1,21 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% request.setCharacterEncoding("utf-8"); %>
+<%-- <% request.setCharacterEncoding("utf-8"); %> --%>
+<jsp:include page="${page}/view/common/header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<!-- JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- FONTAWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
 
-
 <style>
+
+body, html {
+	height:100%;
+	width:100%;
+	padding: 0px auto;
+	margin: 0px auto;
+	background-color: #F3F3F3;
+}
+
+div {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+@media (min-width: 800px){
+
+#wrapper {
+	height:100%;
+	width: 800px;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgba(255, 255, 255);
+}
+
+}
+
+@media (max-width: 800px){
+
+#wrapper {
+	height:100%;
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+	background-color: rgba(255, 255, 255);
+}
+
+}
+
+#mainframe {
+	width: 100%;
+	display : inline-block;
+	margin: 0px auto;
+	background-color: rgba(255, 255, 255);
+	padding-top: 200px;
+}
+
+#contents {
+
+/* 알아서 */
+
+}
+
 html,
 body {
 	magin:0;
@@ -26,26 +80,9 @@ body {
 	
 }
 
-/* span{
-	text-align: center;
-} */
-
-  label { display: inline-block; width:100px;}
+label { display: inline-block; width:100px;}
 .form-control{display: inline-block; width:auto;}
 
-
-
-/* #content {
- 	width: 335px;
-    height: 300px;
-} */
-
-/* 
-#content {
- 	width: 40%;
-    height: 400px;
-}
- */
  
 #conten{
  	text-align: left;
@@ -165,13 +202,14 @@ $(function(){
  
 </head>
 <body>
+<div id="wrapper" class="shadow">
+<div id="mainframe">
+<div id="contents">
 <h1>리뷰 등록</h1>
 <br>
 
 
-<form action="${path}/review/reviewInsert.do"   method="post" enctype="multipart/form-data">
- 
- 
+<form action="${path}/review/reviewInsert.do"   method="post" enctype="multipart/form-data"> 
  <div class="form-group" id="star1" >
  	<label for="starRating">맛  </label><input type="hidden" id="starRating1" name="review_taste"/>
  </div> 
@@ -201,12 +239,15 @@ $(function(){
 </div>
  -->
 
+
 <div class="form-group" >
  <br>
  <label>-내용-</label>
  <br>
 <textarea class="form-control" id="content" name="review_content" cols="50" rows="8"><c:out value="${content}" /></textarea>
 </div>
+
+<input type="hidden" name="menu_seq" value="${menu_seq}" />
 
 <!-- 
 <div class="form-group">
@@ -216,11 +257,17 @@ $(function(){
  -->
  
  	파일: <input type="file" name="photos"> <br> 
-
-<input class="btn btn-primary" type="submit" value="입력하기">
-<input class="btn btn-secondary" type="reset" value="취소하기">
-<input class="btn btn-secondary" type="button" value="목록보기" id="reviewAllList"><!--구매내역으로 돌릴 id설정  -->
+<br>
+<br>
+<input class="btn btn-primary" type="submit" value="입력하기">&nbsp;&nbsp;&nbsp;
+<input class="btn btn-secondary" type="reset" value="취소하기">&nbsp;&nbsp;&nbsp;
+<input class="btn btn-secondary" type="button" value="뒤로가기" id="myOrderList"> <!-- 구매내역으로 돌릴 id설정 --> 
 </form>
+<%-- 
+<br>
+<br>
+<br>
+<button class="btn btn-secondary" onClick="location.href='${path}/orderlist/myorderlist.do'">뒤로가기</button> --%>
 <%-- 
 <form action="${path}/uploadtest.do" 
 	method="post" enctype="multipart/form-data">
@@ -228,13 +275,19 @@ $(function(){
 		<input type="submit"value="업로드">
 </form>
  --%>
+ 
+ 
+ </div>
+</div>
+</div>
 <script>
 
 
  //구매내역으로 다시 반환시켜야됨
 $(function(){
-	$("#reviewAllList").click(function(){
-		location.href="reviewAllList";
+	$("#myOrderList").click(function(){
+		//alert("눌림");
+		location.href="${path}/orderlist/myorderlist.do";
 	});
 });
 

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
 
-
+<!-- 
 <style>
 
 body, html {
@@ -68,22 +68,18 @@ div {
 
 #contents {
 
-/* 알아서 */
 
 }
 
 tr {
 	padding: 0px;
-	margin: 10px;
-	
-	
+	margin: 10px;	
 }
 
 td {
 	padding: 10px;
 	margin: 10px;
 	border: 2px solid graytext;
-	
 	
 	
 }
@@ -96,6 +92,8 @@ table {
 }
 
 </style>
+ -->
+
 <script type="text/javascript">
 
 
@@ -166,30 +164,31 @@ function numberFormat(inputNumber) {
 
 <div id="contents">
 
-<table id="reviewTable" class="table-striped">
+	<table id="reviewTable" class="table table-striped">
+	<thead class="table-success">
 	<tr>	
-		<td>리뷰 번호</td>
+		<th>리뷰 번호</th>
 		<!-- <td>멤버 번호</td> -->
 		<!-- <td>메뉴 번호</td> -->
 		<!-- <td>맛 평가</td>
 		<td>양 평가</td>
 		<td>서비스 평가</td> -->
-		<td>리뷰 내용</td>
-		<td>리뷰 사진</td>
-		<td>작성일자</td>
+		<th>리뷰 내용</th>
+		<th>리뷰 사진</th>
+		<th>작성일자</th>
 		<!-- <td>추천리뷰여부 (1/0)</td> -->
 		<!-- <td>매장 번호</td> -->
 		<!-- <td>메뉴 카테고리</td> -->
-		<td>메뉴 이름</td>
-		<td>메뉴 가격</td>
+		<th>메뉴 이름</th>
+		<th>메뉴 가격</th>
 		<!-- <td>메뉴 사진</td> -->
 		<!-- <td>메뉴 탑</td> -->
 		<!-- <td>메뉴 정보</td> -->
 		<!-- <td>메뉴 상태</td> -->
-		<td>평균별점</td>				
+		<th>평균별점</th>				
 	</tr>	
-	
-	
+</thead>	
+<tbody>
 	<c:forEach items="${reviewShopManager}" var="reviewShopM">
 	<c:set var="starCnt" value="${starCnt+1}"/>	
 	<tr>
@@ -219,7 +218,7 @@ function numberFormat(inputNumber) {
 	
 	</tr>
 	</c:forEach>
-
+</tbody>
 </table>
 <%-- <br> <br> <input type="button" id="btn1" value="뒤로가기"	onclick="location.href='${path}/';"> --%>
 

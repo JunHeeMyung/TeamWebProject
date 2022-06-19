@@ -14,7 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- FONTAWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script>
 
 <script type="text/javascript">
 
@@ -84,7 +84,7 @@ tr {
 td {
 	padding: 10px;
 	margin: 10px;
-	border: 2px solid graytext;
+	/* border: 2px solid graytext; */
 }
 
 table {	
@@ -92,12 +92,6 @@ table {
 	border : 1px;
 	padding: 0px;
 	margin: auto;	
-}
-#pic{
-	width: 200px;
-	
-
-
 }
 </style>
 </head>
@@ -191,20 +185,23 @@ $(()=>{
 
 
 	
-	<table id="reviewTable" class="table-striped">
+	<table id="reviewTable" class="table table-striped">
+	<thead class="table-success">
 		<tr>
 		<!-- 	<td>리뷰 SEQ</td>
 			<td>MEM_SEQ</td> -->
-			<td>메뉴이름</td>
+			<th>메뉴이름</th>
 			<!-- <td>맛</td>
 			<td>양</td>
 			<td>서비스</td> -->
-			<td id="pic">사진</td>
-			<td>내용</td>
-			<td>평균별점</td>
-			<td>날짜</td>					
-			<td></td>					
+			<th>사진</th>
+			<th>내용</th>
+			<th>평균별점</th>
+			<th>날짜</th>					
+			<th></th>					
 		</tr>
+		</thead>
+		<tbody>
 		<c:forEach items="${reviewMemberList}" var="review" varStatus="status">
 		<c:set var="starCnt" value="${starCnt+1}"/>
 		<tr>
@@ -216,14 +213,15 @@ $(()=>{
 			<td>${review.review_service}</td> --%>
 			<td><img src="${path}/images/${review.review_img}" width="250" height="250"></td>
 			<td>${review.review_content}</td>
-			<td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(review.review_taste + review.review_amount + review.review_service)/3}"/></div></td>			
+			<td><div class="form-group" id="star${starCnt}" ><input type="hidden" id="starRating${starCnt}" value="${(review.review_taste + review.review_amount + review.review_service)/3}"/></div></td>
 			<td>${review.review_date}</td>
 			<td><form action="${path}/review/reviewDelete.do" method="post">
 					<input type="hidden" name="review_seq" value="${review.review_seq}"><input type="submit" class="btn btn-primary" value="삭제">
-				</form>				
-			</td>	
+				</form>
+			</td>
 		</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 	<br>
 	<input type="button" id="btn1" value="뒤로가기" onclick="location.href='${path}/';">
