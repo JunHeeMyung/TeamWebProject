@@ -55,11 +55,7 @@ public class ReviewDAO {
 			+ "  GROUP BY b.dt\r\n"
 			+ "  ORDER BY b.dt";
 	
-<<<<<<< HEAD
-	static final String SQL_SELECT_MemSeq_With_MenuName = "SELECT * FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE MEM_SEQ = ?";
-=======
 	static final String SQL_SELECT_MemSeq_With_MenuName = "SELECT * FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE MEM_SEQ = ? ORDER BY REVIEW_SEQ DESC";
->>>>>>> branch 'master' of https://github.com/JunHeeMyung/TeamWebProject.git
 	static final String SQL_SELECT_AVG_BY_SHOPSEQ = "SELECT ROUND(SUM(REVIEW_TASTE+REVIEW_AMOUNT+REVIEW_SERVICE)/(COUNT(*)*3),1 ) POINT FROM Z_REVIEW JOIN Z_MENU USING(MENU_SEQ) WHERE SHOP_SEQ = ?"; 
 	
 	Connection conn;
@@ -523,10 +519,6 @@ public class ReviewDAO {
 	}
 	
 	
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/JunHeeMyung/TeamWebProject.git
 	public double selectAvgByShopSeq(int shop_seq)
 	{		
 		double avg = 0;
