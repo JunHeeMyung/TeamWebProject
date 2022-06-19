@@ -724,7 +724,7 @@ margin-left: 25px;
 
 
 margin-left: 25px;
-margin-top: 50px;
+margin-top: 30px;
 
 
 
@@ -757,10 +757,10 @@ flex-direction: left;
 }
 
 #favoriteimg {
-width: 100px;
-height: 100px;
+width: 80px;
+height: 80px;
 
-margin-left:260px;
+margin-left:280px;
 float: right;
 
 
