@@ -254,7 +254,7 @@ function drawMenu(){
 	        	 str+="</td><td>";
 	        	 str+= JSON.stringify(menudata.menu_price);
 	        	 str+="</td><td>";
-	        	 str+="<img src="+getContextPath()+"/images/"+JSON.stringify(menudata.menu_img)+">";
+	        	 str+="<img src="+getContextPath()+"/images/"+JSON.stringify(menudata.menu_img).replaceAll("\"", "")+">";
 	        	 str+="</td><td>";
 	        	 str+= JSON.stringify(menudata.menu_info).replaceAll("\"", "");
 	        	 str+="</td></tr>";
