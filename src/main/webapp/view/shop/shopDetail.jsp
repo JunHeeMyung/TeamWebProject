@@ -100,7 +100,7 @@ h2 {
 
 .shopcat{
  	display: flex;
-	width: 60%;
+	width: 100%;
     margin: 0 auto;
     justify-content: space-around;
     border: 1px solid lightgray;
