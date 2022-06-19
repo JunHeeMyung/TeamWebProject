@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- FONTAWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script>
 
 <title>기본 디자인</title>
 <style>
@@ -107,20 +108,23 @@ h2 {
 
 .allmenu:hover{
 	color: orange;
+	cusor: pointer;
 }
 
 .topmenu:hover{
 	color: orange;
+	cusor: pointer;
 }
 
 .allreview:hover{
 	color: orange;
+	cusor: pointer;
 }
 
 .allinfo:hover{
 	color: orange;
+	cusor: pointer;
 }
-
 
 .hd {
 	background-color: skyblue;
@@ -129,6 +133,38 @@ h2 {
 
 }
 
+table {
+    width: 800px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-spacing: 1px;
+    font-family: 'Cairo', sans-serif;
+  margin: auto;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+table td {
+    padding: 10px;
+    background-color: #eee;
+}
+
+table th {
+    background-color: rgba(255, 138, 0);
+    color: #fff;
+    padding: 10px;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}
+
+thead{
+	cursor: pointer;
+}
 
 </style>
 
@@ -140,6 +176,7 @@ function getContextPath() {
     var hostIndex = location.href.indexOf( location.host ) + location.host.length;
     return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 };
+
 
 
 
@@ -186,12 +223,6 @@ function drawtopmenu(){
 	});
 	
 }
-
-
-
-
-
-
 
 
 /* 메뉴정보 */
@@ -247,25 +278,6 @@ function drawReview(){
 	        
 	        var str = "";
 	        
-	      /*   str+="<table class='menutable'>"; 
-	        for(var menudata of data){
-	        	  
-	        	 str+="<tr><td>";
-	        	 str+= JSON.stringify(review.review_taste);
-	        	 str+="</td><td>";
-	        	 str+= JSON.stringify(review.review_amount);
-	        	 str+="</td><td>";
-	        	 str+= JSON.stringify(review.review_service);
-	        	 str+="</td><td>";
-	        	 review.review_content(menudata.menu_name).replaceAll("\"", "");
-	        	 str+="</td><td>";
-	        	 str+= JSON.stringify(review.review_service).replaceAll("\"", "");
-	        	 str+="</td></tr>";
-	        	 
-	        	 
-	        }
-	        
-			str+="</table>"; */
 	        hall.innerHTML=data;
 		    
 		},
@@ -310,12 +322,6 @@ function drawInfo(){
 }
 
 
-
-
-
-
-
-
 $(()=> {
 	
 	drawtopmenu();
@@ -336,24 +342,57 @@ $(()=> {
 		drawInfo();
 	});
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 });
 
 
+/* 별점 스크립트 */
+$(()=>{
+	$('div#star1').raty({
+		score: function(evt) {            
+            return $("#starRating1").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+		,width : 500
+	});
+});
+$(()=>{
+	$('div#star2').raty({
+		score: function(evt) {            
+            return $("#starRating2").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star3').raty({
+		score: function(evt) {            
+            return $("#starRating3").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
 
-
-
-
-
+$(()=>{
+	$('div#star4').raty({
+		score: function(evt) {            
+            return $("#starRating4").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star5').raty({
+		score: function(evt) {            
+            return $("#starRating5").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
 
 
 
@@ -375,85 +414,34 @@ $(()=> {
 	<h2>매장상세</h2>
 	
 	<div class="shopcat">
-		<div id="menu_all_topmenu" class="topmenu">
+	<table>
+	<thead>
+	<tr>
+		<th id="menu_all_topmenu" class="topmenu">
 			추천메뉴
-		</div>
-		<div id="menu_all_btn" class="allmenu">
+		</th>
+		<th id="menu_all_btn" class="allmenu">
 			전체메뉴
-		</div>
-		<div id="menu_all_review" class="allreview">
+		</th>
+		<th id="menu_all_review" class="allreview">
 			리뷰
-		</div>
-		<div id="menu_all_info" class="allinfo"> 
+		</th>
+		<th id="menu_all_info" class="allinfo"> 
 			매장정보
-		</div>
+		</th>
+	</tr>
+	</thead>
+	</table>
 	</div>
-	
-		
 	
 	<div id="hall">
 		
 	</div>
 	
-	
-	
 </div>
-
 	
 </div>
 </div>
-
-<%-- 
-<div class="shop-menu">
-			<table class = "mtbl">
-				<tr>
-					<td>순서</td>
-					<td>메뉴이미지</td>
-					<td>메뉴이름</td>
-					<td>메뉴가격</td>
-					<td>메뉴소개</td>
-				</tr>
-				
-				
-				<c:forEach items="${menulist}" var="menu" varStatus="status">
-						<tr>
-						<td>${menu.menu_seq}</td>
-						<td><img src="${path}/images/${menu.menu_img}"></td>
-						<td>${menu.menu_name}</td>
-						<td>${menu.menu_price}</td>
-						<td>${menu.menu_info}</td>	
-						</tr>
-				</c:forEach>
-			
-		
-			</table>	
-		</div>
-		
-		
-		<div class= "review-detail">
-			<table class = "rtbl">
-			<tr>
-				<td>맛</td>
-				<td>양</td>
-				<td>서비스</td>
-				<td>사진</td>
-				<td>내용</td>
-			</tr>
-			<c:forEach items="${reviewShopList}" var="review" varStatus="status">
-					<tr>
-					<td>${review.review_taste}</td>
-					<td>${review.review_amount}</td>
-					<td>${review.review_service}</td>
-					<td><img src="${path}/images/${review.review_img}"></td>
-					<td>${review.review_content}</td>
-					</tr>
-					</c:forEach>
-			</table>
-		</div>
-		 --%>
-
-
-
 
 
 </body>
