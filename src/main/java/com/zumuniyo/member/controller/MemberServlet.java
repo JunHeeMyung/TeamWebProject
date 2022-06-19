@@ -39,6 +39,8 @@ public class MemberServlet extends HttpServlet {
 			command = new SubloginController();
 		}else if(uri.equals("/member/login/subregister.do")&&method.equals("POST")){
 			command = new SubregisterController();
+		}else if(uri.equals("/member/updatenick.do")&&method.equals("POST")){
+			command = new UpdatenickController();
 		}
 		
 		if(command==null) {

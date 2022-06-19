@@ -149,6 +149,33 @@ $(()=>{
 			}
 		})
 	});
+	
+	$("#nick_update").click(() => {
+		
+		if($("#mem_nick").val()==null||$("#mem_nick").val()==""){
+			alert("입력이 비어있습니다");
+			return;
+		}
+
+		$.ajax({
+			url: getContextPath()+"/member/updatenick.do",
+			type: "post",
+			data: { "mem_nick": $("#mem_nick").val() },
+			dataType: "text",
+			success: data => {
+				if (data == "성공") {
+					alert("닉네임 변경에 성공했습니다");
+					location.reload();
+				} 
+				else{
+					alert(data);
+				}
+			},
+			error: () => {
+				alert("요청실패");
+			}
+		})
+	});
 
 	$("#mem_nick").keyup(() => {
 		$("#nicklabel").html(document.getElementById("mem_nick").checkValidity() ? "" : "<i class='xicon fas fa-times-circle red'></i>");
