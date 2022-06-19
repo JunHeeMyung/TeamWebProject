@@ -318,6 +318,8 @@ function drawInfo(){
 
 $(()=> {
 	
+	drawtopmenu();
+	
 	$("#menu_all_topmenu").click(()=>{		
 		drawtopmenu();
 	});
