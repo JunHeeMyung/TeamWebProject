@@ -151,7 +151,7 @@ $(()=>{
 
 <div id="wrapper" class="shadow">
 <div id="mainframe">
-<h2>매장 등록</h2>
+<h2>매장 수정</h2>
 <!-- 입력 -->
 <div id="contents">
 
