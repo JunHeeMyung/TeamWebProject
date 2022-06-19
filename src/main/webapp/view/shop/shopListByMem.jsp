@@ -146,12 +146,12 @@ tr:hover { background-color: #F5F5F5; }
 	<td class="tblname">매장주소</td>
 	<td class="tblname">상세주소</td>
 	<!-- <td>mem_seq</td> -->
-	<td class="tblname">분류</td>
 	<td class="tblname">매장사진</td>
 	<td class="tblname">매장정보</td>
 	<!-- <td>shop_status</td> -->
 	<td class="tblname">수정</td>
 	<td class="tblname">삭제</td>
+	<td class="tblname">메뉴관리</td>
 </tr>
 <c:forEach items="${shopLists}" var="shoplist">
 <tr>
@@ -160,13 +160,13 @@ tr:hover { background-color: #F5F5F5; }
 	<td>${shoplist.loc_addr}</td>
 	<td>${shoplist.shop_addr_detail}</td>
 <%--<td>${shoplist.mem_seq}</td> --%>
-	<td>${shoplist.category_code}</td>
 	<td class="shopimg"><img src="${path}/images/${shoplist.shop_img}"></td>
 	<%-- <td>${shoplist.shop_img}</td> --%>
 	<td>${shoplist.shop_notice}</td>
 	<td><input type="button" value="수정하기" onClick="location.href='${path}/shop/shopUpdate.do?shop_seq=${shoplist.shop_seq}'"></td>
 <%--<td>${shoplist.shop_status}</td> --%>
 	<td><input type="button" value="삭제하기" onClick="location.href='${path}/shop/shopDelete.do?shop_seq=${shoplist.shop_seq}'"> </td>	
+	<td><input type="button" value="관리" onClick="location.href='${path}/menu/menuManage.do?shop_seq=${shoplist.shop_seq}'"></td>
 </tr>
 </c:forEach>
 </table>
