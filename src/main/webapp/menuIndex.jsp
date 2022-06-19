@@ -19,7 +19,7 @@ index.jsp
 <li><a href="view/shop/shopList">모든 매장 조회</a></li>
 </ul>
 <ul>
-<li><a href="view/review/reviewAllList">모든 리뷰 조회</a></li>
+<li><a href="${ path }/review/reviewAllList.zmny?shop_seq=3">모든 리뷰 조회</a></li>
 </ul>
 
 <ul>

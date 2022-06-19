@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 
 import com.zumuniyo.menu.dto.MenuDTO;
 import com.zumuniyo.menu.model.MenuService;
+import com.zumuniyo.review.model.ReviewService;
 import com.zumuniyo.shop.dto.ShopDTO;
 import com.zumuniyo.shop.model.ShopService;
 
@@ -66,7 +67,17 @@ public class MenuListAllController implements Command {
 				request.setAttribute("shop", shoplist.get(0));
 				
 				System.out.println(shoplist.get(0));
-			
+				
+				
+				ReviewService reviewService = new ReviewService();
+				
+				double reviewlist = reviewService.selectAvgByShopSeq(ishop_seq);
+				
+				request.setAttribute("review", reviewlist);
+				
+				System.out.println(reviewlist);
+				
+				
 			return "/view/menu/menuListFrontDesign.jsp";
 	
 

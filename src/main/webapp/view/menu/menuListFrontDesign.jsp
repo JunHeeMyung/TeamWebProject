@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.min.js"></script>
 
 
 <meta charset="UTF-8">
@@ -757,6 +758,20 @@ height: 100px;
 
 }
 
+#shopreview{
+display: inline-block;
+}
+
+
+#shopstar{
+
+display: inline-block;
+}
+
+
+
+
+
 
 
 </style>
@@ -772,12 +787,16 @@ function getContextPath() {
 
 
 
-
-	
-
-
-
 $(()=>{
+	
+	
+	$("#shopreview").click(function(){
+	
+		
+		
+	});
+	
+	
 	
 	$("#shopinfobtn").click(function(){
 
@@ -1035,11 +1054,6 @@ $(()=>{
 
 
 
-
-
-
-
-
 $.ajax({
 	url: getContextPath()+"/mypage/mypage",
 	type: "get",
@@ -1110,6 +1124,65 @@ $(function(){
 
 
 
+$(()=>{
+	$('div#star1').raty({
+		score: function(evt) {            
+            return $("#starRating1").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star2').raty({
+		score: function(evt) {            
+            return $("#starRating2").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star3').raty({
+		score: function(evt) {            
+            return $("#starRating3").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+
+$(()=>{
+	$('div#star4').raty({
+		score: function(evt) {            
+            return $("#starRating4").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+$(()=>{
+	$('div#star5').raty({
+		score: function(evt) {            
+            return $("#starRating5").val();
+        }
+		,path : "${path}/view/review/img"
+		,readOnly: true
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 
@@ -1157,20 +1230,27 @@ $(function(){
 <div id="shopimg"><img src="${ path }/images/${shop.shop_img}" class="menu_shop_img"></div>
 
 <div id="shoptext">
-<div id="shopname">${ shop.shop_name }</div>
+
+
+<c:set var="starCnt" value="${starCnt+1}"/>	
+
+<div id="shopname" >${ shop.shop_name } 
+<div id="shopreview"> <div id="shopstar"> 
+<div class="form-group" id="star${starCnt}"><input type="hidden" id="starRating${starCnt}" value="${review}"/></div>
+ </div> ${review} </div>
+</div>
+
+
 <div id="shopnotice">${ shop.shop_notice }</div>
 
 <div id="shopinfobtn"><span id="shopinfobtn_space">매장정보보기>> </span></div>
 
-<div id="shopfavorite"><img id="favoriteimg" src="${ path }/view/menu/image/favorites_mark.png" ></div>
-</div>
+<div id="shopfavorite" data-bs-toggle="tooltip" title="즐겨찾기 매장에 추가"><img id="favoriteimg" src="${ path }/view/menu/image/favorites_mark.png" ></div>
 
-</div>
 
 </div>
-
-
-
+</div>
+</div>
 
 
 
